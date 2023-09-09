@@ -1,5 +1,4 @@
-import logging, os, json
-
+import logging, colorlog, os, json, sys
 
 def loadFile(path):
     """ Loads a file from the given path """
@@ -34,8 +33,9 @@ def setupLogger(constants):
     elif LOG_LEVEL == "info":    logger.setLevel(logging.INFO)
 
     # Setting up the format of log output
-    fileFormat =    logging.Formatter("%(asctime)s - [%(levelname)s] %(name)s (line %(lineno)d): %(message)s")
-    consoleFormat = logging.Formatter("[%(levelname)s] %(name)s (line %(lineno)d): \033[1;37m%(message)s\033[1;0m")    
+    fileFormat = logging.Formatter("%(asctime)s - [%(levelname)s] %(name)s (line %(lineno)d): %(message)s")
+    # Using the colorlog module to color the log level name with %(log_color)s and %(reset)s
+    consoleFormat = colorlog.ColoredFormatter("[%(log_color)s%(levelname)s%(reset)s] %(name)s (line %(lineno)d): %(log_color)s%(message)s%(reset)s")
 
     # Getting log file from the constants JSON file
     LOG_FILE = constants["saves"]["log"]["file"]
@@ -50,10 +50,3 @@ def setupLogger(constants):
     # Add the handlers to the logger
     logger.addHandler(consoleHandler)
     logger.addHandler(fileHandler)
-
-    # Add colors to the logger
-    # These are using console color escape codes to color the level name output
-    # Using f-strings to insert the log level name between the color escape codes
-    logging.addLevelName(logging.WARNING, f"\033[1;33m{logging.getLevelName(logging.WARNING)}\033[1;0m")
-    logging.addLevelName(logging.ERROR,   f"\033[1;31m{logging.getLevelName(logging.ERROR  )}\033[1;0m")
-    logging.addLevelName(logging.INFO,    f"\033[1;37m{logging.getLevelName(logging.INFO   )}\033[1;0m")
