@@ -1,5 +1,7 @@
 import src.game, pygame
 pygame.init()
 
-g = src.game.Game()
+CONSTANTS_FILE = "data/constants.json"
+
+g = src.game.Game(CONSTANTS_FILE)
 g.mainLoop()

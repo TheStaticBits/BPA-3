@@ -1,0 +1,21 @@
+{
+    "window": {
+        "title": "BPA 3 or something",
+        "size": [ 800, 600 ],
+        
+        "FPS": 60,
+        "logFPS": true
+    },
+
+    "saves": {
+        "folder": "saves",
+        "log": {
+            "level": "debug",
+            "file": "saves/log.txt",
+            "errorsFile": "saves/errors.txt"
+        }
+    },
+
+    "game": {
+    }
+}
