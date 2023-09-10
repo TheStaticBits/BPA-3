@@ -3,7 +3,7 @@
         "title": "BPA 3 or something",
         "size": [ 800, 600 ],
         
-        "FPS": 60,
+        "FPS": -1,
         "logFPS": true
     },
 
