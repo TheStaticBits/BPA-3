@@ -13,9 +13,12 @@ class Vect:
                 self.x = args[0]
                 self.y = args[0]
         
-        else: # two parameters
+        elif len(args) == 2: # two parameters
             self.x = args[0]
             self.y = args[1]
+        
+        else:
+            raise TypeError(f"Vect() takes 1 or 2 arguments, not {len(args)}")
 
 
     def copy(self):
