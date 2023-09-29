@@ -4,7 +4,9 @@
         "size": [ 800, 600 ],
         
         "FPS": -1,
-        "logFPS": true
+        "logFPS": true,
+
+        "imgScale": 3
     },
 
     "saves": {
@@ -16,6 +18,11 @@
         }
     },
 
-    "game": {
+    "player": {
+        "anim": {
+            "path": "res/exampleAnim.png",
+            "frames": 3,
+            "delay": 1
+        }
     }
 }

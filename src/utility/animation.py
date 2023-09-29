@@ -19,7 +19,7 @@ class Animation:
         if spritesheet.get_width() % frameCount != 0:
             self.log.error("Spritesheet width is not divisible by frame count")
 
-        self.frameSize = Vect(spritesheet.get_height(), spritesheet.get_height() / frameCount)
+        self.frameSize = Vect(spritesheet.get_width() / frameCount, spritesheet.get_height())
 
         self.frameCount = frameCount
         self.currentFrame: int = 0
@@ -45,4 +45,4 @@ class Animation:
         area = pygame.Rect(self.currentFrame * self.frameSize.x, 0, 
                            self.frameSize.x, self.frameSize.y)
 
-        window.blit(self.spritesheet, pos, area=area)
+        window.render(self.spritesheet, pos, area=area)

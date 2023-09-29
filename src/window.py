@@ -74,7 +74,7 @@ class Window:
     def render(self, img: pygame.Surface, pos: Vect, area: pygame.Rect = None) -> None:
         """ Renders an image on a window at a given position,
             with a given portion of the image to render if specified """
-        self.window.blit(img, pos.tuple(), area=(area if area else None))
+        self.window.blit(img, pos.toTuple(), area=(area if area else None))
     
 
     # Getters
