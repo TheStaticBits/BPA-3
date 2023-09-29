@@ -4,7 +4,7 @@ import src.utility.utility as util
 from src.window import Window
 
 class Game:
-    def __init__(self, CONSTANTS_FILE):
+    def __init__(self, CONSTANTS_FILE: str) -> None:
         """ Initialize game objects and data"""
         
         # Setup constants and logger
@@ -19,7 +19,7 @@ class Game:
         self.window = Window(self.constants)
 
 
-    def mainLoop(self):
+    def mainLoop(self) -> None:
         while not self.window.isClosed():
             self.window.handleInputs()
 

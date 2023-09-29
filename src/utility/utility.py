@@ -1,24 +1,24 @@
-import logging, colorlog, os, json, sys
+import logging, colorlog, os, json
 
-def loadFile(path):
+def loadFile(path) -> str:
     """ Loads a file from the given path """
     with open(path, "r") as file:
         return file.read()
 
 
-def loadJSON(path):
+def loadJSON(path) -> dict:
     """ Loads a JSON file from the given path """
     with open(path, "r") as file:
         return json.load(file)
 
 
-def createFolder(folder):
+def createFolder(folder) -> None:
     """ Creates the a folder directory if it hasn't already been created """
     if not os.path.exists(folder):
         os.mkdir(folder)
 
 
-def setupLogger(constants):
+def setupLogger(constants: dict) -> None:
     """ Setting up base Python logger for every file to use """
     # Generate base save folder if it doesn't exist
     createFolder(constants["saves"]["folder"])
