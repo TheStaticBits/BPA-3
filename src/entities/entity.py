@@ -13,7 +13,9 @@ class Entity:
     spritesheets = {}
     
     def __init__(self, animData: dict, pos: Vect=Vect()) -> None:
-        """ Setup base values. animData must contain "path", "frames", and "delay" keys """
+        """ Setup base values. animData must contain "path", "frames", and "delay" keys
+            pos is an optional argument which is set to (0, 0) by default """
+        
         self.log = logging.getLogger(__name__)
 
         self.pos = pos

@@ -1,7 +1,7 @@
 {
     "window": {
         "title": "BPA 3 or something",
-        "size": [ 800, 600 ],
+        "size": [ 900, 600 ],
         
         "FPS": -1,
         "logFPS": true,
@@ -24,5 +24,16 @@
             "frames": 3,
             "delay": 1
         }
+    },
+
+    "tileset": {
+        "tilesFile": "data/tileset.json",
+
+        "tileSize": [ 60, 60 ],
+        "mapsFolder": "data/maps",
+
+        "jsonFile": "data.json",
+        "entitiesFile": "entities.txt",
+        "mapFile": "map.txt"
     }
 }
