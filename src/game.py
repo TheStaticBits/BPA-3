@@ -2,7 +2,7 @@ import pygame, logging
 
 import src.utility.utility as util
 from src.window import Window
-from src.entities.player import Player
+from src.scene import Scene
 from src.tileset import Tileset
 
 class Game:
@@ -25,11 +25,8 @@ class Game:
         # Window
         self.window: Window = Window(self.constants)
 
-        # player (testing)
-        self.player: Player = Player(self.constants)
-
-        # Tileset (testing)
-        self.testTileset: Tileset = Tileset("testmap")
+        # Test scene
+        self.scene: Scene = Scene(self.constants, "testmap")
 
 
     def mainLoop(self) -> None:
@@ -37,11 +34,9 @@ class Game:
             self.window.handleInputs()
 
             # Update functions
-            self.testTileset.update(self.window)
-            self.player.update(self.window)
+            self.scene.update(self.window)
 
             # Render functions
-            self.testTileset.render(self.window)
-            self.player.render(self.window)
+            self.scene.render(self.window)
 
             self.window.update()

@@ -58,7 +58,7 @@ class Tileset:
 
         mapData: dict = util.loadJSON(dataPath)
 
-        self.playerStarting = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
+        self.PLAYER_START = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
 
     
     def loadEntities(self, entitiesPath: str) -> None:
@@ -101,11 +101,16 @@ class Tileset:
                 tile.update(window)
     
 
-    def render(self, window: Window) -> None:
+    def render(self, window: Window, offset: Vect=Vect()) -> None:
         """ Renders all tiles """
         
         row: list[Tile]
         for row in self.tiles:
             tile: Tile
             for tile in row:
-                tile.render(window)
+                tile.render(window, offset=offset)
+
+    
+    # Getters
+    def getPlayerStart(self) -> Vect:
+        return self.PLAYER_START

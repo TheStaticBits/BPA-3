@@ -8,13 +8,13 @@ class Player(Entity):
     """ Inherits from Entity class. 
         Handles player functionality and movement """
     
-    def __init__(self, constants: dict) -> None:
+    def __init__(self, constants: dict, startingPos: Vect) -> None:
         """ Initialize player objects and data """
         self.log = logging.getLogger(__name__)
 
         self.log.info("Initializing player")
 
-        super().__init__(constants["player"]["anim"])
+        super().__init__(constants["player"]["anim"], pos=startingPos)
 
         self.SPEED = constants["player"]["speed"]
     

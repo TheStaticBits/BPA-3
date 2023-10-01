@@ -46,3 +46,7 @@ class Animation:
                            self.frameSize.x, self.frameSize.y)
 
         window.render(self.spritesheet, pos, area=area)
+    
+
+    # Getters
+    def getSize(self) -> Vect: return self.frameSize

@@ -19,8 +19,10 @@ class Window:
         self.log = logging.getLogger(__name__)
 
         self.log.info("Initializing window")
+
+        self.WINDOW_SIZE = Vect(constants["window"]["size"])
         
-        self.window: pygame.Surface = pygame.display.set_mode(constants["window"]["size"])
+        self.window: pygame.Surface = pygame.display.set_mode(self.WINDOW_SIZE.toTuple())
         pygame.display.set_caption(constants["window"]["title"])
 
         self.clock: pygame.Clock = pygame.time.Clock()
@@ -121,3 +123,5 @@ class Window:
     def getKey(self, key: str) -> bool: return self.inputs[key]
 
     def isClosed(self) -> bool: return self.quit
+
+    def getWindowSize(self) -> Vect: return self.WINDOW_SIZE

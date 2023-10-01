@@ -44,13 +44,14 @@ class Entity:
         self.animation.update(window)
     
 
-    def render(self, window: Window) -> None:
+    def render(self, window: Window, offset: Vect=Vect()) -> None:
         """ Renders the animation at the entity's current position"""
-        self.animation.render(window, self.pos)
+        self.animation.render(window, self.pos + offset)
     
     
     # Getters
     def getAnim(self) -> Animation: return self.animation
+    def getPos(self) -> Vect: return self.pos
 
     # Setters
     def setPos(self, pos: Vect) -> None: self.pos = pos
