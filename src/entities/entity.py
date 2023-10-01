@@ -54,5 +54,5 @@ class Entity:
 
     # Setters
     def setPos(self, pos: Vect) -> None: self.pos = pos
-
-    # Add more when needed
+    def addPos(self, addPos: Vect) -> None:
+        self.pos += addPos

@@ -23,7 +23,9 @@
             "path": "res/exampleAnim.png",
             "frames": 3,
             "delay": 1
-        }
+        },
+
+        "speed": 200
     },
 
     "tileset": {

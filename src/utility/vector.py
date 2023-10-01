@@ -49,7 +49,7 @@ class Vect:
             raise TypeError(f"Cannot add Vect and {type(other)}")
     
 
-    def __iadd__(self, other: Vect | int | float) -> None:
+    def __iadd__(self, other: Vect | int | float) -> Vect:
         """ += by a Vect or number """
         if isinstance(other, Vect):
             self.x += other.x
@@ -59,6 +59,7 @@ class Vect:
             self.y += other
         else:
             raise TypeError(f"Cannot add Vect and {type(other)}")
+        return self
 
 
     def __sub__(self, other: Vect | int | float) -> Vect:
@@ -71,7 +72,7 @@ class Vect:
             raise TypeError(f"Cannot subtract Vect and {type(other)}")
         
     
-    def __isub__(self, other: Vect | int | float) -> None:
+    def __isub__(self, other: Vect | int | float) -> Vect:
         """ -= by a Vect or number """
         if isinstance(other, Vect):
             self.x -= other.x
@@ -81,6 +82,7 @@ class Vect:
             self.y -= other
         else:
             raise TypeError(f"Cannot subtract Vect and {type(other)}")
+        return self
 
 
     def __mul__(self, other: Vect | int | float) -> Vect:
@@ -93,7 +95,7 @@ class Vect:
             raise TypeError(f"Cannot multiply Vect and {type(other)}")
     
 
-    def __imul__(self, other: Vect | int | float) -> None:
+    def __imul__(self, other: Vect | int | float) -> Vect:
         """ *= by a Vect or number """
         if isinstance(other, Vect):
             self.x *= other.x
@@ -103,6 +105,7 @@ class Vect:
             self.y *= other
         else:
             raise TypeError(f"Cannot multiply Vect and {type(other)}")
+        return self
     
 
     def __truediv__(self, other: Vect | int | float) -> Vect:
@@ -115,7 +118,7 @@ class Vect:
             raise TypeError(f"Cannot divide Vect and {type(other)}")
     
 
-    def __itruediv__(self, other: Vect | int | float) -> None:
+    def __itruediv__(self, other: Vect | int | float) -> Vect:
         """ /= by a Vect or number """
         if isinstance(other, Vect):
             self.x /= other.x
@@ -125,6 +128,7 @@ class Vect:
             self.y /= other
         else:
             raise TypeError(f"Cannot divide Vect and {type(other)}")
+        return self
         
 
     def __floordiv__(self, other: Vect | int | float) -> Vect:
@@ -137,7 +141,7 @@ class Vect:
             raise TypeError(f"Cannot floor divide Vect and {type(other)}")
     
 
-    def __ifloordiv__(self, other: Vect | int | float) -> None:
+    def __ifloordiv__(self, other: Vect | int | float) -> Vect:
         """ //= by a Vect or number """
         if isinstance(other, Vect):
             self.x //= other.x
@@ -147,6 +151,7 @@ class Vect:
             self.y //= other
         else:
             raise TypeError(f"Cannot floor divide Vect and {type(other)}")
+        return self
     
 
     def __eq__(self, other: Vect) -> bool:
