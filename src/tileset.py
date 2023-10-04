@@ -1,7 +1,6 @@
-import logging
+import pygame, logging
 
 import src.utility.utility as util
-from src.entities.tile import Tile
 from src.utility.vector import Vect
 from src.window import Window
 
@@ -20,6 +19,9 @@ class Tileset:
 
     # Tile data
     TILESET_DATA: dict = None # Tileset data loaded from JSON file
+
+    # Tile images cache { path: pygame.Surface }
+    tileImages: dict = {}
 
 
     @classmethod
@@ -42,12 +44,12 @@ class Tileset:
 
         self.log = logging.getLogger(__name__)
 
-        # List of tiles
-        self.tiles: list[list[Tile]] = []
-
-        containingFolder: str = f"{self.MAPS_FOLDER}/{mapFolderName}"
+        # Entire map/tileset image
+        self.tiles: pygame.Surface = None
 
         # Load map info
+        containingFolder: str = f"{self.MAPS_FOLDER}/{mapFolderName}"
+
         self.loadMapData(f"{containingFolder}/{self.JSON_FILE}")
         self.loadEntities(f"{containingFolder}/{self.ENTITIES_FILE}")
         self.loadFromText(f"{containingFolder}/{self.MAP_FILE}")
@@ -57,7 +59,6 @@ class Tileset:
         """ Loads the JSON containing map metadata and vars from it """
 
         mapData: dict = util.loadJSON(dataPath)
-
         self.PLAYER_START = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
 
     
@@ -72,43 +73,43 @@ class Tileset:
         mapData: str = util.loadFile(mapPath)
         splitData: list[str] = mapData.split("\n")
 
+        # Create empty tileset image based on the tiledata
+        self.tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x, # Width
+                                     len(splitData) * self.TILE_SIZE.y)) # Height
+
         # Create Tile objects for every char in the map data
         for y, row in enumerate(splitData): # Iterate through rows
-            self.tiles.append([]) # add row
-
             for x, tileChar in enumerate(row): # Iterate through columns
 
+                # Gets position of the tile in pixels
                 pos: Vect = Vect(x, y) * self.TILE_SIZE
 
-                # Generate Tile objects
-                # Occupied is set to False initially,
-                # will be set to true when loading other entities or buildings
-                tileObj: Tile = Tile(pos, False, self.TILESET_DATA[tileChar])
-                
-                # Append to the last row in the list
-                self.tiles[-1].append(tileObj)
+                # Load tile image
+                tileImg: pygame.Surface = self.getTileImg(self.TILESET_DATA[tileChar])
 
+                # Draw to the tileset image
+                self.tiles.blit(tileImg, pos.toTuple())
+
+
+    def getTileImg(self, path: str) -> pygame.Surface:
+        """ Gets the tile image from the cache 
+            or loads it if it has not been loaded previously """
+        if path not in self.tileImages:
+            self.log.info(f"Loading tile image at {path}")
+            self.tileImages[path] = util.loadImg(path)
+        
+        return self.tileImages[path]
+    
     
     def update(self, window: Window) -> None:
-        """ Updates all tiles' animations """
-
-        # This annotates the type of the for loop iterator
-        # since you cannot annotate it inside the for loop
-        row: list[Tile]
-        for row in self.tiles:
-            tile: Tile
-            for tile in row:
-                tile.update(window)
+        """ Will be used to update anything in the tileset 
+            with animations in the future """
+        pass
     
 
     def render(self, window: Window, offset: Vect=Vect()) -> None:
-        """ Renders all tiles """
-        
-        row: list[Tile]
-        for row in self.tiles:
-            tile: Tile
-            for tile in row:
-                tile.render(window, offset=offset)
+        """ Renders tileset image """
+        window.render(self.tiles, offset)
 
     
     # Getters

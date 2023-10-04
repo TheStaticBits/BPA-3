@@ -9,8 +9,8 @@ class Entity:
     """ Base class for all entities in the game.
         Handles the animation and position """
     
-    # Stores any spritesheets used so as to reduce duplicates
-    spritesheets = {}
+    # Cache for spritesheets so as to reduce loading the same image twice
+    spritesheets: dict = {}
     
     def __init__(self, animData: dict, pos: Vect=Vect()) -> None:
         """ Setup base values. animData must contain "path", "frames", and "delay" keys
@@ -18,7 +18,7 @@ class Entity:
         
         self.log = logging.getLogger(__name__)
 
-        self.pos = pos
+        self.pos: Vect = pos
 
         self.loadSpritesheet(animData["path"])
         self.animation = self.loadAnim(animData)
@@ -33,7 +33,7 @@ class Entity:
 
 
     def loadAnim(self, animData: dict) -> Animation:
-        """ Loads the animation object using a """
+        """ Loads the animation object """
         return Animation(self.spritesheets[animData["path"]], 
                          animData["frames"], 
                          animData["delay"])
