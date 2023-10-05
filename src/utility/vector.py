@@ -1,4 +1,5 @@
 from __future__ import annotations # allows use of the class type inside the same class
+from math import floor
 
 class Vect:
     """ Stores two digits, allowing for operations """
@@ -33,6 +34,10 @@ class Vect:
 
     def toTuple(self) -> tuple:
         return (self.x, self.y)
+    
+    
+    def floor(self) -> Vect:
+        return Vect(floor(self.x), floor(self.y))
     
 
     def __str__(self) -> str:
@@ -202,3 +207,6 @@ class Vect:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
         
     
+    def __neg__(self) -> Vect:
+        """ - overloading """
+        return Vect(-self.x, -self.y)

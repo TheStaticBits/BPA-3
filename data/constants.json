@@ -36,5 +36,9 @@
         "jsonFile": "data.json",
         "entitiesFile": "entities.txt",
         "mapFile": "map.txt"
+    },
+
+    "buildings": {
+        "jsonPath": "data/buildings.json"
     }
 }

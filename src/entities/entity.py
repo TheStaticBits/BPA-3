@@ -52,6 +52,9 @@ class Entity:
     # Getters
     def getAnim(self) -> Animation: return self.animation
     def getPos(self) -> Vect: return self.pos
+    def getCenterPos(self) -> Vect:
+        """ Returns the center of the entity """
+        return self.pos + (self.animation.getSize() / 2)
 
     # Setters
     def setPos(self, pos: Vect) -> None: self.pos = pos

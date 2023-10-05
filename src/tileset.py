@@ -24,7 +24,7 @@ class Tileset:
     tileImages: dict = {}
 
 
-    @classmethod
+    @classmethod # static function
     def loadStatic(cls, constants: dict) -> None:
         """ Loads metadata about the tilesets from the constants file
             into several static variables """
@@ -46,6 +46,9 @@ class Tileset:
 
         # Entire map/tileset image
         self.tiles: pygame.Surface = None
+
+        # 2D array for occupied tiles (for things like placing buildings)
+        self.occupiedTiles: list[list[bool]] = []
 
         # Load map info
         containingFolder: str = f"{self.MAPS_FOLDER}/{mapFolderName}"
@@ -79,6 +82,8 @@ class Tileset:
 
         # Create Tile objects for every char in the map data
         for y, row in enumerate(splitData): # Iterate through rows
+            self.occupiedTiles.append([False] * len(row)) # Add a row of False to occupiedTiles
+
             for x, tileChar in enumerate(row): # Iterate through columns
 
                 # Gets position of the tile in pixels
@@ -111,7 +116,24 @@ class Tileset:
         """ Renders tileset image """
         window.render(self.tiles, offset)
 
+        # Draw red square over tiles that are occupied (debugging)
+        for y, row in enumerate(self.occupiedTiles):
+            for x, occupied in enumerate(row):
+                if occupied:
+                    window.drawRect(Vect(x, y) * self.TILE_SIZE + offset + Vect(3), self.TILE_SIZE - Vect(6), (255, 0, 0))
+
     
     # Getters
     def getPlayerStart(self) -> Vect:
         return self.PLAYER_START
+    
+
+    def isOccupied(self, tilePos: Vect) -> bool:
+        """ Returns whether or not a tile is occupied """
+        return self.occupiedTiles[tilePos.y][tilePos.x]
+
+
+    # Setters
+    def setOccupied(self, tilePos: Vect) -> None:
+        """ Sets the occupied status of a tile """
+        self.occupiedTiles[tilePos.y][tilePos.x] = True

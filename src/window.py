@@ -10,7 +10,9 @@ class Window:
         pygame.K_a: "left",  pygame.K_LEFT: "left",
         pygame.K_d: "right", pygame.K_RIGHT: "right",
         pygame.K_w: "up",    pygame.K_UP: "up",
-        pygame.K_s: "down",  pygame.K_DOWN: "down"
+        pygame.K_s: "down",  pygame.K_DOWN: "down",
+
+        pygame.K_SPACE: "space" # may be temporary
     }
 
     def __init__(self, constants) -> None:
@@ -45,6 +47,11 @@ class Window:
         # Set default inputs all to false
         for value in self.KEYS.values():
             self.inputs[value] = False
+        
+        # Inputs that were just pressed
+        # These are only True for one single frame,
+        # when the player pressed them initially
+        self.justPressed: dict = self.inputs.copy()
         
         # Mouse inputs
         self.mousePos: Vect = Vect(0, 0)
@@ -90,6 +97,10 @@ class Window:
         # Mouse input
         self.mousePos = Vect(pygame.mouse.get_pos())
         self.mouseButtons[1], self.mouseButtons[2], self.mouseButtons[3] = pygame.mouse.get_pressed()
+
+        # Reset justPressed inputs
+        for key in self.justPressed:
+            self.justPressed[key] = False
         
         # Iterate through all pygame-given events
         for event in pygame.event.get():
@@ -101,6 +112,7 @@ class Window:
             elif event.type == pygame.KEYDOWN:
                 if event.key in self.KEYS:
                     self.inputs[self.KEYS[event.key]] = True # self.KEYS gets the string name of the input
+                    self.justPressed[self.KEYS[event.key]] = True
             
             elif event.type == pygame.KEYUP:
                 if event.key in self.KEYS:
@@ -109,8 +121,13 @@ class Window:
 
     def render(self, img: pygame.Surface, pos: Vect, area: pygame.Rect = None) -> None:
         """ Renders an image on a window at a given position,
-            with a given portion of the image to render if specified """
+            with a given portion of the image to render if specified (the area parameter) """
         self.window.blit(img, pos.toTuple(), area=(area if area else None))
+    
+
+    def drawRect(self, pos: Vect, size: Vect, color: tuple[int, int, int]) -> None:
+        """ Draws a rectangle on the window """
+        pygame.draw.rect(self.window, color, pygame.Rect(pos.toTuple(), size.toTuple()))
     
 
     # Getters
@@ -121,6 +138,7 @@ class Window:
     def getMousePos(self) -> Vect: return self.mousePos
     def getMouseButton(self, button: int) -> bool: return self.mouseButtons[button]
     def getKey(self, key: str) -> bool: return self.inputs[key]
+    def getJustPressed(self, key: str) -> bool: return self.justPressed[key]
 
     def isClosed(self) -> bool: return self.quit
 

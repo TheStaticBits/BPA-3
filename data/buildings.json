@@ -1,0 +1,10 @@
+{
+    "testBuilding": {
+        "anim": {
+            "path": "res/testBuilding.png",
+            "frames": 1, "delay": 1
+        },
+
+        "size": [3, 2]
+    }
+}

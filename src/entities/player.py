@@ -37,3 +37,9 @@ class Player(Entity):
         movePixels = move * self.SPEED * window.getDeltaTime()
 
         super().addPos(movePixels)
+    
+
+    # Getters
+    def getTilePos(self, tileSize: Vect) -> Vect:
+        """ Returns the player's position in tiles """
+        return (self.getCenterPos() / tileSize).floor()
