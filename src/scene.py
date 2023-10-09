@@ -38,19 +38,14 @@ class Scene:
         self.updateCameraPos(window)
         self.testPlaceBuilding(window)
 
-
-    def findCameraPos(self, window: Window) -> Vect:
-        """ Returns the locked camera position """
-        # Finding the camera position centered on the player
-        return self.player.getCenterPos() - window.getWindowSize() / 2
-
     
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
-        moveTo = self.findCameraPos(window)
+        # Camera position centered on the position
+        newOffset = self.player.getCenterPos() - window.getWindowSize() / 2
 
         # Move the camera offset slowly to the new position
-        self.cameraOffset += (moveTo - self.cameraOffset) * self.CAMERA_SPEED * window.getDeltaTime()
+        self.cameraOffset += (newOffset - self.cameraOffset) * self.CAMERA_SPEED * window.getDeltaTime()
     
     
     def testPlaceBuilding(self, window: Window) -> None:
