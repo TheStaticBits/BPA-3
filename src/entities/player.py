@@ -16,7 +16,9 @@ class Player(Entity):
 
         super().__init__(constants["player"]["anim"], pos=startingPos)
 
-        self.SPEED = constants["player"]["speed"]
+        self.MAX_SPEED = constants["player"]["maxSpeed"]
+        self.ACCELERATION = constants["player"]["acceleration"]
+        self.DECELERATION = constants["player"]["deceleration"]
 
         self.velocity = Vect(0, 0)
     
@@ -31,30 +33,23 @@ class Player(Entity):
     def movement(self, window: Window) -> None:
         """ Handle player movement based on inputs """
 
-        acceleration: Vect = Vect(window.getKey("right") - window.getKey("left"), 
-                             window.getKey("down") - window.getKey("up"))
-
         # Gets movement direction based on the keys pressed (getKey is 1 or 0)
+        acceleration: Vect = Vect(window.getKey("right") - window.getKey("left"), 
+                                  window.getKey("down") - window.getKey("up"))
 
-        self.velocity += acceleration #* window.getDeltaTime()
-
-        if -200 > self.velocity.x or self.velocity.x > 200:
-            self.velocity.x = 200 * (self.velocity.x/abs(self.velocity.x))
-        if -200 > self.velocity.y or self.velocity.y > 200:
-            self.velocity.y = 200 * (self.velocity.y/abs(self.velocity.y))
+        self.velocity += acceleration * self.ACCELERATION * window.getDeltaTime()
         
+        # Lock between the max an min speed
+        self.velocity.clamp(Vect(-self.MAX_SPEED), Vect(self.MAX_SPEED))
 
-        if(acceleration.x == 0 and self.velocity.x != 0):
-            self.velocity.x += ((self.velocity.x/abs(self.velocity.x))* -2)
+        # Deceleration when the player is not inputting
+        # and the velocity is not 0
+        if acceleration.x == 0 and self.velocity.x != 0:
+            self.velocity.x -= (-1 if self.velocity.x < 0 else 1) * self.DECELERATION * window.getDeltaTime()
         if acceleration.y == 0 and self.velocity.y != 0:
-            self.velocity.y += ((self.velocity.y/abs(self.velocity.y))* -2)
-        
+            self.velocity.y -= (-1 if self.velocity.y < 0 else 1) * self.DECELERATION * window.getDeltaTime()
 
-        
-        # Amount moved in pixels based on the direction and speed
-        movePixels = self.velocity * self.SPEED * 1/80 * window.getDeltaTime()
-
-        super().addPos(movePixels)
+        super().addPos(self.velocity * window.getDeltaTime())
     
 
     # Getters
