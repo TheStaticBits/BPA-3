@@ -47,20 +47,18 @@ class Player(Entity):
         # Used for each axis on the velocity Vect separately
         def decelerate(velocity: float, acceleration: float) -> float:
             """ Returns the deceleration value for the given velocity """
-            newVelocity: float = velocity
-
             if acceleration == 0: # player is not moving in that direction
-                dir: int = (-1 if velocity < 0 else 1)
+                dir: int = (-1 if velocity < 0 else 1) # get direction of velocity
 
                 # decelerate towards zero
-                newVelocity -= dir * self.DECELERATION * window.getDeltaTime()
+                velocity -= dir * self.DECELERATION * window.getDeltaTime()
                 
                 # if the velocity has passed zero, set it to zero
                 # useful for low framerates
-                if newVelocity * dir < 0:
-                    newVelocity = 0
-
-            return newVelocity
+                if velocity * dir < 0:
+                    velocity = 0
+            
+            return velocity
 
 
         # Apply the above decelerate function for each axis
