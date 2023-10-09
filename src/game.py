@@ -1,9 +1,10 @@
-import pygame, logging
+import logging
 
 import src.utility.utility as util
 from src.window import Window
 from src.scene import Scene
 from src.tileset import Tileset
+from src.entities.building import Building
 
 class Game:
     def __init__(self, CONSTANTS_FILE: str) -> None:
@@ -19,8 +20,9 @@ class Game:
         # Get image scale
         util.IMG_SCALE = self.constants["window"]["imgScale"]
 
-        # Setup Tileset with static constants data
+        # Setup Tileset and Building with static constants data
         Tileset.loadStatic(self.constants)
+        Building.loadStatic(self.constants)
 
         # Window
         self.window: Window = Window(self.constants)

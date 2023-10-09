@@ -10,6 +10,7 @@ class Entity:
         Handles the animation and position """
     
     # Cache for spritesheets so as to reduce loading the same image twice
+    # Key: image path - Value: the spritesheet
     spritesheets: dict = {}
     
     def __init__(self, animData: dict, pos: Vect=Vect()) -> None:
@@ -52,6 +53,9 @@ class Entity:
     # Getters
     def getAnim(self) -> Animation: return self.animation
     def getPos(self) -> Vect: return self.pos
+    def getCenterPos(self) -> Vect:
+        """ Returns the center of the entity """
+        return self.pos + (self.animation.getSize() / 2)
 
     # Setters
     def setPos(self, pos: Vect) -> None: self.pos = pos
