@@ -42,12 +42,31 @@ class Player(Entity):
         # Lock between the max an min speed
         self.velocity.clamp(Vect(-self.MAX_SPEED), Vect(self.MAX_SPEED))
 
-        # Deceleration when the player is not inputting
-        # and the velocity is not 0
-        if acceleration.x == 0 and self.velocity.x != 0:
-            self.velocity.x -= (-1 if self.velocity.x < 0 else 1) * self.DECELERATION * window.getDeltaTime()
-        if acceleration.y == 0 and self.velocity.y != 0:
-            self.velocity.y -= (-1 if self.velocity.y < 0 else 1) * self.DECELERATION * window.getDeltaTime()
+
+        # Decelerate velocity if the player is not inputting movement
+        # Used for each axis on the velocity Vect separately
+        def decelerate(velocity: float, acceleration: float) -> float:
+            """ Returns the deceleration value for the given velocity """
+            newVelocity: float = velocity
+
+            if acceleration == 0: # player is not moving in that direction
+                dir: int = (-1 if velocity < 0 else 1)
+
+                # decelerate towards zero
+                newVelocity -= dir * self.DECELERATION * window.getDeltaTime()
+                
+                # if the velocity has passed zero, set it to zero
+                # useful for low framerates
+                if newVelocity * dir < 0:
+                    newVelocity = 0
+
+            return newVelocity
+
+
+        # Apply the above decelerate function for each axis
+        self.velocity.forEach(decelerate,
+                              paramsX=[acceleration.x],
+                              paramsY=[acceleration.y])
 
         super().addPos(self.velocity * window.getDeltaTime())
     

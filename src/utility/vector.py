@@ -44,6 +44,14 @@ class Vect:
         """ Locks the vector between two vectors """
         self.x = min(max(self.x, minVect.x), maxVect.x)
         self.y = min(max(self.y, minVect.y), maxVect.y)
+    
+
+    def forEach(self, func: callable, paramsX: list=[], paramsY: list=[]) -> Vect:
+        """ Applies a function to each component of the vector,
+            with additional parameters in lists for x and y"""
+        self.x = func(self.x, *paramsX)
+        self.y = func(self.y, *paramsY)
+        return self
 
 
     def __str__(self) -> str:
