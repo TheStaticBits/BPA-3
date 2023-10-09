@@ -24,8 +24,8 @@
     },
 
     "player": {
-        "maxSpeed": 200,
-        "acceleration": 400,
+        "maxSpeed": 300,
+        "acceleration": 800,
         "deceleration": 800,
         "anim": {
             "path": "res/exampleAnim.png",

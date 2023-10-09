@@ -37,7 +37,7 @@ class Player(Entity):
         acceleration: Vect = Vect(window.getKey("right") - window.getKey("left"), 
                                   window.getKey("down") - window.getKey("up"))
 
-        self.velocity += acceleration * self.ACCELERATION * window.getDeltaTime() * 2
+        self.velocity += acceleration * self.ACCELERATION * window.getDeltaTime()
         
         # Lock between the max an min speed
         self.velocity.clamp(Vect(-self.MAX_SPEED), Vect(self.MAX_SPEED))
