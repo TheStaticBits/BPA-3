@@ -39,6 +39,17 @@ class Vect:
     def floor(self) -> Vect:
         return Vect(floor(self.x), floor(self.y))
     
+    
+    def clamp(self, min: Vect=None, max: Vect=None) -> Vect:
+        """ Locks the vector between two vectors """
+        if min != None:
+            self.x = max(self.x, min.x)
+            self.y = max(self.y, min.y)
+        
+        if max != None:
+            self.x = min(self.x, max.x)
+            self.y = min(self.y, max.y)
+
 
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
