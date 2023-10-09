@@ -1,4 +1,5 @@
 from __future__ import annotations # allows use of the class type inside the same class
+from math import floor
 
 class Vect:
     """ Stores two digits, allowing for operations """
@@ -34,10 +35,27 @@ class Vect:
     def toTuple(self) -> tuple:
         return (self.x, self.y)
     
+    
+    def floor(self) -> Vect:
+        return Vect(floor(self.x), floor(self.y))
+    
+    
+    def clamp(self, min: Vect=None, max: Vect=None) -> Vect:
+        """ Locks the vector between two vectors """
+        if min != None:
+            self.x = max(self.x, min.x)
+            self.y = max(self.y, min.y)
+        
+        if max != None:
+            self.x = min(self.x, max.x)
+            self.y = min(self.y, max.y)
+
 
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
     
+
+    # A whole ton of boilerplate for overloading operators
 
     def __add__(self, other: Vect | int | float) -> Vect:
         """ + by a Vect or number """
@@ -202,3 +220,6 @@ class Vect:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
         
     
+    def __neg__(self) -> Vect:
+        """ - overloading """
+        return Vect(-self.x, -self.y)
