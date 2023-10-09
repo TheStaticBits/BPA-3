@@ -10,6 +10,7 @@ class Entity:
         Handles the animation and position """
     
     # Cache for spritesheets so as to reduce loading the same image twice
+    # Key: image path - Value: the spritesheet
     spritesheets: dict = {}
     
     def __init__(self, animData: dict, pos: Vect=Vect()) -> None:

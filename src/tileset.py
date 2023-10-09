@@ -78,7 +78,8 @@ class Tileset:
 
         # Create empty tileset image based on the tiledata
         self.tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x, # Width
-                                     len(splitData) * self.TILE_SIZE.y)) # Height
+                                     len(splitData) * self.TILE_SIZE.y), # Height
+                                     pygame.DOUBLEBUF | pygame.HWSURFACE)
 
         # Create Tile objects for every char in the map data
         for y, row in enumerate(splitData): # Iterate through rows

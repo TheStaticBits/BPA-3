@@ -1,10 +1,13 @@
 {
     "window": {
         "title": "BPA 3 or something",
-        "size": [ 900, 600 ],
+
+        "minSize": [ 900, 600 ],
+        "resizable": true,
         
         "FPS": -1,
         "logFPS": true,
+        "vsync": false, 
 
         "imgScale": 3,
 

@@ -44,6 +44,8 @@ class Vect:
         return f"({self.x}, {self.y})"
     
 
+    # A whole ton of boilerplate for overloading operators
+
     def __add__(self, other: Vect | int | float) -> Vect:
         """ + by a Vect or number """
         if isinstance(other, Vect):
