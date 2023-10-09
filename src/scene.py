@@ -22,6 +22,8 @@ class Scene:
 
         self.cameraOffset: Vect = Vect()
 
+        self.CAMERA_SPEED = constants["window"]["cameraSpeed"]
+
 
     def update(self, window: Window) -> None:
         """ Update scene objects """
@@ -36,10 +38,19 @@ class Scene:
         self.updateCameraPos(window)
         self.testPlaceBuilding(window)
 
+
+    def findCameraPos(self, window: Window) -> Vect:
+        """ Returns the locked camera position """
+        # Finding the camera position centered on the player
+        return self.player.getCenterPos() - window.getWindowSize() / 2
+
     
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
-        self.cameraOffset = self.findCameraPos(window)
+        moveTo = self.findCameraPos(window)
+
+        # Move the camera offset slowly to the new position
+        self.cameraOffset += (moveTo - self.cameraOffset) * self.CAMERA_SPEED * window.getDeltaTime()
     
     
     def testPlaceBuilding(self, window: Window) -> None:
@@ -64,9 +75,3 @@ class Scene:
             building.render(window, -self.cameraOffset)
     
         self.player.render(window, -self.cameraOffset)
-
-
-    def findCameraPos(self, window: Window) -> Vect:
-        """ Returns the camera position """
-        # Finding the camera position centered on the player
-        return self.player.getCenterPos() - window.getWindowSize() / 2

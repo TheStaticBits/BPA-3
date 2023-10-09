@@ -6,7 +6,9 @@
         "FPS": -1,
         "logFPS": true,
 
-        "imgScale": 3
+        "imgScale": 3,
+
+        "cameraSpeed": 8
     },
 
     "saves": {
