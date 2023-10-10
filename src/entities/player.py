@@ -16,9 +16,9 @@ class Player(Entity):
 
         super().__init__(constants["player"]["anim"], pos=startingPos)
 
-        self.MAX_SPEED = constants["player"]["maxSpeed"]
-        self.ACCELERATION = constants["player"]["acceleration"]
-        self.DECELERATION = constants["player"]["deceleration"]
+        self.MAX_SPEED: float = constants["player"]["maxSpeed"]
+        self.ACCELERATION: float = constants["player"]["acceleration"]
+        self.DECELERATION: float = constants["player"]["deceleration"]
 
         self.velocity = Vect(0, 0)
     
@@ -46,14 +46,16 @@ class Player(Entity):
         # Decelerate velocity if the player is not inputting movement
         # Used for each axis on the velocity Vect separately
         def decelerate(velocity: float, acceleration: float) -> float:
-            """ Returns the deceleration value for the given velocity """
-            if acceleration == 0: # player is not moving in that direction
-                dir: int = (-1 if velocity < 0 else 1) # get direction of velocity
+            """ Returns the decelerated value for the given velocity """
+            if acceleration == 0: # player is not inputting movement in this direction
+                # get direction of velocity (positive or negative):
+                if velocity < 0: dir: int = -1
+                else: dir: int = 1
 
                 # decelerate towards zero
                 velocity -= dir * self.DECELERATION * window.getDeltaTime()
                 
-                # if the velocity has passed zero, set it to zero
+                # if the velocity has passed zero, set it to zero,
                 # useful for low framerates
                 if velocity * dir < 0:
                     velocity = 0

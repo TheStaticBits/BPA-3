@@ -48,7 +48,7 @@ class Vect:
 
     def forEach(self, func: callable, paramsX: list=[], paramsY: list=[]) -> Vect:
         """ Applies a function to each component of the vector,
-            with additional parameters in lists for x and y"""
+            with additional parameters passed in via lists for x and y"""
         self.x = func(self.x, *paramsX)
         self.y = func(self.y, *paramsY)
         return self
