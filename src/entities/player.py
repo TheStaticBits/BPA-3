@@ -10,11 +10,9 @@ class Player(Entity):
     
     def __init__(self, constants: dict, startingPos: Vect) -> None:
         """ Initialize player objects and data """
-        self.log = logging.getLogger(__name__)
+        super().__init__(constants["player"]["anim"], __name__, pos=startingPos)
 
         self.log.info("Initializing player")
-
-        super().__init__(constants["player"]["anim"], pos=startingPos)
 
         self.MAX_SPEED: float = constants["player"]["maxSpeed"]
         self.ACCELERATION: float = constants["player"]["acceleration"]
@@ -74,4 +72,4 @@ class Player(Entity):
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:
         """ Returns the player's position in tiles """
-        return (self.getCenterPos() / tileSize).floor()
+        return (super().getCenterPos() / tileSize).floor()

@@ -19,9 +19,7 @@ class Warrior(Entity):
 
     def __init__(self, type: str) -> None:
         """ Setup position, animation, etc. """
-        self.log = logging.getLogger(__name__)
-
-        super().__init__(self.WARRIOR_DICT[type]["anim"], Vect(300, 300))
+        super().__init__(self.WARRIOR_DICT[type]["anim"], __name__, Vect(300, 300))
     
 
     def update(self, window: Window) -> None:

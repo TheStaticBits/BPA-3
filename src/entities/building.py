@@ -41,10 +41,8 @@ class Building(Entity):
     def __init__(self, tileset: Tileset, type: str, tilePos: Vect=Vect()) -> None:
         """ Setup initial position, animation, and 
             set tiles where the building is to occupied """
-        
-        self.log = logging.getLogger(__name__)
 
-        super().__init__(self.getData(type)["anim"], tilePos * Tileset.TILE_SIZE)
+        super().__init__(self.getData(type)["anim"], __name__, tilePos * Tileset.TILE_SIZE)
 
         self.type = type
 

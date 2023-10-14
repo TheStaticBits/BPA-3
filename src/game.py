@@ -2,10 +2,11 @@ import logging
 
 import src.utility.utility as util
 from src.window import Window
-from src.scenes.scene import Scene
 from src.tileset import Tileset
 from src.entities.building import Building
 from src.entities.warrior import Warrior
+from src.scenes.baseScene import BaseScene
+from src.scenes.buildingsScene import BuildingsScene
 
 class Game:
     def __init__(self, CONSTANTS_FILE: str) -> None:
@@ -25,12 +26,13 @@ class Game:
         Tileset.loadStatic(self.constants)
         Building.loadStatic(self.constants)
         Warrior.loadStatic(self.constants)
+        BaseScene.loadStatic(self.constants)
 
         # Window
         self.window: Window = Window(self.constants)
 
         # Test scene
-        self.scene: Scene = Scene(self.constants, "testmap")
+        self.buildingsScene: BuildingsScene = BuildingsScene(self.constants, "testmap")
 
 
     def mainLoop(self) -> None:
@@ -38,9 +40,9 @@ class Game:
             self.window.handleInputs()
 
             # Update functions
-            self.scene.update(self.window)
+            self.buildingsScene.update(self.window)
 
             # Render functions
-            self.scene.render(self.window)
+            self.buildingsScene.render(self.window)
 
             self.window.update()
