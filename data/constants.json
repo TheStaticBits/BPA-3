@@ -11,7 +11,7 @@
 
         "imgScale": 3,
 
-        "cameraSpeed": 7
+        "cameraSpeed": 5
     },
 
     "saves": {
@@ -47,5 +47,9 @@
 
     "buildings": {
         "jsonPath": "data/buildings.json"
+    },
+
+    "warriors": {
+        "jsonPath": "data/warriors.json"
     }
 }

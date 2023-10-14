@@ -1,0 +1,9 @@
+{
+    "testWarriorLigma": {
+        "anim": {
+            "path": "res/exampleAnim.png",
+            "frames": 3,
+            "delay": 1
+        }
+    }
+}

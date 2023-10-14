@@ -2,9 +2,10 @@ import logging
 
 import src.utility.utility as util
 from src.window import Window
-from src.scene import Scene
+from src.scenes.scene import Scene
 from src.tileset import Tileset
 from src.entities.building import Building
+from src.entities.warrior import Warrior
 
 class Game:
     def __init__(self, CONSTANTS_FILE: str) -> None:
@@ -23,6 +24,7 @@ class Game:
         # Setup Tileset and Building with static constants data
         Tileset.loadStatic(self.constants)
         Building.loadStatic(self.constants)
+        Warrior.loadStatic(self.constants)
 
         # Window
         self.window: Window = Window(self.constants)
