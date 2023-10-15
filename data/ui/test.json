@@ -1,6 +1,6 @@
 {
     "pos": {
-        "x": { "locked": "center", "margin": 10 },
+        "x": { "locked": "center", "margin": 0 },
         "y": { "locked": "start", "margin": 10 }
     },
 
@@ -10,16 +10,35 @@
         "text": {
             "exampleText": {
                 "text": "Hello there",
-                "fontSize": 16,
                 "offset": [ 0, 0 ],
+                "fontSize": 16,
                 "color": [ 0, 255, 0 ]
             },
 
             "exampleText2": {
                 "text": "Hello there",
-                "fontSize": 16,
                 "offset": [ 0, 30 ],
+                "fontSize": 16,
                 "color": [ 255, 0, 0 ]
+            }
+        },
+
+        "buttons": {
+            "exampleButton": {
+                "offset": [ 0, 60 ],
+
+                "images": {
+                    "inactive": "button.png",
+                    "hover": "buttonHover.png",
+                    "pressed": "buttonPressed.png"
+                },
+
+                "textData": {
+                    "text": "Hello there",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 16,
+                    "color": [ 255, 255, 0 ]
+                }
             }
         }
     }

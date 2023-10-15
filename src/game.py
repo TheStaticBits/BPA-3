@@ -10,10 +10,11 @@ from src.scenes.buildingsScene import BuildingsScene
 from src.ui.elements.text import Text
 from src.ui.baseUI import BaseUI
 
+
 class Game:
     def __init__(self, CONSTANTS_FILE: str) -> None:
         """ Initialize game objects and data"""
-        
+
         # Setup constants and logger
         self.constants: dict = util.loadJSON(CONSTANTS_FILE)
         util.setupLogger(self.constants)
@@ -36,8 +37,8 @@ class Game:
         self.window: Window = Window(self.constants)
 
         # Test scene
-        self.buildingsScene: BuildingsScene = BuildingsScene(self.constants, "testmap")
-
+        self.buildingsScene: BuildingsScene = BuildingsScene(self.constants,
+                                                             "testmap")
 
     def mainLoop(self) -> None:
         while not self.window.isClosed():
