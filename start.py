@@ -1,4 +1,5 @@
-import src.game, pygame
+import src.game
+import pygame
 pygame.init()
 
 CONSTANTS_FILE: str = "data/constants.json"

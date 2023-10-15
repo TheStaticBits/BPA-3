@@ -34,7 +34,6 @@ class BaseUI:
         """ Load static vars from constants """
         cls.UI_FOLDER = constants["game"]["uiFolder"]
 
-
     def __init__(self, jsonFile: str, loggerName: str) -> None:
         self.log = logging.getLogger(loggerName)
 
@@ -54,17 +53,15 @@ class BaseUI:
 
         self.loadPos(jsonData["pos"])
 
-
     def loadUI(self, jsonData: dict) -> dict:
         """ Loads the UI objects (text, buttons, etc.)
             from the JSON data, and returns it """
         elements: dict = {}
-        
+
         for key, textData in jsonData["elements"]["text"].items():
             elements[key] = Text(textData)
-        
+
         return elements
-    
 
     def findSize(self) -> Vect:
         """ Finds the size of the UI object from the elements """
@@ -74,11 +71,10 @@ class BaseUI:
 
         for element in self.elements.values():
             bottomRight: Vect = element.getSize() + element.getOffset()
-            if bottomRight >= greatest: 
+            if bottomRight >= greatest:
                 greatest = bottomRight
-        
-        return greatest
 
+        return greatest
 
     def loadPos(self, posData: dict) -> None:
         """ Loads the position lamdas using JSON data """
@@ -86,7 +82,8 @@ class BaseUI:
         self.xPos: callable = self.POS_CALCS[posData["x"]["locked"]]
         self.yPos: callable = self.POS_CALCS[posData["y"]["locked"]]
 
-        self.margin: Vect = Vect(posData["x"]["margin"], posData["y"]["margin"])
+        self.margin: Vect = Vect(posData["x"]["margin"],
+                                 posData["y"]["margin"])
 
     def update(self, window: Window) -> None:
         """ Updates all elements """
