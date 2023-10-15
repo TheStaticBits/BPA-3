@@ -1,0 +1,26 @@
+{
+    "pos": {
+        "x": { "locked": "center", "margin": 10 },
+        "y": { "locked": "start", "margin": 10 }
+    },
+
+    "size": "auto",
+
+    "elements": {
+        "text": {
+            "exampleText": {
+                "text": "Hello there",
+                "fontSize": 16,
+                "offset": [ 0, 0 ],
+                "color": [ 0, 255, 0 ]
+            },
+
+            "exampleText2": {
+                "text": "Hello there",
+                "fontSize": 16,
+                "offset": [ 0, 30 ],
+                "color": [ 255, 0, 0 ]
+            }
+        }
+    }
+}

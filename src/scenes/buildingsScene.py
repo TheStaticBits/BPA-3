@@ -4,6 +4,7 @@ from src.entities.building import Building
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
+from src.ui.interfaces.test import TestUI
 
 class BuildingsScene(BaseScene):
     """ Inherits from BaseScene
@@ -14,6 +15,7 @@ class BuildingsScene(BaseScene):
         super().__init__(constants, mapFolderName, __name__)
         
         self.buildings: list[Building] = []
+        self.testUI: TestUI = TestUI()
     
 
     def update(self, window: Window) -> None:
@@ -26,6 +28,8 @@ class BuildingsScene(BaseScene):
         
         if window.getJustPressed("space"):
             self.placeBuilding()
+        
+        self.testUI.update(window)
     
 
     def render(self, window: Window) -> None:
@@ -35,6 +39,8 @@ class BuildingsScene(BaseScene):
         # Render buildings
         for building in self.buildings:
             building.render(window, -super().getCamOffset())
+        
+        self.testUI.render(window)
     
 
     def placeBuilding(self) -> None:

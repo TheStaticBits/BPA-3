@@ -1,6 +1,7 @@
 import pygame, logging
 
 import src.utility.utility as util
+from src.utility.vector import Vect
 from src.window import Window
 
 class BaseUIElement:
@@ -12,10 +13,16 @@ class BaseUIElement:
     # Value: pygame.Surface (the image)
     images: dict = {}
     
-    def __init__(self, imgPath: str) -> None:
-        self.log = logging.getLogger(__name__)
+    def __init__(self, offset: Vect, loggerName: str, imgPath: str=None) -> None:
+        self.log = logging.getLogger(loggerName)
 
-        self.image = self.loadImg(imgPath)
+        self.offset: Vect = offset # Offset from top left corner of each UI
+
+        self.image: pygame.Surface = None
+        self.size: Vect = None
+
+        if imgPath is not None:
+            self.setImg(self.loadImg(imgPath))
     
 
     def loadImg(self, imgPath: str) -> pygame.Surface:
@@ -25,8 +32,23 @@ class BaseUIElement:
             self.images[imgPath] = util.loadImg(imgPath) # loads and stores
         
         return self.images[imgPath]
+    
+
+    def update(self, window: Window) -> None:
+        """ Override in base classes if needed """
 
 
-    def render(self, window: Window) -> None:
+    def render(self, window: Window, offset: Vect) -> None:
         """ Renders the image to the given window """
-        window.blit(self.image, self.pos)
+        if self.image is not None:
+            window.render(self.image, self.offset + offset)
+    
+
+    # Getters
+    def getSize(self) -> Vect: return self.size
+    def getOffset(self) -> Vect: return self.offset
+
+    # Setters
+    def setImg(self, image: pygame.Surface) -> None:
+        self.image = image
+        self.size = Vect(image.get_size())

@@ -14,7 +14,7 @@ class BaseScene:
 
     @classmethod
     def loadStatic(cls, constants: str):
-        cls.CAMERA_SPEED = constants["window"]["cameraSpeed"]
+        cls.CAMERA_SPEED = constants["game"]["cameraSpeed"]
 
     
     def __init__(self, constants: dict, mapFolderName: str, loggerName: str) -> None:

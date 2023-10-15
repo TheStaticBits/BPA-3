@@ -1,4 +1,13 @@
 {
+    "saves": {
+        "folder": "saves",
+        "log": {
+            "level": "debug",
+            "file": "saves/log.txt",
+            "errorsFile": "saves/errors.txt"
+        }
+    },
+    
     "window": {
         "title": "BPA 3 or something",
 
@@ -7,20 +16,15 @@
         
         "FPS": -1,
         "logFPS": true,
-        "vsync": false, 
-
-        "imgScale": 3,
-
-        "cameraSpeed": 5
+        "vsync": false
     },
 
-    "saves": {
-        "folder": "saves",
-        "log": {
-            "level": "debug",
-            "file": "saves/log.txt",
-            "errorsFile": "saves/errors.txt"
-        }
+    "game": {
+        "imgScale": 3,
+        "cameraSpeed": 5,
+
+        "uiFolder": "data/ui",
+        "font": "res/font/staticfont.ttf"
     },
 
     "player": {

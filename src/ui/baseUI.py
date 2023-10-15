@@ -1,10 +1,98 @@
-import pygame, logging
+import logging, os
+
+from src.window import Window
+import src.utility.utility as util
+from src.utility.vector import Vect
+
+from src.ui.baseUIElement import BaseUIElement
+from src.ui.elements.text import Text
 
 class BaseUI:
     """ All UI interfaces inherit from this class,
         which creates and handles UI elements given
         the JSON data for them. """
+    
+    UI_FOLDER: str = None
 
-    def __init__(self):
-        self.log = logging.getLogger(__name__)
+    # Given a window size (int), UI size (int), and margin (int),
+    # these return the position of each UI interface
+    # for each of the three alignments
+    POS_CALCS: dict = {
+        "start": lambda windowSize, uiSize, margin: margin,
+        "center": lambda windowSize, uiSize, margin: (windowSize - uiSize) / 2 + margin,
+        "end": lambda windowSize, uiSize, margin: windowSize - uiSize - margin
+    }
 
+    @classmethod
+    def loadStatic(cls, constants: dict):
+        cls.UI_FOLDER = constants["game"]["uiFolder"]
+    
+
+    def __init__(self, jsonFile: str, loggerName: str) -> None:
+        self.log = logging.getLogger(loggerName)
+
+        # Load the UI's JSON data
+        jsonData = util.loadJSON(os.path.join(self.UI_FOLDER, jsonFile))
+
+        # Dict storing all UI element objects
+        # Key: string ID provided in the JSON
+        # Value: UI element object (inherited from BaseUIElement)
+        self.elements: dict = self.loadUI(jsonData)
+
+        # Additional UI data
+        self.size: Vect = self.findSize() if jsonData["size"] == "auto" else Vect(jsonData["size"])
+        
+        self.loadPos(jsonData["pos"])
+
+
+    def loadUI(self, jsonData: dict) -> dict:
+        """ Loads the UI objects (text, buttons, etc.)
+            from the JSON data, and returns it """
+        elements: dict = {}
+        
+        for key, textData in jsonData["elements"]["text"].items():
+            elements[key] = Text(textData)
+        
+        return elements
+    
+
+    def findSize(self) -> Vect:
+        """ Finds the size of the UI object from the elements """
+        # Find the object with the greatest offset + size
+        # from the UI's top left corner. This is the size of the UI
+        greatest: Vect = Vect(0, 0)
+
+        for element in self.elements.values():
+            bottomRight: Vect = element.getSize() + element.getOffset()
+            if bottomRight >= greatest: 
+                greatest = bottomRight
+        
+        return greatest
+
+
+    def loadPos(self, posData: dict) -> None:
+        """ Loads the position lamdas using JSON data """
+
+        self.xPos: callable[[int, int, int], int] = self.POS_CALCS[posData["x"]["locked"]]
+        self.yPos: callable[[int, int, int], int] = self.POS_CALCS[posData["y"]["locked"]]
+
+        self.margin: Vect = Vect(posData["x"]["margin"], posData["y"]["margin"])
+    
+
+    def update(self, window: Window) -> None:
+        """ Updates all elements """
+        for element in self.elements.values():
+            element.update(window)
+
+
+    def render(self, window: Window) -> None:
+        """ Renders all elements """
+
+        # Calculate offset based on position lambdas
+        offset: Vect = Vect(
+            self.xPos(window.getWindowSize().x, self.size.x, self.margin.x),
+            self.yPos(window.getWindowSize().y, self.size.y, self.margin.y)
+        )
+
+        for element in self.elements.values():
+            element.render(window, offset)

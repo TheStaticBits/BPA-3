@@ -7,6 +7,8 @@ from src.entities.building import Building
 from src.entities.warrior import Warrior
 from src.scenes.baseScene import BaseScene
 from src.scenes.buildingsScene import BuildingsScene
+from src.ui.elements.text import Text
+from src.ui.baseUI import BaseUI
 
 class Game:
     def __init__(self, CONSTANTS_FILE: str) -> None:
@@ -20,13 +22,15 @@ class Game:
         self.log.info("Initializing game")
 
         # Get image scale
-        util.IMG_SCALE = self.constants["window"]["imgScale"]
+        util.IMG_SCALE = self.constants["game"]["imgScale"]
 
-        # Setup Tileset and Building with static constants data
+        # Loading static data from the constants JSON file
         Tileset.loadStatic(self.constants)
         Building.loadStatic(self.constants)
         Warrior.loadStatic(self.constants)
         BaseScene.loadStatic(self.constants)
+        BaseUI.loadStatic(self.constants)
+        Text.loadStatic(self.constants)
 
         # Window
         self.window: Window = Window(self.constants)

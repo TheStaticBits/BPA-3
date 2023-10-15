@@ -46,7 +46,7 @@ class Vect:
         self.y = min(max(self.y, minVect.y), maxVect.y)
     
 
-    def forEach(self, func: callable, paramsX: list=[], paramsY: list=[]) -> Vect:
+    def forEach(self, func: callable, paramsX: tuple=[], paramsY: tuple=[]) -> Vect:
         """ Applies a function to each component of the vector,
             with additional parameters passed in via lists for x and y"""
         self.x = func(self.x, *paramsX)

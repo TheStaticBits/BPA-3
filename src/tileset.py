@@ -1,4 +1,4 @@
-import pygame, logging
+import pygame, logging, os
 
 import src.utility.utility as util
 from src.utility.vector import Vect
@@ -51,11 +51,9 @@ class Tileset:
         self.occupiedTiles: list[list[bool]] = []
 
         # Load map info
-        containingFolder: str = f"{self.MAPS_FOLDER}/{mapFolderName}"
-
-        self.loadMapData(f"{containingFolder}/{self.JSON_FILE}")
-        self.loadEntities(f"{containingFolder}/{self.ENTITIES_FILE}")
-        self.loadFromText(f"{containingFolder}/{self.MAP_FILE}")
+        self.loadMapData(os.path.join(self.MAPS_FOLDER, mapFolderName, self.JSON_FILE))
+        self.loadEntities(os.path.join(self.MAPS_FOLDER, mapFolderName, self.ENTITIES_FILE))
+        self.loadFromText(os.path.join(self.MAPS_FOLDER, mapFolderName, self.MAP_FILE))
     
 
     def loadMapData(self, dataPath: dict) -> None:
