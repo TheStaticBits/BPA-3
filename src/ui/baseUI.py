@@ -6,6 +6,7 @@ import src.utility.utility as util
 from src.utility.vector import Vect
 
 from src.ui.elements.text import Text
+from src.ui.elements.button import Button
 
 
 class BaseUI:
@@ -61,6 +62,9 @@ class BaseUI:
         for key, textData in jsonData["elements"]["text"].items():
             elements[key] = Text(textData)
 
+        for key, buttonData in jsonData["elements"]["buttons"].items():
+            elements[key] = Button(buttonData)
+
         return elements
 
     def findSize(self) -> Vect:
@@ -87,17 +91,19 @@ class BaseUI:
 
     def update(self, window: Window) -> None:
         """ Updates all elements """
-        for element in self.elements.values():
-            element.update(window)
 
-    def render(self, window: Window) -> None:
-        """ Renders all elements """
-
-        # Calculate offset based on position lambdas
+        # Calculate UI interface offset based on position lambdas
         offset: Vect = Vect(
             self.xPos(window.getWindowSize().x, self.size.x, self.margin.x),
             self.yPos(window.getWindowSize().y, self.size.y, self.margin.y)
         )
 
+        # Iterate through UI elements and update them
         for element in self.elements.values():
-            element.render(window, offset)
+            element.update(window, offset)
+
+    def render(self, window: Window) -> None:
+        """ Renders all UI elements in this interface """
+
+        for element in self.elements.values():
+            element.render(window)

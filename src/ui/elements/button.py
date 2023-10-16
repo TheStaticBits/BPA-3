@@ -1,30 +1,95 @@
 import pygame
-import enum
 
 from src.ui.baseUIElement import BaseUIElement
 
 from src.utility.vector import Vect
 from src.ui.elements.text import Text
-
-
-class ButtonState(enum.Enum):
-    inactive = 0
-    hover = 1
-    pressed = 2
+from src.window import Window
 
 
 class Button(BaseUIElement):
     """ Handles buttons in a UI """
 
-    def __init__(self, buttonData: dict):
+    def __init__(self, buttonData: dict) -> None:
         """ Loads button data and initializes """
-        super().__init__(Vect(buttonData["offset"]), __name__)
-
-        self.text = Text(buttonData["textData"])
+        super().__init__(buttonData, __name__)
 
         self.buttons: dict[str, pygame.Surface] = {}
 
+        # Load all button images
         for key, buttonPath in buttonData["images"].items():
-            self.buttons[key] = self.loadImg(buttonPath)
+            self.buttons[key] = super().loadImg(buttonPath)
 
-        self.mode: str = 0
+        super().setSize(Vect(self.buttons["inactive"].get_size()))
+
+        self.text: Text = None
+
+        # Load text data for the button
+        if "textData" in buttonData:
+            textData: dict = buttonData["textData"]
+            textData["centered"] = True  # Text is always centered
+
+            self.text = Text(textData)
+
+            self.centerText()
+
+        # Can be "inactive", "hover", or "pressed"
+        self.mode: str = "inactive"
+
+        self.pressed: bool = False
+
+    def update(self, window: Window, offset: Vect) -> None:
+        """ Updates the button's mode based on mouse position """
+        super().update(window, offset)
+
+        self.updateMouseEvents(window)
+
+        # Update text
+        if self.text is not None:
+            self.text.update(window, super().getRenderPos())
+
+    def updateMouseEvents(self, window: Window) -> None:
+        """ Updates the button's mode based on mouse position """
+        # Reset pressed (since it is only true for one frame)
+        self.pressed = False
+
+        if self.mode == "pressed":
+            if window.getMouseReleased("left"):  # Mouse released button
+                if self.isMouseOver(window):
+                    self.mode = "hover"
+                else:
+                    self.mode = "inactive"
+
+        elif self.isMouseOver(window):
+            self.mode = "hover"
+
+            if window.getMouseJustPressed("left"):  # Just pressed button
+                self.mode = "pressed"
+                self.pressed = True
+
+        else:
+            self.mode = "inactive"
+
+    def isMouseOver(self, window: Window) -> bool:
+        """ Tests if mouse is hovering over the button """
+
+        rect: pygame.Rect = Vect.toRect(super().getRenderPos(),
+                                        super().getSize())
+
+        print(rect, window.getMousePos().toTuple())
+
+        return rect.collidepoint(window.getMousePos().toTuple())
+
+    def centerText(self) -> None:
+        """ Centers the button's text """
+        self.text.setOffset(super().getSize() / 2)
+
+    def render(self, window) -> None:
+        """ Renders the button """
+        super().render(window, image=self.buttons[self.mode])
+
+        if self.text is not None:
+            self.text.render(window)
+
+    # Getters
+    def getPressed(self) -> bool: return self.pressed

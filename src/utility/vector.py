@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import pygame
 from math import floor
 
 
@@ -41,6 +43,10 @@ class Vect:
         """ Locks the vector between two vectors """
         self.x = min(max(self.x, minVect.x), maxVect.x)
         self.y = min(max(self.y, minVect.y), maxVect.y)
+
+    @classmethod
+    def toRect(cls, pos: Vect, size: Vect) -> pygame.Rect:
+        return pygame.Rect(pos.x, pos.y, size.x, size.y)
 
     def forEach(self, func: callable,
                 paramsX: tuple = [], paramsY: tuple = []) -> Vect:

@@ -1,8 +1,17 @@
 import pygame
 import logging
 import time
+import enum
 
 from src.utility.vector import Vect
+
+
+class InputState(enum.Enum):
+    """ Input states for mouse and keyboard inputs """
+    INACTIVE = 0  # Not pressed
+    JUST_PRESSED = 1  # Frame on which the button was pressed
+    PRESSED = 2  # Held down
+    RELEASED = 3  # Frame on which the button was released
 
 
 class Window:
@@ -16,6 +25,12 @@ class Window:
         pygame.K_s: "down",  pygame.K_DOWN: "down",
 
         pygame.K_SPACE: "space"  # may be temporary
+    }
+
+    MOUSE: dict = {
+        pygame.BUTTON_LEFT: "left",
+        pygame.BUTTON_MIDDLE: "middle",
+        pygame.BUTTON_RIGHT: "right"
     }
 
     def __init__(self, constants) -> None:
@@ -35,8 +50,6 @@ class Window:
             self.windowFlags |= pygame.RESIZABLE  # make window resizable
 
         self.setWindow(self.MIN_SIZE)  # create window
-
-        print(pygame.display.get_desktop_sizes())
 
         pygame.display.set_caption(constants["window"]["title"])
 
@@ -60,23 +73,16 @@ class Window:
         # Inputs
         self.inputs: dict = {}
 
-        # Set default inputs all to false
+        # Set default inputs all to inactive
         for value in self.KEYS.values():
-            self.inputs[value] = False
-
-        # Inputs that were just pressed
-        # These are only True for one single frame,
-        # when the player pressed them initially
-        self.justPressed: dict = self.inputs.copy()
+            self.inputs[value] = InputState.INACTIVE
 
         # Mouse inputs
         self.mousePos: Vect = Vect(0, 0)
-        # Left, middle, right clicking
-        self.mouseButtons: dict = {
-            "left": False,
-            "middle": False,
-            "right": False
-        }
+
+        self.mouseButtons: dict = {}
+        for value in self.MOUSE.values():
+            self.mouseButtons[value] = InputState.INACTIVE
 
     def setWindow(self, size: Vect) -> None:
         """ Sets up the Pygame window with the given size
@@ -125,14 +131,9 @@ class Window:
         # Mouse input
         self.mousePos = Vect(pygame.mouse.get_pos())
 
-        buttons: tuple = pygame.mouse.get_pressed()
-        self.mouseButtons["left"] = buttons[0]
-        self.mouseButtons["middle"] = buttons[1]
-        self.mouseButtons["right"] = buttons[2]
-
-        # Reset justPressed inputs
-        for key in self.justPressed:
-            self.justPressed[key] = False
+        # Update inputs
+        self.updateInputs(self.inputs)
+        self.updateInputs(self.mouseButtons)
 
         # Iterate through all pygame-given events
         for event in pygame.event.get():
@@ -144,12 +145,24 @@ class Window:
             elif event.type == pygame.KEYDOWN:
                 if event.key in self.KEYS:
                     # self.KEYS[event.key] gets the string name of the input
-                    self.inputs[self.KEYS[event.key]] = True
-                    self.justPressed[self.KEYS[event.key]] = True
+                    buttonType: str = self.KEYS[event.key]
+                    self.inputs[buttonType] = InputState.JUST_PRESSED
 
             elif event.type == pygame.KEYUP:
                 if event.key in self.KEYS:
-                    self.inputs[self.KEYS[event.key]] = False
+                    buttonType: str = self.KEYS[event.key]
+                    self.inputs[buttonType] = InputState.RELEASED
+
+            # Handle mouse button inputs
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button in self.MOUSE:
+                    buttonType: str = self.MOUSE[event.button]
+                    self.mouseButtons[buttonType] = InputState.JUST_PRESSED
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button in self.MOUSE:
+                    buttonType: str = self.MOUSE[event.button]
+                    self.mouseButtons[buttonType] = InputState.RELEASED
 
             # Window resize
             elif event.type == pygame.VIDEORESIZE:
@@ -161,6 +174,18 @@ class Window:
 
                 elif self.windowSize.y < self.MIN_SIZE.y:
                     self.setWindow(Vect(self.windowSize.x, self.MIN_SIZE.y))
+
+    def updateInputs(self, buttons: dict) -> None:
+        """ Updates the values of a dict
+            to cycle between input states """
+        # The inputs are only JUST_PRESSED and RELEASED for one frame,
+        # so they need to be updated to PRESSED and INACTIVE
+        for key in buttons:
+            if buttons[key] == InputState.JUST_PRESSED:
+                buttons[key] = InputState.PRESSED
+
+            elif buttons[key] == InputState.RELEASED:
+                buttons[key] = InputState.INACTIVE
 
     def render(self, img: pygame.Surface, pos: Vect,
                area: pygame.Rect = None) -> None:
@@ -179,12 +204,26 @@ class Window:
         """ Returns the time that has elapsed since the previous function """
         return self.deltaTime
 
-    def getMouseButton(self, button: str) -> bool:
-        return self.mouseButtons[button]
-
     def getMousePos(self) -> Vect: return self.mousePos
-
-    def getKey(self, key: str) -> bool: return self.inputs[key]
-    def getJustPressed(self, key: str) -> bool: return self.justPressed[key]
     def isClosed(self) -> bool: return self.quit
     def getWindowSize(self) -> Vect: return self.windowSize
+
+    # Keyboard inputs
+    def getKey(self, key: str) -> bool:
+        return self.inputs[key] == InputState.PRESSED
+
+    def getJustPressed(self, key: str) -> bool:
+        return self.inputs[key] == InputState.JUST_PRESSED
+
+    def getKeyReleased(self, key: str) -> bool:
+        return self.inputs[key] == InputState.RELEASED
+
+    # Mouse inputs
+    def getMouseButton(self, button: str) -> bool:
+        return self.mouseButtons[button] == InputState.PRESSED
+
+    def getMouseJustPressed(self, button: str) -> bool:
+        return self.mouseButtons[button] == InputState.JUST_PRESSED
+
+    def getMouseReleased(self, button: str) -> bool:
+        return self.mouseButtons[button] == InputState.RELEASED

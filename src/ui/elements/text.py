@@ -1,7 +1,6 @@
 import pygame
 
 from src.ui.baseUIElement import BaseUIElement
-from src.utility.vector import Vect
 
 
 class Text(BaseUIElement):
@@ -20,7 +19,7 @@ class Text(BaseUIElement):
 
     def __init__(self, textData: dict):
         """ Loads text data and initializes """
-        super().__init__(Vect(textData["offset"]), __name__)
+        super().__init__(textData, __name__)
 
         self.text: str = textData["text"]
         self.fontSize: int = textData["fontSize"]
@@ -30,7 +29,7 @@ class Text(BaseUIElement):
         if "color" in textData:
             self.color = textData["color"]
 
-        self.renderText()
+        self.createTextImg()
 
     def getFontObj(self, size: int) -> pygame.font.Font:
         """ Loads font if it has not already been loaded and returns it """
@@ -40,7 +39,7 @@ class Text(BaseUIElement):
 
         return self.fonts[size]
 
-    def renderText(self) -> None:
+    def createTextImg(self) -> None:
         """ Uses the text and font to draw an image,
             and then sets the image of the BaseUIElement to it. """
 

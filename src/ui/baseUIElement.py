@@ -16,15 +16,19 @@ class BaseUIElement:
     # Value: pygame.Surface (the image)
     images: dict = {}
 
-    def __init__(self, offset: Vect, loggerName: str,
+    def __init__(self, data: dict, loggerName: str,
                  imgPath: str = None) -> None:
 
         self.log = logging.getLogger(loggerName)
 
-        self.offset: Vect = offset  # Offset from top left corner of each UI
+        # Offset from top left corner of each UI
+        self.offset: Vect = Vect(data["offset"])
+
+        self.centered: bool = data["centered"] if "centered" in data else False
 
         self.image: pygame.Surface = None
         self.size: Vect = None
+        self.renderPos: Vect = None
 
         if imgPath is not None:
             self.setImg(self.loadImg(imgPath))
@@ -32,25 +36,37 @@ class BaseUIElement:
     def loadImg(self, imgPath: str) -> pygame.Surface:
         """ Loads an image from the given path if it has
             not been loaded already, and returns it """
-        if imgPath not in BaseUIElement.images:
+        if imgPath not in self.images:
             self.images[imgPath] = util.loadImg(imgPath)  # loads and stores
 
         return self.images[imgPath]
 
-    def update(self, window: Window) -> None:
-        """ Override in base classes if needed """
-        pass
+    def update(self, window: Window, offset: Vect) -> None:
+        """ Calculates renderPos based on offset and UI offset,
+            so that the renderPos can be used in
+            base class update functions """
+        self.renderPos = offset + self.offset
 
-    def render(self, window: Window, offset: Vect) -> None:
+        if self.centered:  # Center the image on the pos
+            self.renderPos -= self.size / 2
+
+    def render(self, window: Window, image: pygame.Surface = None) -> None:
         """ Renders the image to the given window """
-        if self.image is not None:
-            window.render(self.image, self.offset + offset)
+        image = image if image is not None else self.image
+
+        if image is not None:
+            window.render(image, self.renderPos)
 
     # Getters
     def getSize(self) -> Vect: return self.size
     def getOffset(self) -> Vect: return self.offset
+    def getRenderPos(self) -> Vect: return self.renderPos
 
     # Setters
+    def setOffset(self, offset: Vect) -> None: self.offset = offset
+
     def setImg(self, image: pygame.Surface) -> None:
         self.image = image
         self.size = Vect(image.get_size())
+
+    def setSize(self, size: Vect) -> None: self.size = size

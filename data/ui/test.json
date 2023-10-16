@@ -28,13 +28,13 @@
                 "offset": [ 0, 60 ],
 
                 "images": {
-                    "inactive": "button.png",
-                    "hover": "buttonHover.png",
-                    "pressed": "buttonPressed.png"
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
                 },
 
                 "textData": {
-                    "text": "Hello there",
+                    "text": "Hello",
                     "offset": [ 0, 0 ],
                     "fontSize": 16,
                     "color": [ 255, 255, 0 ]
