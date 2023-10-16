@@ -36,7 +36,7 @@ class Button(BaseUIElement):
         # Can be "inactive", "hover", or "pressed"
         self.mode: str = "inactive"
 
-        self.pressed: bool = False
+        self.activated: bool = False
 
     def update(self, window: Window, offset: Vect) -> None:
         """ Updates the button's mode based on mouse position """
@@ -50,11 +50,13 @@ class Button(BaseUIElement):
 
     def updateMouseEvents(self, window: Window) -> None:
         """ Updates the button's mode based on mouse position """
-        # Reset pressed (since it is only true for one frame)
-        self.pressed = False
+        # Reset activated (since it is only true for one frame)
+        self.activated = False
 
         if self.mode == "pressed":
             if window.getMouseReleased("left"):  # Mouse released button
+                self.activated = True
+
                 if self.isMouseOver(window):
                     self.mode = "hover"
                 else:
@@ -65,7 +67,6 @@ class Button(BaseUIElement):
 
             if window.getMouseJustPressed("left"):  # Just pressed button
                 self.mode = "pressed"
-                self.pressed = True
 
         else:
             self.mode = "inactive"
@@ -75,8 +76,6 @@ class Button(BaseUIElement):
 
         rect: pygame.Rect = Vect.toRect(super().getRenderPos(),
                                         super().getSize())
-
-        print(rect, window.getMousePos().toTuple())
 
         return rect.collidepoint(window.getMousePos().toTuple())
 
@@ -92,4 +91,4 @@ class Button(BaseUIElement):
             self.text.render(window)
 
     # Getters
-    def getPressed(self) -> bool: return self.pressed
+    def getActivated(self) -> bool: return self.activated

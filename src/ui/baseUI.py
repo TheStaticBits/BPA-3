@@ -112,3 +112,7 @@ class BaseUI:
 
         for element in self.elements.values():
             element.render(window)
+
+    # Getters
+    def getElement(self, key: str) -> BaseUIElement:
+        return self.elements[key]
