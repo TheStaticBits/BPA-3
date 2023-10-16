@@ -5,6 +5,7 @@ from src.window import Window
 import src.utility.utility as util
 from src.utility.vector import Vect
 
+from src.ui.baseUIElement import BaseUIElement
 from src.ui.elements.text import Text
 from src.ui.elements.button import Button
 
@@ -58,6 +59,10 @@ class BaseUI:
         """ Loads the UI objects (text, buttons, etc.)
             from the JSON data, and returns it """
         elements: dict = {}
+
+        for key, imageData in jsonData["elements"]["images"].items():
+            elements[key] = BaseUIElement(imageData, "src.ui.baseUIElement",
+                                          imageData["path"])
 
         for key, textData in jsonData["elements"]["text"].items():
             elements[key] = Text(textData)
