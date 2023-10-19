@@ -77,6 +77,8 @@ class Tileset:
         mapData: str = util.loadFile(mapPath)
         splitData: list[str] = mapData.split("\n")
 
+        self.size: Vect = Vect(len(splitData[0]), len(splitData))
+
         # Create empty tileset image based on the tiledata
         self.tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x,
                                      len(splitData) * self.TILE_SIZE.y),
@@ -134,6 +136,8 @@ class Tileset:
     def isOccupied(self, tilePos: Vect) -> bool:
         """ Returns whether or not a tile is occupied """
         return self.occupiedTiles[tilePos.y][tilePos.x]
+
+    def getSize(self) -> Vect: return self.size
 
     # Setters
     def setOccupied(self, tilePos: Vect) -> None:

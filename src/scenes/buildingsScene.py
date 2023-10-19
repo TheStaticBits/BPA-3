@@ -33,11 +33,13 @@ class BuildingsScene(BaseScene):
 
     def render(self, window: Window) -> None:
         """ Renders buildings """
-        super().render(window)
+        super().renderTileset(window)
 
         # Render buildings
         for building in self.buildings:
             building.render(window, -super().getCamOffset())
+
+        super().renderPlayer(window)
 
         self.testUI.render(window)
 

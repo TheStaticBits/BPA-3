@@ -67,7 +67,7 @@ def setupLogger(constants: dict) -> None:
     # with %(log_color)s and %(reset)s
     consoleFormat = colorlog.ColoredFormatter(
         "[%(log_color)s%(levelname)s%(reset)s]"
-        "%(name)s (line %(lineno)d): %(log_color)s%(message)s%(reset)s"
+        " %(name)s (line %(lineno)d): %(log_color)s%(message)s%(reset)s"
     )
 
     # Getting log file from the constants JSON file

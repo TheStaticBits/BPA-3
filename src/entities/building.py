@@ -23,6 +23,12 @@ class Building(Entity):
             at tilePos are occupied or not """
         buildingTileSize: Vect = Vect(cls.getData(type)["size"])
 
+        # Test if out of range of tiles
+        if (tilePos.x + buildingTileSize.x > tileset.getSize().x or
+                tilePos.y + buildingTileSize.y > tileset.getSize().y or
+                tilePos.x < 0 or tilePos.y < 0):
+            return False
+
         # Iterate through the tiles the building would occupy
         for y in range(buildingTileSize.y):
             for x in range(buildingTileSize.x):

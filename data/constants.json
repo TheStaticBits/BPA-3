@@ -16,7 +16,7 @@
         
         "FPS": -1,
         "logFPS": true,
-        "vsync": false
+        "vsync": true
     },
 
     "game": {

@@ -48,7 +48,15 @@ class BaseScene:
 
     def render(self, window: Window) -> None:
         """ Render scene objects """
+        self.renderTileset(window)
+        self.renderPlayer(window)
+
+    def renderTileset(self, window: Window) -> None:
+        """ Render the tileset """
         self.tileset.render(window, -self.cameraOffset)
+
+    def renderPlayer(self, window: Window) -> None:
+        """ Render the player """
         self.player.render(window, -self.cameraOffset)
 
     # Getters
