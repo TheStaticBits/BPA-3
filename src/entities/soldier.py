@@ -8,12 +8,12 @@ class Soldier(Entity):
     """ Handles soldier functionality,
         including movement and pathfinding """
 
-    WARRIOR_DICT: dict = None
-
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the warrior data JSON file """
-        cls.WARRIOR_DICT = util.loadJSON(constants["warriors"]["jsonPath"])
+        cls.WARRIOR_DICT: str = util.loadJSON(
+            constants["warriors"]["jsonPath"]
+        )
 
     def __init__(self, type: str) -> None:
         """ Setup position, animation, etc. """

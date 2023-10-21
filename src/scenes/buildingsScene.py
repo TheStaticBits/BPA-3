@@ -3,7 +3,7 @@ from src.entities.building import Building
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
-from src.ui.baseUI import BaseUI
+from src.ui.interfaces.baseUI import BaseUI
 from src.ui.interfaces.buildingsSceneUI import BuildingsSceneUI
 
 
@@ -11,9 +11,9 @@ class BuildingsScene(BaseScene):
     """ Inherits from BaseScene
         Manages a scene that has buildings """
 
-    def __init__(self, constants: dict, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str) -> None:
         """ Initializes buildings list """
-        super().__init__(constants, mapFolderName, __name__)
+        super().__init__(mapFolderName, __name__)
 
         self.buildings: list[Building] = []
         self.buildingsSceneUI: BuildingsSceneUI = BuildingsSceneUI()

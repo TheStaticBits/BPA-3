@@ -4,11 +4,12 @@ import src.utility.utility as util
 from src.window import Window
 from src.tileset import Tileset
 from src.entities.building import Building
+from src.entities.player import Player
 from src.entities.soldier import Soldier
 from src.scenes.baseScene import BaseScene
 from src.scenes.buildingsScene import BuildingsScene
 from src.ui.elements.text import Text
-from src.ui.baseUI import BaseUI
+from src.ui.interfaces.baseUI import BaseUI
 
 
 class Game:
@@ -22,23 +23,24 @@ class Game:
         self.log = logging.getLogger(__name__)
         self.log.info("Initializing game")
 
-        # Get image scale
-        util.IMG_SCALE = self.constants["game"]["imgScale"]
+        self.loadStatic()
 
-        # Loading static data from the constants JSON file
+        # Window
+        self.window: Window = Window()
+
+        # Test scene
+        self.buildingsScene: BuildingsScene = BuildingsScene("testmap")
+
+    def loadStatic(self) -> None:
+        """ Loading static data from the constants JSON file """
+        Window.loadStatic(self.constants)
         Tileset.loadStatic(self.constants)
         Building.loadStatic(self.constants)
+        Player.loadStatic(self.constants)
         Soldier.loadStatic(self.constants)
         BaseScene.loadStatic(self.constants)
         BaseUI.loadStatic(self.constants)
         Text.loadStatic(self.constants)
-
-        # Window
-        self.window: Window = Window(self.constants)
-
-        # Test scene
-        self.buildingsScene: BuildingsScene = BuildingsScene(self.constants,
-                                                             "testmap")
 
     def mainLoop(self) -> None:
         while not self.window.isClosed():

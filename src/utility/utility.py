@@ -1,12 +1,7 @@
-import pygame
 import logging
 import colorlog
 import os
 import json
-
-from src.utility.vector import Vect
-
-IMG_SCALE = 1
 
 
 def loadFile(path: str) -> str:
@@ -19,20 +14,6 @@ def loadJSON(path: str) -> dict:
     """ Loads a JSON file from the given path """
     with open(path, "r") as file:
         return json.load(file)
-
-
-def loadImg(path: str) -> pygame.Surface:
-    """ Loads an image from the given path """
-    # convert_alpha converts the image to a quicker rendering file format
-    # and allows for transparency, unlike the pygame convert() function
-    img: pygame.Surface = pygame.image.load(path).convert_alpha()
-
-    if IMG_SCALE != 1:
-        # Scales the image by IMG_SCALE
-        size: Vect = Vect(img.get_size())
-        img = pygame.transform.scale(img, (size * IMG_SCALE).toTuple())
-
-    return img
 
 
 def createFolder(folder) -> None:

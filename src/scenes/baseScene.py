@@ -10,14 +10,11 @@ class BaseScene:
     """ Handles/contains tileset, player, camera offset,
         and other scene-related things """
 
-    CAMERA_SPEED: float = None
-
     @classmethod
     def loadStatic(cls, constants: str):
-        cls.CAMERA_SPEED = constants["game"]["cameraSpeed"]
+        cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
 
-    def __init__(self, constants: dict, mapFolderName: str,
-                 loggerName: str) -> None:
+    def __init__(self, mapFolderName: str, loggerName: str) -> None:
         """ Sets up logger, tileset, players, and camera offset """
 
         self.log = logging.getLogger(loggerName)
@@ -25,7 +22,7 @@ class BaseScene:
         self.log.info("Initializing scene for map " + mapFolderName)
 
         self.tileset: Tileset = Tileset(mapFolderName)
-        self.player: Player = Player(constants, self.tileset.getPlayerStart())
+        self.player: Player = Player(self.tileset.getPlayerStart())
 
         self.cameraOffset: Vect = Vect()
 

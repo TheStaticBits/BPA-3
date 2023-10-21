@@ -1,7 +1,6 @@
 import pygame
 import logging
 
-import src.utility.utility as util
 from src.utility.vector import Vect
 from src.window import Window
 
@@ -37,7 +36,7 @@ class BaseUIElement:
         """ Loads an image from the given path if it has
             not been loaded already, and returns it """
         if imgPath not in self.images:
-            self.images[imgPath] = util.loadImg(imgPath)  # loads and stores
+            self.images[imgPath] = Window.loadImg(imgPath)  # loads and stores
 
         return self.images[imgPath]
 

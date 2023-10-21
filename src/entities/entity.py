@@ -1,6 +1,5 @@
 import logging
 
-import src.utility.utility as util
 from src.utility.animation import Animation
 from src.utility.vector import Vect
 from src.window import Window
@@ -32,7 +31,7 @@ class Entity:
             not already in the spritesheets variable """
         if animPath not in self.spritesheets:
             self.log.info(f"Loading animation spritesheet at {animPath}")
-            self.spritesheets[animPath] = util.loadImg(animPath)
+            self.spritesheets[animPath] = Window.loadImg(animPath)
 
     def loadAnim(self, animData: dict) -> Animation:
         """ Loads the animation object """

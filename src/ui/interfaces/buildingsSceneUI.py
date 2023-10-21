@@ -1,4 +1,4 @@
-from src.ui.baseUI import BaseUI
+from src.ui.interfaces.baseUI import BaseUI
 
 from src.window import Window
 

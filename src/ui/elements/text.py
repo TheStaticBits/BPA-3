@@ -1,6 +1,6 @@
 import pygame
 
-from src.ui.baseUIElement import BaseUIElement
+from src.ui.elements.baseUIElement import BaseUIElement
 
 
 class Text(BaseUIElement):
@@ -11,11 +11,9 @@ class Text(BaseUIElement):
     # Value: pygame.font.Font object
     fonts: dict = {}
 
-    FONT_PATH: str = None
-
     @classmethod
     def loadStatic(cls, constants: dict):
-        cls.FONT_PATH = constants["game"]["font"]
+        cls.FONT_PATH: str = constants["game"]["font"]
 
     def __init__(self, textData: dict):
         """ Loads text data and initializes """

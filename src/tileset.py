@@ -11,18 +11,6 @@ class Tileset:
     """ Stores tiles along with interactable entities
         such as buildings and trees aside from buildings """
 
-    # Static data about tilesets loaded from constants.json
-    TILE_SIZE: Vect = None
-
-    # File info
-    MAPS_FOLDER: str = None  # Map folder containing folders for each map
-    JSON_FILE: str = None  # File inside each map folder for map data (JSON)
-    ENTITIES_FILE: str = None  # File for entities data (txt)
-    MAP_FILE: str = None  # File for map data (txt)
-
-    # Tile data
-    TILESET_DATA: dict = None  # Tileset data loaded from JSON file
-
     # Tile images cache { path: pygame.Surface }
     tileImages: dict = {}
 
@@ -30,15 +18,24 @@ class Tileset:
     def loadStatic(cls, constants: dict) -> None:
         """ Loads metadata about the tilesets from the constants file
             into several static variables """
+        # Static data about tilesets loaded from constants.json
+        cls.TILE_SIZE: Vect = Vect(constants["tileset"]["tileSize"])
 
-        cls.TILE_SIZE = Vect(constants["tileset"]["tileSize"])
+        # FILE INFO:
 
-        cls.MAPS_FOLDER = constants["tileset"]["mapsFolder"]
-        cls.JSON_FILE = constants["tileset"]["jsonFile"]
-        cls.ENTITIES_FILE = constants["tileset"]["entitiesFile"]
-        cls.MAP_FILE = constants["tileset"]["mapFile"]
+        # Map folder containing folders for each map
+        cls.MAPS_FOLDER: str = constants["tileset"]["mapsFolder"]
+        # File inside each map folder for map data (JSON)
+        cls.JSON_FILE: str = constants["tileset"]["jsonFile"]
+        # File for entities data (txt)
+        cls.ENTITIES_FILE: str = constants["tileset"]["entitiesFile"]
+        # File for map data (txt)
+        cls.MAP_FILE: str = constants["tileset"]["mapFile"]
 
-        cls.TILESET_DATA = util.loadJSON(constants["tileset"]["tilesFile"])
+        # Tileset data loaded from JSON file
+        cls.TILESET_DATA: dict = util.loadJSON(
+            constants["tileset"]["tilesFile"]
+        )
 
     def __init__(self, mapFolderName: str) -> None:
         """ Load tileset information and tiles"""
@@ -107,7 +104,7 @@ class Tileset:
             or loads it if it has not been loaded previously """
         if path not in self.tileImages:
             self.log.info(f"Loading tile image at {path}")
-            self.tileImages[path] = util.loadImg(path)
+            self.tileImages[path] = Window.loadImg(path)
 
         return self.tileImages[path]
 

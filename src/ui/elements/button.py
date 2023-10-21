@@ -1,6 +1,6 @@
 import pygame
 
-from src.ui.baseUIElement import BaseUIElement
+from src.ui.elements.baseUIElement import BaseUIElement
 
 from src.utility.vector import Vect
 from src.ui.elements.text import Text

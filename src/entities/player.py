@@ -7,16 +7,20 @@ class Player(Entity):
     """ Inherits from Entity class.
         Handles player functionality and movement """
 
-    def __init__(self, constants: dict, startingPos: Vect) -> None:
+    @classmethod
+    def loadStatic(cls, constants: dict) -> None:
+        """ Load static variables from constants dict """
+        cls.ANIM: dict = constants["player"]["anim"]
+
+        cls.MAX_SPEED: float = constants["player"]["maxSpeed"]
+        cls.ACCELERATION: float = constants["player"]["acceleration"]
+        cls.DECELERATION: float = constants["player"]["deceleration"]
+
+    def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
-        super().__init__(constants["player"]["anim"], __name__,
-                         pos=startingPos)
+        super().__init__(self.ANIM, __name__, pos=startingPos)
 
         self.log.info("Initializing player")
-
-        self.MAX_SPEED: float = constants["player"]["maxSpeed"]
-        self.ACCELERATION: float = constants["player"]["acceleration"]
-        self.DECELERATION: float = constants["player"]["deceleration"]
 
         self.velocity = Vect(0, 0)
 

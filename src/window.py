@@ -33,7 +33,42 @@ class Window:
         pygame.BUTTON_RIGHT: "right"
     }
 
-    def __init__(self, constants) -> None:
+    # Static methods
+    @classmethod
+    def loadStatic(cls, constants: dict) -> None:
+        """ Loads static variables from constants """
+        # Scale of images
+        cls.IMG_SCALE: float = constants["game"]["imgScale"]
+
+        # Minimum scale of images
+        cls.MIN_SIZE: Vect = Vect(constants["window"]["minSize"])
+
+        # Whether or not to use vsync
+        cls.VSYNC: bool = constants["window"]["vsync"]
+
+        # FPS and whether or not to log it
+        cls.FPS: int = constants["window"]["FPS"]
+        cls.LOG_FPS: bool = constants["window"]["logFPS"]
+
+        cls.RESIZABLE: bool = constants["window"]["resizable"]
+        cls.WINDOW_TITLE: str = constants["window"]["title"]
+
+    @classmethod
+    def loadImg(cls, path: str) -> pygame.Surface:
+        """ Loads an image from the given path """
+
+        # convert_alpha converts the image to a quicker rendering file format
+        # and allows for transparency, unlike the pygame convert() function
+        img = pygame.image.load(path).convert_alpha()
+
+        if cls.IMG_SCALE != 1:
+            # Scale image up by the scale factor
+            size: Vect = Vect(img.get_size())
+            img = pygame.transform.scale(img, (size * cls.IMG_SCALE).toTuple())
+
+        return img
+
+    def __init__(self) -> None:
         """ Creates the Window object from data in data/constants.json,
             along with deltatime and fps tracking """
         self.log = logging.getLogger(__name__)
@@ -41,24 +76,18 @@ class Window:
         self.log.info("Initializing window")
 
         # Create pygame window object
-        self.MIN_SIZE: Vect = Vect(constants["window"]["minSize"])
         self.windowSize: Vect = self.MIN_SIZE  # Gets updated when resized
-        self.vsync: bool = constants["window"]["vsync"]
         self.windowFlags: int = 0
 
-        if constants["window"]["resizable"]:
+        if self.RESIZABLE:
             self.windowFlags |= pygame.RESIZABLE  # make window resizable
 
         self.setWindow(self.MIN_SIZE)  # create window
 
-        pygame.display.set_caption(constants["window"]["title"])
+        pygame.display.set_caption(self.WINDOW_TITLE)
 
         # Clock for fixed framerate (if enabled)
         self.clock: pygame.Clock = pygame.time.Clock()
-
-        # FPS and whether or not to log it
-        self.FPS: int = constants["window"]["FPS"]
-        self.LOG_FPS: bool = constants["window"]["logFPS"]
 
         # Deltatime
         self.deltaTime: float = 0
@@ -89,7 +118,7 @@ class Window:
             and various settings """
         self.window = pygame.display.set_mode(size.toTuple(),
                                               self.windowFlags,
-                                              vsync=self.vsync)
+                                              vsync=self.VSYNC)
 
     def update(self) -> None:
         """ Updates the window with what was
@@ -190,7 +219,8 @@ class Window:
     def render(self, img: pygame.Surface, pos: Vect,
                area: pygame.Rect = None) -> None:
         """ Renders an image on a window at a given position,
-            with a given portion (area) of the image to render if specified """
+            with a given portion (area) of the image to render if specified.
+            Renders the image with the image scale specified in constants """
         self.window.blit(img, pos.toTuple(), area=(area if area else None))
 
     def drawRect(self, pos: Vect, size: Vect,

@@ -5,7 +5,7 @@ from src.window import Window
 import src.utility.utility as util
 from src.utility.vector import Vect
 
-from src.ui.baseUIElement import BaseUIElement
+from src.ui.elements.baseUIElement import BaseUIElement
 from src.ui.elements.text import Text
 from src.ui.elements.button import Button
 
@@ -14,8 +14,6 @@ class BaseUI:
     """ All UI interfaces inherit from this class,
         which creates and handles UI elements given
         the JSON data for them. """
-
-    UI_FOLDER: str = None
 
     # Given a window size (int), UI size (int), and margin (int),
     # these return the position of each UI interface
@@ -34,7 +32,7 @@ class BaseUI:
     @classmethod
     def loadStatic(cls, constants: dict):
         """ Load static vars from constants """
-        cls.UI_FOLDER = constants["game"]["uiFolder"]
+        cls.UI_FOLDER: str = constants["game"]["uiFolder"]
 
     def __init__(self, jsonFile: str, loggerName: str = __name__) -> None:
         self.log = logging.getLogger(loggerName)

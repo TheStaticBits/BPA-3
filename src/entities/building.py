@@ -8,14 +8,14 @@ class Building(Entity):
     """ All buildings inherit from this base building class
         Handles placing of buildings, size/hitboxes, etc. """
 
-    # Building JSON data file (data/buildings.json)
-    BUILDINGS_DATA: dict = None
-
     # Static functions
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the buildings data JSON file """
-        cls.BUILDINGS_DATA = util.loadJSON(constants["buildings"]["jsonPath"])
+        # Building JSON data file (data/buildings.json)
+        cls.BUILDINGS_DATA: str = util.loadJSON(
+            constants["buildings"]["jsonPath"]
+        )
 
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
