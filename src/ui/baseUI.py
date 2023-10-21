@@ -36,7 +36,7 @@ class BaseUI:
         """ Load static vars from constants """
         cls.UI_FOLDER = constants["game"]["uiFolder"]
 
-    def __init__(self, jsonFile: str, loggerName: str) -> None:
+    def __init__(self, jsonFile: str, loggerName: str = __name__) -> None:
         self.log = logging.getLogger(loggerName)
 
         # Load the UI's JSON data

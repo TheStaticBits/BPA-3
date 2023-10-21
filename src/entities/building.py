@@ -24,8 +24,8 @@ class Building(Entity):
         buildingTileSize: Vect = Vect(cls.getData(type)["size"])
 
         # Test if out of range of tiles
-        if (tilePos.x + buildingTileSize.x > tileset.getSize().x or
-                tilePos.y + buildingTileSize.y > tileset.getSize().y or
+        if (tilePos.x + buildingTileSize.x > tileset.getTileSize().x or
+                tilePos.y + buildingTileSize.y > tileset.getTileSize().y or
                 tilePos.x < 0 or tilePos.y < 0):
             return False
 

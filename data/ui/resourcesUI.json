@@ -1,0 +1,39 @@
+{
+    "pos": {
+        "x": { "locked": "start", "margin": 10 },
+        "y": { "locked": "start", "margin": 10 }
+    },
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "goldImg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/resources/gold.png"
+            },
+
+            "electricityImg": {
+                "offset": [ 0, 40 ],
+                "path": "res/ui/resources/electricity.png"
+            }
+        },
+        
+        "text": {
+            "goldText": {
+                "text": "0",
+                "offset": [ 40, 5 ],
+                "fontSize": 24,
+                "color": [ 255, 255, 255 ]
+            },
+
+            "electricityText": {
+                "text": "0",
+                "offset": [ 40, 45 ],
+                "fontSize": 24,
+                "color": [ 255, 255, 255 ]
+            }
+        },
+        "buttons": {}
+    }
+}

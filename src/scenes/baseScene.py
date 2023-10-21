@@ -42,6 +42,12 @@ class BaseScene:
         # Camera position centered on the position
         newOffset = self.player.getCenterPos() - window.getWindowSize() / 2
 
+        # Clamp between 0, 0 and max camera offset
+        newOffset.clamp(
+            Vect(),  # 0, 0
+            self.tileset.getSize() - window.getWindowSize()
+        )
+
         # Move the camera offset slowly to the new position
         self.cameraOffset += ((newOffset - self.cameraOffset) *
                               self.CAMERA_SPEED * window.getDeltaTime())

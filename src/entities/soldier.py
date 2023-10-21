@@ -4,8 +4,8 @@ from src.utility.vector import Vect
 import src.utility.utility as util
 
 
-class Warrior(Entity):
-    """ Handles warrior functionality,
+class Soldier(Entity):
+    """ Handles soldier functionality,
         including movement and pathfinding """
 
     WARRIOR_DICT: dict = None

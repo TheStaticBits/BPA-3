@@ -1,10 +1,10 @@
-
 from src.scenes.baseScene import BaseScene
 from src.entities.building import Building
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
-from src.ui.interfaces.test import TestUI
+from src.ui.baseUI import BaseUI
+from src.ui.interfaces.buildingsSceneUI import BuildingsSceneUI
 
 
 class BuildingsScene(BaseScene):
@@ -16,7 +16,9 @@ class BuildingsScene(BaseScene):
         super().__init__(constants, mapFolderName, __name__)
 
         self.buildings: list[Building] = []
-        self.testUI: TestUI = TestUI()
+        self.buildingsSceneUI: BuildingsSceneUI = BuildingsSceneUI()
+
+        self.resourcesUI = BaseUI("resourcesUI.json")
 
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
@@ -29,7 +31,8 @@ class BuildingsScene(BaseScene):
         if window.getJustPressed("space"):
             self.placeBuilding()
 
-        self.testUI.update(window)
+        self.resourcesUI.update(window)
+        self.buildingsSceneUI.update(window)
 
     def render(self, window: Window) -> None:
         """ Renders buildings """
@@ -41,7 +44,8 @@ class BuildingsScene(BaseScene):
 
         super().renderPlayer(window)
 
-        self.testUI.render(window)
+        self.resourcesUI.render(window)
+        self.buildingsSceneUI.render(window)
 
     def placeBuilding(self) -> None:
         """ Tests if the player can place a building and then places it """

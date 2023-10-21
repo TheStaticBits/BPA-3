@@ -137,7 +137,8 @@ class Tileset:
         """ Returns whether or not a tile is occupied """
         return self.occupiedTiles[tilePos.y][tilePos.x]
 
-    def getSize(self) -> Vect: return self.size
+    def getTileSize(self) -> Vect: return self.size
+    def getSize(self) -> Vect: return self.size * self.TILE_SIZE
 
     # Setters
     def setOccupied(self, tilePos: Vect) -> None:
