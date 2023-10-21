@@ -16,6 +16,9 @@ class Player(Entity):
         cls.ACCELERATION: float = constants["player"]["acceleration"]
         cls.DECELERATION: float = constants["player"]["deceleration"]
 
+        # Player resources
+        cls.resources: dict = constants["player"]["resources"]
+
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
         super().__init__(self.ANIM, __name__, pos=startingPos)
@@ -78,3 +81,16 @@ class Player(Entity):
     def getTilePos(self, tileSize: Vect) -> Vect:
         """ Returns the player's position in tiles """
         return (super().getCenterPos() / tileSize).floor()
+
+    @classmethod
+    def getResource(cls, resource: str) -> int:
+        return cls.resources[resource]
+
+    @classmethod
+    def getAllResources(cls) -> None:
+        return cls.resources
+
+    # Setters
+    @classmethod
+    def addResource(cls, resource: str, amount: int) -> None:
+        cls.resources[resource] += amount

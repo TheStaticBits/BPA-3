@@ -49,6 +49,6 @@ class Text(BaseUIElement):
         super().setImg(image)
 
     # Setters
-    def setText(self, newText: str) -> None:
-        self.text = newText
-        self.renderText()
+    def setText(self, newText: any) -> None:
+        self.text = str(newText)
+        self.createTextImg()

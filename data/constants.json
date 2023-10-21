@@ -31,10 +31,16 @@
         "maxSpeed": 300,
         "acceleration": 800,
         "deceleration": 1600,
+        
         "anim": {
             "path": "res/exampleAnim.png",
             "frames": 3,
             "delay": 1
+        },
+
+        "resources": {
+            "gold": 100,
+            "electricity": 0
         }
     },
 

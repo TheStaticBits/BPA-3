@@ -4,6 +4,8 @@ from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
 from src.window import Window
+from src.ui.interfaces.baseUI import BaseUI
+from src.ui.elements.text import Text
 
 
 class BaseScene:
@@ -26,13 +28,28 @@ class BaseScene:
 
         self.cameraOffset: Vect = Vect()
 
+        # Handling resource numbers and icons in the top left
+        self.resourcesUI = BaseUI("resourcesUI.json")
+
     def update(self, window: Window) -> None:
         """ Update scene objects """
         self.tileset.update(window)
-
         self.player.update(window)
 
         self.updateCameraPos(window)
+        self.updateResources(window)
+
+    def updateResources(self, window: Window) -> None:
+        """ Update all the resources
+            with the current player resource values """
+        for resource in Player.getAllResources().keys():
+            # Get text element for the resource
+            element: Text = self.resourcesUI.getElement(resource + "Text")
+
+            # Set text element's value to the current resource value
+            element.setText(Player.getResource(resource))
+
+        self.resourcesUI.update(window)
 
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
@@ -61,6 +78,10 @@ class BaseScene:
     def renderPlayer(self, window: Window) -> None:
         """ Render the player """
         self.player.render(window, -self.cameraOffset)
+
+    def renderUI(self, window: Window) -> None:
+        """ Render any universal scene UIs """
+        self.resourcesUI.render(window)
 
     # Getters
     def getCamOffset(self) -> Vect: return self.cameraOffset
