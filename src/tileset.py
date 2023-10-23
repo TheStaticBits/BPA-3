@@ -19,7 +19,9 @@ class Tileset:
         """ Loads metadata about the tilesets from the constants file
             into several static variables """
         # Static data about tilesets loaded from constants.json
-        cls.TILE_SIZE: Vect = Vect(constants["tileset"]["tileSize"])
+        cls.TILE_SIZE: Vect = (
+            Vect(constants["tileset"]["tileSize"]) * Window.getImgScale()
+        )
 
         # FILE INFO:
 

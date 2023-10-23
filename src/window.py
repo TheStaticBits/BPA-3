@@ -257,3 +257,8 @@ class Window:
 
     def getMouseReleased(self, button: str) -> bool:
         return self.mouseButtons[button] == InputState.RELEASED
+
+    # Other
+    @classmethod
+    def getImgScale(cls) -> float:
+        return cls.IMG_SCALE

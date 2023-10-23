@@ -8,13 +8,23 @@
 
     "elements": {
         "images": {
-            "goldImg": {
+            "bg1": {
                 "offset": [ 0, 0 ],
+                "path": "res/ui/resources/bg.png"
+            },
+
+            "bg2": {
+                "offset": [ 0, 18 ],
+                "path": "res/ui/resources/bg.png"
+            },
+
+            "goldImg": {
+                "offset": [ 2, 2 ],
                 "path": "res/ui/resources/gold.png"
             },
 
             "electricityImg": {
-                "offset": [ 0, 40 ],
+                "offset": [ 2, 20 ],
                 "path": "res/ui/resources/electricity.png"
             }
         },
@@ -22,15 +32,15 @@
         "text": {
             "goldText": {
                 "text": "0",
-                "offset": [ 40, 5 ],
-                "fontSize": 24,
+                "offset": [ 16, 4 ],
+                "fontSize": 8,
                 "color": [ 255, 255, 255 ]
             },
 
             "electricityText": {
                 "text": "0",
-                "offset": [ 40, 45 ],
-                "fontSize": 24,
+                "offset": [ 16, 22 ],
+                "fontSize": 8,
                 "color": [ 255, 255, 255 ]
             }
         },

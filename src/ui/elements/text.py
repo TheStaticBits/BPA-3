@@ -1,6 +1,7 @@
 import pygame
 
 from src.ui.elements.baseUIElement import BaseUIElement
+from src.window import Window
 
 
 class Text(BaseUIElement):
@@ -31,11 +32,14 @@ class Text(BaseUIElement):
 
     def getFontObj(self, size: int) -> pygame.font.Font:
         """ Loads font if it has not already been loaded and returns it """
-        if size not in self.fonts:
-            self.log.info(f"Loading font size {size}")
-            self.fonts[size] = pygame.font.Font(self.FONT_PATH, size)
+        scaledSize = size * Window.getImgScale()
 
-        return self.fonts[size]
+        if scaledSize not in self.fonts:
+            self.log.info(f"Loading font size {scaledSize}")
+            self.fonts[scaledSize] = pygame.font.Font(self.FONT_PATH,
+                                                      round(scaledSize))
+
+        return self.fonts[scaledSize]
 
     def createTextImg(self) -> None:
         """ Uses the text and font to draw an image,
