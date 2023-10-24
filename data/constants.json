@@ -29,7 +29,7 @@
 
     "player": {
         "maxSpeed": 300,
-        "acceleration": 800,
+        "acceleration": 1200,
         "deceleration": 1600,
         
         "anim": {

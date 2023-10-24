@@ -34,10 +34,13 @@ class BaseScene:
     def update(self, window: Window) -> None:
         """ Update scene objects """
         self.tileset.update(window)
-        self.player.update(window)
 
         self.updateCameraPos(window)
         self.updateResources(window)
+
+    def updatePlayer(self, window: Window) -> None:
+        """ Default updating player """
+        self.player.update(window)
 
     def updateResources(self, window: Window) -> None:
         """ Update all the resources

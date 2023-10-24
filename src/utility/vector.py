@@ -49,17 +49,54 @@ class Vect:
         return pygame.Rect(pos.x, pos.y, size.x, size.y)
 
     def forEach(self, func: callable,
-                paramsX: tuple = [], paramsY: tuple = []) -> Vect:
+                vectParams: tuple[Vect] = (),
+                otherParams: tuple = ()) -> Vect:
         """ Applies a function to each component of the vector,
             with additional parameters passed in via lists for x and y """
-        self.x = func(self.x, *paramsX)
-        self.y = func(self.y, *paramsY)
+
+        # Create lists of the params for
+        # each axis of the vector
+        paramsX: list = []
+        paramsY: list = []
+
+        for vect in vectParams:
+            paramsX.append(vect.x)
+            paramsY.append(vect.y)
+
+        # Apply function callback to each axis of the vector
+        # using the * spread operator for the parameters
+        self.x = func(self.x, *paramsX, *otherParams)
+        self.y = func(self.y, *paramsY, *otherParams)
+
         return self
+
+    # Getters and setters for when using a string to get the x or y component
+
+    def get(self, dir: str) -> any:
+        """ Gets the x or y component of the vector """
+        if dir == "x":
+            return self.x
+        elif dir == "y":
+            return self.y
+
+    def add(self, dir: str, value: any) -> any:
+        """ Adds to the x or y component of the vector """
+        if dir == "x":
+            self.x += value
+        elif dir == "y":
+            self.y += value
+
+    def set(self, dir: str, value: any) -> any:
+        """ Sets the x or y component of the vector """
+        if dir == "x":
+            self.x = value
+        elif dir == "y":
+            self.y = value
+
+    # A whole ton of boilerplate for overloading operators
 
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
-
-    # A whole ton of boilerplate for overloading operators
 
     def __add__(self, other: Vect | int | float) -> Vect:
         """ + by a Vect or number """

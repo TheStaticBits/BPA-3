@@ -1,3 +1,4 @@
+import pygame
 import logging
 
 from src.utility.animation import Animation
@@ -47,9 +48,53 @@ class Entity:
         """ Renders the animation at the entity's current position"""
         self.animation.render(window, self.pos + offset)
 
+    def collision(self, window: Window,
+                  entities: list["Entity"], velocity: Vect) -> None:
+        """ Handle collision with other entities,
+            and also updating position based on velocity """
+
+        def axisCollision(pos: float, vel: float, dir: str) -> float:
+            """ Handle collision with a single entity,
+                used separately for both x and y axis.
+                dir is equal to "x" or "y" """
+            self.pos.add(dir, vel * window.getDeltaTime())
+
+            # Check collision with each entity
+            entity: Entity  # Set the type of the iterator
+            for entity in entities:
+
+                # Collided with an entity
+                if self.collide(entity):
+                    entityStart = entity.getPos().get(dir)
+                    velocity.set(dir, 0)  # Reset velocity in that dir
+
+                    if vel > 0:  # Collided with top or left of entity
+                        width = self.getAnim().getSize().get(dir)
+
+                        # Set position to the edge of the entity
+                        return entityStart - width
+
+                    else:  # Collided with bottom or right of entity
+                        return entityStart + entity.getSize().get(dir)
+
+            # Return unmodified position if no collision
+            return self.pos.get(dir)
+
+        # Apply the above axisCollision function for each axis
+        self.pos.forEach(axisCollision,
+                         vectParams=[velocity, Vect("x", "y")])
+
+    def collide(self, entity: "Entity") -> bool:
+        """ Collision detection between an entity and another """
+        return self.getRect().colliderect(entity.getRect())
+
     # Getters
     def getAnim(self) -> Animation: return self.animation
+    def getSize(self) -> Vect: return self.animation.getSize()
     def getPos(self) -> Vect: return self.pos
+
+    def getRect(self) -> pygame.Rect:
+        return Vect.toRect(self.pos, self.animation.getSize())
 
     def getCenterPos(self) -> Vect:
         """ Returns the center of the entity """

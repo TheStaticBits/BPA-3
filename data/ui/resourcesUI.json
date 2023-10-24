@@ -14,7 +14,7 @@
             },
 
             "bg2": {
-                "offset": [ 0, 18 ],
+                "offset": [ 0, 17 ],
                 "path": "res/ui/resources/bg.png"
             },
 
@@ -24,7 +24,7 @@
             },
 
             "electricityImg": {
-                "offset": [ 2, 20 ],
+                "offset": [ 2, 19 ],
                 "path": "res/ui/resources/electricity.png"
             }
         },
@@ -39,7 +39,7 @@
 
             "electricityText": {
                 "text": "0",
-                "offset": [ 16, 22 ],
+                "offset": [ 16, 21 ],
                 "fontSize": 8,
                 "color": [ 255, 255, 255 ]
             }

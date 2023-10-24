@@ -27,11 +27,14 @@ class Player(Entity):
 
         self.velocity = Vect(0, 0)
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, entities: list[Entity] = None) -> None:
         """ Update player animation, movement, etc. """
         super().update(window)
 
         self.movement(window)
+
+        # Move player based on velocity while checking collisions
+        super().collision(window, entities, self.velocity)
 
     def movement(self, window: Window) -> None:
         """ Handle player movement based on inputs """
@@ -70,12 +73,9 @@ class Player(Entity):
 
             return velocity
 
-        # Apply the above decelerate function for each axis
-        self.velocity.forEach(decelerate,
-                              paramsX=[acceleration.x],
-                              paramsY=[acceleration.y])
-
-        super().addPos(self.velocity * window.getDeltaTime())
+        # Apply the above decelerate function for each axis,
+        # with acceleration as the parameter of the decelerate function
+        self.velocity.forEach(decelerate, vectParams=[acceleration])
 
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:

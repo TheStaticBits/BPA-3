@@ -25,6 +25,9 @@ class BuildingsScene(BaseScene):
         for building in self.buildings:
             building.update(window)
 
+        # Player collision with buildings
+        super().getPlayer().update(window, self.buildings)
+
         if window.getJustPressed("space"):
             self.placeBuilding()
 
