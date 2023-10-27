@@ -3,7 +3,7 @@ import logging
 import src.utility.utility as util
 from src.window import Window
 from src.tileset import Tileset
-from src.entities.building import Building
+from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.player import Player
 from src.entities.soldier import Soldier
 from src.scenes.baseScene import BaseScene
@@ -35,7 +35,7 @@ class Game:
         """ Loading static data from the constants JSON file """
         Window.loadStatic(self.constants)
         Tileset.loadStatic(self.constants)
-        Building.loadStatic(self.constants)
+        BaseBuilding.loadStatic(self.constants)
         Player.loadStatic(self.constants)
         Soldier.loadStatic(self.constants)
         BaseScene.loadStatic(self.constants)

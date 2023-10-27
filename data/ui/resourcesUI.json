@@ -23,7 +23,7 @@
                 "path": "res/ui/resources/gold.png"
             },
 
-            "electricityImg": {
+            "steampowerImg": {
                 "offset": [ 2, 19 ],
                 "path": "res/ui/resources/electricity.png"
             }
@@ -37,7 +37,7 @@
                 "color": [ 255, 255, 255 ]
             },
 
-            "electricityText": {
+            "steampowerText": {
                 "text": "0",
                 "offset": [ 16, 21 ],
                 "fontSize": 8,

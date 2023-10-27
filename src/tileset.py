@@ -128,6 +128,21 @@ class Tileset:
                 window.drawRect(Vect(x, y) * self.TILE_SIZE + offset + Vect(3),
                                 self.TILE_SIZE - Vect(6), (255, 0, 0))
 
+    def testRangeOccupied(self, startTile: Vect, tileRange: Vect) -> bool:
+        """ Tests if a range of tiles has at least one tile occupied """
+        for y in range(tileRange.y):
+            for x in range(tileRange.x):
+                if self.isOccupied(startTile + Vect(x, y)):
+                    return True
+
+        return False
+
+    def setRangeOccupied(self, startTile: Vect, tileRange: Vect) -> None:
+        """ Sets the occupied status of a range of tiles """
+        for y in range(tileRange.y):
+            for x in range(tileRange.x):
+                self.setOccupied(startTile + Vect(x, y))
+
     # Getters
     def getPlayerStart(self) -> Vect:
         return self.PLAYER_START

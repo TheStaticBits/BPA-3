@@ -3,6 +3,7 @@ import logging
 from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
+from src.utility.advDict import AdvDict
 from src.window import Window
 from src.ui.interfaces.baseUI import BaseUI
 from src.ui.elements.text import Text
@@ -45,12 +46,13 @@ class BaseScene:
     def updateResources(self, window: Window) -> None:
         """ Update all the resources
             with the current player resource values """
-        for resource in Player.getAllResources().keys():
+        resources: AdvDict = Player.getResources()
+        for resource in resources.getPyDict().keys():
             # Get text element for the resource
             element: Text = self.resourcesUI.getElement(resource + "Text")
 
             # Set text element's value to the current resource value
-            element.setText(Player.getResource(resource))
+            element.setText(resources[resource])
 
         self.resourcesUI.update(window)
 

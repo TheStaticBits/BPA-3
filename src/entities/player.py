@@ -1,6 +1,7 @@
 from src.entities.entity import Entity
 from src.window import Window
 from src.utility.vector import Vect
+from src.utility.advDict import AdvDict
 
 
 class Player(Entity):
@@ -17,7 +18,16 @@ class Player(Entity):
         cls.DECELERATION: float = constants["player"]["deceleration"]
 
         # Player resources
-        cls.resources: dict = constants["player"]["resources"]
+        cls.resources = AdvDict(constants["player"]["resources"]["starting"])
+        cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
+
+    @classmethod
+    def getResources(cls) -> AdvDict:
+        return cls.resources
+
+    @classmethod
+    def addToResources(cls, resources: AdvDict) -> None:
+        cls.resources += resources
 
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
@@ -81,16 +91,3 @@ class Player(Entity):
     def getTilePos(self, tileSize: Vect) -> Vect:
         """ Returns the player's position in tiles """
         return (super().getCenterPos() / tileSize).floor()
-
-    @classmethod
-    def getResource(cls, resource: str) -> int:
-        return cls.resources[resource]
-
-    @classmethod
-    def getAllResources(cls) -> None:
-        return cls.resources
-
-    # Setters
-    @classmethod
-    def addResource(cls, resource: str, amount: int) -> None:
-        cls.resources[resource] += amount

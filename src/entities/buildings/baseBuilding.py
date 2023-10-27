@@ -4,9 +4,10 @@ from src.utility.vector import Vect
 from src.tileset import Tileset
 
 
-class Building(Entity):
+class BaseBuilding(Entity):
     """ All buildings inherit from this base building class
-        Handles placing of buildings, size/hitboxes, etc. """
+        Handles placing of buildings, size/hitboxes, etc.
+        Inherits from Entity class for animation and position handling. """
 
     # Static functions
     @classmethod
@@ -21,7 +22,9 @@ class Building(Entity):
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
         """ Tests if the tiles in the tileset
             at tilePos are occupied or not """
-        buildingTileSize: Vect = Vect(cls.getData(type)["size"])
+        data: dict = cls.BUILDINGS_DATA[type]
+
+        buildingTileSize = Vect(data["size"])
 
         # Test if out of range of tiles
         if (tilePos.x + buildingTileSize.x > tileset.getTileSize().x or
@@ -29,37 +32,28 @@ class Building(Entity):
                 tilePos.x < 0 or tilePos.y < 0):
             return False
 
-        # Iterate through the tiles the building would occupy
-        for y in range(buildingTileSize.y):
-            for x in range(buildingTileSize.x):
-                if tileset.isOccupied(tilePos + Vect(x, y)):
-                    return False
+        # Test if any tiles are occupied
+        return not tileset.testRangeOccupied(tilePos, buildingTileSize)
 
-        return True
-
-    @classmethod
-    def getData(cls, type: str) -> dict:
-        return cls.BUILDINGS_DATA[type]
-
-    def __init__(self, tileset: Tileset,
-                 type: str, tilePos: Vect = Vect()) -> None:
+    def __init__(self, type: str, tileset: Tileset, tilePos: Vect) -> None:
         """ Setup initial position, animation, and
             set tiles where the building is to occupied """
 
-        super().__init__(self.getData(type)["anim"], __name__,
-                         tilePos * Tileset.TILE_SIZE)
-
         self.type = type
+
+        super().__init__(self.getData()["anim"], __name__,
+                         tilePos * Tileset.TILE_SIZE)
 
         self.place(tileset, tilePos)
 
     def place(self, tileset: Tileset, tilePos: Vect) -> None:
         """ Places the building on the tileset,
             setting occupied tiles to True """
-        buildingTileSize: Vect = Vect(self.getData(self.type)["size"])
+        buildingTileSize: Vect = Vect(self.getData()["size"])
 
-        # Iterate through the tiles the building would occupy
-        # setting occupied to True
-        for y in range(buildingTileSize.y):
-            for x in range(buildingTileSize.x):
-                tileset.setOccupied(tilePos + Vect(x, y))
+        # Sets the range of tiles that the building takes up to occupied
+        # so no other building can be placed there
+        tileset.setRangeOccupied(tilePos, buildingTileSize)
+
+    def getData(self) -> dict:
+        return self.BUILDINGS_DATA[self.type]

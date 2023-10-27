@@ -16,7 +16,7 @@
         
         "FPS": -1,
         "logFPS": true,
-        "vsync": true
+        "vsync": false
     },
 
     "game": {
@@ -39,8 +39,15 @@
         },
 
         "resources": {
-            "gold": 100,
-            "electricity": 0
+            "starting": {
+                "gold": 0,
+                "steampower": 20
+            },
+
+            "limits": {
+                "gold": 50,
+                "steampower": -1
+            }
         }
     },
 

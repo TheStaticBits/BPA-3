@@ -1,5 +1,5 @@
 from src.scenes.baseScene import BaseScene
-from src.entities.building import Building
+from src.entities.buildings.baseBuilding import BaseBuilding
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
@@ -14,7 +14,7 @@ class BuildingsScene(BaseScene):
         """ Initializes buildings list """
         super().__init__(mapFolderName, __name__)
 
-        self.buildings: list[Building] = []
+        self.buildings: list[BaseBuilding] = []
         self.buildingsSceneUI: BuildingsSceneUI = BuildingsSceneUI()
 
     def update(self, window: Window) -> None:
@@ -53,11 +53,12 @@ class BuildingsScene(BaseScene):
         buildingPos: Vect = super().getPlayer().getTilePos(Tileset.TILE_SIZE)
 
         # Test if the position is not occupied
-        if Building.testPlacement("testBuilding", buildingPos,
-                                  super().getTileset()):
+        if BaseBuilding.testPlacement("testBuilding", buildingPos,
+                                      super().getTileset()):
             # Create new building object and add to the list
-            newBuilding: Building = Building(super().getTileset(),
-                                             "testBuilding", buildingPos)
+            newBuilding: BaseBuilding = BaseBuilding("testBuilding",
+                                                     super().getTileset(),
+                                                     buildingPos)
 
             self.buildings.append(newBuilding)
 

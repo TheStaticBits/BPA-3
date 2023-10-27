@@ -53,36 +53,44 @@ class Entity:
         """ Handle collision with other entities,
             and also updating position based on velocity """
 
-        def axisCollision(pos: float, vel: float, dir: str) -> float:
-            """ Handle collision with a single entity,
-                used separately for both x and y axis.
-                dir is equal to "x" or "y" """
-            self.pos.add(dir, vel * window.getDeltaTime())
+        # Apply velocity in each direction separately
+        # and then check for collisions,
+        # then adjust pos accordingly to edge of any collisions
+        self.pos.x += velocity.x * window.getDeltaTime()
+        self.axisCollision("x", velocity, entities)
 
-            # Check collision with each entity
-            entity: Entity  # Set the type of the iterator
-            for entity in entities:
+        self.pos.y += velocity.y * window.getDeltaTime()
+        self.axisCollision("y", velocity, entities)
 
-                # Collided with an entity
-                if self.collide(entity):
-                    entityStart = entity.getPos().get(dir)
-                    velocity.set(dir, 0)  # Reset velocity in that dir
+    def axisCollision(self, dir: str, velocity: Vect,
+                      entities: list["Entity"]) -> None:
+        """ Check and adjust pos for any collisions in a single direction.
+            dir parameter must be "x" or "y". """
 
-                    if vel > 0:  # Collided with top or left of entity
-                        width = self.getAnim().getSize().get(dir)
+        # Check collision with each entity
+        entity: Entity  # Set the type of the iterator
+        for entity in entities:
 
-                        # Set position to the edge of the entity
-                        return entityStart - width
+            # Collided with an entity
+            if self.collide(entity):
+                # Get entity position in the direction of collision
+                entityStart: float = entity.getPos().get(dir)
 
-                    else:  # Collided with bottom or right of entity
-                        return entityStart + entity.getSize().get(dir)
+                # Collided with top or left
+                if velocity.get(dir) > 0:
+                    # Get width of self in the direction of collision
+                    width: float = self.getAnim().getSize().get(dir)
 
-            # Return unmodified position if no collision
-            return self.pos.get(dir)
+                    # Set position to the edge of the entity
+                    newPos: float = entityStart - width
 
-        # Apply the above axisCollision function for each axis
-        self.pos.forEach(axisCollision,
-                         vectParams=[velocity, Vect("x", "y")])
+                # Collided with bottom or right of entity
+                else:
+                    # Set pos to bottom or right edge of entity
+                    newPos: float = entityStart + entity.getSize().get(dir)
+
+                self.pos.set(dir, newPos)  # Set new position
+                velocity.set(dir, 0)  # Reset velocity in that dir
 
     def collide(self, entity: "Entity") -> bool:
         """ Collision detection between an entity and another """
