@@ -21,6 +21,16 @@ class Player(Entity):
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
         cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
 
+    @classmethod
+    def capResources(cls):
+        """ If any resources are above their limit, set them to the limit """
+        for resource in cls.resources.getPyDict().keys():
+            if cls.resLimits[resource] < 0:
+                continue
+
+            if cls.resources[resource] > cls.resLimits[resource]:
+                cls.resources[resource] = cls.resLimits[resource]
+
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
         super().__init__(self.ANIM, __name__, pos=startingPos)

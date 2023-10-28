@@ -2,6 +2,7 @@ import src.utility.utility as util
 from src.entities.entity import Entity
 from src.utility.vector import Vect
 from src.tileset import Tileset
+from src.window import Window
 
 
 class BaseBuilding(Entity):
@@ -50,6 +51,10 @@ class BaseBuilding(Entity):
         """ Overriden in subclasses.
             Called on building removal. """
 
+    def update(self, window: Window) -> None:
+        """ Override in subclasses. """
+        super().update(window)
+
     def place(self, tileset: Tileset, tilePos: Vect) -> None:
         """ Places the building on the tileset,
             setting occupied tiles to True """
@@ -61,3 +66,7 @@ class BaseBuilding(Entity):
 
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
+
+    @classmethod
+    def getDataFrom(cls, type: str) -> dict:
+        return cls.BUILDINGS_DATA[type]

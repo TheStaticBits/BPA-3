@@ -2,7 +2,8 @@ from __future__ import annotations
 
 
 class AdvDict:
-    """ Adds features such as +, -, *, /, etc. to dictionaries. """
+    """ Advanced Dictionary.
+        Adds features such as +, -, *, /, etc. to dictionaries. """
 
     def __init__(self, pyDict: dict):
         self.pyDict = pyDict
@@ -19,6 +20,9 @@ class AdvDict:
         self.pyDict[key] = value
 
     # Operator overloading
+
+    def __str__(self) -> str:
+        return str(self.pyDict)
 
     def __add__(self, other: AdvDict | int | float) -> AdvDict:
         """ + overloading """
@@ -84,18 +88,20 @@ class AdvDict:
 
     def __mul__(self, other: AdvDict | int | float) -> AdvDict:
         """ * overloading """
+        copy = self.copy()
+
         if isinstance(other, AdvDict):
             for key in other.getPyDict():
-                self.pyDict[key] *= other[key]
+                copy[key] *= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in other.getPyDict():
-                self.pyDict[key] *= other
+            for key in self.pyDict:
+                copy[key] *= other
 
         else:
             raise TypeError(f"Cannot multiply AdvDict and {type(other)}")
 
-        return self
+        return copy
 
     def __imul__(self, other: AdvDict | int | float) -> AdvDict:
         """ *= overloading """
@@ -104,7 +110,7 @@ class AdvDict:
                 self.pyDict[key] *= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in other.getPyDict():
+            for key in self.pyDict:
                 self.pyDict[key] *= other
 
         else:
@@ -114,18 +120,20 @@ class AdvDict:
 
     def __truediv__(self, other: AdvDict | int | float) -> AdvDict:
         """ / overloading """
+        copy = self.copy()
+
         if isinstance(other, AdvDict):
             for key in other.getPyDict():
-                self.pyDict[key] /= other[key]
+                copy[key] /= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in other.getPyDict():
-                self.pyDict[key] /= other
+            for key in self.pyDict:
+                copy[key] /= other
 
         else:
             raise TypeError(f"Cannot divide AdvDict and {type(other)}")
 
-        return self
+        return copy
 
     def __itruediv__(self, other: AdvDict | int | float) -> AdvDict:
         """ /= overloading """
@@ -134,7 +142,7 @@ class AdvDict:
                 self.pyDict[key] /= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in other.getPyDict():
+            for key in self.pyDict:
                 self.pyDict[key] /= other
 
         else:

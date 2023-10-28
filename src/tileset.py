@@ -113,7 +113,6 @@ class Tileset:
     def update(self, window: Window) -> None:
         """ Will be used to update anything in the tileset
             with animations in the future """
-        pass
 
     def render(self, window: Window, offset: Vect = Vect()) -> None:
         """ Renders tileset image """

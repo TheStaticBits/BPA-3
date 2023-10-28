@@ -1,6 +1,7 @@
 from src.scenes.baseScene import BaseScene
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.buildings.storage import Storage
+from src.entities.buildings.generator import Generator
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
@@ -10,6 +11,11 @@ from src.ui.interfaces.buildingsSceneUI import BuildingsSceneUI
 class BuildingsScene(BaseScene):
     """ Inherits from BaseScene
         Manages a scene that has buildings """
+
+    BUILDING_TYPES: dict = {
+        "storage": Storage,
+        "generator": Generator
+    }
 
     def __init__(self, mapFolderName: str) -> None:
         """ Initializes buildings list """
@@ -30,7 +36,10 @@ class BuildingsScene(BaseScene):
         super().getPlayer().update(window, self.buildings)
 
         if window.getJustPressed("space"):
-            self.placeBuilding()
+            self.placeBuilding("testStorage")
+
+        if window.getJustPressed("1"):
+            self.placeBuilding("testGenerator")
 
         self.buildingsSceneUI.update(window)
 
@@ -48,18 +57,22 @@ class BuildingsScene(BaseScene):
 
         super().renderUI(window)
 
-    def placeBuilding(self) -> None:
+    def placeBuilding(self, buildingType: str) -> None:
         """ Tests if the player can place a building and then places it """
         # Gets tile position of player
         buildingPos: Vect = super().getPlayer().getTilePos(Tileset.TILE_SIZE)
 
         # Test if the position is not occupied
-        if BaseBuilding.testPlacement("testBuilding", buildingPos,
+        if BaseBuilding.testPlacement(buildingType, buildingPos,
                                       super().getTileset()):
+            # Get building type based on the building data
+            typeName = BaseBuilding.getDataFrom(buildingType)["type"]
+            objType: type = self.BUILDING_TYPES[typeName]
+
             # Create new building object and add to the list
-            newBuilding: Storage = Storage("testBuilding",
-                                           super().getTileset(),
-                                           buildingPos)
+            newBuilding = objType(buildingType,
+                                  super().getTileset(),
+                                  buildingPos)
 
             self.buildings.append(newBuilding)
 

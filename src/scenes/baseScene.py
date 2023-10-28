@@ -1,9 +1,9 @@
 import logging
+from math import floor
 
 from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
-from src.utility.advDict import AdvDict
 from src.window import Window
 from src.ui.interfaces.baseUI import BaseUI
 from src.ui.elements.text import Text
@@ -51,7 +51,7 @@ class BaseScene:
             element: Text = self.resourcesUI.getElement(resource + "Text")
 
             # The current number of resources
-            text: str = str(Player.resources[resource])
+            text: str = str(floor(Player.resources[resource]))
 
             # If there is a limit, add it to the text
             if Player.resLimits[resource] >= 0:
