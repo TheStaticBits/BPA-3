@@ -21,14 +21,6 @@ class Player(Entity):
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
         cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
 
-    @classmethod
-    def getResources(cls) -> AdvDict:
-        return cls.resources
-
-    @classmethod
-    def addToResources(cls, resources: AdvDict) -> None:
-        cls.resources += resources
-
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
         super().__init__(self.ANIM, __name__, pos=startingPos)

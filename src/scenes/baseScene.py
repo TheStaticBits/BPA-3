@@ -46,13 +46,19 @@ class BaseScene:
     def updateResources(self, window: Window) -> None:
         """ Update all the resources
             with the current player resource values """
-        resources: AdvDict = Player.getResources()
-        for resource in resources.getPyDict().keys():
+        for resource in Player.resources.getPyDict().keys():
             # Get text element for the resource
             element: Text = self.resourcesUI.getElement(resource + "Text")
 
-            # Set text element's value to the current resource value
-            element.setText(resources[resource])
+            # The current number of resources
+            text: str = str(Player.resources[resource])
+
+            # If there is a limit, add it to the text
+            if Player.resLimits[resource] >= 0:
+                text += "/" + str(Player.resLimits[resource])
+
+            # Set text element's value
+            element.setText(text)
 
         self.resourcesUI.update(window)
 

@@ -25,11 +25,11 @@ class AdvDict:
         copy = self.copy()
 
         if isinstance(other, AdvDict):  # Add two AdvDicts
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 copy[key] += other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 copy[key] += other
 
         else:
@@ -40,11 +40,11 @@ class AdvDict:
     def __iadd__(self, other: AdvDict | int | float) -> AdvDict:
         """ += overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] += other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] += other
 
         else:
@@ -55,11 +55,11 @@ class AdvDict:
     def __sub__(self, other: AdvDict | int | float) -> AdvDict:
         """ - overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] -= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] -= other
 
         else:
@@ -70,11 +70,11 @@ class AdvDict:
     def __isub__(self, other: AdvDict | int | float) -> AdvDict:
         """ -= overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] -= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] -= other
 
         else:
@@ -85,11 +85,11 @@ class AdvDict:
     def __mul__(self, other: AdvDict | int | float) -> AdvDict:
         """ * overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] *= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] *= other
 
         else:
@@ -100,11 +100,11 @@ class AdvDict:
     def __imul__(self, other: AdvDict | int | float) -> AdvDict:
         """ *= overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] *= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] *= other
 
         else:
@@ -115,11 +115,11 @@ class AdvDict:
     def __truediv__(self, other: AdvDict | int | float) -> AdvDict:
         """ / overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] /= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] /= other
 
         else:
@@ -130,11 +130,11 @@ class AdvDict:
     def __itruediv__(self, other: AdvDict | int | float) -> AdvDict:
         """ /= overloading """
         if isinstance(other, AdvDict):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] /= other[key]
 
         elif isinstance(other, int) or isinstance(other, float):
-            for key in self.pyDict:
+            for key in other.getPyDict():
                 self.pyDict[key] /= other
 
         else:

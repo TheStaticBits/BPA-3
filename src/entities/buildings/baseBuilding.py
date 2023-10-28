@@ -46,6 +46,10 @@ class BaseBuilding(Entity):
 
         self.place(tileset, tilePos)
 
+    def onRemove(self) -> None:
+        """ Overriden in subclasses.
+            Called on building removal. """
+
     def place(self, tileset: Tileset, tilePos: Vect) -> None:
         """ Places the building on the tileset,
             setting occupied tiles to True """

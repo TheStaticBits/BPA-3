@@ -86,8 +86,8 @@ class BaseUI:
     def loadPos(self, posData: dict) -> None:
         """ Loads the position lamdas using JSON data """
 
-        self.xPos: callable = self.POS_CALCS[posData["x"]["locked"]]
-        self.yPos: callable = self.POS_CALCS[posData["y"]["locked"]]
+        self.CalcX: callable = self.POS_CALCS[posData["x"]["locked"]]
+        self.CalcY: callable = self.POS_CALCS[posData["y"]["locked"]]
 
         self.margin: Vect = Vect(posData["x"]["margin"],
                                  posData["y"]["margin"])
@@ -97,8 +97,8 @@ class BaseUI:
 
         # Calculate UI interface offset based on position lambdas
         offset: Vect = Vect(
-            self.xPos(window.getWindowSize().x, self.size.x, self.margin.x),
-            self.yPos(window.getWindowSize().y, self.size.y, self.margin.y)
+            self.CalcX(window.getWindowSize().x, self.size.x, self.margin.x),
+            self.CalcY(window.getWindowSize().y, self.size.y, self.margin.y)
         )
 
         # Iterate through UI elements and update them

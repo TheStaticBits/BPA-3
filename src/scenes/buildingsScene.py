@@ -1,5 +1,6 @@
 from src.scenes.baseScene import BaseScene
 from src.entities.buildings.baseBuilding import BaseBuilding
+from src.entities.buildings.storage import Storage
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
@@ -56,9 +57,9 @@ class BuildingsScene(BaseScene):
         if BaseBuilding.testPlacement("testBuilding", buildingPos,
                                       super().getTileset()):
             # Create new building object and add to the list
-            newBuilding: BaseBuilding = BaseBuilding("testBuilding",
-                                                     super().getTileset(),
-                                                     buildingPos)
+            newBuilding: Storage = Storage("testBuilding",
+                                           super().getTileset(),
+                                           buildingPos)
 
             self.buildings.append(newBuilding)
 
