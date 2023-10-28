@@ -1,12 +1,10 @@
 import logging
-from math import floor
 
 from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
 from src.window import Window
-from src.ui.interfaces.baseUI import BaseUI
-from src.ui.elements.text import Text
+from src.ui.interfaces.resourcesUI import ResourcesUI
 
 
 class BaseScene:
@@ -30,36 +28,26 @@ class BaseScene:
         self.cameraOffset: Vect = Vect()
 
         # Handling resource numbers and icons in the top left
-        self.resourcesUI = BaseUI("resourcesUI.json")
+        self.resourcesUI = ResourcesUI()
 
     def update(self, window: Window) -> None:
         """ Update scene objects """
+        self.updateCameraPos(window)
+
+        self.updateTileset(window)
+        self.updatePlayer(window)
+        self.updateUI(window)
+
+    def updateTileset(self, window: Window) -> None:
+        """ Update tileset """
         self.tileset.update(window)
 
-        self.updateCameraPos(window)
-        self.updateResources(window)
-
     def updatePlayer(self, window: Window) -> None:
-        """ Default updating player """
+        """ Update player """
         self.player.update(window)
 
-    def updateResources(self, window: Window) -> None:
-        """ Update all the resources
-            with the current player resource values """
-        for resource in Player.resources.getPyDict().keys():
-            # Get text element for the resource
-            element: Text = self.resourcesUI.getElement(resource + "Text")
-
-            # The current number of resources
-            text: str = str(floor(Player.resources[resource]))
-
-            # If there is a limit, add it to the text
-            if Player.resLimits[resource] >= 0:
-                text += "/" + str(Player.resLimits[resource])
-
-            # Set text element's value
-            element.setText(text)
-
+    def updateUI(self, window: Window) -> None:
+        """ Update any universal scene UIs """
         self.resourcesUI.update(window)
 
     def updateCameraPos(self, window: Window) -> None:

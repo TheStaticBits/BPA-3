@@ -24,8 +24,8 @@ class Window:
         pygame.K_w: "up",    pygame.K_UP: "up",
         pygame.K_s: "down",  pygame.K_DOWN: "down",
 
-        # may be temporary
-        pygame.K_SPACE: "space",
+        # TEMPORARY
+        pygame.K_0: "0",
         pygame.K_1: "1",
         pygame.K_2: "2"
     }

@@ -26,7 +26,9 @@ class BuildingsScene(BaseScene):
 
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
-        super().update(window)
+        super().updateCameraPos(window)
+        super().updateUI(window)
+        super().updateTileset(window)
 
         # Update buildings
         for building in self.buildings:
@@ -35,7 +37,7 @@ class BuildingsScene(BaseScene):
         # Player collision with buildings
         super().getPlayer().update(window, self.buildings)
 
-        if window.getJustPressed("space"):
+        if window.getJustPressed("0"):
             self.placeBuilding("testStorage")
 
         if window.getJustPressed("1"):
