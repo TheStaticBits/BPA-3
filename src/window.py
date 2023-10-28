@@ -26,7 +26,8 @@ class Window:
 
         # may be temporary
         pygame.K_SPACE: "space",
-        pygame.K_1: "1"
+        pygame.K_1: "1",
+        pygame.K_2: "2"
     }
 
     MOUSE: dict = {

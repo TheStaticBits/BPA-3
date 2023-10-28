@@ -32,8 +32,31 @@
             "gold": 100
         },
 
+        "oneTimeGenerate": false,
+
         "generateAmount": {
             "gold": 5
+        }
+    },
+
+    "testSteamGenerator": {
+        "type": "generator",
+
+        "anim": {
+            "path": "res/testBuilding.png",
+            "frames": 1, "delay": 1
+        },
+
+        "size": [3, 2],
+
+        "cost": {
+            "gold": 100
+        },
+
+        "oneTimeGenerate": true,
+
+        "generateAmount": {
+            "steampower": 5
         }
     }
 }

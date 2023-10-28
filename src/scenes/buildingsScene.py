@@ -41,6 +41,9 @@ class BuildingsScene(BaseScene):
         if window.getJustPressed("1"):
             self.placeBuilding("testGenerator")
 
+        if window.getJustPressed("2"):
+            self.placeBuilding("testSteamGenerator")
+
         self.buildingsSceneUI.update(window)
 
     def render(self, window: Window) -> None:
