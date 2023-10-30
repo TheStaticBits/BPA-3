@@ -55,9 +55,8 @@ class Button(BaseUIElement):
 
         if self.mode == "pressed":
             if window.getMouseReleased("left"):  # Mouse released button
-                self.activated = True
-
                 if self.isMouseOver(window):
+                    self.activated = True
                     self.mode = "hover"
                 else:
                     self.mode = "inactive"

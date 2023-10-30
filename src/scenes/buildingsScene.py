@@ -37,13 +37,13 @@ class BuildingsScene(BaseScene):
         # Player collision with buildings
         super().getPlayer().update(window, self.buildings)
 
-        if window.getJustPressed("0"):
+        if window.getJustPressed("1"):
             self.placeBuilding("testStorage")
 
-        if window.getJustPressed("1"):
+        if window.getJustPressed("2"):
             self.placeBuilding("testGenerator")
 
-        if window.getJustPressed("2"):
+        if window.getJustPressed("3"):
             self.placeBuilding("testSteamGenerator")
 
         self.buildingsSceneUI.update(window)

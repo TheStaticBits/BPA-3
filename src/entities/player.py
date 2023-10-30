@@ -20,6 +20,7 @@ class Player(Entity):
         # Player resources
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
         cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
+        cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
 
     @classmethod
     def capResources(cls):

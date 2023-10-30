@@ -47,6 +47,11 @@
             "limits": {
                 "gold": 50,
                 "steampower": -1
+            },
+
+            "labels": {
+                "gold": "gold",
+                "steampower": "capacity"
             }
         }
     },
