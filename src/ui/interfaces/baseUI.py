@@ -90,7 +90,7 @@ class BaseUI:
         self.CalcY: callable = self.POS_CALCS[posData["y"]["locked"]]
 
         self.margin: Vect = Vect(posData["x"]["margin"],
-                                 posData["y"]["margin"])
+                                 posData["y"]["margin"]) * Window.IMG_SCALE
 
     def update(self, window: Window) -> None:
         """ Updates all elements """

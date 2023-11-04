@@ -32,7 +32,7 @@ class Text(BaseUIElement):
 
     def getFontObj(self, size: int) -> pygame.font.Font:
         """ Loads font if it has not already been loaded and returns it """
-        scaledSize = size * Window.getImgScale()
+        scaledSize = size * Window.IMG_SCALE
 
         if scaledSize not in self.fonts:
             self.log.info(f"Loading font size {scaledSize}")

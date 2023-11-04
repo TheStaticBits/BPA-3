@@ -20,7 +20,7 @@ class Tileset:
             into several static variables """
         # Static data about tilesets loaded from constants.json
         cls.TILE_SIZE: Vect = (
-            Vect(constants["tileset"]["tileSize"]) * Window.getImgScale()
+            Vect(constants["tileset"]["tileSize"]) * Window.IMG_SCALE
         )
 
         # FILE INFO:

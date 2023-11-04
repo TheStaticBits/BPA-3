@@ -1,7 +1,7 @@
 {
     "pos": {
-        "x": { "locked": "start", "margin": 10 },
-        "y": { "locked": "start", "margin": 10 }
+        "x": { "locked": "start", "margin": 3 },
+        "y": { "locked": "start", "margin": 3 }
     },
 
     "size": "auto",

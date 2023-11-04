@@ -21,7 +21,7 @@ class BaseUIElement:
         self.log = logging.getLogger(loggerName)
 
         # Offset from top left corner of each UI
-        self.offset: Vect = Vect(data["offset"]) * Window.getImgScale()
+        self.offset: Vect = Vect(data["offset"]) * Window.IMG_SCALE
 
         self.centered: bool = data["centered"] if "centered" in data else False
 

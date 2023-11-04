@@ -1,3 +1,21 @@
 {
-    
+    "pos": {
+        "x": { "locked": "center", "margin": 0 },
+        "y": { "locked": "end",    "margin": 0 }
+    },
+
+    "defaultPos": "visible",
+    "size": "auto",
+
+    "elements": {
+        "images": {
+
+        },
+        "text": {
+
+        },
+        "buttons": {
+
+        }
+    }
 }
