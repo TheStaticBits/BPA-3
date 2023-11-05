@@ -11,7 +11,7 @@ class ResourcesUI(BaseUI):
         when walking around during gameplay """
 
     def __init__(self) -> None:
-        super().__init__("resourcesUI.json", __name__)
+        super().__init__("resourcesUI", __name__)
 
     def update(self, window: Window) -> None:
         super().update(window)

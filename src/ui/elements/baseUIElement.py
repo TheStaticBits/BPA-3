@@ -15,7 +15,7 @@ class BaseUIElement:
     # Value: pygame.Surface (the image)
     images: dict = {}
 
-    def __init__(self, data: dict, loggerName: str,
+    def __init__(self, data: dict, loggerName: str = __name__,
                  imgPath: str = None) -> None:
 
         self.log = logging.getLogger(loggerName)
@@ -63,6 +63,7 @@ class BaseUIElement:
 
     # Setters
     def setOffset(self, offset: Vect) -> None: self.offset = offset
+    def addToOffset(self, offset: Vect) -> None: self.offset += offset
 
     def setImg(self, image: pygame.Surface) -> None:
         self.image = image

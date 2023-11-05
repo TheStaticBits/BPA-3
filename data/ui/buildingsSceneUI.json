@@ -1,9 +1,13 @@
 {
-    "pos": {
-        "x": { "locked": "center", "margin": 0 },
-        "y": { "locked": "start", "margin": 10 }
+    "positions": {
+        "default": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "start", "margin": 10 }
+        }
     },
 
+    "defaultPos": "default",
+    
     "size": "auto",
 
     "elements": {

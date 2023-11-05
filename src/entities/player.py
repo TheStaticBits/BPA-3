@@ -88,7 +88,8 @@ class Player(Entity):
 
         # Apply the above decelerate function for each axis,
         # with acceleration as the parameter of the decelerate function
-        self.velocity.forEach(decelerate, vectParams=[acceleration])
+        self.velocity = self.velocity.forEach(decelerate,
+                                              vectParams=[acceleration])
 
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:

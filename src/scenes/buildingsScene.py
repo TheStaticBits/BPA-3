@@ -5,7 +5,7 @@ from src.entities.buildings.generator import Generator
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
-from src.ui.interfaces.buildingsSceneUI import BuildingsSceneUI
+from src.ui.interfaces.buildingShop import BuildingShop
 
 
 class BuildingsScene(BaseScene):
@@ -22,7 +22,7 @@ class BuildingsScene(BaseScene):
         super().__init__(mapFolderName, __name__)
 
         self.buildings: list[BaseBuilding] = []
-        self.buildingsSceneUI: BuildingsSceneUI = BuildingsSceneUI()
+        self.buildingsSceneUI: BuildingShop = BuildingShop()
 
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """

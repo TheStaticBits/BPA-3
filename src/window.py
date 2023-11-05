@@ -131,7 +131,7 @@ class Window:
         self.window.fill((0, 0, 0))  # Clear the window
 
         # Cap FPS
-        if self.FPS > 0 and not self.vsync:
+        if self.FPS > 0 and not self.VSYNC:
             self.clock.tick(self.FPS)
 
         # Deltatime is the time that has elapsed since the previous function

@@ -36,6 +36,9 @@ class Vect:
     def toTuple(self) -> tuple:
         return (self.x, self.y)
 
+    def round(self) -> Vect:
+        return Vect(round(self.x), round(self.y))
+
     def floor(self) -> Vect:
         return Vect(floor(self.x), floor(self.y))
 
@@ -47,6 +50,17 @@ class Vect:
     @classmethod
     def toRect(cls, pos: Vect, size: Vect) -> pygame.Rect:
         return pygame.Rect(pos.x, pos.y, size.x, size.y)
+
+    def getSigns(self) -> Vect:
+        """ Returns a vector with the signs of each component """
+        return Vect(
+            1 if self.x > 0 else -1 if self.x < 0 else 0,
+            1 if self.y > 0 else -1 if self.y < 0 else 0
+        )
+
+    def signsMatch(self, other: Vect) -> bool:
+        """ Returns if the signs of the components match """
+        return self.getSigns() == other.getSigns()
 
     def forEach(self, func: callable,
                 vectParams: tuple[Vect] = (),
@@ -65,10 +79,10 @@ class Vect:
 
         # Apply function callback to each axis of the vector
         # using the * spread operator for the parameters
-        self.x = func(self.x, *paramsX, *otherParams)
-        self.y = func(self.y, *paramsY, *otherParams)
-
-        return self
+        return Vect(
+            func(self.x, *paramsX, *otherParams),
+            func(self.y, *paramsY, *otherParams)
+        )
 
     # Getters and setters for when using a string to get the x or y component
 

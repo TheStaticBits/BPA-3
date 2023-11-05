@@ -80,7 +80,7 @@ class Button(BaseUIElement):
 
     def centerText(self) -> None:
         """ Centers the button's text """
-        self.text.setOffset(super().getSize() / 2)
+        self.text.addToOffset(super().getSize() / 2)
 
     def render(self, window) -> None:
         """ Renders the button """

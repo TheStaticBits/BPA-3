@@ -1,21 +1,49 @@
 {
-    "pos": {
-        "x": { "locked": "center", "margin": 0 },
-        "y": { "locked": "end",    "margin": 0 }
+    "positions": {
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "end",    "margin": 0 }
+        },
+
+        "hidden": {
+            "x": { "locked": "center", "margin": 0   },
+            "y": { "locked": "end",    "margin": -50 }
+        }
     },
 
-    "defaultPos": "visible",
+    "defaultPos": "hidden",
+    "transitionSpeed": 3,
+    "transitionType": "ease",
+
     "size": "auto",
 
     "elements": {
         "images": {
-
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/shop/bg.png"
+            }
         },
         "text": {
 
         },
         "buttons": {
+            "openShop": {
+                "offset": [ 250, -15 ],
 
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Shop",
+                    "offset": [ 0.66, 0.33 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            }
         }
     }
 }

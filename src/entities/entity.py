@@ -78,11 +78,8 @@ class Entity:
 
                 # Collided with top or left
                 if velocity.get(dir) > 0:
-                    # Get width of self in the direction of collision
-                    width: float = self.getAnim().getSize().get(dir)
-
                     # Set position to the edge of the entity
-                    newPos: float = entityStart - width
+                    newPos: float = entityStart - self.getSize().get(dir)
 
                 # Collided with bottom or right of entity
                 else:
