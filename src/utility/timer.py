@@ -4,7 +4,7 @@ from src.window import Window
 
 
 class Timer:
-    def __init__(self, delay: float):
+    def __init__(self, delay: float) -> None:
         self.log = logging.getLogger(__name__)
 
         self.delay: float = delay

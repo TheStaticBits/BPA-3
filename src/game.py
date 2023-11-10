@@ -1,6 +1,7 @@
 import logging
 
 import src.utility.utility as util
+from src.utility.image import Image
 from src.window import Window
 from src.tileset import Tileset
 from src.entities.buildings.baseBuilding import BaseBuilding
@@ -33,6 +34,7 @@ class Game:
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
+        Image.loadStatic(self.constants)
         Window.loadStatic(self.constants)
         Tileset.loadStatic(self.constants)
         BaseBuilding.loadStatic(self.constants)

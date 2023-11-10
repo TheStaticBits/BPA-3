@@ -4,6 +4,7 @@ import os
 
 import src.utility.utility as util
 from src.utility.vector import Vect
+from src.utility.image import Image
 from src.window import Window
 
 
@@ -11,16 +12,13 @@ class Tileset:
     """ Stores tiles along with interactable entities
         such as buildings and trees aside from buildings """
 
-    # Tile images cache { path: pygame.Surface }
-    tileImages: dict = {}
-
     @classmethod  # static function
     def loadStatic(cls, constants: dict) -> None:
         """ Loads metadata about the tilesets from the constants file
             into several static variables """
         # Static data about tilesets loaded from constants.json
         cls.TILE_SIZE: Vect = (
-            Vect(constants["tileset"]["tileSize"]) * Window.IMG_SCALE
+            Vect(constants["tileset"]["tileSize"]) * Image.SCALE
         )
 
         # FILE INFO:
@@ -45,7 +43,7 @@ class Tileset:
         self.log = logging.getLogger(__name__)
 
         # Entire map/tileset image
-        self.tiles: pygame.Surface = None
+        self.tiles: Image = None
 
         # 2D array for occupied tiles (for things like placing buildings)
         self.occupiedTiles: list[list[bool]] = []
@@ -57,8 +55,8 @@ class Tileset:
         self.loadEntities(os.path.join(self.MAPS_FOLDER, mapFolderName,
                                        self.ENTITIES_FILE))
 
-        self.loadFromText(os.path.join(self.MAPS_FOLDER, mapFolderName,
-                                       self.MAP_FILE))
+        self.generateMapImg(os.path.join(self.MAPS_FOLDER, mapFolderName,
+                                         self.MAP_FILE))
 
     def loadMapData(self, dataPath: dict) -> None:
         """ Loads the JSON containing map metadata and vars from it """
@@ -70,7 +68,7 @@ class Tileset:
         """ Loads any minable entities TO BE IMPLEMENTED (or removed) """
         pass
 
-    def loadFromText(self, mapPath: str) -> None:
+    def generateMapImg(self, mapPath: str) -> None:
         """ Generates the tiles based on the chars in the map data """
 
         mapData: str = util.loadFile(mapPath)
@@ -79,53 +77,32 @@ class Tileset:
         self.size: Vect = Vect(len(splitData[0]), len(splitData))
 
         # Create empty tileset image based on the tiledata
-        self.tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x,
-                                     len(splitData) * self.TILE_SIZE.y),
-                                    pygame.DOUBLEBUF | pygame.HWSURFACE)
+        tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x,
+                                len(splitData) * self.TILE_SIZE.y),
+                               pygame.DOUBLEBUF | pygame.HWSURFACE)
+
+        self.tiles = Image(surf=tiles)
 
         # Create Tile objects for every char in the map data
-        for y, row in enumerate(splitData):  # Iterate through rows
-
+        for y, row in enumerate(splitData):  # Rows
             # Add a row of False to occupiedTiles
             self.occupiedTiles.append([False] * len(row))
 
-            # Iterate through columns
-            for x, tileChar in enumerate(row):
-
+            for x, tileChar in enumerate(row):  # Columns
                 # Gets position of the tile in pixels
                 pos: Vect = Vect(x, y) * self.TILE_SIZE
 
-                # Load tile image
-                tileImg = self.getTileImg(self.TILESET_DATA[tileChar])
-
-                # Draw to the tileset image
-                self.tiles.blit(tileImg, pos.toTuple())
-
-    def getTileImg(self, path: str) -> pygame.Surface:
-        """ Gets the tile image from the cache
-            or loads it if it has not been loaded previously """
-        if path not in self.tileImages:
-            self.log.info(f"Loading tile image at {path}")
-            self.tileImages[path] = Window.loadImg(path)
-
-        return self.tileImages[path]
+                # Load image and draw to tiles image at the current pos
+                tileImg = Image(self.TILESET_DATA[tileChar])
+                self.tiles.render(tileImg, pos)
 
     def update(self, window: Window) -> None:
         """ Will be used to update anything in the tileset
             with animations in the future """
 
-    def render(self, window: Window, offset: Vect = Vect()) -> None:
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders tileset image """
-        window.render(self.tiles, offset)
-
-        # Draw red square over tiles that are occupied (debugging)
-        for y, row in enumerate(self.occupiedTiles):
-            for x, occupied in enumerate(row):
-                if not occupied:
-                    continue
-
-                window.drawRect(Vect(x, y) * self.TILE_SIZE + offset + Vect(3),
-                                self.TILE_SIZE - Vect(6), (255, 0, 0))
+        surface.render(self.tiles, offset)
 
     def testRangeOccupied(self, startTile: Vect, tileRange: Vect) -> bool:
         """ Tests if a range of tiles has at least one tile occupied """

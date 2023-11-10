@@ -15,7 +15,7 @@ class BaseBuilding(Entity):
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the buildings data JSON file """
         # Building JSON data file (data/buildings.json)
-        cls.BUILDINGS_DATA: str = util.loadJSON(
+        cls.BUILDINGS_DATA: dict = util.loadJSON(
             constants["buildings"]["jsonPath"]
         )
 

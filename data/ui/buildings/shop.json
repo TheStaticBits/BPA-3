@@ -1,4 +1,6 @@
 {
+    "buildingImgScale": 0.25,
+
     "positions": {
         "visible": {
             "x": { "locked": "center", "margin": 0 },

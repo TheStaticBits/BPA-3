@@ -4,6 +4,7 @@ import time
 import enum
 
 from src.utility.vector import Vect
+from src.utility.image import Image
 
 
 class InputState(enum.Enum):
@@ -18,7 +19,7 @@ class Window:
     """ Handles actions regarding the Pygame window object and deltatime """
 
     # Inputs and what string value they map to in the window.inputs dict
-    KEYS: dict = {
+    KEYS: dict[int, str] = {
         pygame.K_a: "left",  pygame.K_LEFT: "left",
         pygame.K_d: "right", pygame.K_RIGHT: "right",
         pygame.K_w: "up",    pygame.K_UP: "up",
@@ -30,7 +31,7 @@ class Window:
         pygame.K_3: "3"
     }
 
-    MOUSE: dict = {
+    MOUSE: dict[int, str] = {
         pygame.BUTTON_LEFT: "left",
         pygame.BUTTON_MIDDLE: "middle",
         pygame.BUTTON_RIGHT: "right"
@@ -40,9 +41,6 @@ class Window:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads static variables from constants """
-        # Scale of images
-        cls.IMG_SCALE: float = constants["game"]["imgScale"]
-
         # Minimum scale of images
         cls.MIN_SIZE: Vect = Vect(constants["window"]["minSize"])
 
@@ -55,21 +53,6 @@ class Window:
 
         cls.RESIZABLE: bool = constants["window"]["resizable"]
         cls.WINDOW_TITLE: str = constants["window"]["title"]
-
-    @classmethod
-    def loadImg(cls, path: str) -> pygame.Surface:
-        """ Loads an image from the given path """
-
-        # convert_alpha converts the image to a quicker rendering file format
-        # and allows for transparency, unlike the pygame convert() function
-        img = pygame.image.load(path).convert_alpha()
-
-        if cls.IMG_SCALE != 1:
-            # Scale image up by the scale factor
-            size: Vect = Vect(img.get_size())
-            img = pygame.transform.scale(img, (size * cls.IMG_SCALE).toTuple())
-
-        return img
 
     def __init__(self) -> None:
         """ Creates the Window object from data in data/constants.json,
@@ -103,7 +86,7 @@ class Window:
         self.quit: bool = False
 
         # Inputs
-        self.inputs: dict = {}
+        self.inputs: dict[str, InputState] = {}
 
         # Set default inputs all to inactive
         for value in self.KEYS.values():
@@ -112,7 +95,7 @@ class Window:
         # Mouse inputs
         self.mousePos: Vect = Vect(0, 0)
 
-        self.mouseButtons: dict = {}
+        self.mouseButtons: dict[str, InputState] = {}
         for value in self.MOUSE.values():
             self.mouseButtons[value] = InputState.INACTIVE
 
@@ -207,7 +190,7 @@ class Window:
                 elif self.windowSize.y < self.MIN_SIZE.y:
                     self.setWindow(Vect(self.windowSize.x, self.MIN_SIZE.y))
 
-    def updateInputs(self, buttons: dict) -> None:
+    def updateInputs(self, buttons: dict[str, InputState]) -> None:
         """ Updates the values of a dict
             to cycle between input states """
         # The inputs are only JUST_PRESSED and RELEASED for one frame,
@@ -219,12 +202,12 @@ class Window:
             elif buttons[key] == InputState.RELEASED:
                 buttons[key] = InputState.INACTIVE
 
-    def render(self, img: pygame.Surface, pos: Vect,
+    def render(self, img: Image, pos: Vect,
                area: pygame.Rect = None) -> None:
         """ Renders an image on a window at a given position,
             with a given portion (area) of the image to render if specified.
             Renders the image with the image scale specified in constants """
-        self.window.blit(img, pos.toTuple(), area=(area if area else None))
+        self.window.blit(img.getSurf(), pos.toTuple(), area=area)
 
     def drawRect(self, pos: Vect, size: Vect,
                  color: tuple[int, int, int]) -> None:
@@ -239,7 +222,7 @@ class Window:
 
     def getMousePos(self) -> Vect: return self.mousePos
     def isClosed(self) -> bool: return self.quit
-    def getWindowSize(self) -> Vect: return self.windowSize
+    def getSize(self) -> Vect: return self.windowSize
 
     # Keyboard inputs
     def getKey(self, key: str) -> bool:

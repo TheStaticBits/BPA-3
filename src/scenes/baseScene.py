@@ -3,6 +3,7 @@ import logging
 from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
+from src.utility.image import Image
 from src.window import Window
 from src.ui.interfaces.resourcesUI import ResourcesUI
 
@@ -53,34 +54,34 @@ class BaseScene:
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
         # Camera position centered on the position
-        newOffset = self.player.getCenterPos() - window.getWindowSize() / 2
+        newOffset = self.player.getCenterPos() - window.getSize() / 2
 
         # Clamp between 0, 0 and max camera offset
         newOffset.clamp(
             Vect(),  # 0, 0
-            self.tileset.getSize() - window.getWindowSize()
+            self.tileset.getSize() - window.getSize()
         )
 
         # Move the camera offset slowly to the new position
         self.cameraOffset += ((newOffset - self.cameraOffset) *
                               self.CAMERA_SPEED * window.getDeltaTime())
 
-    def render(self, window: Window) -> None:
+    def render(self, surface: Window | Image) -> None:
         """ Render scene objects """
-        self.renderTileset(window)
-        self.renderPlayer(window)
+        self.renderTileset(surface)
+        self.renderPlayer(surface)
 
-    def renderTileset(self, window: Window) -> None:
+    def renderTileset(self, surface: Window | Image) -> None:
         """ Render the tileset """
-        self.tileset.render(window, -self.cameraOffset)
+        self.tileset.render(surface, -self.cameraOffset)
 
-    def renderPlayer(self, window: Window) -> None:
+    def renderPlayer(self, surface: Window | Image) -> None:
         """ Render the player """
-        self.player.render(window, -self.cameraOffset)
+        self.player.render(surface, -self.cameraOffset)
 
-    def renderUI(self, window: Window) -> None:
+    def renderUI(self, surface: Window | Image) -> None:
         """ Render any universal scene UIs """
-        self.resourcesUI.render(window)
+        self.resourcesUI.render(surface)
 
     # Getters
     def getCamOffset(self) -> Vect: return self.cameraOffset

@@ -4,6 +4,7 @@ from src.entities.buildings.storage import Storage
 from src.entities.buildings.generator import Generator
 from src.utility.vector import Vect
 from src.window import Window
+from src.utility.image import Image
 from src.tileset import Tileset
 from src.ui.interfaces.buildingShop import BuildingShop
 
@@ -12,7 +13,7 @@ class BuildingsScene(BaseScene):
     """ Inherits from BaseScene
         Manages a scene that has buildings """
 
-    BUILDING_TYPES: dict = {
+    BUILDING_TYPES: dict[str, type] = {
         "storage": Storage,
         "generator": Generator
     }
@@ -48,19 +49,19 @@ class BuildingsScene(BaseScene):
 
         self.buildingsSceneUI.update(window)
 
-    def render(self, window: Window) -> None:
+    def render(self, surface: Window | Image) -> None:
         """ Renders buildings """
-        super().renderTileset(window)
+        super().renderTileset(surface)
 
         # Render buildings
         for building in self.buildings:
-            building.render(window, -super().getCamOffset())
+            building.render(surface, -super().getCamOffset())
 
-        super().renderPlayer(window)
+        super().renderPlayer(surface)
 
-        self.buildingsSceneUI.render(window)
+        self.buildingsSceneUI.render(surface)
 
-        super().renderUI(window)
+        super().renderUI(surface)
 
     def placeBuilding(self, buildingType: str) -> None:
         """ Tests if the player can place a building and then places it """

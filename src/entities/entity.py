@@ -1,18 +1,16 @@
+from __future__ import annotations
 import pygame
 import logging
 
 from src.utility.animation import Animation
 from src.utility.vector import Vect
+from src.utility.image import Image
 from src.window import Window
 
 
 class Entity:
     """ Base class for all entities in the game.
         Handles the animation and position """
-
-    # Cache for spritesheets so as to reduce loading the same image twice
-    # Key: image path - Value: the spritesheet
-    spritesheets: dict = {}
 
     def __init__(self, animData: dict, loggerName: str,
                  pos: Vect = Vect()) -> None:
@@ -24,19 +22,13 @@ class Entity:
 
         self.pos: Vect = pos
 
-        self.loadSpritesheet(animData["path"])
+        self.log.info(f"Loading animation spritesheet at {animData['path']}")
         self.animation = self.loadAnim(animData)
 
-    def loadSpritesheet(self, animPath: str) -> None:
-        """ Loads spritesheet image at path if it's
-            not already in the spritesheets variable """
-        if animPath not in self.spritesheets:
-            self.log.info(f"Loading animation spritesheet at {animPath}")
-            self.spritesheets[animPath] = Window.loadImg(animPath)
-
-    def loadAnim(self, animData: dict) -> Animation:
+    @classmethod
+    def loadAnim(cls, animData: dict) -> Animation:
         """ Loads the animation object """
-        return Animation(self.spritesheets[animData["path"]],
+        return Animation(animData["path"],
                          animData["frames"],
                          animData["delay"])
 
@@ -44,12 +36,12 @@ class Entity:
         """ Updates the animation """
         self.animation.update(window)
 
-    def render(self, window: Window, offset: Vect = Vect()) -> None:
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the animation at the entity's current position"""
-        self.animation.render(window, self.pos + offset)
+        self.animation.render(surface, self.pos + offset)
 
     def collision(self, window: Window,
-                  entities: list["Entity"], velocity: Vect) -> None:
+                  entities: list[Entity], velocity: Vect) -> None:
         """ Handle collision with other entities,
             and also updating position based on velocity """
 
@@ -63,14 +55,12 @@ class Entity:
         self.axisCollision("y", velocity, entities)
 
     def axisCollision(self, dir: str, velocity: Vect,
-                      entities: list["Entity"]) -> None:
+                      entities: list[Entity]) -> None:
         """ Check and adjust pos for any collisions in a single direction.
             dir parameter must be "x" or "y". """
 
         # Check collision with each entity
-        entity: Entity  # Set the type of the iterator
         for entity in entities:
-
             # Collided with an entity
             if self.collide(entity):
                 # Get entity position in the direction of collision
@@ -89,7 +79,7 @@ class Entity:
                 self.pos.set(dir, newPos)  # Set new position
                 velocity.set(dir, 0)  # Reset velocity in that dir
 
-    def collide(self, entity: "Entity") -> bool:
+    def collide(self, entity: Entity) -> bool:
         """ Collision detection between an entity and another """
         return self.getRect().colliderect(entity.getRect())
 

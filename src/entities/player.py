@@ -23,7 +23,7 @@ class Player(Entity):
         cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
 
     @classmethod
-    def capResources(cls):
+    def capResources(cls) -> None:
         """ If any resources are above their limit, set them to the limit """
         for resource in cls.resources.getPyDict().keys():
             if cls.resLimits[resource] < 0:

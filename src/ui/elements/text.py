@@ -1,22 +1,21 @@
 import pygame
 
 from src.ui.elements.baseUIElement import BaseUIElement
-from src.window import Window
+from src.utility.image import Image
 
 
 class Text(BaseUIElement):
     """ Handles Text in a UI """
 
     # Static variable that stores font objects based on their size
-    # Key: font size (int)
-    # Value: pygame.font.Font object
-    fonts: dict = {}
+    # Key: font size, value: pygame.font.Font object
+    fonts: dict[int, pygame.font.Font] = {}
 
     @classmethod
-    def loadStatic(cls, constants: dict):
+    def loadStatic(cls, constants: dict) -> None:
         cls.FONT_PATH: str = constants["game"]["font"]
 
-    def __init__(self, textData: dict):
+    def __init__(self, textData: dict) -> None:
         """ Loads text data and initializes """
         super().__init__(textData, __name__)
 
@@ -32,7 +31,7 @@ class Text(BaseUIElement):
 
     def getFontObj(self, size: int) -> pygame.font.Font:
         """ Loads font if it has not already been loaded and returns it """
-        scaledSize = size * Window.IMG_SCALE
+        scaledSize = size * Image.SCALE
 
         if scaledSize not in self.fonts:
             self.log.info(f"Loading font size {scaledSize}")
@@ -50,9 +49,9 @@ class Text(BaseUIElement):
         # Draw image with text
         image: pygame.Surface = font.render(self.text, False, self.color)
 
-        super().setImg(image)
+        super().setImg(Image(surf=image, scale=False))
 
     # Setters
-    def setText(self, newText: any) -> None:
-        self.text = str(newText)
+    def setText(self, newText: str) -> None:
+        self.text = newText
         self.createTextImg()

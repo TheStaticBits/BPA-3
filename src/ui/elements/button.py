@@ -3,6 +3,7 @@ import pygame
 from src.ui.elements.baseUIElement import BaseUIElement
 
 from src.utility.vector import Vect
+from src.utility.image import Image
 from src.ui.elements.text import Text
 from src.window import Window
 
@@ -18,9 +19,9 @@ class Button(BaseUIElement):
 
         # Load all button images
         for key, buttonPath in buttonData["images"].items():
-            self.buttons[key] = super().loadImg(buttonPath)
+            self.buttons[key] = Image(buttonPath)
 
-        super().setSize(Vect(self.buttons["inactive"].get_size()))
+        super().setSize(self.buttons["inactive"].getSize())
 
         self.text: Text = None
 
@@ -82,12 +83,12 @@ class Button(BaseUIElement):
         """ Centers the button's text """
         self.text.addToOffset(super().getSize() / 2)
 
-    def render(self, window) -> None:
+    def render(self, surface: Window | Image) -> None:
         """ Renders the button """
-        super().render(window, image=self.buttons[self.mode])
+        super().render(surface, image=self.buttons[self.mode])
 
         if self.text is not None:
-            self.text.render(window)
+            self.text.render(surface)
 
     # Getters
     def getActivated(self) -> bool: return self.activated

@@ -5,7 +5,7 @@ class AdvDict:
     """ Advanced Dictionary.
         Adds features such as +, -, *, /, etc. to dictionaries. """
 
-    def __init__(self, pyDict: dict):
+    def __init__(self, pyDict: dict) -> None:
         self.pyDict = pyDict
 
     def getPyDict(self) -> dict: return self.pyDict

@@ -16,9 +16,9 @@ class ResourcesUI(BaseUI):
     def update(self, window: Window) -> None:
         super().update(window)
 
-        self.updateResources(window)
+        self.updateResources()
 
-    def updateResources(self, window: Window) -> None:
+    def updateResources(self) -> None:
         """ Update all the resources
             with the current player resource values """
         for resource in Player.resources.getPyDict().keys():
