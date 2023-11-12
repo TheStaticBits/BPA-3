@@ -28,7 +28,7 @@ class BuildingShop(BaseUI):
         # Surface used to clip off the detail UIs
         # and hide them when they're not displayed over the shop
         clipSurf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
-        self.clipSurface: Image = Image(surf=clipSurf)
+        self.clipSurface: Image = Image(surf=clipSurf, scale=False)
 
     def loadBuildingUI(self, index: int, posType: str) -> None:
         """ Loads the UI, images, descriptions, etc. for the building """

@@ -212,8 +212,8 @@ class Window:
     def drawRect(self, pos: Vect, size: Vect,
                  color: tuple[int, int, int]) -> None:
         """ Draws a rectangle on the window """
-        pygame.draw.rect(self.window, color, pygame.Rect(pos.toTuple(),
-                                                         size.toTuple()))
+        rect = pygame.Rect(pos.toTuple(), size.toTuple())
+        pygame.draw.rect(self.window, color, rect)
 
     # Getters
     def getDeltaTime(self) -> float:
