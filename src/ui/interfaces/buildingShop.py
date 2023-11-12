@@ -6,17 +6,15 @@ from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
 from src.entities.buildings.baseBuilding import BaseBuilding
-from src.entities.entity import Entity
+from src.ui.interfaces.shopDetails import ShopDetails
 
 
 class BuildingShop(BaseUI):
-    """ Handles building shop UI """
+    """ Handles the building shop UI """
 
     def __init__(self) -> None:
+        """ Load data, initialize, and load the first building UI """
         super().__init__("buildings/shop", __name__)
-
-        # Image scaler for building images
-        self.buildingScale = super().getData()["buildingImgScale"]
 
         self.buildingShown: int = 0
         self.detailUIs: list[BaseUI] = []
@@ -35,28 +33,12 @@ class BuildingShop(BaseUI):
         if index < len(self.detailUIs):
             return  # UI already loaded
 
-        name: str
-        data: dict
-        name, data = list(BaseBuilding.BUILDINGS_DATA.items())[index]
-
-        self.log.info(f"Loading shop details for building {name}")
-
-        buildingUI: BaseUI = BaseUI("buildings/details", __name__)
-        buildingUI.getElement("buildingName").setText(name)
-        buildingUI.setPosType(posType)
-
-        # Get building image and set it
-        buildingImg: Image = Entity.loadAnim(data["anim"]).getFrame(0)
-        size: Vect = buildingImg.getSize() * self.buildingScale
-
-        # Scale image and set it to the building image element
-        buildingImg.transform(size)
-        buildingUI.getElement("buildingImg").setImg(buildingImg)
-
-        # Add to the list of UIs
+        # Load and append to list
+        buildingUI = ShopDetails(index, posType)
         self.detailUIs.append(buildingUI)
 
     def update(self, window: Window) -> None:
+        """ Updates the UI buttons """
         super().update(window)
 
         self.updateButtons()
