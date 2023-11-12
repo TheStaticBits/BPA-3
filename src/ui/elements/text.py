@@ -49,7 +49,9 @@ class Text(BaseUIElement):
         # Draw image with text
         image: pygame.Surface = font.render(self.text, False, self.color)
 
-        super().setImg(Image(surf=image, scale=False))
+        # Create, transform, and set surf with text
+        surf: Image = Image(surf=image, scale=False)
+        super().setImg(super().transform(surf))
 
     # Setters
     def setText(self, newText: str) -> None:

@@ -2,25 +2,25 @@
     "positions": {
         "visible": {
             "x": { "locked": "center", "margin": 0 },
-            "y": { "locked": "end",    "margin": 0 },
+            "y": { "locked": "end",    "margin": 5 },
             "hidden": false
         },
 
         "left": {
-            "x": { "locked": "start",  "margin": -100 },
-            "y": { "locked": "center", "margin": 0    },
+            "x": { "locked": "center", "margin": -260 },
+            "y": { "locked": "end",   "margin": 5    },
             "hidden": true
         },
 
         "right": {
-            "x": { "locked": "end",    "margin": 100 },
-            "y": { "locked": "center", "margin": 0   },
+            "x": { "locked": "center", "margin": 260 },
+            "y": { "locked": "end", "margin": 5    },
             "hidden": true
         }
     },
 
     "defaultPos": "visible",
-    "transitionSpeed": 0.5,
+    "transitionSpeed": 3,
     "transitionType": "ease",
 
     "size": "auto",
@@ -33,7 +33,7 @@
             },
 
             "buildingImg": {
-                "offset": [ 30, 30 ],
+                "offset": [ 5, 5 ],
                 "path": ""
             }
         },
@@ -41,7 +41,7 @@
         "text": {
             "buildingName": {
                 "text": "[Building Name]",
-                "offset": [ 60, 30 ],
+                "offset": [ 55, 7 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             }

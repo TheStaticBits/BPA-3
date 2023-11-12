@@ -19,9 +19,9 @@ class Button(BaseUIElement):
 
         # Load all button images
         for key, buttonPath in buttonData["images"].items():
-            self.buttons[key] = Image(buttonPath)
+            self.buttons[key] = super().transform(Image(buttonPath))
 
-        super().setSize(self.buttons["inactive"].getSize())
+        super().setImg(self.buttons["inactive"])
 
         self.text: Text = None
 
@@ -58,18 +58,18 @@ class Button(BaseUIElement):
             if window.getMouseReleased("left"):  # Mouse released button
                 if self.isMouseOver(window):
                     self.activated = True
-                    self.mode = "hover"
+                    self.setMode("hover")
                 else:
-                    self.mode = "inactive"
+                    self.setMode("inactive")
 
         elif self.isMouseOver(window):
-            self.mode = "hover"
-
             if window.getMouseJustPressed("left"):  # Just pressed button
-                self.mode = "pressed"
+                self.setMode("pressed")
+            else:
+                self.setMode("hover")
 
         else:
-            self.mode = "inactive"
+            self.setMode("inactive")
 
     def isMouseOver(self, window: Window) -> bool:
         """ Tests if mouse is hovering over the button """
@@ -85,10 +85,30 @@ class Button(BaseUIElement):
 
     def render(self, surface: Window | Image) -> None:
         """ Renders the button """
-        super().render(surface, image=self.buttons[self.mode])
+        if self.mode in self.buttons:
+            btnImg = self.buttons[self.mode]
+        else:
+            btnImg = self.buttons["inactive"]
+
+        super().render(surface, image=btnImg)
 
         if self.text is not None:
             self.text.render(surface)
 
     # Getters
     def getActivated(self) -> bool: return self.activated
+
+    def getModeImg(self) -> str:
+        """ Gets the mode image or defaults to the inactive img """
+        if self.mode in self.buttons:
+            return self.buttons[self.mode]
+
+        return self.buttons["inactive"]
+
+    # Setters
+    def setMode(self, mode: str) -> None:
+        if self.mode == mode:
+            return
+
+        super().setImg(self.getModeImg())
+        self.mode = mode

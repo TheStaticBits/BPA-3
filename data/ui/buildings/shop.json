@@ -13,7 +13,7 @@
         }
     },
 
-    "defaultPos": "hidden",
+    "defaultPos": "visible",
     "transitionSpeed": 3,
     "transitionType": "ease",
 
@@ -26,9 +26,11 @@
                 "path": "res/ui/shop/bg.png"
             }
         },
+        
         "text": {
 
         },
+
         "buttons": {
             "openShop": {
                 "offset": [ 250, -15 ],
@@ -45,6 +47,26 @@
                     "fontSize": 5,
                     "color": [ 0, 0, 0 ]
                 }
+            },
+
+            "left": {
+                "offset": [ 4, 9 ],
+                "layer": 1,
+
+                "images": {
+                    "inactive": "res/ui/shop/arrow.png"
+                }
+            },
+
+            "right": {
+                "offset": [ 264, 9 ],
+                "layer": 1,
+                
+                "images": {
+                    "inactive": "res/ui/shop/arrow.png"
+                },
+                
+                "flip": [ true, false ]
             }
         }
     }

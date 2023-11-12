@@ -5,7 +5,7 @@ from math import floor
 
 
 class Vect:
-    """ Stores two digits, allowing for operations """
+    """ Stores two digits/vars, allowing for operations """
 
     def __init__(self, *args) -> None:
         if len(args) == 1:

@@ -20,14 +20,21 @@ class BuildingShop(BaseUI):
 
         self.buildingShown: int = 0
         self.detailUIs: list[BaseUI] = []
+        self.totalBuildings: int = len(BaseBuilding.BUILDINGS_DATA)
+
+        # Load the first building shop UI
+        self.loadBuildingUI(self.buildingShown, "visible")
 
         # Surface used to clip off the detail UIs
         # and hide them when they're not displayed over the shop
         clipSurf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
         self.clipSurface: Image = Image(surf=clipSurf)
 
-    def loadBuildingUI(self, index: int) -> None:
+    def loadBuildingUI(self, index: int, posType: str) -> None:
         """ Loads the UI, images, descriptions, etc. for the building """
+        if index < len(self.detailUIs):
+            return  # UI already loaded
+
         name: str
         data: dict
         name, data = list(BaseBuilding.BUILDINGS_DATA.items())[index]
@@ -36,17 +43,6 @@ class BuildingShop(BaseUI):
 
         buildingUI: BaseUI = BaseUI("buildings/details", __name__)
         buildingUI.getElement("buildingName").setText(name)
-
-        # Set position of building UI
-        # to whether or not it is shown and where
-        posType: str
-        if self.buildingShown == index:
-            posType = "visible"
-        elif index < self.buildingShown:
-            posType = "right"
-        else:
-            posType = "left"
-
         buildingUI.setPosType(posType)
 
         # Get building image and set it
@@ -64,6 +60,7 @@ class BuildingShop(BaseUI):
         super().update(window)
 
         self.updateButtons()
+        self.checkLeftRight()
         self.updateDetailUIs(window)
 
     def updateButtons(self) -> None:
@@ -74,26 +71,58 @@ class BuildingShop(BaseUI):
             else:
                 super().startTransition("hidden")
 
+    def checkLeftRight(self) -> None:
+        """ Checks left & right buttons and starts UI transitions
+            if either are pressed"""
+        if super().getElement("left").getActivated():
+            if self.buildingShown == 0:
+                return  # Can't go left any further
+
+            # Start transitions for the current and next building
+            self.detailUIs[self.buildingShown].startTransition("right")
+            self.buildingShown -= 1
+            self.detailUIs[self.buildingShown].startTransition("visible")
+
+        # Check if the right button was pressed
+        elif super().getElement("right").getActivated():
+            if self.buildingShown >= self.totalBuildings - 1:
+                return  # Can't go right any further
+
+            # Start transitions for the current and next building
+            self.detailUIs[self.buildingShown].startTransition("left")
+            self.buildingShown += 1
+            self.loadBuildingUI(self.buildingShown, "right")
+            self.detailUIs[self.buildingShown].startTransition("visible")
+
     def updateDetailUIs(self, window: Window) -> None:
         """ Updates the detail UIs """
-        if self.buildingShown >= len(self.detailUIs):
-            self.loadBuildingUI(self.buildingShown)
+        # Calculate current transition offset by finding the distance from
+        # the default position of "visible"
+        defaultPos: Vect = super().getUIOffset(window.getSize(), "visible")
+        transitionOffset: Vect = super().getOffset() - defaultPos
 
+        # Update every building UI
         for ui in self.detailUIs:
-            ui.update(window)
+            ui.update(window, transitionOffset)
 
     def render(self, surface: Window | Image) -> None:
-        super().render(surface)
-
-        self.renderDetailUIs(surface)
+        """ Renders the UI to the given surface along with the
+            building shop detail UIs """
+        # Render the base UI
+        super().renderLayer(surface, 0)
+        self.renderDetailUIs(surface)  # Render shop detail UIs
+        # Render left/right buttons on top of that
+        super().renderLayer(surface, 1)
 
     def renderDetailUIs(self, surface: Window | Image) -> None:
         """ Renders detail UIs to a clipped surface
             and then renders that to the given surface """
         offset: Vect = super().getOffset()
-        self.clipSurface.getSurf().fill((0, 0, 0, 0))
+        self.clipSurface.getSurf().fill((0, 0, 0, 0))  # Clear surf
 
         for ui in self.detailUIs:
+            # Render at the negative offset to clip it
             ui.render(self.clipSurface, -offset)
 
+        # Render clipped surface at the offset to the screen
         surface.render(self.clipSurface, offset)

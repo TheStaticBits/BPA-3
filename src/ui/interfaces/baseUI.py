@@ -40,22 +40,26 @@ class BaseUI:
         self.log = logging.getLogger(loggerName)
 
         # Load the UI's JSON data
-        self.jsonData = self.loadJson(jsonFile)
+        self.data = self.loadJson(jsonFile)
+        self.name = jsonFile
 
         # Dict storing all UI element objects
         # Key: string ID provided in the JSON
         # Value: UI element object (inherited from BaseUIElement)
-        self.elements: dict[str, BaseUIElement] = self.loadUI(self.jsonData)
+        self.elements: dict[str, BaseUIElement] = self.loadUI(self.data)
 
         # Additional UI data
-        if self.jsonData["size"] == "auto":
+        if self.data["size"] == "auto":
             self.size: Vect = self.findSize()
         else:
-            self.size: Vect = Vect(self.jsonData["size"])
+            self.size: Vect = Vect(self.data["size"])
 
-        self.loadPosTypes(self.jsonData["positions"],
-                          self.jsonData["defaultPos"])
-        self.loadTransitionData(self.jsonData)
+        # Get layer number if provided in the data
+        self.layers: int = self.data["layers"] if "layers" in self.data else 1
+
+        self.loadPosTypes(self.data["positions"],
+                          self.data["defaultPos"])
+        self.loadTransitionData(self.data)
 
     def loadJson(self, jsonFile: str) -> dict:
         """ Loads the UI's JSON data """
@@ -141,9 +145,10 @@ class BaseUI:
             # The position type to transition to
             self.transitionTo: str = self.posType
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, offset: Vect = Vect()) -> None:
         """ Updates all elements """
         self.offset = self.getUIOffset(window.getSize(), self.posType)
+        self.offset += offset
 
         # Apply transitioning offset if applicable
         if self.transitioning:
@@ -197,7 +202,9 @@ class BaseUI:
         # If the transition offset has roughly reached the new offset,
         # set the transition offset to the new offset and stop transitioning
         if self.transitionDone(offsetDiff):
-            self.log.info(f"UI Transition to {self.transitionTo} complete")
+            self.log.info(
+                f'UI "{self.name}" Transition to {self.transitionTo} complete'
+            )
 
             self.transitioning = False
             self.transitionOffset = offsetDiff
@@ -232,7 +239,17 @@ class BaseUI:
         if self.hidden:
             return
 
+        # Render all elements in the order of layers
+        for layer in range(self.layers):
+            self.renderLayer(surface, layer, offset)
+
+    def renderLayer(self, surface: Window | Image,
+                    layer: int, offset: Vect = Vect()) -> None:
+        """ Renders all elements in the given layer """
         for element in self.elements.values():
+            if element.getLayer() != layer:
+                continue
+
             element.addOffset(offset)
             element.render(surface)
 
@@ -245,8 +262,9 @@ class BaseUI:
 
     def getPosType(self) -> str: return self.transitionTo
     def getSize(self) -> Vect: return self.size
-    def getData(self) -> dict: return self.jsonData
+    def getData(self) -> dict: return self.data
     def getOffset(self) -> Vect: return self.offset
+    def getTransitionOffset(self) -> Vect: return self.transitionOffset
 
     # Setters
     def setHidden(self, hidden: bool) -> None:
@@ -256,3 +274,4 @@ class BaseUI:
         """ Directly change pos type without activating a transition """
         self.posType = posType
         self.hidden = self.posData[posType]["hidden"]
+        self.transitionTo = posType

@@ -51,6 +51,15 @@ class Image:
         self.image = pygame.transform.scale(self.image, size.toTuple())
         self.size = size
 
+    def rotate(self, degrees: float) -> None:
+        """ Rotates the image by the given degrees """
+        if degrees != 0:
+            self.image = pygame.transform.rotate(self.image, degrees)
+
+    def flip(self, x: bool, y: bool) -> None:
+        """ Flips the image on the x and/or y axis """
+        self.image = pygame.transform.flip(self.image, x, y)
+
     # Getters
     def getSurf(self) -> pygame.Surface: return self.image
     def getSize(self) -> Vect: return self.size
