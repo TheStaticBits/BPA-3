@@ -36,7 +36,7 @@ class BaseUIElement:
             the renderPos can be used in child class update functions """
         self.renderPos = self.getOffset() + offset
 
-    def addOffset(self, offset: Vect) -> None:
+    def addRenderOffset(self, offset: Vect) -> None:
         """ Adds to the current frame and element's render pos """
         self.renderPos += offset
 

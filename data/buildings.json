@@ -1,6 +1,7 @@
 {
     "testStorage": {
         "type": "storage",
+        "description": "This is a test\nstorage building",
 
         "anim": {
             "path": "res/testBuilding.png",
@@ -20,6 +21,7 @@
 
     "testGenerator": {
         "type": "generator",
+        "description": "This is a test generator building",
 
         "anim": {
             "path": "res/testBuilding.png",
@@ -41,6 +43,7 @@
 
     "testSteamGenerator": {
         "type": "generator",
+        "description": "This is a test steam gen building",
 
         "anim": {
             "path": "res/testBuilding.png",

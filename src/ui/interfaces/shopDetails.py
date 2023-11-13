@@ -35,3 +35,7 @@ class ShopDetails(BaseUI):
         buildingImg.transform(size)
 
         super().getElement("buildingImg").setImg(buildingImg)
+
+        # Get description and set it
+        description: str = data["description"]
+        super().getElement("description").setText(description)

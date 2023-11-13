@@ -106,5 +106,8 @@ class BuildingShop(BaseUI):
             # Render at the negative offset to clip it
             ui.render(self.clipSurface, -offset)
 
+            # Don't clip (for testing):
+            # ui.render(surface)
+
         # Render clipped surface at the offset to the screen
         surface.render(self.clipSurface, offset)

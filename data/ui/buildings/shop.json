@@ -1,13 +1,13 @@
 {
     "positions": {
         "visible": {
-            "x": { "locked": "center", "margin": 0 },
-            "y": { "locked": "end",    "margin": 0 }
+            "x": { "locked": "end", "margin": 10 },
+            "y": { "locked": "end", "margin": 0  }
         },
 
         "hidden": {
-            "x": { "locked": "center", "margin": 0   },
-            "y": { "locked": "end",    "margin": -50 }
+            "x": { "locked": "end", "margin": 10  },
+            "y": { "locked": "end", "margin": -50 }
         }
     },
 
@@ -22,6 +22,12 @@
             "bg": {
                 "offset": [ 0, 0 ],
                 "path": "res/ui/shop/bg.png"
+            },
+
+            "outline": {
+                "offset": [ 0, 0 ],
+                "layer": 1,
+                "path": "res/ui/shop/outline.png"
             }
         },
         

@@ -1,28 +1,28 @@
 {
-    "buildingImgScale": 0.25,
+    "buildingImgScale": 0.17,
     
     "positions": {
         "visible": {
-            "x": { "locked": "center", "margin": 0 },
-            "y": { "locked": "end",    "margin": 5 },
+            "x": { "locked": "end", "margin": 30 },
+            "y": { "locked": "end", "margin": 5 },
             "hidden": false
         },
 
         "left": {
-            "x": { "locked": "center", "margin": -260 },
-            "y": { "locked": "end",   "margin": 5    },
+            "x": { "locked": "end", "margin": 290 },
+            "y": { "locked": "end", "margin": 5    },
             "hidden": true
         },
 
         "right": {
-            "x": { "locked": "center", "margin": 260 },
+            "x": { "locked": "end", "margin": -230 },
             "y": { "locked": "end", "margin": 5    },
             "hidden": true
         }
     },
 
     "defaultPos": "visible",
-    "transitionSpeed": 3,
+    "transitionSpeed": 5,
     "transitionType": "ease",
 
     "size": "auto",
@@ -43,14 +43,36 @@
         "text": {
             "buildingName": {
                 "text": "[Building Name]",
-                "offset": [ 55, 7 ],
+                "offset": [ 5, 30 ],
+                "fontSize": 5,
+                "color": [ 0, 0, 0 ]
+            },
+
+            "description": {
+                "text": "[Description]",
+                "offset": [ 40, 5 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             }
         },
 
         "buttons": {
+            "openShop": {
+                "offset": [ 205, 5 ],
 
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Buy",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            }
         }
     }
 }

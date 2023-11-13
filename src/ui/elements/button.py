@@ -83,6 +83,13 @@ class Button(BaseUIElement):
         """ Centers the button's text """
         self.text.addToOffset(super().getSize() / 2)
 
+    def addRenderOffset(self, offset: Vect) -> None:
+        """ Adds offset to text as well as calling the super().addOffset """
+        super().addRenderOffset(offset)
+
+        if self.text is not None:
+            self.text.addRenderOffset(offset)
+
     def render(self, surface: Window | Image) -> None:
         """ Renders the button """
         if self.mode in self.buttons:
@@ -92,6 +99,7 @@ class Button(BaseUIElement):
 
         super().render(surface, image=btnImg)
 
+        # Render text if it exists
         if self.text is not None:
             self.text.render(surface)
 

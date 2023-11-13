@@ -250,7 +250,7 @@ class BaseUI:
             if element.getLayer() != layer:
                 continue
 
-            element.addOffset(offset)
+            element.addRenderOffset(offset)
             element.render(surface)
 
     # Getters
