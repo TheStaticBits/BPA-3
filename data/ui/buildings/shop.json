@@ -14,6 +14,7 @@
     "defaultPos": "visible",
     "transitionSpeed": 3,
     "transitionType": "ease",
+    "layers": 2,
 
     "size": "auto",
 
