@@ -3,6 +3,7 @@ from src.entities.entity import Entity
 from src.utility.vector import Vect
 from src.tileset import Tileset
 from src.window import Window
+from src.entities.player import Player
 
 
 class BaseBuilding(Entity):
@@ -36,36 +37,67 @@ class BaseBuilding(Entity):
         # Test if any tiles are occupied
         return not tileset.testRangeOccupied(tilePos, buildingTileSize)
 
-    def __init__(self, type: str, tileset: Tileset, tilePos: Vect) -> None:
+    def __init__(self, type: str) -> None:
         """ Setup initial position, animation, and
             set tiles where the building is to occupied """
 
-        self.type = type
+        self.type: str = type
+        self.placing: bool = True
 
-        super().__init__(self.getData()["anim"], __name__,
-                         tilePos * Tileset.TILE_SIZE)
-
-        self.place(tileset, tilePos)
+        super().__init__(self.getData()["anim"], __name__, Tileset.TILE_SIZE)
 
     def onRemove(self) -> None:
         """ Overriden in subclasses.
             Called on building removal. """
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, camOffset: Vect,
+               tileset: Tileset, player: Player) -> None:
         """ Override in subclasses. """
-        super().update(window)
+        if self.placing:
+            self.followCursor(window, camOffset, tileset, player)
+            self.testPlace(window, tileset)
+        else:  # update animation:
+            super().update(window)
 
-    def place(self, tileset: Tileset, tilePos: Vect) -> None:
-        """ Places the building on the tileset,
-            setting occupied tiles to True """
-        buildingTileSize: Vect = Vect(self.getData()["size"])
+    def followCursor(self, window: Window, camOffset: Vect,
+                     tileset: Tileset, player: Player) -> None:
+        """ Moves to cursor and tests if the building can be placed """
+        # Get cursor position and convert to tile position
+        self.tilePos = window.getMousePos() + camOffset
+        # Offset by half the building size
+        self.tilePos -= super().getSize() / 2
 
-        # Sets the range of tiles that the building takes up to occupied
-        # so no other building can be placed there
-        tileset.setRangeOccupied(tilePos, buildingTileSize)
+        # Calculate tile position of the cursor
+        self.tilePos /= Tileset.TILE_SIZE
+        self.tilePos = self.tilePos.floor()
 
+        # Clamp to the tile map so it doesn't go over the edge
+        self.tilePos.clamp(Vect(0, 0), tileset.getTileSize() - Vect(1, 1))
+
+        # Set position to tilePos
+        super().setPos(self.tilePos * Tileset.TILE_SIZE)
+
+    def testPlace(self, window: Window, tileset: Tileset) -> None:
+        """ Tests if the building can be placed and places it """
+        # Test clicked
+        if not window.getMouseJustPressed("left"):
+            return
+
+        if self.testPlacement(self.type, self.tilePos, tileset):
+            self.placing = False
+
+            buildingTileSize: Vect = Vect(self.getData()["size"])
+
+            # Sets the range of tiles that the building takes up to occupied
+            # so no other building can be placed there
+            tileset.setRangeOccupied(self.tilePos, buildingTileSize)
+
+    # Getters
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
+
+    def isPlacing(self) -> bool:
+        return self.placing
 
     @classmethod
     def getDataFrom(cls, type: str) -> dict:

@@ -1,15 +1,13 @@
 from src.entities.buildings.baseBuilding import BaseBuilding
-from src.tileset import Tileset
 from src.entities.player import Player
-from src.utility.vector import Vect
 from src.utility.advDict import AdvDict
 
 
 class Storage(BaseBuilding):
     """ Handles storage buildings """
 
-    def __init__(self, type: str, tileset: Tileset, tilePos: Vect) -> None:
-        super().__init__(type, tileset, tilePos)
+    def __init__(self, type: str) -> None:
+        super().__init__(type)
 
         data: dict = self.getData()
 

@@ -1,6 +1,7 @@
 {
     "testStorage": {
         "type": "storage",
+        "name": "Test Storage",
         "description": "This is a test\nstorage building",
 
         "anim": {
@@ -21,6 +22,7 @@
 
     "testGenerator": {
         "type": "generator",
+        "name": "Test Generator",
         "description": "This is a test generator building",
 
         "anim": {
@@ -43,6 +45,7 @@
 
     "testSteamGenerator": {
         "type": "generator",
+        "name": "Test Steam Generator",
         "description": "This is a test steam gen building",
 
         "anim": {

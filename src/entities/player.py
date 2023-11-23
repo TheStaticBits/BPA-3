@@ -2,6 +2,7 @@ from src.entities.entity import Entity
 from src.window import Window
 from src.utility.vector import Vect
 from src.utility.advDict import AdvDict
+from src.utility.image import Image
 
 
 class Player(Entity):
@@ -13,9 +14,11 @@ class Player(Entity):
         """ Load static variables from constants dict """
         cls.ANIM: dict = constants["player"]["anim"]
 
-        cls.MAX_SPEED: float = constants["player"]["maxSpeed"]
-        cls.ACCELERATION: float = constants["player"]["acceleration"]
-        cls.DECELERATION: float = constants["player"]["deceleration"]
+        cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * Image.SCALE
+        cls.ACCELERATION: float = constants["player"]["accel"] * Image.SCALE
+        cls.DECELERATION: float = constants["player"]["decel"] * Image.SCALE
+
+        cls.BUilD_REACH: int = constants["player"]["buildReachTiles"]
 
         # Player resources
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
@@ -40,14 +43,18 @@ class Player(Entity):
 
         self.velocity = Vect(0, 0)
 
-    def update(self, window: Window, entities: list[Entity] = None) -> None:
+    def update(self, window: Window,
+               buildings: list[Entity] = None) -> None:
         """ Update player animation, movement, etc. """
         super().update(window)
 
         self.movement(window)
 
+        # Remove buildings that are being placed:
+        buildings = [b for b in buildings if not b.isPlacing()]
+
         # Move player based on velocity while checking collisions
-        super().collision(window, entities, self.velocity)
+        super().collision(window, buildings, self.velocity)
 
     def movement(self, window: Window) -> None:
         """ Handle player movement based on inputs """

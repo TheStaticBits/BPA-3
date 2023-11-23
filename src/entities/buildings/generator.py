@@ -9,8 +9,8 @@ from src.utility.advDict import AdvDict
 class Generator(BaseBuilding):
     """ Handles generators that generate resources """
 
-    def __init__(self, type: str, tileset: Tileset, tilePos: Vect) -> None:
-        super().__init__(type, tileset, tilePos)
+    def __init__(self, type: str) -> None:
+        super().__init__(type)
 
         data: dict = self.getData()
 
@@ -20,9 +20,10 @@ class Generator(BaseBuilding):
         if self.oneTimeGenerate:
             Player.resources += self.generate
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, camOffset: Vect,
+               tileset: Tileset, player: Player) -> None:
         """ Updates generator and generates resources """
-        super().update(window)
+        super().update(window, camOffset, tileset, player)
 
         if self.oneTimeGenerate:
             return

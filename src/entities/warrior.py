@@ -4,8 +4,8 @@ from src.utility.vector import Vect
 import src.utility.utility as util
 
 
-class Soldier(Entity):
-    """ Handles soldier functionality,
+class Warrior(Entity):
+    """ Handles warrior functionality,
         including movement and pathfinding """
 
     @classmethod

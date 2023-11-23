@@ -1,8 +1,8 @@
 {
     "testWarriorLigma": {
         "anim": {
-            "path": "res/exampleAnim.png",
-            "frames": 3,
+            "path": "res/warriors/ligmaWarrior.png",
+            "frames": 1,
             "delay": 1
         }
     }

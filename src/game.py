@@ -6,7 +6,7 @@ from src.window import Window
 from src.tileset import Tileset
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.player import Player
-from src.entities.soldier import Soldier
+from src.entities.warrior import Warrior
 from src.scenes.baseScene import BaseScene
 from src.scenes.buildingsScene import BuildingsScene
 from src.ui.elements.text import Text
@@ -39,7 +39,7 @@ class Game:
         Tileset.loadStatic(self.constants)
         BaseBuilding.loadStatic(self.constants)
         Player.loadStatic(self.constants)
-        Soldier.loadStatic(self.constants)
+        Warrior.loadStatic(self.constants)
         BaseScene.loadStatic(self.constants)
         BaseUI.loadStatic(self.constants)
         Text.loadStatic(self.constants)

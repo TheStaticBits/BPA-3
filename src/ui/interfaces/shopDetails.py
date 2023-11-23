@@ -19,12 +19,12 @@ class ShopDetails(BaseUI):
     def load(self, index: int) -> None:
         """ Loads data for the building, and sets the UI elements
             to the data """
-        name: str
+        self.type: str
         data: dict
-        name, data = list(BaseBuilding.BUILDINGS_DATA.items())[index]
+        self.type, data = list(BaseBuilding.BUILDINGS_DATA.items())[index]
 
-        self.log.info(f"Loading shop details for building {name}")
-        super().getElement("buildingName").setText(name)
+        self.log.info(f"Loading shop details for building {self.type}")
+        super().getElement("buildingName").setText(data["name"])
 
         # Get building image and set it
         buildingImg: Image = Entity.loadAnim(data["anim"]).getFrame(0)
@@ -39,3 +39,12 @@ class ShopDetails(BaseUI):
         # Get description and set it
         description: str = data["description"]
         super().getElement("description").setText(description)
+
+    def pressedBuy(self) -> bool:
+        """ Returns True if the buy button was pressed """
+        return super().getElement("buy").getActivated()
+
+    # Getters
+    def getType(self) -> str:
+        """ Returns the type of building """
+        return self.type

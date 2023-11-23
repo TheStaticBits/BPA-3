@@ -57,7 +57,7 @@
         },
 
         "buttons": {
-            "openShop": {
+            "buy": {
                 "offset": [ 205, 5 ],
 
                 "images": {

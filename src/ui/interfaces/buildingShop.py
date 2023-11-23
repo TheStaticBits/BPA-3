@@ -17,7 +17,7 @@ class BuildingShop(BaseUI):
         super().__init__("buildings/shop", __name__)
 
         self.buildingShown: int = 0
-        self.detailUIs: list[BaseUI] = []
+        self.detailUIs: list[ShopDetails] = []
         self.totalBuildings: int = len(BaseBuilding.BUILDINGS_DATA)
 
         # Load the first building shop UI
@@ -111,3 +111,10 @@ class BuildingShop(BaseUI):
 
         # Render clipped surface at the offset to the screen
         surface.render(self.clipSurface, offset)
+
+    def pressedBuy(self) -> str:
+        """ Returns the type of building, or None if no building was bought """
+        if self.detailUIs[self.buildingShown].pressedBuy():
+            return self.detailUIs[self.buildingShown].getType()
+
+        return None
