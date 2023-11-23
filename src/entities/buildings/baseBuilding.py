@@ -1,9 +1,11 @@
+import pygame
 import src.utility.utility as util
 from src.entities.entity import Entity
 from src.utility.vector import Vect
 from src.tileset import Tileset
 from src.window import Window
 from src.entities.player import Player
+from src.utility.image import Image
 
 
 class BaseBuilding(Entity):
@@ -43,6 +45,7 @@ class BaseBuilding(Entity):
 
         self.type: str = type
         self.placing: bool = True
+        self.placable: bool = False
 
         super().__init__(self.getData()["anim"], __name__, Tileset.TILE_SIZE)
 
@@ -83,11 +86,9 @@ class BaseBuilding(Entity):
 
     def testPlace(self, window: Window, tileset: Tileset) -> None:
         """ Tests if the building can be placed and places it """
-        # Test clicked
-        if not window.getMouseJustPressed("left"):
-            return
+        self.placable = self.testPlacement(self.type, self.tilePos, tileset)
 
-        if self.testPlacement(self.type, self.tilePos, tileset):
+        if self.placable and window.getMouseJustPressed("left"):
             self.placing = False
 
             buildingTileSize: Vect = Vect(self.getData()["size"])
@@ -97,6 +98,23 @@ class BaseBuilding(Entity):
             tileset.setRangeOccupied(self.tilePos, buildingTileSize)
 
             self.onPlace()
+
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
+        """ Render with tints if placing """
+        if self.placing:
+            surf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
+            img = Image(surf=surf, scale=False)
+            super().render(img, -super().getPos())  # Render at top left
+            img.setAlpha(150)
+
+            # Tint red if not placeable
+            if not self.placable:
+                img.fill(255, 0, 0, 150)
+
+            surface.render(img, super().getPos() + offset)
+
+        else:
+            super().render(surface, offset)
 
     # Getters
     def getData(self) -> dict:

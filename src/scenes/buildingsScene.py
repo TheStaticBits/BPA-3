@@ -24,6 +24,8 @@ class BuildingsScene(BaseScene):
         self.buildings: list[BaseBuilding] = []
         self.buildingsSceneUI: BuildingShop = BuildingShop()
 
+        self.placingBuilding: bool = False
+
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
@@ -40,7 +42,10 @@ class BuildingsScene(BaseScene):
         # Player collision with buildings
         super().getPlayer().update(window, self.buildings)
 
-        self.testBuyBuilding()
+        if not self.placingBuilding:
+            self.testBuyBuilding()
+        else:
+            self.placingBuilding = self.isPlacingBuilding()
 
     def testBuyBuilding(self) -> None:
         """ Tests if the player has begun placing a building """
@@ -48,6 +53,7 @@ class BuildingsScene(BaseScene):
         if type:
             self.log.info(f"Started placing building {type}")
             self.placeBuilding(type)
+            self.placingBuilding = True
 
     def placeBuilding(self, buildingType: str) -> None:
         """ Appends building to the list """
@@ -57,6 +63,14 @@ class BuildingsScene(BaseScene):
         # Create new building object and add to the list
         newBuilding: objType = objType(buildingType)
         self.buildings.append(newBuilding)
+
+    def isPlacingBuilding(self) -> bool:
+        """ Test if the user is placing a building """
+        for building in self.buildings:
+            if building.isPlacing():
+                return True
+
+        return False
 
     def render(self, surface: Window | Image) -> None:
         """ Renders buildings """

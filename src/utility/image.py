@@ -46,6 +46,14 @@ class Image:
         """ Renders another image to this image at a given pos """
         self.image.blit(other.image, pos.toTuple(), area=area)
 
+    def fill(self, *color) -> None:
+        """ Fills the image with a given color """
+        self.image.fill(color)
+
+    def setAlpha(self, alpha: int) -> None:
+        """ Sets the alpha of the image """
+        self.image.set_alpha(alpha)
+
     def transform(self, size: Vect) -> None:
         """ Transforms the image to the given size """
         self.image = pygame.transform.scale(self.image, size.toTuple())
