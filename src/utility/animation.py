@@ -58,4 +58,4 @@ class Animation:
                                         self.frameSize.x, self.frameSize.y)
 
         frame: pygame.Surface = self.spritesheet.getSurf().subsurface(rect)
-        return Image(surf=frame)
+        return Image(surf=frame, scale=False)
