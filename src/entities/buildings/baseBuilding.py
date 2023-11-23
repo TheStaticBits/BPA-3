@@ -50,6 +50,10 @@ class BaseBuilding(Entity):
         """ Overriden in subclasses.
             Called on building removal. """
 
+    def onPlace(self) -> None:
+        """ Overriden in subclasses.
+            Called on building placement. """
+
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
         """ Override in subclasses. """
@@ -91,6 +95,8 @@ class BaseBuilding(Entity):
             # Sets the range of tiles that the building takes up to occupied
             # so no other building can be placed there
             tileset.setRangeOccupied(self.tilePos, buildingTileSize)
+
+            self.onPlace()
 
     # Getters
     def getData(self) -> dict:

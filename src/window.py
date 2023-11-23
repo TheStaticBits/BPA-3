@@ -239,7 +239,14 @@ class Window:
         return self.mouseButtons[button] == InputState.PRESSED
 
     def getMouseJustPressed(self, button: str) -> bool:
-        return self.mouseButtons[button] == InputState.JUST_PRESSED
+        """ Returns whether or not the mouse button was just pressed """
+        # Only allows it to be detected once
+        # This makes it so you can't click "through" a UI,
+        # both a button on the UI and a thing behind it, for example.
+        if self.mouseButtons[button] == InputState.JUST_PRESSED:
+            self.mouseButtons[button] = InputState.PRESSED
+            return True
+        return False
 
     def getMouseReleased(self, button: str) -> bool:
         return self.mouseButtons[button] == InputState.RELEASED

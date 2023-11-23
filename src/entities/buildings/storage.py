@@ -5,10 +5,8 @@ from src.utility.advDict import AdvDict
 
 class Storage(BaseBuilding):
     """ Handles storage buildings """
-
-    def __init__(self, type: str) -> None:
-        super().__init__(type)
-
+    def onPlace(self) -> None:
+        """ Add storage amount to the player's resource limit """
         data: dict = self.getData()
 
         # The amount that the storage can store

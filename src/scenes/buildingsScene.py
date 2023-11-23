@@ -30,6 +30,8 @@ class BuildingsScene(BaseScene):
         super().updateUI(window)
         super().updateTileset(window)
 
+        self.buildingsSceneUI.update(window)
+
         # Update buildings
         for building in self.buildings:
             building.update(window, super().getCamOffset(),
@@ -37,17 +39,6 @@ class BuildingsScene(BaseScene):
 
         # Player collision with buildings
         super().getPlayer().update(window, self.buildings)
-
-        # if window.getJustPressed("1"):
-        #     self.placeBuilding("testStorage")
-
-        # if window.getJustPressed("2"):
-        #     self.placeBuilding("testGenerator")
-
-        # if window.getJustPressed("3"):
-        #     self.placeBuilding("testSteamGenerator")
-
-        self.buildingsSceneUI.update(window)
 
         self.testBuyBuilding()
 

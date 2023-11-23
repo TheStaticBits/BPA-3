@@ -17,6 +17,7 @@ class Generator(BaseBuilding):
         self.generate: AdvDict = AdvDict(data["generateAmount"])
         self.oneTimeGenerate: bool = data["oneTimeGenerate"]
 
+    def onPlace(self) -> None:
         if self.oneTimeGenerate:
             Player.resources += self.generate
 
@@ -25,7 +26,7 @@ class Generator(BaseBuilding):
         """ Updates generator and generates resources """
         super().update(window, camOffset, tileset, player)
 
-        if self.oneTimeGenerate:
+        if self.oneTimeGenerate or super().isPlacing():
             return
 
         # Generate resources per frame
