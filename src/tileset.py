@@ -27,8 +27,6 @@ class Tileset:
         cls.MAPS_FOLDER: str = constants["tileset"]["mapsFolder"]
         # File inside each map folder for map data (JSON)
         cls.JSON_FILE: str = constants["tileset"]["jsonFile"]
-        # File for entities data (txt)
-        cls.ENTITIES_FILE: str = constants["tileset"]["entitiesFile"]
         # File for map data (txt)
         cls.MAP_FILE: str = constants["tileset"]["mapFile"]
 
@@ -52,9 +50,6 @@ class Tileset:
         self.loadMapData(os.path.join(self.MAPS_FOLDER, mapFolderName,
                                       self.JSON_FILE))
 
-        self.loadEntities(os.path.join(self.MAPS_FOLDER, mapFolderName,
-                                       self.ENTITIES_FILE))
-
         self.generateMapImg(os.path.join(self.MAPS_FOLDER, mapFolderName,
                                          self.MAP_FILE))
 
@@ -63,10 +58,6 @@ class Tileset:
 
         mapData: dict = util.loadJSON(dataPath)
         self.PLAYER_START = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
-
-    def loadEntities(self, entitiesPath: str) -> None:
-        """ Loads any minable entities TO BE IMPLEMENTED (or removed) """
-        pass
 
     def generateMapImg(self, mapPath: str) -> None:
         """ Generates the tiles based on the chars in the map data """

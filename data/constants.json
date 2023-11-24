@@ -65,7 +65,6 @@
         "mapsFolder": "data/maps",
 
         "jsonFile": "data.json",
-        "entitiesFile": "entities.txt",
         "mapFile": "map.txt"
     },
 

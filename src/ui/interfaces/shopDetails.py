@@ -26,13 +26,13 @@ class ShopDetails(BaseUI):
         self.log.info(f"Loading shop details for building {self.type}")
         super().getElement("buildingName").setText(data["name"])
 
-        # Get building image and set it
+        # Get building anim and use the first frame of its animation
         buildingImg: Image = Entity.loadAnim(data["anim"]).getFrame(0)
 
         # Get scale, multiply by size, and transform it
         scale = super().getData()["buildingImgScale"]
-        size: Vect = buildingImg.getSize() * scale
-        buildingImg.transform(size)
+        newSize: Vect = buildingImg.getSize() * scale
+        buildingImg.transform(newSize)
 
         super().getElement("buildingImg").setImg(buildingImg)
 
