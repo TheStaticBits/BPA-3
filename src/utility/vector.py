@@ -9,10 +9,10 @@ class Vect:
 
     def __init__(self, *args) -> None:
         if len(args) == 1:
-            if isinstance(args[0], Vect):
+            if type(args[0]) is Vect:
                 self.x = args[0].x
                 self.y = args[0].y
-            elif isinstance(args[0], tuple) or isinstance(args[0], list):
+            elif type(args[0]) is tuple or type(args[0]) is list:
                 self.x = args[0][0]
                 self.y = args[0][1]
             else:  # Single integer
@@ -114,19 +114,19 @@ class Vect:
 
     def __add__(self, other: Vect | int | float) -> Vect:
         """ + by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return Vect(self.x + other.x, self.y + other.y)
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             return Vect(self.x + other, self.y + other)
         else:
             raise TypeError(f"Cannot add Vect and {type(other)}")
 
     def __iadd__(self, other: Vect | int | float) -> Vect:
         """ += by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             self.x += other.x
             self.y += other.y
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             self.x += other
             self.y += other
         else:
@@ -135,19 +135,19 @@ class Vect:
 
     def __sub__(self, other: Vect | int | float) -> Vect:
         """ - by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return Vect(self.x - other.x, self.y - other.y)
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             return Vect(self.x - other, self.y - other)
         else:
             raise TypeError(f"Cannot subtract Vect and {type(other)}")
 
     def __isub__(self, other: Vect | int | float) -> Vect:
         """ -= by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             self.x -= other.x
             self.y -= other.y
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             self.x -= other
             self.y -= other
         else:
@@ -156,19 +156,19 @@ class Vect:
 
     def __mul__(self, other: Vect | int | float) -> Vect:
         """ * by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return Vect(self.x * other.x, self.y * other.y)
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             return Vect(self.x * other, self.y * other)
         else:
             raise TypeError(f"Cannot multiply Vect and {type(other)}")
 
     def __imul__(self, other: Vect | int | float) -> Vect:
         """ *= by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             self.x *= other.x
             self.y *= other.y
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             self.x *= other
             self.y *= other
         else:
@@ -177,19 +177,19 @@ class Vect:
 
     def __truediv__(self, other: Vect | int | float) -> Vect:
         """ / by a vector or a number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return Vect(self.x / other.x, self.y / other.y)
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             return Vect(self.x / other, self.y / other)
         else:
             raise TypeError(f"Cannot divide Vect and {type(other)}")
 
     def __itruediv__(self, other: Vect | int | float) -> Vect:
         """ /= by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             self.x /= other.x
             self.y /= other.y
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             self.x /= other
             self.y /= other
         else:
@@ -198,19 +198,19 @@ class Vect:
 
     def __floordiv__(self, other: Vect | int | float) -> Vect:
         """ // by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return Vect(self.x // other.x, self.y // other.y)
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             return Vect(self.x // other, self.y // other)
         else:
             raise TypeError(f"Cannot floor divide Vect and {type(other)}")
 
     def __ifloordiv__(self, other: Vect | int | float) -> Vect:
         """ //= by a Vect or number """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             self.x //= other.x
             self.y //= other.y
-        elif isinstance(other, int) or isinstance(other, float):
+        elif type(other) is int or type(other) is float:
             self.x //= other
             self.y //= other
         else:
@@ -219,42 +219,42 @@ class Vect:
 
     def __eq__(self, other: Vect) -> bool:
         """ == overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x == other.x and self.y == other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
 
     def __ne__(self, other: Vect) -> bool:
         """ != overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x != other.x or self.y != other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
 
     def __lt__(self, other: Vect) -> bool:
         """ < overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x < other.x and self.y < other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
 
     def __le__(self, other: Vect) -> bool:
         """ <= overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x <= other.x and self.y <= other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
 
     def __gt__(self, other: Vect) -> bool:
         """ > overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x > other.x and self.y > other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")
 
     def __ge__(self, other: Vect) -> bool:
         """ >= overloading """
-        if isinstance(other, Vect):
+        if type(other) is Vect:
             return self.x >= other.x and self.y >= other.y
         else:
             raise TypeError(f"Cannot compare Vect and {type(other)}")

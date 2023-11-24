@@ -1,0 +1,58 @@
+{
+    "positions": {
+        "default": {
+            "x": { "locked": "end", "margin": 3 },
+            "y": { "locked": "start", "margin": 3 }
+        }
+    },
+
+    "defaultPos": "default",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+
+        },
+
+        "text": {
+
+        },
+
+        "buttons": {
+            "scene": {
+                "offset": [ 0, 0 ],
+
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Dungeon",
+                    "offset": [ 0.66, 0.33 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            },
+
+            "pause": {
+                "offset": [ 34, 0 ],
+
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Pause",
+                    "offset": [ 0.66, 0.33 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            }
+        }
+    }
+}

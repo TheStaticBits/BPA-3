@@ -6,6 +6,7 @@ from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
 from src.ui.interfaces.resourcesUI import ResourcesUI
+from src.ui.interfaces.optionsUI import OptionsUI
 
 
 class BaseScene:
@@ -30,6 +31,7 @@ class BaseScene:
 
         # Handling resource numbers and icons in the top left
         self.resourcesUI = ResourcesUI()
+        self.optionsUI = OptionsUI()
 
     def update(self, window: Window) -> None:
         """ Update scene objects """
@@ -50,6 +52,7 @@ class BaseScene:
     def updateUI(self, window: Window) -> None:
         """ Update any universal scene UIs """
         self.resourcesUI.update(window)
+        self.optionsUI.update(window)
 
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
@@ -82,6 +85,7 @@ class BaseScene:
     def renderUI(self, surface: Window | Image) -> None:
         """ Render any universal scene UIs """
         self.resourcesUI.render(surface)
+        self.optionsUI.render(surface)
 
     # Getters
     def getCamOffset(self) -> Vect: return self.cameraOffset

@@ -37,7 +37,8 @@ class Button(BaseUIElement):
         # Can be "inactive", "hover", or "pressed"
         self.mode: str = "inactive"
 
-        self.activated: bool = False
+        self.activated: bool = False  # True if button was just clicked
+        self.enabled: bool = True  # Gray out the button if False
 
     def update(self, window: Window, offset: Vect) -> None:
         """ Updates the button's mode based on mouse position """
