@@ -40,7 +40,8 @@ class BuildingsScene(BaseScene):
                             super().getTileset(), super().getPlayer())
 
         # Player collision with buildings
-        super().getPlayer().update(window, self.buildings)
+        super().getPlayer().update(window, super().getTileset(),
+                                   buildings=self.buildings)
 
         if not self.placingBuilding:
             self.testBuyBuilding()

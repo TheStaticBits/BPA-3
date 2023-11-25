@@ -83,6 +83,22 @@ class Entity:
         """ Collision detection between an entity and another """
         return self.getRect().colliderect(entity.getRect())
 
+    def lockToRect(self, topLeft: Vect, bottomRight: Vect,
+                   velocity: Vect) -> None:
+        """ Locks the entity to a rect """
+        # Clamp position to inside the rect
+        bottomRight -= self.getSize()
+        self.pos.clamp(topLeft, bottomRight)
+
+        # Reset velocity if the entity is at the edge of the rect
+        if self.pos.x == topLeft.x or self.pos.x == bottomRight.x:
+            velocity.x = 0
+
+        if self.pos.y == topLeft.y or self.pos.y == bottomRight.y:
+            velocity.y = 0
+
+        print(velocity)
+
     # Getters
     def getAnim(self) -> Animation: return self.animation
     def getSize(self) -> Vect: return self.animation.getSize()

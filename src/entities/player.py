@@ -3,6 +3,7 @@ from src.window import Window
 from src.utility.vector import Vect
 from src.utility.advDict import AdvDict
 from src.utility.image import Image
+from src.tileset import Tileset
 
 
 class Player(Entity):
@@ -43,7 +44,7 @@ class Player(Entity):
 
         self.velocity = Vect(0, 0)
 
-    def update(self, window: Window,
+    def update(self, window: Window, tileset: Tileset,
                buildings: list[Entity] = None) -> None:
         """ Update player animation, movement, etc. """
         super().update(window)
@@ -55,6 +56,9 @@ class Player(Entity):
 
         # Move player based on velocity while checking collisions
         super().collision(window, buildings, self.velocity)
+
+        # Prevent player from walking out of the map boundaries
+        super().lockToRect(Vect(0, 0), tileset.getSize(), self.velocity)
 
     def movement(self, window: Window) -> None:
         """ Handle player movement based on inputs """

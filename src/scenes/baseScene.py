@@ -47,7 +47,7 @@ class BaseScene:
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
-        self.player.update(window)
+        self.player.update(window, self.tileset)
 
     def updateUI(self, window: Window) -> None:
         """ Update any universal scene UIs """
