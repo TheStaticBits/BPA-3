@@ -40,10 +40,10 @@ class SceneManager:
     def update(self, window: Window):
         """ Update the current scene """
 
-        # Iterate through scenes and update them
-        for scene in self.scenes.values():
-            scene.update(window)
+        # Update the current scene
+        self.scenes[self.state].update(window)
 
+        # Update UIs
         self.resourcesUI.update(window)
         self.optionsUI.update(window)
 
@@ -52,14 +52,9 @@ class SceneManager:
     def testSwitchScene(self) -> None:
         """ Tests if the scene should be switched """
         if self.optionsUI.switchScene():
-            # Update switch scene button's text
+            # Update switch scene button's text and switch it
             self.optionsUI.updateSceneText(self.state.value)
-
-            # Switch the scene
-            if self.state == SceneState.BUILDING:
-                self.state = SceneState.DUNGEON
-            else:
-                self.state = SceneState.BUILDING
+            self.state = self.getOppositeScene()
 
     def render(self, surface: Window | Image):
         """ Render the current scene """
@@ -67,3 +62,11 @@ class SceneManager:
 
         self.resourcesUI.render(surface)
         self.optionsUI.render(surface)
+
+    # Getters
+    def getOppositeScene(self) -> SceneState:
+        """ Returns the opposite scene """
+        if self.state == SceneState.BUILDING:
+            return SceneState.DUNGEON
+
+        return SceneState.BUILDING
