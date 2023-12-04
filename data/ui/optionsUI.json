@@ -20,7 +20,7 @@
         },
 
         "buttons": {
-            "scene": {
+            "switchScene": {
                 "offset": [ 0, 0 ],
 
                 "images": {
@@ -37,7 +37,7 @@
                 }
             },
 
-            "pause": {
+            "pauseButton": {
                 "offset": [ 34, 0 ],
 
                 "images": {

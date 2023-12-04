@@ -8,7 +8,7 @@ from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.player import Player
 from src.entities.warrior import Warrior
 from src.scenes.baseScene import BaseScene
-from src.scenes.buildingsScene import BuildingsScene
+from src.scenes.sceneManager import SceneManager
 from src.ui.elements.text import Text
 from src.ui.interfaces.baseUI import BaseUI
 
@@ -29,8 +29,8 @@ class Game:
         # Window
         self.window: Window = Window()
 
-        # Test scene
-        self.buildingsScene: BuildingsScene = BuildingsScene("testmap")
+        # Scene manager
+        self.sceneManager: SceneManager = SceneManager()
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
@@ -49,9 +49,9 @@ class Game:
             self.window.handleInputs()
 
             # Update functions
-            self.buildingsScene.update(self.window)
+            self.sceneManager.update(self.window)
 
             # Render functions
-            self.buildingsScene.render(self.window)
+            self.sceneManager.render(self.window)
 
             self.window.update()

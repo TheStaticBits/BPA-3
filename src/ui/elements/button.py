@@ -106,6 +106,7 @@ class Button(BaseUIElement):
 
     # Getters
     def getActivated(self) -> bool: return self.activated
+    def getText(self) -> Text: return self.text
 
     def getModeImg(self) -> str:
         """ Gets the mode image or defaults to the inactive img """

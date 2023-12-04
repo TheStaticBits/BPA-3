@@ -45,7 +45,7 @@ class Player(Entity):
         self.velocity = Vect(0, 0)
 
     def update(self, window: Window, tileset: Tileset,
-               buildings: list[Entity] = None) -> None:
+               buildings: list[Entity] = []) -> None:
         """ Update player animation, movement, etc. """
         super().update(window)
 

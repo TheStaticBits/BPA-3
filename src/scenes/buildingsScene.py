@@ -29,7 +29,6 @@ class BuildingsScene(BaseScene):
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
-        super().updateUI(window)
         super().updateTileset(window)
 
         self.buildingsSceneUI.update(window)
@@ -84,5 +83,3 @@ class BuildingsScene(BaseScene):
         super().renderPlayer(surface)
 
         self.buildingsSceneUI.render(surface)
-
-        super().renderUI(surface)

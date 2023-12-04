@@ -85,7 +85,7 @@ class Entity:
 
     def lockToRect(self, topLeft: Vect, bottomRight: Vect,
                    velocity: Vect) -> None:
-        """ Locks the entity to a rect """
+        """ Locks the entity to a rect (used for map boundaries) """
         # Clamp position to inside the rect
         bottomRight -= self.getSize()
         self.pos.clamp(topLeft, bottomRight)
@@ -96,8 +96,6 @@ class Entity:
 
         if self.pos.y == topLeft.y or self.pos.y == bottomRight.y:
             velocity.y = 0
-
-        print(velocity)
 
     # Getters
     def getAnim(self) -> Animation: return self.animation
