@@ -62,7 +62,8 @@ class BaseBuilding(Entity):
 
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
-        """ Override in subclasses. """
+        """ Updates the building by following the cursor and testing placement
+            and updating animation if not placing"""
         if self.placing:
             self.followCursor(window, camOffset, tileset, player)
             self.testPlace(window, tileset)

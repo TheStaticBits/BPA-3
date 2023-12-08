@@ -25,6 +25,7 @@ class SceneManager:
 
         # Current scene being shown & updated
         self.state = SceneState.BUILDING
+        self.otherState = SceneState.DUNGEON
 
         # Dictionary of all the scenes
         self.scenes: dict[SceneState, BaseScene] = {
@@ -39,22 +40,27 @@ class SceneManager:
 
     def update(self, window: Window):
         """ Update the current scene """
+        self.optionsUI.update(window)  # Update options buttons
 
         # Update the current scene
         self.scenes[self.state].update(window)
 
-        # Update UIs
-        self.resourcesUI.update(window)
-        self.optionsUI.update(window)
+        # Update the hidden scene without any inputs
+        window.setHideInputs(True)
+        self.scenes[self.otherState].update(window)
+        window.setHideInputs(False)
 
+        self.resourcesUI.update(window)  # Update resource numbers shown
         self.testSwitchScene()
 
     def testSwitchScene(self) -> None:
         """ Tests if the scene should be switched """
-        if self.optionsUI.switchScene():
+        if self.optionsUI.switchScene():  # Pressed button
             # Update switch scene button's text and switch it
             self.optionsUI.updateSceneText(self.state.value)
-            self.state = self.getOppositeScene()
+
+            # Switch the scene
+            self.state, self.otherState = self.otherState, self.state
 
     def render(self, surface: Window | Image):
         """ Render the current scene """
@@ -62,11 +68,3 @@ class SceneManager:
 
         self.resourcesUI.render(surface)
         self.optionsUI.render(surface)
-
-    # Getters
-    def getOppositeScene(self) -> SceneState:
-        """ Returns the opposite scene """
-        if self.state == SceneState.BUILDING:
-            return SceneState.DUNGEON
-
-        return SceneState.BUILDING

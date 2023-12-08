@@ -99,6 +99,9 @@ class Window:
         for value in self.MOUSE.values():
             self.mouseButtons[value] = InputState.INACTIVE
 
+        # Hide inputs
+        self.hideInputs: bool = False
+
     def setWindow(self, size: Vect) -> None:
         """ Sets up the Pygame window with the given size
             and various settings """
@@ -220,26 +223,38 @@ class Window:
         """ Returns the time that has elapsed since the previous function """
         return self.deltaTime
 
-    def getMousePos(self) -> Vect: return self.mousePos
+    def getMousePos(self) -> Vect:
+        """ Returns the mouse position """
+        if self.hideInputs:
+            return Vect()
+        return self.mousePos
+
     def isClosed(self) -> bool: return self.quit
     def getSize(self) -> Vect: return self.windowSize
 
     # Keyboard inputs
     def getKey(self, key: str) -> bool:
-        return self.inputs[key] == InputState.PRESSED
+        return self.inputs[key] == InputState.PRESSED \
+            and not self.hideInputs
 
     def getJustPressed(self, key: str) -> bool:
-        return self.inputs[key] == InputState.JUST_PRESSED
+        return self.inputs[key] == InputState.JUST_PRESSED \
+            and not self.hideInputs
 
     def getKeyReleased(self, key: str) -> bool:
-        return self.inputs[key] == InputState.RELEASED
+        return self.inputs[key] == InputState.RELEASED \
+            and not self.hideInputs
 
     # Mouse inputs
     def getMouseButton(self, button: str) -> bool:
-        return self.mouseButtons[button] == InputState.PRESSED
+        return self.mouseButtons[button] == InputState.PRESSED \
+            and not self.hideInputs
 
     def getMouseJustPressed(self, button: str) -> bool:
         """ Returns whether or not the mouse button was just pressed """
+        if self.hideInputs:
+            return False
+
         # Only allows it to be detected once
         # This makes it so you can't click "through" a UI,
         # both a button on the UI and a thing behind it, for example.
@@ -249,4 +264,10 @@ class Window:
         return False
 
     def getMouseReleased(self, button: str) -> bool:
-        return self.mouseButtons[button] == InputState.RELEASED
+        return self.mouseButtons[button] == InputState.RELEASED \
+            and not self.hideInputs
+
+    # Setters
+    def setHideInputs(self, hide: bool) -> None:
+        """ Sets whether or not to hide inputs """
+        self.hideInputs = hide
