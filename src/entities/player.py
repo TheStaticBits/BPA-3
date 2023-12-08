@@ -19,8 +19,6 @@ class Player(Entity):
         cls.ACCELERATION: float = constants["player"]["accel"] * Image.SCALE
         cls.DECELERATION: float = constants["player"]["decel"] * Image.SCALE
 
-        cls.BUilD_REACH: int = constants["player"]["buildReachTiles"]
-
         # Player resources
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
         cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])

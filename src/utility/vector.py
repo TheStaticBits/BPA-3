@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pygame
-from math import floor
+from math import floor, sqrt, atan2, cos, sin
 
 
 class Vect:
@@ -42,10 +42,23 @@ class Vect:
     def floor(self) -> Vect:
         return Vect(floor(self.x), floor(self.y))
 
-    def clamp(self, minVect: Vect, maxVect: Vect):
+    def clamp(self, minVect: Vect, maxVect: Vect) -> None:
         """ Locks the vector between two vectors """
         self.x = min(max(self.x, minVect.x), maxVect.x)
         self.y = min(max(self.y, minVect.y), maxVect.y)
+
+    def dist(self, other: Vect) -> float:
+        """ Returns distance using pythagorean theorem """
+        return sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+    def angle(self, other: Vect) -> float:
+        """ Returns the angle in radians between two points """
+        return atan2(self.y - other.y, self.x - other.x)
+
+    @classmethod
+    def distFromAngle(self, angle: float, dist: float) -> Vect:
+        """ Returns a vector from an angle and distance """
+        return Vect(dist * cos(angle), dist * sin(angle))
 
     @classmethod
     def toRect(cls, pos: Vect, size: Vect) -> pygame.Rect:

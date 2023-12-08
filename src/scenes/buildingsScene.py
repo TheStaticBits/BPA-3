@@ -42,6 +42,7 @@ class BuildingsScene(BaseScene):
         super().getPlayer().update(window, super().getTileset(),
                                    buildings=self.buildings)
 
+        # Makes sure the player can only buy one building at a time
         if not self.placingBuilding:
             self.testBuyBuilding()
         else:
@@ -49,14 +50,17 @@ class BuildingsScene(BaseScene):
 
     def testBuyBuilding(self) -> None:
         """ Tests if the player has begun placing a building """
+        # Test if the player pressed the button to buy a building
         type: str = self.buildingsSceneUI.pressedBuy()
         if type:
+            # Place the building
             self.log.info(f"Started placing building {type}")
             self.placeBuilding(type)
             self.placingBuilding = True
 
     def placeBuilding(self, buildingType: str) -> None:
         """ Appends building to the list """
+        # Get building class from type string and building data
         typeName = BaseBuilding.getDataFrom(buildingType)["type"]
         objType: type = self.BUILDING_TYPES[typeName]
 

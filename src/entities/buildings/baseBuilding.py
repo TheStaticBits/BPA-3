@@ -22,6 +22,9 @@ class BaseBuilding(Entity):
             constants["buildings"]["jsonPath"]
         )
 
+        cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
+            * Tileset.TILE_SIZE.x
+
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
         """ Tests if the tiles in the tileset
@@ -68,20 +71,40 @@ class BaseBuilding(Entity):
 
     def followCursor(self, window: Window, camOffset: Vect,
                      tileset: Tileset, player: Player) -> None:
-        """ Moves to cursor and tests if the building can be placed """
-        # Get cursor position and convert to tile position
-        self.tilePos = window.getMousePos() + camOffset
+        """ Moves to cursor and tests if the building can be placed
+            Also limits the cursor position to a range around the player """
+        # Get cursor position and convert to position on the tileset
+        mousePos: Vect = window.getMousePos() + camOffset
+
+        # Get player center position
+        playerPos: Vect = player.getCenterPos()
+
+        # Find distance between player and cursor
+        dist: Vect = mousePos.dist(playerPos)
+
+        if dist > self.BUILD_REACH:
+            # Cursor is too far from player, clamp to max distance
+
+            # Get angle between player and cursor
+            angle: float = mousePos.angle(playerPos)
+
+            # Get distance from angle and max distance
+            dist: Vect = Vect.distFromAngle(angle, self.BUILD_REACH)
+
+            # Set mousePos to the new position
+            mousePos = playerPos + dist
+
         # Offset by half the building size
-        self.tilePos -= super().getSize() / 2
+        mousePos -= super().getSize() / 2
 
         # Calculate tile position of the cursor
-        self.tilePos /= Tileset.TILE_SIZE
+        self.tilePos = mousePos / Tileset.TILE_SIZE
         self.tilePos = self.tilePos.floor()
 
         # Clamp to the tile map so it doesn't go over the edge
         self.tilePos.clamp(Vect(0, 0), tileset.getTileSize() - Vect(1, 1))
 
-        # Set position to tilePos
+        # Set position to new self.tilePos
         super().setPos(self.tilePos * Tileset.TILE_SIZE)
 
     def testPlace(self, window: Window, tileset: Tileset) -> None:
@@ -102,15 +125,19 @@ class BaseBuilding(Entity):
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """
         if self.placing:
+            # Create a new surface the size of the building image
             surf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
             img = Image(surf=surf, scale=False)
-            super().render(img, -super().getPos())  # Render at top left
+
+            # Render the current animation frame on the new surface
+            super().render(img, -super().getPos())
             img.setAlpha(150)
 
             # Tint red if not placeable
             if not self.placable:
                 img.fill(255, 0, 0, 150)
 
+            # Draw the new tinted surface to the screen
             surface.render(img, super().getPos() + offset)
 
         else:
