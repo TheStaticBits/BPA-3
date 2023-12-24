@@ -2,6 +2,7 @@ from src.scenes.baseScene import BaseScene
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.buildings.storage import Storage
 from src.entities.buildings.generator import Generator
+from src.entities.buildings.spawner import Spawner
 from src.window import Window
 from src.utility.image import Image
 from src.ui.interfaces.buildingShop import BuildingShop
@@ -14,7 +15,8 @@ class BuildingsScene(BaseScene):
     # Matches a building type with the class
     BUILDING_TYPES: dict[str, type] = {
         "storage": Storage,
-        "generator": Generator
+        "generator": Generator,
+        "spawner": Spawner
     }
 
     def __init__(self, mapFolderName: str) -> None:

@@ -22,7 +22,6 @@ class Entity:
 
         self.pos: Vect = pos
 
-        self.log.info(f"Loading animation spritesheet at {animData['path']}")
         self.animation = self.loadAnim(animData)
 
     @classmethod

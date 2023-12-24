@@ -20,6 +20,27 @@
         }
     },
 
+    "testSpawner": {
+        "type": "spawner",
+        "name": "Test Spawner",
+        "description": "This is a test\nspawner building",
+
+        "anim": {
+            "path": "res/testBuilding.png",
+            "frames": 1, "delay": 1
+        },
+
+        "size": [3, 2],
+
+        "cost": {
+            "gold": 100
+        },
+
+        "warrior": "testWarrior",
+        "spawnInterval": 0.1,
+        "spawnAmount": 2
+    },
+
     "testGenerator": {
         "type": "generator",
         "name": "Test Generator",
