@@ -18,6 +18,10 @@ class DungeonScene(BaseScene):
         self.enemies: list[Warrior] = []
         self.allies: list[Warrior] = []
 
+        # List of tile coords where enemies can spawn
+        self.enemySpawns: list[list[int]] = \
+            super().getTileset().getData()["enemySpawns"]
+
     def update(self, window: Window) -> None:
         super().update(window)
 

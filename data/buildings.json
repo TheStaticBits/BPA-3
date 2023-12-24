@@ -37,7 +37,7 @@
         },
 
         "warrior": "testWarrior",
-        "spawnInterval": 0.1,
+        "spawnInterval": 5,
         "spawnAmount": 2
     },
 

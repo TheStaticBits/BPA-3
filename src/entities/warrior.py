@@ -1,11 +1,10 @@
 from __future__ import annotations
 
+import random
 from src.entities.entity import Entity
 from src.window import Window
 from src.utility.vector import Vect
 import src.utility.utility as util
-
-import random
 
 
 class Warrior(Entity):
@@ -24,12 +23,37 @@ class Warrior(Entity):
         super().__init__(self.WARRIOR_DICT[type]["anim"], __name__,
                          Vect(0, 0))
 
-        self.speedX = random.randint(1, 300)
-        self.speedY = random.randint(1, 300)
+        self.target = None
 
     def update(self, window: Window, opponents: list[Warrior]) -> None:
         super().update(window)
 
-        # Some kind of pathfinding to enemies
-        super().getPos().y += self.speedY * window.getDeltaTime()
-        super().getPos().x += self.speedX * window.getDeltaTime()
+        if self.target is None:
+            self.findTarget(opponents)
+
+    def findTarget(self, opponents: list[Warrior]) -> None:
+        """ Finds the closest opponent to attack
+            that is not already a target """
+        if len(opponents) == 0:
+            return
+
+        lowestDist: float = super().getPos().dist(opponents[0].getPos())
+
+        for warrior in opponents:
+            # Find closets enemy not targeted by another warrior
+            if warrior.hasTarget():
+                continue
+
+            # Get distance from warrior
+            dist = super().getPos().dist(warrior.getPos())
+            if dist < lowestDist:
+                self.target = warrior
+                lowestDist = dist
+
+        # All enemies have a target already, so pick a random one
+        if self.target is None:
+            self.target = random.choice(opponents)
+
+    def hasTarget(self) -> bool:
+        """ Returns whether or not the warrior has a target """
+        return self.target is not None

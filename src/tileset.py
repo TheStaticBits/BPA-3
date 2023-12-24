@@ -58,6 +58,7 @@ class Tileset:
 
         mapData: dict = util.loadJSON(dataPath)
         self.PLAYER_START = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
+        self.OTHER_DATA = mapData["other"]
 
     def generateMapImg(self, mapPath: str) -> None:
         """ Generates the tiles based on the chars in the map data """
@@ -120,6 +121,7 @@ class Tileset:
 
     def getTileSize(self) -> Vect: return self.size
     def getSize(self) -> Vect: return self.size * self.TILE_SIZE
+    def getData(self) -> dict: return self.OTHER_DATA
 
     # Setters
     def setOccupied(self, tilePos: Vect) -> None:

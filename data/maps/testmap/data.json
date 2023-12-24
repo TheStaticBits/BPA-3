@@ -1,3 +1,4 @@
 {
-    "playerSpawn": [4, 4]
+    "playerSpawn": [4, 4],
+    "other": {}
 }
