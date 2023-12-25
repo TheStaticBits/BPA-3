@@ -16,6 +16,7 @@ class BaseUI:
     """ All UI interfaces inherit from this class,
         which creates and handles UI elements given
         the JSON data for them. """
+    log = logging.getLogger(__name__)
 
     # Given a window size (int), UI size (int), and margin (int),
     # these return the position of each UI interface
@@ -36,9 +37,7 @@ class BaseUI:
         """ Load static vars from constants """
         cls.UI_FOLDER: str = constants["game"]["uiFolder"]
 
-    def __init__(self, jsonFile: str, loggerName: str = __name__) -> None:
-        self.log = logging.getLogger(loggerName)
-
+    def __init__(self, jsonFile: str) -> None:
         # Load the UI's JSON data
         self.data = self.loadJson(jsonFile)
         self.name = jsonFile

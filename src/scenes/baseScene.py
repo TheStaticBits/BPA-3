@@ -10,16 +10,14 @@ from src.window import Window
 class BaseScene:
     """ Handles/contains tileset, player, camera offset,
         and other scene-related things """
+    log = logging.getLogger(__name__)
 
     @classmethod
     def loadStatic(cls, constants: str):
         cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
 
-    def __init__(self, mapFolderName: str, loggerName: str) -> None:
-        """ Sets up logger, tileset, players, and camera offset """
-
-        self.log = logging.getLogger(loggerName)
-
+    def __init__(self, mapFolderName: str) -> None:
+        """ Sets up tileset, players, and camera offset """
         self.log.info("Initializing scene for map " + mapFolderName)
 
         self.tileset: Tileset = Tileset(mapFolderName)

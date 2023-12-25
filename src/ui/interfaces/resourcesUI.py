@@ -1,3 +1,4 @@
+import logging
 from math import floor
 
 from src.ui.interfaces.baseUI import BaseUI
@@ -9,9 +10,10 @@ from src.window import Window
 class ResourcesUI(BaseUI):
     """ Handles UI surrounding the screen
         when walking around during gameplay """
+    log = logging.getLogger(__name__)
 
     def __init__(self) -> None:
-        super().__init__("resourcesUI", __name__)
+        super().__init__("resourcesUI")
 
     def update(self, window: Window) -> None:
         super().update(window)

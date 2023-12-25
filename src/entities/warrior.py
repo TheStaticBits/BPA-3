@@ -1,15 +1,16 @@
 from __future__ import annotations
 
 import random
+import logging
 from src.entities.entity import Entity
 from src.window import Window
-from src.utility.vector import Vect
 import src.utility.utility as util
 
 
 class Warrior(Entity):
     """ Handles warrior functionality,
         including movement and pathfinding """
+    log = logging.getLogger(__name__)
 
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
@@ -20,8 +21,7 @@ class Warrior(Entity):
 
     def __init__(self, type: str) -> None:
         """ Setup position, animation, etc. """
-        super().__init__(self.WARRIOR_DICT[type]["anim"], __name__,
-                         Vect(0, 0))
+        super().__init__(self.WARRIOR_DICT[type]["anim"])
 
         self.target = None
 

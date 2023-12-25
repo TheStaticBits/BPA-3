@@ -17,6 +17,7 @@ class InputState(enum.Enum):
 
 class Window:
     """ Handles actions regarding the Pygame window object and deltatime """
+    log = logging.getLogger(__name__)
 
     # Inputs and what string value they map to in the window.inputs dict
     KEYS: dict[int, str] = {
@@ -57,8 +58,6 @@ class Window:
     def __init__(self) -> None:
         """ Creates the Window object from data in data/constants.json,
             along with deltatime and fps tracking """
-        self.log = logging.getLogger(__name__)
-
         self.log.info("Initializing window")
 
         # Create pygame window object

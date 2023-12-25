@@ -1,4 +1,5 @@
 import pygame
+import logging
 
 from src.ui.elements.baseUIElement import BaseUIElement
 
@@ -10,10 +11,11 @@ from src.window import Window
 
 class Button(BaseUIElement):
     """ Handles buttons in a UI """
+    log = logging.getLogger(__name__)
 
     def __init__(self, buttonData: dict) -> None:
         """ Loads button data and initializes """
-        super().__init__(buttonData, __name__)
+        super().__init__(buttonData)
 
         self.buttons: dict[str, pygame.Surface] = {}
 

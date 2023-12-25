@@ -1,4 +1,5 @@
 import pygame
+import logging
 
 from src.ui.interfaces.baseUI import BaseUI
 
@@ -11,10 +12,11 @@ from src.ui.interfaces.shopDetails import ShopDetails
 
 class BuildingShop(BaseUI):
     """ Handles the building shop UI """
+    log = logging.getLogger(__name__)
 
     def __init__(self) -> None:
         """ Load data, initialize, and load the first building UI """
-        super().__init__("buildings/shop", __name__)
+        super().__init__("buildings/shop")
 
         self.buildingShown: int = 0
         self.detailUIs: list[ShopDetails] = []

@@ -9,11 +9,9 @@ class BaseUIElement:
     """ All UI elements (text, buttons, etc.) inherit
         from this class, which handles image loading,
         storage, and rendering """
+    log = logging.getLogger(__name__)
 
-    def __init__(self, data: dict, loggerName: str = __name__,
-                 imgPath: str = None) -> None:
-        self.log = logging.getLogger(loggerName)
-
+    def __init__(self, data: dict, imgPath: str = None) -> None:
         # Offset from top left corner of each UI
         self.offset: Vect = Vect(data["offset"]) * Image.SCALE
 

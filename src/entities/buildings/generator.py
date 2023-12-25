@@ -1,3 +1,4 @@
+import logging
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.window import Window
 from src.tileset import Tileset
@@ -8,6 +9,7 @@ from src.utility.advDict import AdvDict
 
 class Generator(BaseBuilding):
     """ Handles generators that generate resources """
+    log = logging.getLogger(__name__)
 
     def __init__(self, type: str) -> None:
         super().__init__(type)

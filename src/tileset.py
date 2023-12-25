@@ -11,6 +11,7 @@ from src.window import Window
 class Tileset:
     """ Stores tiles along with interactable entities
         such as buildings and trees aside from buildings """
+    log = logging.getLogger(__name__)
 
     @classmethod  # static function
     def loadStatic(cls, constants: dict) -> None:
@@ -36,9 +37,7 @@ class Tileset:
         )
 
     def __init__(self, mapFolderName: str) -> None:
-        """ Load tileset information and tiles"""
-
-        self.log = logging.getLogger(__name__)
+        """ Load tileset information and tiles """
 
         # Entire map/tileset image
         self.tiles: Image = None

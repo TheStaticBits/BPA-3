@@ -15,6 +15,8 @@ from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Game:
+    log = logging.getLogger(__name__)
+
     def __init__(self, CONSTANTS_FILE: str) -> None:
         """ Initialize game objects and data"""
 
@@ -22,7 +24,6 @@ class Game:
         self.constants: dict = util.loadJSON(CONSTANTS_FILE)
         util.setupLogger(self.constants)
 
-        self.log = logging.getLogger(__name__)
         self.log.info("Initializing game")
 
         # Load static data from the constants JSON file

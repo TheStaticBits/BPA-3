@@ -1,4 +1,5 @@
 import pygame
+import logging
 
 from src.ui.elements.baseUIElement import BaseUIElement
 from src.utility.image import Image
@@ -6,6 +7,7 @@ from src.utility.image import Image
 
 class Text(BaseUIElement):
     """ Handles Text in a UI """
+    log = logging.getLogger(__name__)
 
     # Static variable that stores font objects based on their size
     # Key: font size, value: pygame.font.Font object
@@ -17,7 +19,7 @@ class Text(BaseUIElement):
 
     def __init__(self, textData: dict) -> None:
         """ Loads text data and initializes """
-        super().__init__(textData, __name__)
+        super().__init__(textData)
 
         self.text: str = textData["text"]
         self.fontSize: int = textData["fontSize"]

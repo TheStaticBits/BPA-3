@@ -1,3 +1,4 @@
+import logging
 from src.utility.vector import Vect
 from src.ui.interfaces.baseUI import BaseUI
 from src.utility.image import Image
@@ -7,11 +8,12 @@ from src.entities.entity import Entity
 
 class ShopDetails(BaseUI):
     """ Handles individual UIs for each building in the shop """
+    log = logging.getLogger(__name__)
 
     def __init__(self, index: int, posType: str) -> None:
         """ Loads the UI, images, descriptions, etc. for the building
             at the given index """
-        super().__init__("buildings/details", __name__)
+        super().__init__("buildings/details")
         super().setPosType(posType)
 
         self.load(index)

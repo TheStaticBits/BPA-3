@@ -1,5 +1,5 @@
+import logging
 from src.scenes.baseScene import BaseScene
-
 from src.window import Window
 from src.entities.warrior import Warrior
 from src.utility.image import Image
@@ -8,12 +8,13 @@ from src.utility.image import Image
 class DungeonScene(BaseScene):
     """ Inherits from BaseScene
         Manages a scene that has warriors """
+    log = logging.getLogger(__name__)
 
     # Append to this list to queue spawning allies
     queuedAllies: list[str] = []
 
     def __init__(self, mapFolderName: str) -> None:
-        super().__init__(mapFolderName, __name__)
+        super().__init__(mapFolderName)
 
         self.enemies: list[Warrior] = []
         self.allies: list[Warrior] = []

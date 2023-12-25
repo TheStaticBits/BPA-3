@@ -1,3 +1,4 @@
+import logging
 import enum
 from src.scenes.baseScene import BaseScene
 from src.scenes.buildingsScene import BuildingsScene
@@ -19,8 +20,9 @@ class SceneManager:
     """ Manages any scenes and their interactions,
         including transitions and spawning enemies.
         It also manages any shared UI elements. """
+    log = logging.getLogger(__name__)
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Create the scene objects """
 
         # Current scene being shown & updated
@@ -38,7 +40,7 @@ class SceneManager:
         self.resourcesUI = ResourcesUI()
         self.optionsUI = OptionsUI()
 
-    def update(self, window: Window):
+    def update(self, window: Window) -> None:
         """ Update the current scene """
         self.optionsUI.update(window)  # Update options buttons
 
@@ -62,7 +64,7 @@ class SceneManager:
             # Switch the scene
             self.state, self.otherState = self.otherState, self.state
 
-    def render(self, surface: Window | Image):
+    def render(self, surface: Window | Image) -> None:
         """ Render the current scene """
         self.scenes[self.state].render(surface)
 

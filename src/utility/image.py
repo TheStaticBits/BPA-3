@@ -1,5 +1,6 @@
 from __future__ import annotations
 import pygame
+import logging
 
 from src.utility.vector import Vect
 
@@ -8,6 +9,7 @@ class Image:
     """ Contains a single pygame.Surface object for images
         Reduces loading the same image multiple times,
         and contains easy functions for rendering and others """
+    log = logging.getLogger(__name__)
 
     # Static variable for all images to avoid duplicates
     # Key: path, value: pygame.Surface (the image)
@@ -31,6 +33,7 @@ class Image:
             # Load image if it hasn't been loaded before
             if path not in self.images:
                 self.images[path] = pygame.image.load(path).convert_alpha()
+                self.log.info(f"Loaded image {path}")
 
             self.image = self.images[path]
 

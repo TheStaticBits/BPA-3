@@ -1,9 +1,13 @@
+import logging
 from src.ui.interfaces.baseUI import BaseUI
 
 
 class OptionsUI(BaseUI):
+    """ Handles the options UI in the top right of the screen """
+    log = logging.getLogger(__name__)
+
     def __init__(self) -> None:
-        super().__init__("optionsUI", __name__)
+        super().__init__("optionsUI")
 
     def switchScene(self) -> bool:
         """ Returns true if the scene should be switched """

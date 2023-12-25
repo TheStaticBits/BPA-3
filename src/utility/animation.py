@@ -11,11 +11,10 @@ class Animation:
     """ Class for handling animations,
         including updating and rendering.
         Only works with horizontal spritesheets """
+    log = logging.getLogger(__name__)
 
     def __init__(self, path: str, frameCount: int, delay: float) -> None:
         """ Sets initial values for the animation """
-        self.log = logging.getLogger(__name__)
-
         self.spritesheet: Image = Image(path)
         self.timer = Timer(delay)
 

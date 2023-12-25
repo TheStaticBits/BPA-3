@@ -1,9 +1,11 @@
 import traceback
+import logging
 from src.ui.interfaces.baseUI import BaseUI
 
 
 class ErrorUI(BaseUI):
     """ Handles the error UI popup for any errors in the game """
+    log = logging.getLogger(__name__)
 
     # Static variables to define the error message
     errored: bool = False
@@ -32,7 +34,7 @@ class ErrorUI(BaseUI):
             f.write(f"{message}:\n{self.error}\n\n")
 
     def __init__(self) -> None:
-        super().__init__("errorUI", __name__)
+        super().__init__("errorUI")
 
     def update(self) -> None:
         """ Handles button presses if an error is showing """

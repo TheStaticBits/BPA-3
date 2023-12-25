@@ -1,4 +1,5 @@
 import pygame
+import logging
 import src.utility.utility as util
 from src.entities.entity import Entity
 from src.utility.vector import Vect
@@ -12,6 +13,7 @@ class BaseBuilding(Entity):
     """ All buildings inherit from this base building class
         Handles placing of buildings, size/hitboxes, etc.
         Inherits from Entity class for animation and position handling. """
+    log = logging.getLogger(__name__)
 
     # Static functions
     @classmethod
@@ -50,7 +52,7 @@ class BaseBuilding(Entity):
         self.placing: bool = True
         self.placable: bool = False
 
-        super().__init__(self.getData()["anim"], __name__, Tileset.TILE_SIZE)
+        super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
 
     def onRemove(self) -> None:
         """ Overriden in subclasses.

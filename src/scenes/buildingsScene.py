@@ -1,3 +1,4 @@
+import logging
 from src.scenes.baseScene import BaseScene
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.buildings.storage import Storage
@@ -11,6 +12,7 @@ from src.ui.interfaces.buildingShop import BuildingShop
 class BuildingsScene(BaseScene):
     """ Inherits from BaseScene
         Manages a scene that has buildings """
+    log = logging.getLogger(__name__)
 
     # Matches a building type with the class
     BUILDING_TYPES: dict[str, type] = {
@@ -21,7 +23,7 @@ class BuildingsScene(BaseScene):
 
     def __init__(self, mapFolderName: str) -> None:
         """ Initializes buildings list """
-        super().__init__(mapFolderName, __name__)
+        super().__init__(mapFolderName)
 
         self.buildings: list[BaseBuilding] = []
         self.buildingsSceneUI: BuildingShop = BuildingShop()

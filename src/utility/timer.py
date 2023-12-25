@@ -4,9 +4,11 @@ from src.window import Window
 
 
 class Timer:
-    def __init__(self, delay: float) -> None:
-        self.log = logging.getLogger(__name__)
+    """ A simple timer that can be used to
+        activate something after a delay """
+    log = logging.getLogger(__name__)
 
+    def __init__(self, delay: float) -> None:
         self.delay: float = delay
         self.timer: float = 0
 

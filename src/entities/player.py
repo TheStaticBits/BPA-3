@@ -1,3 +1,4 @@
+import logging
 from src.entities.entity import Entity
 from src.window import Window
 from src.utility.vector import Vect
@@ -9,6 +10,7 @@ from src.tileset import Tileset
 class Player(Entity):
     """ Inherits from Entity class.
         Handles player functionality and movement """
+    log = logging.getLogger(__name__)
 
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
@@ -36,7 +38,7 @@ class Player(Entity):
 
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
-        super().__init__(self.ANIM, __name__, pos=startingPos)
+        super().__init__(self.ANIM, pos=startingPos)
 
         self.log.info("Initializing player")
 
