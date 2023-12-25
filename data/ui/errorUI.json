@@ -1,0 +1,36 @@
+{
+    "positions": {
+        "hidden": {
+            "x": { "locked": "center", "margin": 0    },
+            "y": { "locked": "end",    "margin": -600 },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "center", "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 5,
+    "transitionType": "ease",
+
+    "size": "auto",
+    
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/error/bg.png"
+            }
+        },
+        "text": {
+
+        },
+        "buttons": {
+            
+        }
+    }
+}

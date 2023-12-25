@@ -257,8 +257,8 @@ class BaseUI:
     def getElement(self, key: str) -> BaseUIElement:
         return self.elements[key]
 
-    def isTransitioning(self) -> bool:
-        return self.transitioning
+    def isTransitioning(self) -> bool: return self.transitioning
+    def isHidden(self) -> bool: return self.hidden
 
     def getPosType(self) -> str: return self.transitionTo
     def getSize(self) -> Vect: return self.size
