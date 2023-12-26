@@ -55,9 +55,57 @@
                 "offset": [ 278, 15 ],
                 
                 "images": {
-                    "inactive": "res/ui/error/xbutton.png",
-                    "hover": "res/ui/error/xbuttonHover.png",
-                    "pressed": "res/ui/error/xbuttonPress.png"
+                    "inactive": "res/buttons/xButton/inactive.png",
+                    "hover": "res/buttons/xButton/hover.png",
+                    "pressed": "res/buttons/xButton/pressed.png"
+                }
+            },
+            "sendEmail": {
+                "offset": [ 15, 165 ],
+
+                "images": {
+                    "inactive": "res/buttons/option/inactive.png",
+                    "hover": "res/buttons/option/hover.png",
+                    "pressed": "res/buttons/option/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Send Crash Report Email",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 5,
+                    "color": [ 255, 255, 255 ]
+                }
+            },
+            "logFile": {
+                "offset": [ 110, 165 ],
+
+                "images": {
+                    "inactive": "res/buttons/option/inactive.png",
+                    "hover": "res/buttons/option/hover.png",
+                    "pressed": "res/buttons/option/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Open Logs File",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 5,
+                    "color": [ 255, 255, 255 ]
+                }
+            },
+            "errorFile": {
+                "offset": [ 205, 165 ],
+
+                "images": {
+                    "inactive": "res/buttons/option/inactive.png",
+                    "hover": "res/buttons/option/hover.png",
+                    "pressed": "res/buttons/option/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Open Errors File",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 5,
+                    "color": [ 255, 255, 255 ]
                 }
             }
         }
