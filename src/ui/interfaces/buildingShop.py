@@ -1,4 +1,3 @@
-import pygame
 import logging
 
 from src.ui.interfaces.baseUI import BaseUI
@@ -27,8 +26,8 @@ class BuildingShop(BaseUI):
 
         # Surface used to clip off the detail UIs
         # and hide them when they're not displayed over the shop
-        clipSurf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
-        self.clipSurface: Image = Image(surf=clipSurf, scale=False)
+        self.clipSurface: Image = Image.makeEmpty(super().getSize(),
+                                                  transparent=True)
 
     def loadBuildingUI(self, index: int, posType: str) -> None:
         """ Loads the UI, images, descriptions, etc. for the building """
@@ -43,19 +42,19 @@ class BuildingShop(BaseUI):
         """ Updates the UI buttons """
         super().update(window)
 
-        self.updateButtons()
-        self.checkLeftRight()
+        self.updateButtons(window)
+        self.checkLeftRight(window)
         self.updateDetailUIs(window)
 
-    def updateButtons(self) -> None:
+    def updateButtons(self, window: Window) -> None:
         """ Updates the buttons """
         if super().getElement("openShop").getActivated():
             if super().getPosType() == "hidden":
-                super().startTransition("visible")
+                super().startTransition("visible", window)
             else:
-                super().startTransition("hidden")
+                super().startTransition("hidden", window)
 
-    def checkLeftRight(self) -> None:
+    def checkLeftRight(self, window: Window) -> None:
         """ Checks left & right buttons and starts UI transitions
             if either are pressed"""
         if super().getElement("left").getActivated():
@@ -63,9 +62,11 @@ class BuildingShop(BaseUI):
                 return  # Can't go left any further
 
             # Start transitions for the current and next building
-            self.detailUIs[self.buildingShown].startTransition("right")
+            self.detailUIs[self.buildingShown].startTransition("right",
+                                                               window)
             self.buildingShown -= 1
-            self.detailUIs[self.buildingShown].startTransition("visible")
+            self.detailUIs[self.buildingShown].startTransition("visible",
+                                                               window)
 
         # Check if the right button was pressed
         elif super().getElement("right").getActivated():
@@ -73,10 +74,11 @@ class BuildingShop(BaseUI):
                 return  # Can't go right any further
 
             # Start transitions for the current and next building
-            self.detailUIs[self.buildingShown].startTransition("left")
+            self.detailUIs[self.buildingShown].startTransition("left", window)
             self.buildingShown += 1
             self.loadBuildingUI(self.buildingShown, "right")
-            self.detailUIs[self.buildingShown].startTransition("visible")
+            self.detailUIs[self.buildingShown].startTransition("visible",
+                                                               window)
 
     def updateDetailUIs(self, window: Window) -> None:
         """ Updates the detail UIs """

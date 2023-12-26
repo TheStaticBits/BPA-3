@@ -5,6 +5,7 @@ from src.utility.vector import Vect
 from src.utility.advDict import AdvDict
 from src.utility.image import Image
 from src.tileset import Tileset
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Player(Entity):
@@ -17,7 +18,14 @@ class Player(Entity):
         """ Load static variables from constants dict """
         cls.ANIM: dict = constants["player"]["anim"]
 
-        cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * Image.SCALE
+        try:
+            cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find player: maxSpeed in constants.json",
+                           cls.log, recoverable=True)
+            cls.MAX_SPEED: float = 100 * Image.SCALE
+
         cls.ACCELERATION: float = constants["player"]["accel"] * Image.SCALE
         cls.DECELERATION: float = constants["player"]["decel"] * Image.SCALE
 

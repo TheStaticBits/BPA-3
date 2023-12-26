@@ -1,4 +1,3 @@
-import pygame
 import logging
 import os
 
@@ -67,12 +66,11 @@ class Tileset:
 
         self.size: Vect = Vect(len(splitData[0]), len(splitData))
 
-        # Create empty tileset image based on the tiledata
-        tiles = pygame.Surface((len(splitData[0]) * self.TILE_SIZE.x,
-                                len(splitData) * self.TILE_SIZE.y),
-                               pygame.DOUBLEBUF | pygame.HWSURFACE)
+        surfSize = Vect(len(splitData[0]) * self.TILE_SIZE.x,
+                        len(splitData) * self.TILE_SIZE.y)
 
-        self.tiles = Image(surf=tiles)
+        # Create empty tileset image based on the tiledata
+        self.tiles = Image.makeEmpty(surfSize, scale=True)
 
         # Create Tile objects for every char in the map data
         for y, row in enumerate(splitData):  # Rows

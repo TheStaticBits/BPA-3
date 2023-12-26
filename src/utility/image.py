@@ -19,6 +19,17 @@ class Image:
     def loadStatic(cls, constants: dict) -> None:
         cls.SCALE = constants["game"]["imgScale"]
 
+    @classmethod
+    def makeEmpty(cls, size: Vect, scale=False, transparent=False) -> Image:
+        """ Creates an empty transparent surface with a given size """
+        flags = pygame.HWSURFACE | pygame.DOUBLEBUF
+        if transparent:
+            flags |= pygame.SRCALPHA
+
+        surf = pygame.Surface(size.toTuple(), flags)
+
+        return Image(surf=surf, scale=scale)
+
     def __init__(self, path: str = None,
                  surf: pygame.Surface = None,
                  scale: bool = True) -> None:

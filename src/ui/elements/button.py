@@ -17,7 +17,7 @@ class Button(BaseUIElement):
         """ Loads button data and initializes """
         super().__init__(buttonData)
 
-        self.buttons: dict[str, pygame.Surface] = {}
+        self.buttons: dict[str, Image] = {}
 
         # Load all button images
         for key, buttonPath in buttonData["images"].items():

@@ -1,4 +1,3 @@
-import pygame
 import logging
 import src.utility.utility as util
 from src.entities.entity import Entity
@@ -129,8 +128,8 @@ class BaseBuilding(Entity):
         """ Render with tints if placing """
         if self.placing:
             # Create a new surface the size of the building image
-            surf = pygame.Surface(super().getSize().toTuple(), pygame.SRCALPHA)
-            img = Image(surf=surf, scale=False)
+            img = Image.makeEmpty(super().getSize().toTuple(),
+                                  transparent=True)
 
             # Render the current animation frame on the new surface
             super().render(img, -super().getPos())

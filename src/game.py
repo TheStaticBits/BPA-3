@@ -36,6 +36,8 @@ class Game:
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
+        self.log.info("Loading static data from constants.json")
+
         try:
             Image.loadStatic(self.constants)
             BaseUI.loadStatic(self.constants)
@@ -59,7 +61,7 @@ class Game:
         while not self.window.isClosed():
             self.window.handleInputs()
 
-            self.errorUI.update()
+            self.errorUI.update(self.window)
             self.iteration()
             self.errorUI.render(self.window)
 
@@ -68,12 +70,9 @@ class Game:
     def iteration(self) -> None:
         """ Each iteration of the game loop """
 
-        # Only update if there is no error
-        if self.errorUI.isHidden():
-            self.update()
-
         # Allow rendering of the game if there is a recoverable error
-        if self.errorUI.isHidden() or self.errorUI.isRecoverable():
+        if self.errorUI.isHidden() or ErrorUI.isRecoverable():
+            self.update()
             self.render()
 
     def update(self) -> None:

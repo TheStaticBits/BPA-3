@@ -29,6 +29,11 @@ class Text(BaseUIElement):
         if "color" in textData:
             self.color = textData["color"]
 
+        # Width before wrapping
+        self.wrapLength: int = 0
+        if "wrapLength" in textData:
+            self.wrapLength = textData["wrapLength"] * Image.SCALE
+
         self.createTextImg()
 
     def getFontObj(self, size: int) -> pygame.font.Font:
@@ -49,7 +54,8 @@ class Text(BaseUIElement):
         font: pygame.font.Font = self.getFontObj(self.fontSize)
 
         # Draw image with text
-        image: pygame.Surface = font.render(self.text, False, self.color)
+        image: pygame.Surface = font.render(self.text, False, self.color,
+                                            wraplength=self.wrapLength)
 
         # Create, transform, and set surf with text
         surf: Image = Image(surf=image, scale=False)

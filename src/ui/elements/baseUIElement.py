@@ -23,7 +23,7 @@ class BaseUIElement:
 
         self.image: Image = None
         self.size: Vect = None
-        self.renderPos: Vect = None
+        self.renderPos: Vect = Vect(0, 0)
 
         if imgPath is not None and imgPath != "":
             image: Image = self.transform(Image(imgPath))

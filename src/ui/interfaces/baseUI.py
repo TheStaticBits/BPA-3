@@ -60,6 +60,12 @@ class BaseUI:
                           self.data["defaultPos"])
         self.loadTransitionData(self.data)
 
+        # Percent done transitioning
+        self.percentDone: float = 1
+        # Distance between transition offsets
+        # used to calculate percent done:
+        self.transitionDist: float = 0
+
     def loadJson(self, jsonFile: str) -> dict:
         """ Loads the UI's JSON data """
         jsonPath: str = os.path.join(self.UI_FOLDER, jsonFile + ".json")
@@ -145,20 +151,23 @@ class BaseUI:
             self.transitionTo: str = self.posType
 
     def update(self, window: Window, offset: Vect = Vect()) -> None:
-        """ Updates all elements """
+        """ Updates all elements, transition, and offsets """
+        # Temporary offset for each frame
+        # Setting it to the original offset (without transition offset yet)
         self.offset = self.getUIOffset(window.getSize(), self.posType)
-        self.offset += offset
 
         # Apply transitioning offset if applicable
         if self.transitioning:
             self.updateTransition(window, self.offset)
             self.offset += self.transitionOffset
 
+        self.offset += offset
+
         # Don't update UI elements if hidden
         if self.hidden:
             return
 
-        # Iterate through UI elements and update them
+        # Iterate through UI elements and update them with the offset
         for element in self.elements.values():
             element.update(window, self.offset)
 
@@ -198,6 +207,13 @@ class BaseUI:
         # Move the transition offset by the move amount
         self.transitionOffset += moveAmount
 
+        # Calculate percent done with a transition by finding
+        # the distance between the transition offset and the new offset
+        # and dividing it by the distance between the new offset and the old
+        self.percentDone = self.transitionOffset.dist(offsetDiff)
+        self.percentDone /= self.transitionDist
+        self.percentDone = 1 - self.percentDone
+
         # If the transition offset has roughly reached the new offset,
         # set the transition offset to the new offset and stop transitioning
         if self.transitionDone(offsetDiff):
@@ -219,8 +235,8 @@ class BaseUI:
         # linear transition animation testing, which
         # tests if the UI has moved past its destination offset
         return not moveTo.signsMatch(moveTo - self.transitionOffset)
+    def startTransition(self, posType: str, surface: Window | Image) -> None:
 
-    def startTransition(self, posType: str) -> None:
         """ Starts UI transition to the given position type """
         if self.transitionTo == posType:
             return  # Already at or transitioning to this pos type
@@ -229,6 +245,14 @@ class BaseUI:
             self.transitioning = True
             self.transitionOffset = Vect(0, 0)  # Reset transition offset
 
+        # Calculate the distance between the old and new offsets
+        oldOffset: Vect = self.getUIOffset(surface.getSize(),
+                                           self.transitionTo)
+        newOffset: Vect = self.getUIOffset(surface.getSize(),
+                                           posType)
+        self.transitionDist = newOffset.dist(oldOffset)
+
+        # Set the transition to position type
         self.transitionTo = posType
         self.hidden = False  # Always show UI while transitioning
 
@@ -264,6 +288,7 @@ class BaseUI:
     def getData(self) -> dict: return self.data
     def getOffset(self) -> Vect: return self.offset
     def getTransitionOffset(self) -> Vect: return self.transitionOffset
+    def getPercentDone(self) -> float: return self.percentDone
 
     # Setters
     def setHidden(self, hidden: bool) -> None:
