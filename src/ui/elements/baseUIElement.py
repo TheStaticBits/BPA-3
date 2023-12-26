@@ -24,6 +24,7 @@ class BaseUIElement:
         self.image: Image = None
         self.size: Vect = None
         self.renderPos: Vect = Vect(0, 0)
+        self.hidden: bool = False
 
         if imgPath is not None and imgPath != "":
             image: Image = self.transform(Image(imgPath))
@@ -42,6 +43,9 @@ class BaseUIElement:
                image: Image = None) -> None:
         """ Renders the image to the given window or surf
             with optional offset and image """
+        if self.hidden:
+            return
+
         image = image if image is not None else self.image
 
         surface.render(image, self.renderPos)
@@ -59,10 +63,12 @@ class BaseUIElement:
     def getRenderPos(self) -> Vect: return self.renderPos
     def hasImg(self) -> bool: return self.image is not None
     def getLayer(self) -> int: return self.layer
+    def isHidden(self) -> bool: return self.hidden
 
     # Setters
     def setOffset(self, offset: Vect) -> None: self.offset = offset
     def addToOffset(self, offset: Vect) -> None: self.offset += offset
+    def setHidden(self, hidden: bool) -> None: self.hidden = hidden
 
     def transform(self, image: Image) -> Image:
         """ Transforms a given image based on the element's data """

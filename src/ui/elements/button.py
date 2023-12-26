@@ -46,6 +46,9 @@ class Button(BaseUIElement):
         """ Updates the button's mode based on mouse position """
         super().update(window, offset)
 
+        if super().isHidden():
+            return
+
         self.updateMouseEvents(window)
 
         # Update text
@@ -95,6 +98,9 @@ class Button(BaseUIElement):
 
     def render(self, surface: Window | Image) -> None:
         """ Renders the button """
+        if super().isHidden():
+            return
+
         if self.mode in self.buttons:
             btnImg = self.buttons[self.mode]
         else:

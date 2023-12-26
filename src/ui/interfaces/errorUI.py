@@ -64,8 +64,10 @@ class ErrorUI(BaseUI):
 
             if self.recoverable:
                 text = "A recoverable error occured:"
+                super().getElement("xButton").setHidden(False)
             else:
                 text = "An unrecoverable error occured:"
+                super().getElement("xButton").setHidden(True)
 
             super().getElement("title").setText(text)
 

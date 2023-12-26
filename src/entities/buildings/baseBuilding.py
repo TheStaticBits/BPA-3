@@ -128,8 +128,7 @@ class BaseBuilding(Entity):
         """ Render with tints if placing """
         if self.placing:
             # Create a new surface the size of the building image
-            img = Image.makeEmpty(super().getSize().toTuple(),
-                                  transparent=True)
+            img = Image.makeEmpty(super().getSize(), transparent=True)
 
             # Render the current animation frame on the new surface
             super().render(img, -super().getPos())

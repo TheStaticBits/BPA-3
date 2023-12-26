@@ -235,6 +235,7 @@ class BaseUI:
         # linear transition animation testing, which
         # tests if the UI has moved past its destination offset
         return not moveTo.signsMatch(moveTo - self.transitionOffset)
+
     def startTransition(self, posType: str, surface: Window | Image) -> None:
 
         """ Starts UI transition to the given position type """
