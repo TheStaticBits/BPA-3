@@ -1,5 +1,9 @@
 import traceback
 import logging
+import webbrowser
+import smtplib
+from email.mime.text import MIMEText
+from base64 import b64decode
 from src.ui.interfaces.baseUI import BaseUI
 from src.window import Window
 from src.utility.image import Image
@@ -18,7 +22,17 @@ class ErrorUI(BaseUI):
 
     @classmethod
     def loadStatic(cls, constants) -> None:
-        cls.ERRORS_FILE: str = constants["saves"]["log"]["errorsFile"]
+        cls.ERROR_FILE: str = constants["saves"]["log"]["errorsFile"]
+        cls.LOG_FILE: str = constants["saves"]["log"]["file"]
+        cls.EMAIL_SENDER = constants["email"]["sender"]
+
+        # decode password
+        cls.PASSWORD = b64decode(constants["email"]["pwd"]).decode("utf-8")
+
+        # Find number of lines in the log file (so any crash reports
+        # will include all lines since the game started)
+        with open(cls.LOG_FILE, "r") as f:
+            cls.logLines = len(f.readlines())
 
     # Static method so any file can easily create an error
     @classmethod
@@ -33,7 +47,7 @@ class ErrorUI(BaseUI):
             logger.error(f"{message}:\n\n{self.error}")
 
         # Append error to file
-        with open(self.ERRORS_FILE, "a") as f:
+        with open(self.ERROR_FILE, "a") as f:
             f.write(f"{message}:\n{self.error}\n\n")
 
     def __init__(self) -> None:
@@ -47,10 +61,21 @@ class ErrorUI(BaseUI):
         self.checkTransition(window)
         super().update(window)
 
-        # Button detection here
+        self.updateButtons()
+
+    def updateButtons(self) -> None:
+        """ Handles button presses on the error screen """
         if super().getElement("xButton").getActivated():
-            print("E")
             self.errored = False
+
+        if super().getElement("errorFile").getActivated():
+            webbrowser.open(self.ERROR_FILE)
+
+        if super().getElement("logFile").getActivated():
+            webbrowser.open(self.LOG_FILE)
+
+        if super().getElement("sendEmail").getActivated():
+            self.emailCrashReport()
 
     def checkTransition(self, window: Window) -> None:
         """ Check if an error has occurred """
@@ -92,6 +117,27 @@ class ErrorUI(BaseUI):
         surface.render(surf, Vect(0, 0))
 
         super().render(surface)
+
+    def emailCrashReport(self):
+        """ Sends an email to the developer with the crash report """
+        self.log.info("Sending crash report email...")
+
+        # Gets the logs since the game started
+        with open(self.LOG_FILE, "r") as f:
+            log = f.readlines()[self.logLines:]
+        log = "\n".join(log)
+
+        msgText = f"Error:\n{self.error}\n\nLog:\n{log}"
+
+        # Creating email object
+        msgObj = MIMEText(msgText)
+        msgObj["Subject"] = self.message
+        msgObj["From"] = self.EMAIL_SENDER
+        msgObj["To"] = self.EMAIL_SENDER
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as sender:
+            sender.login(self.EMAIL_SENDER, self.PASSWORD)
+            sender.send_message(msgObj)
 
     # Getters
     @classmethod

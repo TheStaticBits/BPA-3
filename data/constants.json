@@ -7,6 +7,11 @@
             "errorsFile": "saves/errors.txt"
         }
     },
+
+    "email": {
+        "sender": "reporterofcrashes@gmail.com",
+        "pwd": "dXNvcG90cG1leXVkamxsZg=="
+    },
     
     "window": {
         "title": "BPA 3 or something",
