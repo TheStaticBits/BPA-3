@@ -33,6 +33,7 @@
     },
 
     "player": {
+        "maxSpeed": 100,
         "accel": 400,
         "decel": 550,
         

@@ -1,11 +1,11 @@
 {
-    "testStorage": {
+    "treasureChest": {
         "type": "storage",
-        "name": "Test Storage",
-        "description": "This is a test\nstorage building",
+        "name": "Treasure Chest",
+        "description": "This treasure chest can hold much goodies.\n\nDon't let your enemies steal it! :)",
 
         "anim": {
-            "path": "res/testBuilding.png",
+            "path": "res/buildings/treasureChest.png",
             "frames": 1, "delay": 1
         },
 

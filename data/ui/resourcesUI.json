@@ -29,7 +29,7 @@
 
             "steampowerImg": {
                 "offset": [ 2, 19 ],
-                "path": "res/ui/resources/electricity.png"
+                "path": "res/ui/resources/steampower.png"
             }
         },
         
