@@ -1,9 +1,28 @@
 {
     "testWarrior": {
+        "type": "melee",
+
         "anim": {
             "path": "res/warriors/ligmaWarrior.png",
             "frames": 1,
             "delay": 1
-        }
+        },
+
+        "levels": [
+            {
+                "health": 100,
+                "damage": 10,
+                "interval": 1,
+                "range": 40,
+                "speed": 30
+            },
+            {
+                "health": 200,
+                "damage": 20,
+                "interval": 0.5,
+                "range": 80,
+                "speed": 60
+            }
+        ]
     }
 }

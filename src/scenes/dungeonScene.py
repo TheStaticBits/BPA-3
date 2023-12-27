@@ -3,6 +3,8 @@ from src.scenes.baseScene import BaseScene
 from src.window import Window
 from src.entities.warrior import Warrior
 from src.utility.image import Image
+from src.tileset import Tileset
+from src.utility.timer import Timer
 
 
 class DungeonScene(BaseScene):
@@ -10,8 +12,9 @@ class DungeonScene(BaseScene):
         Manages a scene that has warriors """
     log = logging.getLogger(__name__)
 
-    # Append to this list to queue spawning allies
+    # Append to these lists to queue spawning warriors
     queuedAllies: list[str] = []
+    queuedEnemies: list[str] = []
 
     def __init__(self, mapFolderName: str) -> None:
         super().__init__(mapFolderName)
@@ -19,9 +22,16 @@ class DungeonScene(BaseScene):
         self.enemies: list[Warrior] = []
         self.allies: list[Warrior] = []
 
-        # List of tile coords where enemies can spawn
+        # List of tile coords where enemies can spawn,
+        # and where allies can spawn from data/maps/dungeon/data.json
         self.enemySpawns: list[list[int]] = \
             super().getTileset().getData()["enemySpawns"]
+
+        self.allySpawns: list[list[int]] = \
+            super().getTileset().getData()["allySpawns"]
+
+        # temp
+        self.timer = Timer(1)
 
     def update(self, window: Window) -> None:
         super().update(window)
@@ -29,26 +39,39 @@ class DungeonScene(BaseScene):
         self.updateWarriors(window)
         self.spawnQueue()
 
+        self.timer.update(window)
+        while self.timer.completed():
+            self.queuedEnemies.append("testWarrior")
+
     def updateWarriors(self, window: Window) -> None:
         """ Updates warriors (both allies and enemies) """
+        tileset: Tileset = super().getTileset()
+
+        # Updating warriors with the opponent list of warriors
         for ally in self.allies:
-            ally.update(window, self.enemies)
+            ally.update(window, tileset, self.enemies)
 
         for enemy in self.enemies:
-            enemy.update(window, self.allies)
+            enemy.update(window, tileset, self.allies)
 
     def spawnQueue(self) -> None:
-        """ Spawns queued ally warrior types """
+        """ Spawns queued warrior types """
         for warriorType in self.queuedAllies:
-            self.allies.append(Warrior(warriorType))
+            self.allies.append(Warrior(warriorType, 1, self.allySpawns))
         self.queuedAllies.clear()
+
+        for warriorType in self.queuedEnemies:
+            self.enemies.append(Warrior(warriorType, 1, self.enemySpawns))
+        self.queuedEnemies.clear()
 
     def render(self, surface: Window | Image) -> None:
         """ Renders scene and warriors """
-        super().render(surface)
+        super().renderTileset(surface)
 
         for ally in self.allies:
             ally.render(surface, -super().getCamOffset())
 
         for enemy in self.enemies:
             enemy.render(surface, -super().getCamOffset())
+
+        super().renderPlayer(surface)

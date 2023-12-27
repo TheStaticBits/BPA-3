@@ -31,7 +31,9 @@ class Player(Entity):
 
         # Player resources
         cls.resources = AdvDict(constants["player"]["resources"]["starting"])
+        # resource limits (max amounts), -1 means no limit
         cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
+        # display names for resources
         cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
 
     @classmethod

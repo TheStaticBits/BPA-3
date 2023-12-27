@@ -60,11 +60,15 @@ class Game:
         # Main game loop until window is closed
         while not self.window.isClosed():
             self.window.handleInputs()
-
             self.errorUI.update(self.window)
-            self.iteration()
-            self.errorUI.render(self.window)
 
+            # Run the frame, catching any errors in the game
+            try:
+                self.iteration()
+            except Exception:
+                ErrorUI.create("Uncaught error in game loop", self.log)
+
+            self.errorUI.render(self.window)
             self.window.update()
 
     def iteration(self) -> None:

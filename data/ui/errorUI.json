@@ -16,7 +16,7 @@
     },
 
     "defaultPos": "hidden",
-    "transitionSpeed": 2,
+    "transitionSpeed": 6,
     "transitionType": "ease",
 
     "size": "auto",

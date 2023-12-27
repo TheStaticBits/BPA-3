@@ -80,11 +80,14 @@ class Entity:
         return self.getRect().colliderect(entity.getRect())
 
     def lockToRect(self, topLeft: Vect, bottomRight: Vect,
-                   velocity: Vect) -> None:
+                   velocity: Vect = None) -> None:
         """ Locks the entity to a rect (used for map boundaries) """
         # Clamp position to inside the rect
         bottomRight -= self.getSize()
         self.pos.clamp(topLeft, bottomRight)
+
+        if velocity is None:
+            return
 
         # Reset velocity if the entity is at the edge of the rect
         if self.pos.x == topLeft.x or self.pos.x == bottomRight.x:

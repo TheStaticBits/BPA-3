@@ -68,12 +68,13 @@ class ErrorUI(BaseUI):
         if super().getElement("xButton").getActivated():
             self.errored = False
 
+        # Opens error and log files in the default text editor
         if super().getElement("errorFile").getActivated():
             webbrowser.open(self.ERROR_FILE)
-
         if super().getElement("logFile").getActivated():
             webbrowser.open(self.LOG_FILE)
 
+        # Send report email button!
         if super().getElement("sendEmail").getActivated():
             self.emailCrashReport()
 
@@ -105,17 +106,21 @@ class ErrorUI(BaseUI):
         if super().isHidden():
             return
 
-        percent = super().getPercentDone()
-        if super().getPosType() == "hidden":
-            percent = 1 - percent
+        # Only render overlay if the error is recoverable, as
+        # unrecoverable errors do not render the game in the back
+        if self.recoverable:
+            percent = super().getPercentDone()
+            if super().getPosType() == "hidden":
+                percent = 1 - percent
 
-        # create and render shaded overlay
-        surf: Image = Image.makeEmpty(surface.getSize(),
-                                      transparent=True)
-        surf.fill((0, 0, 0, round(self.bgAlpha * percent)))
+            # create and render shaded overlay
+            surf: Image = Image.makeEmpty(surface.getSize(),
+                                          transparent=True)
+            surf.fill((0, 0, 0, round(self.bgAlpha * percent)))
 
-        surface.render(surf, Vect(0, 0))
+            surface.render(surf, Vect(0, 0))
 
+        # Render the error UI
         super().render(surface)
 
     def emailCrashReport(self):

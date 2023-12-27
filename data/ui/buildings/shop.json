@@ -12,7 +12,7 @@
     },
 
     "defaultPos": "visible",
-    "transitionSpeed": 3,
+    "transitionSpeed": 9,
     "transitionType": "ease",
     "layers": 2,
 

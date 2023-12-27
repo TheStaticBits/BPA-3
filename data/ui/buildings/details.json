@@ -22,7 +22,7 @@
     },
 
     "defaultPos": "visible",
-    "transitionSpeed": 5,
+    "transitionSpeed": 15,
     "transitionType": "ease",
 
     "size": "auto",

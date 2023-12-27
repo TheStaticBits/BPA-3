@@ -28,6 +28,7 @@ class Generator(BaseBuilding):
         """ Updates generator and generates resources """
         super().update(window, camOffset, tileset, player)
 
+        # Do not generate resources if placing or onetimegeneration
         if self.oneTimeGenerate or super().isPlacing():
             return
 
@@ -37,6 +38,6 @@ class Generator(BaseBuilding):
         Player.capResources()
 
     def onRemove(self) -> None:
-        """ Remove resources when removed """
+        """ Remove resources when removed if it's one time generation """
         if self.oneTimeGenerate:
             Player.resources -= self.generate

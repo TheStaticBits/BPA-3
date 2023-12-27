@@ -143,7 +143,10 @@ class BaseUI:
         """ Loads transition data from the UI JSON data if applicable """
         self.transitioning: bool = False
         if "transitionSpeed" in jsonData:
-            self.transitionSpeed: float = jsonData["transitionSpeed"]
+            # speed of transitions, divided by image scale to
+            # maintain it across different scales
+            self.transitionSpeed: float = jsonData["transitionSpeed"] / \
+                Image.SCALE
             # ease or linear:
             self.transitionType: str = jsonData["transitionType"]
             self.transitionOffset: Vect = Vect(0, 0)
