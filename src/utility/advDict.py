@@ -149,3 +149,19 @@ class AdvDict:
             raise TypeError(f"Cannot divide AdvDict and {type(other)}")
 
         return self
+
+    def __gt__(self, other: AdvDict) -> bool:
+        """ > overloading """
+        for key in self.pyDict:
+            if self.pyDict[key] <= other[key]:
+                return False
+
+        return True
+
+    def __ge__(self, other: AdvDict) -> bool:
+        """ >= overloading """
+        for key in self.pyDict:
+            if self.pyDict[key] < other[key]:
+                return False
+
+        return True

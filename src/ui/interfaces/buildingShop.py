@@ -48,6 +48,9 @@ class BuildingShop(BaseUI):
         self.checkLeftRight(window)
         self.updateDetailUIs(window)
 
+        # Updates buy button status
+        self.detailUIs[self.buildingShown].updateResources()
+
     def updateButtons(self, window: Window) -> None:
         """ Updates the buttons """
         if super().getElement("openShop").getActivated():
@@ -135,6 +138,9 @@ class BuildingShop(BaseUI):
     def pressedBuy(self) -> str:
         """ Returns the type of building, or None if no building was bought """
         if self.detailUIs[self.buildingShown].pressedBuy():
+            # Spend player resources
+            self.detailUIs[self.buildingShown].spendResources()
+            # Return type
             return self.detailUIs[self.buildingShown].getType()
 
         return None

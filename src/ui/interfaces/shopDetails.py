@@ -4,6 +4,8 @@ from src.ui.interfaces.baseUI import BaseUI
 from src.utility.image import Image
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.entity import Entity
+from src.utility.advDict import AdvDict
+from src.entities.player import Player
 
 
 class ShopDetails(BaseUI):
@@ -43,13 +45,22 @@ class ShopDetails(BaseUI):
         super().getElement("description").setText(description)
 
         # Get cost and set it
-        cost: dict = data["cost"]
-        for resource, amount in cost.items():
+        self.cost: AdvDict = AdvDict(data["cost"])
+        for resource, amount in self.cost.getPyDict().items():
             super().getElement(resource + "Cost").setText(str(amount))
+
+    def updateResources(self) -> None:
+        """ Updates the buy button's enabled/disabled status
+            based on whether the play can afford the building or not """
+        super().getElement("buy").setEnabled(Player.resources >= self.cost)
 
     def pressedBuy(self) -> bool:
         """ Returns True if the buy button was pressed """
         return super().getElement("buy").getActivated()
+
+    def spendResources(self) -> None:
+        """ Spends the resources for the building """
+        Player.resources -= self.cost
 
     # Getters
     def getType(self) -> str:
