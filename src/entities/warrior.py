@@ -33,6 +33,8 @@ class Warrior(Entity):
         self.variant = self.WARRIOR_DICT[type]["type"]  # melee, ranged, etc.
         self.level: int = level
         self.setStats(self.level)
+        self.speed = 0
+        self.angle = 0
 
         # Enemy to target, move to, and attack
         self.target: Warrior = None
@@ -50,7 +52,10 @@ class Warrior(Entity):
         self.damage: int = data["damage"]
         self.interval: float = data["interval"]
         self.range: float = data["range"] * Image.SCALE
-        self.speed: float = data["speed"] * Image.SCALE
+
+        self.maxSpeed: float = data["maxSpeed"] * Image.SCALE
+        self.accel: float = data["accel"] * Image.SCALE
+        self.decel: float = data["decel"] * Image.SCALE
 
     def update(self, window: Window, tileset: Tileset,
                opponents: list[Warrior]) -> None:
@@ -59,6 +64,7 @@ class Warrior(Entity):
 
         # Update target and then move towards it
         self.updateTarget(opponents)
+        self.updateSpeed(window)
         self.moveToTarget(window)
 
         # Lock to tileset
@@ -78,9 +84,11 @@ class Warrior(Entity):
                 self.target = warrior
                 lowestDist = dist
 
-    def moveToTarget(self, window: Window) -> None:
-        """ Finds angle to target and moves to it until it's in range """
+    def updateSpeed(self, window: Window) -> None:
+        """ Updates the warrior's speed based on whether
+            they're in range and/or have a target """
         if self.target is None:
+            self.decelerate(window)
             return
 
         pos: Vect = super().getCenterPos()
@@ -88,20 +96,44 @@ class Warrior(Entity):
 
         # Check if in range
         dist: float = pos.dist(targetPos)
-        if dist <= self.range:
-            return  # don't move any further
+        if dist <= self.range:  # In range, so decelerate
+            self.decelerate(window)
+        else:  # Not in range, so accelerate
+            self.accelerate(window)
 
-        # Create velocity vector from angle to target
-        angle: float = pos.angle(targetPos)
+    def moveToTarget(self, window: Window) -> None:
+        """ Finds angle to target and moves to it until it's in range """
+        if self.target is not None:
+            # Update angle to the target if there is one
+            pos: Vect = super().getCenterPos()
+            targetPos: Vect = self.target.getCenterPos()
 
+            # Create velocity vector from angle to target
+            self.angle: float = pos.angle(targetPos)
+
+        # Find velocity based on angle and speed
         velocity: Vect = Vect()
-        velocity.x = -self.speed * cos(angle)
-        velocity.y = -self.speed * sin(angle)
+        velocity.x = -self.speed * cos(self.angle)
+        velocity.y = -self.speed * sin(self.angle)
 
         velocity *= window.getDeltaTime()
 
         # Move towards target
         super().setPos(super().getPos() + velocity)
+
+    def decelerate(self, window: Window) -> None:
+        """ Decelerates self.speed to 0 """
+        if self.speed > 0:
+            self.speed -= self.decel * window.getDeltaTime()
+            if self.speed < 0:
+                self.speed = 0
+
+    def accelerate(self, window: Window) -> None:
+        """ Accelerates self.speed to self.maxSpeed """
+        if self.speed < self.maxSpeed:
+            self.speed += self.accel * window.getDeltaTime()
+            if self.speed > self.maxSpeed:
+                self.speed = self.maxSpeed
 
     def hasTarget(self) -> bool:
         """ Returns whether or not the warrior has a target """

@@ -13,15 +13,16 @@
                 "health": 100,
                 "damage": 10,
                 "interval": 1,
-                "range": 40,
-                "speed": 30
+                "range": 60,
+                "maxSpeed": 100, "accel": 100, "decel": 400
             },
             {
                 "health": 200,
                 "damage": 20,
                 "interval": 0.5,
                 "range": 80,
-                "speed": 60
+                "speed": 60,
+                "maxSpeed": 120, "accel": 300, "decel": 400
             }
         ]
     }
