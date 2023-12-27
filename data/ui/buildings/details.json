@@ -60,7 +60,7 @@
 
             "description": {
                 "text": "[Description]",
-                "offset": [ 110, 20 ],
+                "offset": [ 110, 18 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             },

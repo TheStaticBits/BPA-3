@@ -67,7 +67,7 @@ class BaseBuilding(Entity):
             and updating animation if not placing"""
         if self.placing:
             self.followCursor(window, camOffset, tileset, player)
-            self.testPlace(window, tileset)
+            self.testPlace(window, tileset, player)
         else:  # update animation:
             super().update(window)
 
@@ -109,9 +109,11 @@ class BaseBuilding(Entity):
         # Set position to new self.tilePos
         super().setPos(self.tilePos * Tileset.TILE_SIZE)
 
-    def testPlace(self, window: Window, tileset: Tileset) -> None:
+    def testPlace(self, window: Window, tileset: Tileset,
+                  player: Player) -> None:
         """ Tests if the building can be placed and places it """
-        self.placable = self.testPlacement(self.type, self.tilePos, tileset)
+        self.placable = self.testPlacement(self.type, self.tilePos, tileset) \
+            and not super().collide(player)
 
         if self.placable and window.getMouseJustPressed("left"):
             self.placing = False
@@ -136,7 +138,7 @@ class BaseBuilding(Entity):
 
             # Tint red if not placeable
             if not self.placable:
-                img.fill(255, 0, 0, 150)
+                img.tint(255, 80, 80, 150)
 
             # Draw the new tinted surface to the screen
             surface.render(img, super().getPos() + offset)
