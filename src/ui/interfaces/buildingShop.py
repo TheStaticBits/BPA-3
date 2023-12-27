@@ -29,6 +29,8 @@ class BuildingShop(BaseUI):
         self.clipSurface: Image = Image.makeEmpty(super().getSize(),
                                                   transparent=True)
 
+        self.checkButtonsDisabled()
+
     def loadBuildingUI(self, index: int, posType: str) -> None:
         """ Loads the UI, images, descriptions, etc. for the building """
         if index < len(self.detailUIs):
@@ -54,6 +56,13 @@ class BuildingShop(BaseUI):
             else:
                 super().startTransition("hidden", window)
 
+    def checkButtonsDisabled(self) -> None:
+        """ Updates the disabled/enabled status of the left/right buttons
+            based on whether or not there are buildings to the left/right """
+        super().getElement("left").setEnabled(self.buildingShown != 0)
+        super().getElement("right").setEnabled(
+            self.buildingShown != self.totalBuildings - 1)
+
     def checkLeftRight(self, window: Window) -> None:
         """ Checks left & right buttons and starts UI transitions
             if either are pressed"""
@@ -67,6 +76,7 @@ class BuildingShop(BaseUI):
             self.buildingShown -= 1
             self.detailUIs[self.buildingShown].startTransition("visible",
                                                                window)
+            self.checkButtonsDisabled()
 
         # Check if the right button was pressed
         elif super().getElement("right").getActivated():
@@ -79,6 +89,7 @@ class BuildingShop(BaseUI):
             self.loadBuildingUI(self.buildingShown, "right")
             self.detailUIs[self.buildingShown].startTransition("visible",
                                                                window)
+            self.checkButtonsDisabled()
 
     def updateDetailUIs(self, window: Window) -> None:
         """ Updates the detail UIs """

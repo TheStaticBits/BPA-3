@@ -55,7 +55,7 @@ class Image:
             # Scale image up by the scale factor
             self.transform(self.size * self.SCALE)
 
-    def render(self, other: Image, pos: Vect,
+    def render(self, other: Image, pos: Vect = Vect(),
                area: pygame.Rect = None) -> None:
         """ Renders another image to this image at a given pos """
         self.image.blit(other.image, pos.toTuple(), area=area)
@@ -63,6 +63,10 @@ class Image:
     def fill(self, *color) -> None:
         """ Fills the image with a given color """
         self.image.fill(color)
+
+    def tint(self, *color) -> None:
+        """ Tints the image with a given color """
+        self.image.fill(color, special_flags=pygame.BLEND_MULT)
 
     def setAlpha(self, alpha: int) -> None:
         """ Sets the alpha of the image """

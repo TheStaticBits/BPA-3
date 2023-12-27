@@ -60,6 +60,9 @@ class Button(BaseUIElement):
         # Reset activated (since it is only true for one frame)
         self.activated = False
 
+        if not self.enabled:
+            return
+
         if self.mode == "pressed":
             if window.getMouseReleased("left"):  # Mouse released button
                 if self.isMouseOver(window):
@@ -106,6 +109,14 @@ class Button(BaseUIElement):
         else:
             btnImg = self.buttons["inactive"]
 
+        if not self.enabled:
+            # Create a transparent gray version of the image
+            # Make same-sized transparent image
+            grayedImg = Image.makeEmpty(btnImg.getSize(), transparent=True)
+            grayedImg.render(btnImg)  # Render button image
+            grayedImg.tint(220, 220, 220)  # Make gray
+            btnImg = grayedImg
+
         super().render(surface, image=btnImg)
 
         # Render text if it exists
@@ -130,3 +141,10 @@ class Button(BaseUIElement):
 
         super().setImg(self.getModeImg())
         self.mode = mode
+
+    def setEnabled(self, enabled: bool) -> None:
+        """ Sets whether or not the button is enabled """
+        self.enabled = enabled
+
+        if not enabled:  # Set image to inactive
+            self.setMode("inactive")
