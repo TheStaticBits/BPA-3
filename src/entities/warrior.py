@@ -23,11 +23,17 @@ class Warrior(Entity):
             constants["warriors"]["jsonPath"]
         )
 
-    def __init__(self, type: str, level: int,
+    def __init__(self, type: str, isAlly: bool, level: int,
                  spawnPosList: list[list[int]]) -> None:
         """ Setup randomized position, its animation, stats, etc. """
         spawnPos = self.pickSpawnPos(spawnPosList)
-        super().__init__(self.WARRIOR_DICT[type]["anim"], pos=spawnPos)
+
+        if isAlly:
+            animData = self.WARRIOR_DICT[type]["allyAnim"]
+        else:
+            animData = self.WARRIOR_DICT[type]["enemyAnim"]
+
+        super().__init__(animData, pos=spawnPos)
 
         self.type: str = type
         self.variant = self.WARRIOR_DICT[type]["type"]  # melee, ranged, etc.

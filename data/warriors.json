@@ -2,7 +2,13 @@
     "testWarrior": {
         "type": "melee",
 
-        "anim": {
+        "enemyAnim": {
+            "path": "res/warriors/enemyWarrior.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
             "path": "res/warriors/ligmaWarrior.png",
             "frames": 1,
             "delay": 1

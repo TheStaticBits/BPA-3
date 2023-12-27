@@ -57,11 +57,13 @@ class DungeonScene(BaseScene):
     def spawnQueue(self) -> None:
         """ Spawns queued warrior types """
         for warriorType in self.queuedAllies:
-            self.allies.append(Warrior(warriorType, 1, self.allySpawns))
+            self.allies.append(Warrior(warriorType, True,
+                                       1, self.allySpawns))
         self.queuedAllies.clear()
 
         for warriorType in self.queuedEnemies:
-            self.enemies.append(Warrior(warriorType, 1, self.enemySpawns))
+            self.enemies.append(Warrior(warriorType, False,
+                                        1, self.enemySpawns))
         self.queuedEnemies.clear()
 
     def render(self, surface: Window | Image) -> None:
