@@ -59,7 +59,9 @@
                 "layer": 1,
 
                 "images": {
-                    "inactive": "res/ui/shop/arrow.png"
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
                 }
             },
 
@@ -68,7 +70,9 @@
                 "layer": 1,
                 
                 "images": {
-                    "inactive": "res/ui/shop/arrow.png"
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
                 },
 
                 "flip": [ true, false ]
