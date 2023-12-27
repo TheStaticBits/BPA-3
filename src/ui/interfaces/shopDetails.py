@@ -42,6 +42,11 @@ class ShopDetails(BaseUI):
         description: str = data["description"]
         super().getElement("description").setText(description)
 
+        # Get cost and set it
+        cost: dict = data["cost"]
+        for resource, amount in cost.items():
+            super().getElement(resource + "Cost").setText(str(amount))
+
     def pressedBuy(self) -> bool:
         """ Returns True if the buy button was pressed """
         return super().getElement("buy").getActivated()
