@@ -71,8 +71,9 @@ class Warrior(Entity):
         super().lockToRect(Vect(0, 0), tileset.getSize())
 
     def updateTarget(self, opponents: list[Warrior]) -> None:
-        """ Finds the closest opponent to target """
-        if len(opponents) == 0:
+        """ Finds the closest opponent to target
+            if the warrior does not already have a target """
+        if self.target is not None or len(opponents) == 0:
             return
 
         lowestDist: float = super().getPos().dist(opponents[0].getPos())
