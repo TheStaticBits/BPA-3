@@ -102,6 +102,11 @@ class BuildingShop(BaseUI):
         for ui in self.detailUIs:
             ui.update(window, transitionOffset)
 
+    def setPlacing(self, placing: bool) -> None:
+        """ Call when starting to place a building """
+        buyButton = self.detailUIs[self.buildingShown].getElement("buy")
+        buyButton.setEnabled(not placing)
+
     def render(self, surface: Window | Image) -> None:
         """ Renders the UI to the given surface along with the
             building shop detail UIs """

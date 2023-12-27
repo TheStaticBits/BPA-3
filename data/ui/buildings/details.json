@@ -58,7 +58,7 @@
 
         "buttons": {
             "buy": {
-                "offset": [ 205, 5 ],
+                "offset": [ 80, 20 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",

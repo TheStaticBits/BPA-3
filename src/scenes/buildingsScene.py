@@ -59,6 +59,7 @@ class BuildingsScene(BaseScene):
         if type:
             # Place the building
             self.log.info(f"Started placing building {type}")
+            self.buildingsSceneUI.setPlacing(True)
             self.placeBuilding(type)
             self.placingBuilding = True
 
@@ -78,6 +79,7 @@ class BuildingsScene(BaseScene):
             if building.isPlacing():
                 return True
 
+        self.buildingsSceneUI.setPlacing(False)
         return False
 
     def render(self, surface: Window | Image) -> None:

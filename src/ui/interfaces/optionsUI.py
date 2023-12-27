@@ -9,6 +9,8 @@ class OptionsUI(BaseUI):
     def __init__(self) -> None:
         super().__init__("optionsUI")
 
+        super().getElement("pauseButton").setEnabled(False)
+
     def switchScene(self) -> bool:
         """ Returns true if the scene should be switched """
         return super().getElement("switchScene").getActivated()

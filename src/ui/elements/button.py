@@ -114,7 +114,7 @@ class Button(BaseUIElement):
             # Make same-sized transparent image
             grayedImg = Image.makeEmpty(btnImg.getSize(), transparent=True)
             grayedImg.render(btnImg)  # Render button image
-            grayedImg.tint(220, 220, 220)  # Make gray
+            grayedImg.tint(180, 180, 180)  # Make gray
             btnImg = grayedImg
 
         super().render(surface, image=btnImg)
