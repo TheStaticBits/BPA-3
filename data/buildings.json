@@ -27,8 +27,8 @@
         "description": "This is a test\nspawner building",
 
         "anim": {
-            "path": "res/testBuilding.png",
-            "frames": 1, "delay": 1
+            "path": "res/buildings/spawner.png",
+            "frames": 2, "delay": 1
         },
 
         "size": [3, 2],
