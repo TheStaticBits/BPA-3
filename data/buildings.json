@@ -17,7 +17,7 @@
         },
 
         "storageAmount": {
-            "gold": 100
+            "gold": 150
         }
     },
 
@@ -56,14 +56,14 @@
         "size": [3, 2],
 
         "cost": {
-            "gold": 100,
+            "gold": 140,
             "steampower": 0
         },
 
         "oneTimeGenerate": false,
 
         "generateAmount": {
-            "gold": 5
+            "gold": 4
         }
     },
 
