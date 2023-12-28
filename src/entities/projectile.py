@@ -15,13 +15,15 @@ class Projectile(Entity):
         cls.ANIMS: dict = constants["projectiles"]
 
     def __init__(self, type: str, angle: float, speed: float,
-                 damage: float, startingPos: Vect, isAlly: bool) -> None:
+                 damage: float, knockback: float,
+                 startingPos: Vect, isAlly: bool) -> None:
         """ Sets up the projectile anim and pos """
         super().__init__(self.ANIMS[type], startingPos)
 
         self.angle: float = angle
         self.speed: float = speed
         self.damage: float = damage
+        self.knockback: float = knockback
         self.isAlly: bool = isAlly
 
         self.remove: bool = False
@@ -42,9 +44,9 @@ class Projectile(Entity):
         """ Updates the projectile position """
         # Movement based on the angle and speed
         moveAmount: Vect = Vect(
-            cos(self.angle) * self.speed * window.getDeltaTime(),
-            sin(self.angle) * self.speed * window.getDeltaTime()
-        )
+            self.speed * cos(self.angle),
+            self.speed * sin(self.angle)
+        ) * window.getDeltaTime()
         super().addPos(moveAmount)
 
     def testOutOfBounds(self, tilesetSize: Vect) -> bool:
@@ -66,7 +68,7 @@ class Projectile(Entity):
         for warrior in warriors:
             if super().collide(warrior):
                 self.remove = True
-                warrior.hit(self.damage)
+                warrior.hit(self.damage, self.angle, self.knockback)
                 return warrior  # Can only hit one warrior
 
         return None

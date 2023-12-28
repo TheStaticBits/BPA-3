@@ -25,6 +25,9 @@ class Warrior(Entity):
             constants["warriors"]["jsonPath"]
         )
 
+        cls.KNOCKBACK_ANGLE_RANGE: float = \
+            constants["warriors"]["knockbackAngleRange"]
+
     def __init__(self, type: str, isAlly: bool, level: int,
                  spawnPosList: list[list[int]]) -> None:
         """ Setup randomized position, its animation, stats, etc. """
@@ -55,6 +58,10 @@ class Warrior(Entity):
         self.speed = 0
         self.angle = 0
 
+        # Knockback of projectiles and other such attacks
+        self.knockbackAngle = 0
+        self.knockbackVel = 0
+
         # Enemy to target, move to, and attack
         self.target: Warrior = None
 
@@ -77,8 +84,12 @@ class Warrior(Entity):
         self.accel: float = data["accel"] * Image.SCALE
         self.decel: float = data["decel"] * Image.SCALE
 
+        self.knockbackResistance = data["knockbackResistance"] * Image.SCALE
+
         if self.attackType == "projectile":
             self.projectileSpeed: float = data["projectileSpeed"] * Image.SCALE
+            self.projectileKnockback: float = \
+                data["projectileKnockback"] * Image.SCALE
 
     def update(self, window: Window, tileset: Tileset,
                opponents: list[Warrior]) -> None:
@@ -89,6 +100,7 @@ class Warrior(Entity):
         self.updateTarget(opponents)
         self.updateSpeed(window)
         self.moveToTarget(window)
+        self.updateKnockback(window)
 
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
@@ -109,11 +121,14 @@ class Warrior(Entity):
                 self.target = warrior
                 lowestDist = dist
 
+        # Reset attack timer
+        self.attackTimer.reset()
+
     def updateSpeed(self, window: Window) -> None:
         """ Updates the warrior's speed based on whether
             they're in range and/or have a target """
         if not self.hasTarget():
-            self.decelerate(window)
+            self.speed = self.decelerate(window, self.speed, self.decel)
             return
 
         pos: Vect = super().getCenterPos()
@@ -122,9 +137,9 @@ class Warrior(Entity):
         # Check if in range
         dist: float = pos.dist(targetPos)
         if dist <= self.range:  # In range, so decelerate
-            self.decelerate(window)
+            self.speed = self.decelerate(window, self.speed, self.decel)
         else:  # Not in range, so accelerate
-            self.accelerate(window)
+            self.speed = self.accelerate(window, self.speed, self.accel)
 
     def moveToTarget(self, window: Window) -> None:
         """ Finds angle to target and moves to it until it's in range """
@@ -139,28 +154,52 @@ class Warrior(Entity):
             return
 
         # Find velocity based on angle and speed
-        velocity: Vect = Vect()
-        velocity.x = self.speed * cos(self.angle)
-        velocity.y = self.speed * sin(self.angle)
-
-        velocity *= window.getDeltaTime()
+        velocity: Vect = Vect(
+            self.speed * cos(self.angle),
+            self.speed * sin(self.angle)
+        ) * window.getDeltaTime()
 
         # add movement amount
         super().addPos(velocity)
 
-    def decelerate(self, window: Window) -> None:
-        """ Decelerates self.speed to 0 """
-        if self.speed > 0:
-            self.speed -= self.decel * window.getDeltaTime()
-            if self.speed < 0:
-                self.speed = 0
+    def updateKnockback(self, window: Window) -> None:
+        """ Updates the knockback, decelerating it and moving by it """
+        if self.knockbackVel <= 0:
+            return
 
-    def accelerate(self, window: Window) -> None:
-        """ Accelerates self.speed to self.maxSpeed """
-        if self.speed < self.maxSpeed:
-            self.speed += self.accel * window.getDeltaTime()
-            if self.speed > self.maxSpeed:
-                self.speed = self.maxSpeed
+        # Decelerate knockback
+        self.knockbackVel = self.decelerate(window,
+                                            self.knockbackVel,
+                                            self.knockbackResistance)
+
+        # Get velocity from angle and speed
+        velocity: Vect = Vect(
+            self.knockbackVel * cos(self.knockbackAngle),
+            self.knockbackVel * sin(self.knockbackAngle)
+        ) * window.getDeltaTime()
+
+        # Add movement amount
+        super().addPos(velocity)
+
+    def decelerate(self, window: Window,
+                   velocity: float, decel: float) -> float:
+        """ Decelerates vel to 0 and returns the new velocity"""
+        if velocity > 0:
+            velocity -= decel * window.getDeltaTime()
+            if velocity < 0:
+                velocity = 0
+
+        return velocity
+
+    def accelerate(self, window: Window,
+                   velocity: float, accel: float) -> float:
+        """ Accelerates velocity to self.maxSpeed and returns it """
+        if velocity < self.maxSpeed:
+            velocity += accel * window.getDeltaTime()
+            if velocity > self.maxSpeed:
+                velocity = self.maxSpeed
+
+        return velocity
 
     def updateAttack(self, window: Window, opponents: list[Warrior],
                      projectiles: list[Projectile]) -> None:
@@ -193,6 +232,7 @@ class Warrior(Entity):
         # Create projectile object from data
         proj: Projectile = Projectile(self.type, angle,
                                       self.projectileSpeed, self.damage,
+                                      self.projectileKnockback,
                                       spawnPos, self.isAlly)
 
         projectiles.append(proj)
@@ -200,11 +240,18 @@ class Warrior(Entity):
     def aoeAttack(self, opponents: list[Warrior]) -> None:
         """ Deals damage to all opponents in range """
         # Doing this soon :)
-        # Getting projectiles working first
 
-    def hit(self, damage: float) -> None:
+    def hit(self, damage: float, knockbackAngle: float,
+            knockbackVel: float) -> None:
         """ Deals damage to the warrior """
         self.health -= damage
+
+        # Creates a new knockback angle in the random range
+        knockbackAngle -= self.KNOCKBACK_ANGLE_RANGE / 2
+        knockbackAngle += random.random() * self.KNOCKBACK_ANGLE_RANGE
+
+        self.knockbackAngle = knockbackAngle
+        self.knockbackVel = knockbackVel
 
     # Getters
     def hasTarget(self) -> bool:

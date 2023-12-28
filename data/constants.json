@@ -78,7 +78,8 @@
     },
 
     "warriors": {
-        "jsonPath": "data/warriors.json"
+        "jsonPath": "data/warriors.json",
+        "knockbackAngleRange": 0.5
     },
 
     "projectiles": {

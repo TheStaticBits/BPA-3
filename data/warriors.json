@@ -20,19 +20,23 @@
                 "health": 100,
                 "range": 60,
                 "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
                 
                 "attackInterval": 1,
                 "damage": 10,
-                "projectileSpeed": 200
+                "projectileSpeed": 200,
+                "projectileKnockback": 200
             },
             {
                 "health": 200,
                 "range": 80,
                 "maxSpeed": 120, "accel": 300, "decel": 400,
+                "knockbackResistance": 400,
                 
                 "attackInterval": 0.5,
                 "damage": 20,
-                "projectileSpeed": 200
+                "projectileSpeed": 200,
+                "projectileKnockback": 300
             }
         ]
     }
