@@ -79,5 +79,12 @@
 
     "warriors": {
         "jsonPath": "data/warriors.json"
+    },
+
+    "projectiles": {
+        "testWarrior": {
+            "path": "res/particles/testWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        }
     }
 }
