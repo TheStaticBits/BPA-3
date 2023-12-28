@@ -18,8 +18,8 @@
         "levels": [
             {
                 "health": 100,
-                "range": 60,
-                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "range": 50,
+                "maxSpeed": 80, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
                 "attackInterval": 1,
@@ -28,15 +28,81 @@
                 "projectileKnockback": 200
             },
             {
-                "health": 200,
-                "range": 80,
-                "maxSpeed": 120, "accel": 300, "decel": 400,
+                "health": 100,
+                "range": 55,
+                "maxSpeed": 80, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 0.5,
-                "damage": 20,
+                "attackInterval": 1,
+                "damage": 10,
                 "projectileSpeed": 200,
-                "projectileKnockback": 300
+                "projectileKnockback": 200
+            },
+            {
+                "health": 100,
+                "range": 55,
+                "maxSpeed": 95, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 11,
+                "projectileSpeed": 200,
+                "projectileKnockback": 200
+            },
+            {
+                "health": 100,
+                "range": 60,
+                "maxSpeed": 95, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 11,
+                "projectileSpeed": 200,
+                "projectileKnockback": 200
+            },
+            {
+                "health": 110,
+                "range": 60,
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 12,
+                "projectileSpeed": 200,
+                "projectileKnockback": 200
+            },
+            {
+                "health": 120,
+                "range": 60,
+                "maxSpeed": 105, "accel": 150, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 12,
+                "projectileSpeed": 240,
+                "projectileKnockback": 240
+            },
+            {
+                "health": 130,
+                "range": 60,
+                "maxSpeed": 105, "accel": 150, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 12,
+                "projectileSpeed": 240,
+                "projectileKnockback": 240
+            },
+            {
+                "health": 130,
+                "range": 60,
+                "maxSpeed": 110, "accel": 160, "decel": 400,
+                "knockbackResistance": 500,
+                
+                "attackInterval": 1,
+                "damage": 12,
+                "projectileSpeed": 260,
+                "projectileKnockback": 240
             }
         ]
     }

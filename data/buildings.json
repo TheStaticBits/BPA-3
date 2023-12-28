@@ -35,12 +35,12 @@
 
         "cost": {
             "gold": 100,
-            "steampower": 0
+            "steampower": 15
         },
 
         "warrior": "testWarrior",
-        "spawnInterval": 1,
-        "spawnAmount": 2
+        "spawnInterval": 3,
+        "spawnAmount": 5
     },
 
     "testGenerator": {
