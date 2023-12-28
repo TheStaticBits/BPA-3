@@ -1,0 +1,11 @@
+[
+    {
+        "enemies": [
+            { "warrior": "testWarrior", "amount": 10,
+              }
+        ]
+    },
+    {
+
+    }
+]
