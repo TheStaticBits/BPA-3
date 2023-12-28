@@ -17,7 +17,7 @@
         },
 
         "storageAmount": {
-            "gold": 100
+            "gold": 150
         }
     },
 
@@ -27,20 +27,20 @@
         "description": "This is a test\nspawner building",
 
         "anim": {
-            "path": "res/testBuilding.png",
-            "frames": 1, "delay": 1
+            "path": "res/buildings/spawner.png",
+            "frames": 2, "delay": 1
         },
 
-        "size": [3, 2],
+        "size": [2, 2],
 
         "cost": {
             "gold": 100,
-            "steampower": 0
+            "steampower": 15
         },
 
         "warrior": "testWarrior",
-        "spawnInterval": 1,
-        "spawnAmount": 2
+        "spawnInterval": 3,
+        "spawnAmount": 5
     },
 
     "testGenerator": {
@@ -56,14 +56,14 @@
         "size": [3, 2],
 
         "cost": {
-            "gold": 100,
+            "gold": 140,
             "steampower": 0
         },
 
         "oneTimeGenerate": false,
 
         "generateAmount": {
-            "gold": 5
+            "gold": 4
         }
     },
 
