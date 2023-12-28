@@ -26,3 +26,7 @@ class Timer:
             return True
 
         return False
+
+    def reset(self) -> None:
+        """ Resets the timer """
+        self.timer = 0

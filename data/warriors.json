@@ -1,6 +1,7 @@
 {
     "testWarrior": {
-        "type": "melee",
+        "attackType": "projectile",
+        "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
             "path": "res/warriors/enemyWarrior.png",
@@ -17,18 +18,25 @@
         "levels": [
             {
                 "health": 100,
-                "damage": 10,
-                "interval": 1,
                 "range": 60,
-                "maxSpeed": 100, "accel": 100, "decel": 400
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 10,
+                "projectileSpeed": 200,
+                "projectileKnockback": 200
             },
             {
                 "health": 200,
-                "damage": 20,
-                "interval": 0.5,
                 "range": 80,
-                "speed": 60,
-                "maxSpeed": 120, "accel": 300, "decel": 400
+                "maxSpeed": 120, "accel": 300, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 0.5,
+                "damage": 20,
+                "projectileSpeed": 200,
+                "projectileKnockback": 300
             }
         ]
     }

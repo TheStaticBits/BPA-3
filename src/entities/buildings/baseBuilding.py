@@ -88,7 +88,7 @@ class BaseBuilding(Entity):
             # Cursor is too far from player, clamp to max distance
 
             # Get angle between player and cursor
-            angle: float = mousePos.angle(playerPos)
+            angle: float = playerPos.angle(mousePos)
 
             # Get distance from angle and max distance
             dist: Vect = Vect.distFromAngle(angle, self.BUILD_REACH)

@@ -78,6 +78,14 @@
     },
 
     "warriors": {
-        "jsonPath": "data/warriors.json"
+        "jsonPath": "data/warriors.json",
+        "knockbackAngleRange": 0.5
+    },
+
+    "projectiles": {
+        "testWarrior": {
+            "path": "res/particles/testWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        }
     }
 }

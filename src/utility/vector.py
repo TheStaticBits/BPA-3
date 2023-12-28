@@ -53,7 +53,7 @@ class Vect:
 
     def angle(self, other: Vect) -> float:
         """ Returns the angle in radians between two points """
-        return atan2(self.y - other.y, self.x - other.x)
+        return atan2(other.y - self.y, other.x - self.x)
 
     @classmethod
     def distFromAngle(self, angle: float, dist: float) -> Vect:
