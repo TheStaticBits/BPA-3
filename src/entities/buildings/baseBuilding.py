@@ -51,6 +51,11 @@ class BaseBuilding(Entity):
         self.placing: bool = True
         self.placable: bool = False
 
+        # Whether the player has selected this building
+        # and its upgrades UI is showing.
+        # Resets to False every frame
+        self.selected: bool = False
+
         super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
 
     def onRemove(self) -> None:
@@ -128,31 +133,36 @@ class BaseBuilding(Entity):
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """
-        if self.placing:
-            # Create a new surface the size of the building image
-            img = Image.makeEmpty(super().getSize(), transparent=True)
+        if not self.placing and not self.selected:
+            super().render(surface, offset)
+            return
 
-            # Render the current animation frame on the new surface
-            super().render(img, -super().getPos())
+        # Get current animation frame
+        img = super().getAnim().getFrame().copy()
+
+        if self.placing:  # Set semitransparent
             img.setAlpha(150)
 
             # Tint red if not placeable
             if not self.placable:
-                img.tint(255, 80, 80, 150)
+                img.tint(255, 80, 80)
 
-            # Draw the new tinted surface to the screen
-            surface.render(img, super().getPos() + offset)
+        elif self.selected:
+            img.tint(150, 255, 150)  # Tint green for selected
+            self.selected = False  # Reset selected
 
-        else:
-            super().render(surface, offset)
+        # Draw the new tinted surface to the screen
+        surface.render(img, super().getPos() + offset)
 
     # Getters
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
 
-    def isPlacing(self) -> bool:
-        return self.placing
+    def isPlacing(self) -> bool: return self.placing
 
     @classmethod
     def getDataFrom(cls, type: str) -> dict:
         return cls.BUILDINGS_DATA[type]
+
+    # Setters
+    def select(self) -> None: self.selected = True

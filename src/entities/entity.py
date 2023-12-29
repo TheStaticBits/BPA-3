@@ -37,28 +37,33 @@ class Entity:
         self.animation.render(surface, self.pos + offset)
 
     def collision(self, window: Window,
-                  entities: list[Entity], velocity: Vect) -> None:
+                  entities: list[Entity], velocity: Vect) -> list[Entity]:
         """ Handle collision with other entities,
-            and also updating position based on velocity """
+            and also updating position based on velocity.
+            Returns a list of collided entities """
 
         # Apply velocity in each direction separately
         # and then check for collisions,
         # then adjust pos accordingly to edge of any collisions
         self.pos.x += velocity.x * window.getDeltaTime()
-        self.axisCollision("x", velocity, entities)
+        collided: list[Entity] = self.axisCollision("x", velocity, entities)
 
         self.pos.y += velocity.y * window.getDeltaTime()
-        self.axisCollision("y", velocity, entities)
+        collided += self.axisCollision("y", velocity, entities)
+
+        return collided
 
     def axisCollision(self, dir: str, velocity: Vect,
-                      entities: list[Entity]) -> None:
+                      entities: list[Entity]) -> list[Entity]:
         """ Check and adjust pos for any collisions in a single direction.
-            dir parameter must be "x" or "y". """
+            dir parameter must be "x" or "y". Returns a list of collided """
+        collided: list[Entity] = []
 
         # Check collision with each entity
         for entity in entities:
             # Collided with an entity
             if self.collide(entity):
+                collided.append(entity)
                 # Get entity position in the direction of collision
                 entityStart: float = entity.getPos().get(dir)
 
@@ -74,6 +79,8 @@ class Entity:
 
                 self.pos.set(dir, newPos)  # Set new position
                 velocity.set(dir, 0)  # Reset velocity in that dir
+
+        return collided
 
     def collide(self, entity: Entity) -> bool:
         """ Collision detection between an entity and another """

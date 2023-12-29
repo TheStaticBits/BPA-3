@@ -1,0 +1,65 @@
+{
+    "expandedMinWidth": 590,
+
+    "positions": {
+        "visible": {
+            "x": { "locked": "start", "margin": 10 },
+            "y": { "locked": "end", "margin": 0  },
+            "hidden": false
+        },
+
+        "hidden": {
+            "x": { "locked": "start", "margin": 10  },
+            "y": { "locked": "end", "margin": -50 },
+            "hidden": true
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 9,
+    "transitionType": "ease",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/shop/bg.png"
+            },
+
+            "outline": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/shop/outline.png"
+            }
+        },
+        
+        "text": {
+            "title": {
+                "text": "[Building Level]",
+                "offset": [ 50, 10 ],
+                "fontSize": 8,
+                "color": [ 0, 0, 0 ]
+            }
+        },
+
+        "buttons": {
+            "closeButton": {
+                "offset": [ 5, 5 ],
+
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Close",
+                    "offset": [ 0.66, 0.33 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            }
+        }
+    }
+}

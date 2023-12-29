@@ -31,7 +31,7 @@ class Waves:
         self.waveNum = waveNum
 
         if waveNum >= len(self.WAVES_DATA):
-            self.log.info("All waves have been completed. Oops!")
+            self.log.warn("All waves have been completed. Oops!")
             self.waveNum = 0
             return
 

@@ -55,8 +55,9 @@ class Player(Entity):
         self.velocity = Vect(0, 0)
 
     def update(self, window: Window, tileset: Tileset,
-               buildings: list[Entity] = []) -> None:
-        """ Update player animation, movement, etc. """
+               buildings: list[Entity] = []) -> Entity | None:
+        """ Update player animation, movement, etc.
+            Returns the first building the player has collided with """
         super().update(window)
 
         self.movement(window)
@@ -65,10 +66,13 @@ class Player(Entity):
         buildings = [b for b in buildings if not b.isPlacing()]
 
         # Move player based on velocity while checking collisions
-        super().collision(window, buildings, self.velocity)
+        collided = super().collision(window, buildings, self.velocity)
 
         # Prevent player from walking out of the map boundaries
         super().lockToRect(Vect(0, 0), tileset.getSize(), self.velocity)
+
+        # Return the first collided building if the list isn't empty
+        return collided[0] if len(collided) != 0 else None
 
     def movement(self, window: Window) -> None:
         """ Handle player movement based on inputs """

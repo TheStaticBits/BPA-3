@@ -51,8 +51,11 @@ class Animation:
     # Getters
     def getSize(self) -> Vect: return self.frameSize
 
-    def getFrame(self, frame: int) -> Image:
+    def getFrame(self, frame: int = None) -> Image:
         """ Returns the given frame of the spritesheet """
+        if frame is None:
+            frame = self.currentFrame
+
         rect: pygame.Rect = pygame.Rect(frame * self.frameSize.x, 0,
                                         self.frameSize.x, self.frameSize.y)
 

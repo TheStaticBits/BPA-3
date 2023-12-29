@@ -7,6 +7,7 @@ from src.entities.buildings.spawner import Spawner
 from src.window import Window
 from src.utility.image import Image
 from src.ui.interfaces.buildingShop import BuildingShop
+from src.ui.interfaces.upgradeUI import UpgradeUI
 
 
 class BuildingsScene(BaseScene):
@@ -26,7 +27,8 @@ class BuildingsScene(BaseScene):
         super().__init__(mapFolderName)
 
         self.buildings: list[BaseBuilding] = []
-        self.buildingsSceneUI: BuildingShop = BuildingShop()
+        self.buildingShop: BuildingShop = BuildingShop()
+        self.upgradeUI: UpgradeUI = UpgradeUI()  # Upgrade buildings
 
         self.placingBuilding: bool = False
 
@@ -35,16 +37,9 @@ class BuildingsScene(BaseScene):
         super().updateCameraPos(window)
         super().updateTileset(window)
 
-        self.buildingsSceneUI.update(window)
-
-        # Update buildings
-        for building in self.buildings:
-            building.update(window, super().getCamOffset(),
-                            super().getTileset(), super().getPlayer())
-
-        # Player collision with buildings
-        super().getPlayer().update(window, super().getTileset(),
-                                   buildings=self.buildings)
+        self.buildingShop.update(window)
+        self.updateBuildings(window)
+        self.updatePlayerAndUpgrades(window)
 
         # Makes sure the player can only buy one building at a time
         if not self.placingBuilding:
@@ -52,14 +47,41 @@ class BuildingsScene(BaseScene):
         else:
             self.placingBuilding = self.isPlacingBuilding()
 
+    def updateBuildings(self, window: Window) -> None:
+        """ Updates all buildings """
+        for building in self.buildings:
+            building.update(window, super().getCamOffset(),
+                            super().getTileset(), super().getPlayer())
+
+    def updatePlayerAndUpgrades(self, window: Window) -> None:
+        """ Updates the player and the upgrade UI,
+            including the building shop and upgrade UI interactions """
+        # Player collision with buildings
+        player = super().getPlayer()
+        collided = player.update(window, super().getTileset(),
+                                 buildings=self.buildings)
+        # Set upgrade UI with the selected building
+        self.upgradeUI.setBuilding(collided, window)
+
+        self.upgradeUI.update(window)
+
+        # Hide shop if the player is placing a building
+        if not self.upgradeUI.canShowShop(window):
+            # Hides the upgrade UI if the player just opened it
+            # otherwise, hides the shop
+            if self.buildingShop.startedVisible():
+                self.upgradeUI.hide(window)
+            else:
+                self.buildingShop.hide(window)
+
     def testBuyBuilding(self) -> None:
         """ Tests if the player has begun placing a building """
         # Test if the player pressed the button to buy a building
-        type: str = self.buildingsSceneUI.pressedBuy()
+        type: str = self.buildingShop.pressedBuy()
         if type:
             # Place the building
             self.log.info(f"Started placing building {type}")
-            self.buildingsSceneUI.setPlacing(True)
+            self.buildingShop.setPlacing(True)
             self.placeBuilding(type)
             self.placingBuilding = True
 
@@ -79,7 +101,7 @@ class BuildingsScene(BaseScene):
             if building.isPlacing():
                 return True
 
-        self.buildingsSceneUI.setPlacing(False)
+        self.buildingShop.setPlacing(False)
         return False
 
     def render(self, surface: Window | Image) -> None:
@@ -92,4 +114,6 @@ class BuildingsScene(BaseScene):
 
         super().renderPlayer(surface)
 
-        self.buildingsSceneUI.render(surface)
+        self.buildingShop.render(surface)
+
+        self.upgradeUI.render(surface)

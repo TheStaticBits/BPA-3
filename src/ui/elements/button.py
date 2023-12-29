@@ -110,12 +110,9 @@ class Button(BaseUIElement):
             btnImg = self.buttons["inactive"]
 
         if not self.enabled:
-            # Create a transparent gray version of the image
-            # Make same-sized transparent image
-            grayedImg = Image.makeEmpty(btnImg.getSize(), transparent=True)
-            grayedImg.render(btnImg)  # Render button image
+            grayedImg = btnImg.copy()  # Copy image
             grayedImg.tint(180, 180, 180)  # Make gray
-            btnImg = grayedImg
+            btnImg = grayedImg  # Set to grayed image
 
         super().render(surface, image=btnImg)
 

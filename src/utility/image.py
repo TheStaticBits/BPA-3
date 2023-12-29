@@ -68,6 +68,10 @@ class Image:
         """ Tints the image with a given color """
         self.image.fill(color, special_flags=pygame.BLEND_MULT)
 
+    def copy(self) -> Image:
+        """ Returns a copy of the image """
+        return Image(surf=self.image.copy(), scale=False)
+
     def setAlpha(self, alpha: int) -> None:
         """ Sets the alpha of the image """
         self.image.set_alpha(alpha)

@@ -144,3 +144,12 @@ class BuildingShop(BaseUI):
             return self.detailUIs[self.buildingShown].getType()
 
         return None
+
+    def hide(self, window: Window) -> None:
+        """ Hides the UI """
+        super().startTransition("hidden", window)
+
+    def startedVisible(self) -> bool:
+        """ Returns True if the UI has started transitioning to visible """
+        return super().isTransitioning() and \
+            super().getPosType() == "visible"
