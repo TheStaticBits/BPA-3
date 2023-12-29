@@ -108,10 +108,13 @@ class Warrior(Entity):
     def updateTarget(self, opponents: list[Warrior]) -> None:
         """ Finds the closest opponent to target
             if the warrior does not already have a target """
-        if (self.hasTarget() and not self.target.isDead()) \
-                or len(opponents) == 0:
+        if self.hasTarget() and self.target.isDead():
+            self.target = None  # Reset target if it's dead
+
+        if self.hasTarget() or len(opponents) == 0:
             return
 
+        self.target = opponents[0]
         lowestDist: float = super().getPos().dist(opponents[0].getPos())
 
         for warrior in opponents:
