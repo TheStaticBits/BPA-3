@@ -43,7 +43,7 @@ class BaseBuilding(Entity):
         # Test if any tiles are occupied
         return not tileset.testRangeOccupied(tilePos, buildingTileSize)
 
-    def __init__(self, type: str, level: int = 0) -> None:
+    def __init__(self, type: str, level: int = 1) -> None:
         """ Setup initial position, animation, and
             set tiles where the building is to occupied """
 

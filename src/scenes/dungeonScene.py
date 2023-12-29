@@ -13,8 +13,8 @@ class DungeonScene(BaseScene):
         Manages a scene that has warriors """
     log = logging.getLogger(__name__)
 
-    # Append to this list to queue spawning allies
-    queuedAllies: list[str] = []
+    # Append to this list to queue allies to spawn
+    queuedAllies: list[Warrior] = []
 
     def __init__(self, mapFolderName: str) -> None:
         super().__init__(mapFolderName)
@@ -27,11 +27,10 @@ class DungeonScene(BaseScene):
 
         # List of tile coords where enemies can spawn,
         # and where allies can spawn from data/maps/dungeon/data.json
-        self.enemySpawns: list[list[int]] = \
-            super().getTileset().getData()["enemySpawns"]
-
-        self.allySpawns: list[list[int]] = \
-            super().getTileset().getData()["allySpawns"]
+        tileset = super().getTileset()
+        enemySpawns = tileset.getData()["enemySpawns"]
+        allySpawns = tileset.getData()["allySpawns"]
+        Warrior.setSpawnPositions(allySpawns, enemySpawns)
 
         self.waves = Waves()
 
@@ -89,17 +88,14 @@ class DungeonScene(BaseScene):
 
     def spawnQueue(self) -> None:
         """ Spawns queued warrior types """
-        # Spawn queued allies from the buildings
-        for warriorType in self.queuedAllies:
-            self.allies.append(Warrior(warriorType, True,
-                                       1, self.allySpawns))
+        # Iterate through spawn queue and add them to the correct list
+        for warrior in self.queuedAllies:
+            self.allies.append(warrior)
         self.queuedAllies.clear()
 
-        # Spawn enemies in the waves queue
-        for warriorType in self.waves.getSpawnQueue():
-            self.enemies.append(Warrior(warriorType, False,
-                                        1, self.enemySpawns))
-        self.waves.clearQueue()
+        for warrior in self.waves.getSpawnQueue():
+            self.enemies.append(warrior)
+        self.waves.clearSpawnQueue()
 
     def render(self, surface: Window | Image) -> None:
         """ Renders tileset, warriors, player, and projectiles """

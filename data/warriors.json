@@ -1,16 +1,16 @@
 {
-    "meleeWarriror": {
+    "meleeWarrior": {
         "attackType": "projectile",
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarrirorEnemy.png",
+            "path": "res/warriors/meleeWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarrirorAlly.png",
+            "path": "res/warriors/meleeWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },

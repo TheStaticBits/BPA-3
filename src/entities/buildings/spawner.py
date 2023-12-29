@@ -6,6 +6,7 @@ from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
 from src.scenes.dungeonScene import DungeonScene
+from src.entities.warrior import Warrior
 
 
 class Spawner(BaseBuilding):
@@ -38,4 +39,6 @@ class Spawner(BaseBuilding):
         while self.timer.completed():
             for _ in range(self.spawnAmount):
                 # Queue the warrior type to be spawned
-                DungeonScene.queuedAllies.append(self.warriorType)
+                DungeonScene.queuedAllies.append(
+                    Warrior(self.warriorType, super().getLevel(), True)
+                )

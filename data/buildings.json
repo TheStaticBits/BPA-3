@@ -38,7 +38,7 @@
             "steampower": 15
         },
 
-        "warrior": "meleeWarriror",
+        "warrior": "meleeWarrior",
         "spawnInterval": 3,
         "spawnAmount": 5
     },

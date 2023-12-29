@@ -2,6 +2,7 @@ import logging
 import src.utility.utility as util
 from src.utility.timer import Timer
 from src.window import Window
+from src.entities.warrior import Warrior
 
 
 class Waves:
@@ -22,7 +23,7 @@ class Waves:
         self.betweenWaves: bool = False
 
         self.spawnData: list[dict] = []  # Spawning data for each enemy type
-        self.spawnQueue: list[str] = []  # Enemies that have been spawned
+        self.spawnQueue: list[Warrior] = []  # Enemies that have been spawned
 
         self.loadWave(0)  # Load the first wave
 
@@ -41,6 +42,7 @@ class Waves:
 
             self.spawnData.append({
                 "type": data["type"],
+                "level": data["level"],  # Level of warrior to spawn
                 "amount": data["amount"],  # Total amount to spawn
                 "spawnAmount": data["spawnAmount"],  # Amount created per spawn
                 "startTimer": Timer(data["startDelay"]),
@@ -81,7 +83,7 @@ class Waves:
             while data["spawnTimer"].completed():
                 for _ in range(data["spawnAmount"]):
                     # Spawn enemy
-                    self.spawnQueue.append(data["type"])
+                    self.spawnWarrior(data["type"], data["level"])
                     data["amount"] -= 1
 
         # Test if all enemies have been spawned
@@ -92,12 +94,14 @@ class Waves:
         # all enemies in the wave have spawned, start delay timer
         self.betweenWaves = True
 
-    # Getters
-    def getSpawnQueue(self) -> list:
+    def spawnWarrior(self, warriorType: str, level: int) -> None:
+        """ Spawns a warrior by adding it to the queue """
+        self.spawnQueue.append(Warrior(warriorType, level, False))
+
+    def getSpawnQueue(self) -> list[Warrior]:
         """ Returns the spawn queue """
         return self.spawnQueue
 
-    # Setters
-    def clearQueue(self) -> None:
+    def clearSpawnQueue(self) -> None:
         """ Clears the spawn queue """
         self.spawnQueue.clear()

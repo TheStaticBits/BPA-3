@@ -54,9 +54,8 @@ class Tileset:
     def loadMapData(self, dataPath: dict) -> None:
         """ Loads the JSON containing map metadata and vars from it """
 
-        mapData: dict = util.loadJSON(dataPath)
-        self.PLAYER_START = Vect(mapData["playerSpawn"]) * self.TILE_SIZE
-        self.OTHER_DATA = mapData["other"]
+        self.data: dict = util.loadJSON(dataPath)
+        self.playerStart = Vect(self.data["playerSpawn"]) * self.TILE_SIZE
 
     def generateMapImg(self, mapPath: str) -> None:
         """ Generates the tiles based on the chars in the map data """
@@ -110,7 +109,7 @@ class Tileset:
 
     # Getters
     def getPlayerStart(self) -> Vect:
-        return self.PLAYER_START
+        return self.playerStart
 
     def isOccupied(self, tilePos: Vect) -> bool:
         """ Returns whether or not a tile is occupied """
@@ -118,7 +117,7 @@ class Tileset:
 
     def getTileSize(self) -> Vect: return self.size
     def getSize(self) -> Vect: return self.size * self.TILE_SIZE
-    def getData(self) -> dict: return self.OTHER_DATA
+    def getData(self) -> dict: return self.data
 
     # Setters
     def setOccupied(self, tilePos: Vect) -> None:

@@ -28,10 +28,15 @@ class Warrior(Entity):
         cls.KNOCKBACK_ANGLE_RANGE: float = \
             constants["warriors"]["knockbackAngleRange"]
 
-    def __init__(self, type: str, isAlly: bool, level: int,
-                 spawnPosList: list[list[int]]) -> None:
+    @classmethod
+    def setSpawnPositions(cls, allySpawns: list[list[int]],
+                          enemySpawns: list[list[int]]) -> None:
+        cls.ALLY_SPAWNS: list[list[int]] = allySpawns
+        cls.ENEMY_SPAWNS: list[list[int]] = enemySpawns
+
+    def __init__(self, type: str, level: int, isAlly: bool) -> None:
         """ Setup randomized position, its animation, stats, etc. """
-        spawnPos = self.pickSpawnPos(spawnPosList)
+        spawnPos = self.pickSpawnPos(isAlly)
 
         # Get the animation data based on whether it's an ally or enemy
         # as allies and enemies have different images
@@ -65,9 +70,13 @@ class Warrior(Entity):
         # Enemy to target, move to, and attack
         self.target: Warrior = None
 
-    def pickSpawnPos(self, spawnPosList: list[list[int]]) -> Vect:
-        """ Picks a random spawn position from the list """
-        spawnPos: list[int] = random.choice(spawnPosList)
+    def pickSpawnPos(self, isAlly: bool) -> Vect:
+        """ Picks a random spawn position
+            from the appropriate spawn positions list """
+        spawnList = self.ALLY_SPAWNS if isAlly else self.ENEMY_SPAWNS
+
+        # Choose a random spawn position from the list
+        spawnPos: list[int] = random.choice(spawnList)
         return Vect(spawnPos) * Tileset.TILE_SIZE
 
     def setStats(self, level: int) -> None:

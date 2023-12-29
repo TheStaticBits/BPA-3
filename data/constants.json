@@ -83,8 +83,8 @@
     },
 
     "projectiles": {
-        "meleeWarriror": {
-            "path": "res/particles/meleeWarrirorBullet.png",
+        "meleeWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
             "frames": 2, "delay": 0.3
         }
     },

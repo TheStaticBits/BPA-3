@@ -44,7 +44,7 @@ class UpgradeUI(BaseUI):
     def setStats(self, window: Window) -> None:
         """ Updates the display statistics for the building """
         # Set level displayed
-        buildingLevel: int = self.building.getLevel() + 1
+        buildingLevel: int = self.building.getLevel()
         super().getElement("title").setText(f"Level {buildingLevel} building")
 
     def update(self, window: Window) -> None:
