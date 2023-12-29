@@ -43,13 +43,14 @@ class BaseBuilding(Entity):
         # Test if any tiles are occupied
         return not tileset.testRangeOccupied(tilePos, buildingTileSize)
 
-    def __init__(self, type: str) -> None:
+    def __init__(self, type: str, level: int = 0) -> None:
         """ Setup initial position, animation, and
             set tiles where the building is to occupied """
 
         self.type: str = type
         self.placing: bool = True
         self.placable: bool = False
+        self.level: int = level
 
         # Whether the player has selected this building
         # and its upgrades UI is showing.
@@ -159,6 +160,7 @@ class BaseBuilding(Entity):
         return self.BUILDINGS_DATA[self.type]
 
     def isPlacing(self) -> bool: return self.placing
+    def getLevel(self) -> int: return self.level
 
     @classmethod
     def getDataFrom(cls, type: str) -> dict:

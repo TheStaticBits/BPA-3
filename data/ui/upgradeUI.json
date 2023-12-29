@@ -37,7 +37,7 @@
         "text": {
             "title": {
                 "text": "[Building Level]",
-                "offset": [ 50, 10 ],
+                "offset": [ 40, 10 ],
                 "fontSize": 8,
                 "color": [ 0, 0, 0 ]
             }
@@ -45,7 +45,7 @@
 
         "buttons": {
             "closeButton": {
-                "offset": [ 5, 5 ],
+                "offset": [ 5, 7 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",
@@ -55,6 +55,23 @@
 
                 "textData": {
                     "text": "Close",
+                    "offset": [ 0.66, 0.33 ],
+                    "fontSize": 5,
+                    "color": [ 0, 0, 0 ]
+                }
+            },
+
+            "sellButton": {
+                "offset": [ 5, 28 ],
+
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Sell",
                     "offset": [ 0.66, 0.33 ],
                     "fontSize": 5,
                     "color": [ 0, 0, 0 ]
