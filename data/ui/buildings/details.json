@@ -1,5 +1,5 @@
 {
-    "buildingImgScale": 0.75,
+    "buildingImgHeight": 30,
     
     "positions": {
         "visible": {
@@ -40,12 +40,12 @@
             },
 
             "goldImg": {
-                "offset": [ 55, 5 ],
+                "offset": [ 10, 5 ],
                 "path": "res/ui/resources/gold.png"
             },
 
             "steampowerImg": {
-                "offset": [ 85, 5 ],
+                "offset": [ 40, 5 ],
                 "path": "res/ui/resources/steampower.png"
             }
         },
@@ -53,28 +53,28 @@
         "text": {
             "buildingName": {
                 "text": "[Building Name]",
-                "offset": [ 110, 5 ],
+                "offset": [ 65, 5 ],
                 "fontSize": 8,
                 "color": [ 0, 0, 0 ]
             },
 
             "description": {
                 "text": "[Description]",
-                "offset": [ 110, 18 ],
+                "offset": [ 65, 18 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             },
 
             "goldCost": {
                 "text": "[Gold]",
-                "offset": [ 68, 7.5 ],
+                "offset": [ 23, 7.5 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             },
 
             "steampowerCost": {
                 "text": "[Steam]",
-                "offset": [ 98, 7.5 ],
+                "offset": [ 53, 7.5 ],
                 "fontSize": 5,
                 "color": [ 0, 0, 0 ]
             }
@@ -82,7 +82,7 @@
 
         "buttons": {
             "buy": {
-                "offset": [ 55, 20 ],
+                "offset": [ 10, 20 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",

@@ -23,7 +23,6 @@ class UpgradeUI(BaseUI):
         # shown at the same time.
         self.expandedMinWidth = super().getData()["expandedMinWidth"] * \
             Image.SCALE
-        print(self.expandedMinWidth)
 
     def setBuilding(self, building: BaseBuilding, window: Window) -> None:
         """ Sets the building to upgrade """
@@ -68,7 +67,8 @@ class UpgradeUI(BaseUI):
 
     def canShowShop(self, window: Window) -> bool:
         """ Returns whether or not the shop UI can be shown based on the
-            upgrade UI and the window size. """
+            upgrade UI and the window size.
+            This prevents them from overlapping """
         # If the upgrade UI isn't visible:
         if not super().isTransitioning() and self.getPosType() == "hidden":
             return True

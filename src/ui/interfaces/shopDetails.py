@@ -18,6 +18,10 @@ class ShopDetails(BaseUI):
         super().__init__("buildings/details")
         super().setPosType(posType)
 
+        # Building height after scaling
+        self.buildingScaledHeight = super().getData()["buildingImgHeight"] * \
+            Image.SCALE
+
         self.load(index)
 
     def load(self, index: int) -> None:
@@ -33,11 +37,15 @@ class ShopDetails(BaseUI):
         # Get building anim and use the first frame of its animation
         buildingImg: Image = Entity.loadAnim(data["anim"]).getFrame(0)
 
-        # Get scale, multiply by size, and transform it
-        scale = super().getData()["buildingImgScale"]
+        # Find the percentage to scale the building image by
+        scale = self.buildingScaledHeight / buildingImg.getSize().y
         newSize: Vect = buildingImg.getSize() * scale
         buildingImg.transform(newSize)
 
+        # Moves all elements in the UI over by the building image size
+        self.moveElementsBy(Vect(buildingImg.getSize().x, 0))
+
+        # Sets the building image element to the new image
         super().getElement("buildingImg").setImg(buildingImg)
 
         # Get description and set it
@@ -48,6 +56,13 @@ class ShopDetails(BaseUI):
         self.cost: AdvDict = AdvDict(data["cost"])
         for resource, amount in self.cost.getPyDict().items():
             super().getElement(resource + "Cost").setText(str(amount))
+
+    def moveElementsBy(self, amount: Vect) -> None:
+        """ Moves all UI elements by the given amount,
+            besides the background and building image """
+        for key, element in super().getAllElements().items():
+            if key != "bg" and key != "buildingImg":
+                element.addToOffset(amount)
 
     def updateResources(self) -> None:
         """ Updates the buy button's enabled/disabled status
