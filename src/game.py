@@ -4,6 +4,7 @@ import src.utility.utility as util
 from src.utility.image import Image
 from src.window import Window
 from src.tileset import Tileset
+from src.waves import Waves
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.player import Player
 from src.entities.warrior import Warrior
@@ -52,6 +53,7 @@ class Game:
             Projectile.loadStatic(self.constants)
             BaseScene.loadStatic(self.constants)
             Player.loadStatic(self.constants)
+            Waves.loadStatic(self.constants)
 
         except KeyError:
             ErrorUI.create("Uncaught error loading data from JSON files",

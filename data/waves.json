@@ -1,11 +1,6 @@
 [
-    {
-        "enemies": [
-            { "warrior": "testWarrior", "amount": 10,
-              }
-        ]
-    },
-    {
-
-    }
+    [
+        { "type": "testWarrior", "amount": 10, "startDelay": 0, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "testWarrior", "amount": 10, "startDelay": 0, "spawnInterval": 1, "spawnAmount": 2 }
+    ]
 ]

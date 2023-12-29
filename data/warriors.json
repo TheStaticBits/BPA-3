@@ -4,13 +4,13 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/enemyWarrior.png",
+            "path": "res/warriors/testWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/ligmaWarrior.png",
+            "path": "res/warriors/testWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },

@@ -87,5 +87,10 @@
             "path": "res/particles/testWarriorBullet.png",
             "frames": 2, "delay": 0.3
         }
+    },
+
+    "waves": {
+        "jsonPath": "data/waves.json",
+        "delayBetweenWaves": 5
     }
 }

@@ -5,7 +5,7 @@ from src.entities.warrior import Warrior
 from src.entities.projectile import Projectile
 from src.utility.image import Image
 from src.tileset import Tileset
-from src.utility.timer import Timer
+from src.waves import Waves
 
 
 class DungeonScene(BaseScene):
@@ -13,9 +13,8 @@ class DungeonScene(BaseScene):
         Manages a scene that has warriors """
     log = logging.getLogger(__name__)
 
-    # Append to these lists to queue spawning warriors
+    # Append to this list to queue spawning allies
     queuedAllies: list[str] = []
-    queuedEnemies: list[str] = []
 
     def __init__(self, mapFolderName: str) -> None:
         super().__init__(mapFolderName)
@@ -34,10 +33,11 @@ class DungeonScene(BaseScene):
         self.allySpawns: list[list[int]] = \
             super().getTileset().getData()["allySpawns"]
 
-        # temp enemy spawner (remove when waves are added)
-        self.timer = Timer(1)
+        self.waves = Waves()
 
     def update(self, window: Window) -> None:
+        """ Updates warriors, spawns enemies,
+            and updates projectiles"""
         super().update(window)
 
         self.updateWarriors(window)
@@ -45,9 +45,7 @@ class DungeonScene(BaseScene):
 
         self.updateProjectiles(window)
 
-        self.timer.update(window)
-        while self.timer.completed():
-            self.queuedEnemies.append("testWarrior")
+        self.waves.update(window)
 
     def updateWarriors(self, window: Window) -> None:
         """ Updates warriors (both allies and enemies) """
@@ -91,15 +89,17 @@ class DungeonScene(BaseScene):
 
     def spawnQueue(self) -> None:
         """ Spawns queued warrior types """
+        # Spawn queued allies from the buildings
         for warriorType in self.queuedAllies:
             self.allies.append(Warrior(warriorType, True,
                                        1, self.allySpawns))
         self.queuedAllies.clear()
 
-        for warriorType in self.queuedEnemies:
+        # Spawn enemies in the waves queue
+        for warriorType in self.waves.getSpawnQueue():
             self.enemies.append(Warrior(warriorType, False,
                                         1, self.enemySpawns))
-        self.queuedEnemies.clear()
+        self.waves.clearQueue()
 
     def render(self, surface: Window | Image) -> None:
         """ Renders tileset, warriors, player, and projectiles """
