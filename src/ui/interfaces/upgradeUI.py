@@ -64,7 +64,7 @@ class UpgradeUI(BaseUI):
 
         # Close button
         if super().getElement("closeButton").getActivated():
-            self.hide()
+            self.hide(window)
 
     def canShowShop(self, window: Window) -> bool:
         """ Returns whether or not the shop UI can be shown based on the
