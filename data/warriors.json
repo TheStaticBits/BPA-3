@@ -129,14 +129,14 @@
 
         "levels": [
             {
-                "health": 100,
-                "range": 50,
-                "maxSpeed": 80, "accel": 100, "decel": 400,
+                "health": 130,
+                "range": 35,
+                "maxSpeed": 70, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
                 "attackInterval": 3,
                 "damage": 10,
-                "attackKnockback": 200
+                "attackKnockback": 150
             }
         ]
     }
