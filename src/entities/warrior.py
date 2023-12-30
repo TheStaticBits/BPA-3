@@ -332,6 +332,9 @@ class Warrior(Entity):
 
         self.showDamageTint = True
 
+        if not self.isAlly:
+            print(self.health)
+
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the warrior and its aoe attack if necessary """
         self.renderAoeAttack(surface, offset)

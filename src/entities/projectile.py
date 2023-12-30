@@ -62,16 +62,13 @@ class Projectile(Entity):
                        pos.x + size.x >= tilesetSize.x or
                        pos.y + size.y >= tilesetSize.y)
 
-    # Avoiding using the Warrior type to avoid a circular import...
-    def collisions(self, warriors: list):
+    def collisions(self, warriors: list) -> None:
         """ Tests if the projectile collides with the entity """
         for warrior in warriors:
             if super().collide(warrior):
                 self.remove = True
                 warrior.hit(self.damage, self.angle, self.knockback)
-                return warrior  # Can only hit one warrior
-
-        return None
+                return
 
     # Getters
     def shouldRemove(self) -> bool: return self.remove

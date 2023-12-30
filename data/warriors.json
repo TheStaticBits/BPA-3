@@ -134,7 +134,7 @@
                 "maxSpeed": 80, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 0.5,
+                "attackInterval": 3,
                 "damage": 10,
                 "attackKnockback": 200
             }

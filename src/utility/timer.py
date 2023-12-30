@@ -30,3 +30,8 @@ class Timer:
     def reset(self) -> None:
         """ Resets the timer """
         self.timer = 0
+
+    # Getters
+    def getTimeLeft(self) -> float:
+        """ Returns the time left on the timer """
+        return self.delay - self.timer

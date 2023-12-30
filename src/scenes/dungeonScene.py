@@ -59,6 +59,10 @@ class DungeonScene(BaseScene):
             enemy.update(window, tileset, self.allies)
             enemy.updateAttack(window, self.allies, self.projectiles)
 
+        # Remove dead warriors
+        self.allies = [ally for ally in self.allies if not ally.isDead()]
+        self.enemies = [enemy for enemy in self.enemies if not enemy.isDead()]
+
     def updateProjectiles(self, window: Window) -> None:
         """ Updates the projectiles, removing those out of bounds """
         tileset = super().getTileset()
@@ -74,11 +78,7 @@ class DungeonScene(BaseScene):
                 warriorsList = self.allies
 
             # Test for hits
-            warriorHit: Warrior = projectile.collisions(warriorsList)
-
-            # If dead remove from the list
-            if warriorHit is not None and warriorHit.isDead():
-                warriorsList.remove(warriorHit)
+            projectile.collisions(warriorsList)
 
         # Only keep projectiles that are in the bounds
         self.projectiles = [  # list comprehension
