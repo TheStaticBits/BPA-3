@@ -27,6 +27,9 @@ class BaseBuilding(Entity):
         cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
             * Tileset.TILE_SIZE.x
 
+        cls.redTint: tuple[int] = constants["buildings"]["redTint"]
+        cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
         """ Tests if the tiles in the tileset
@@ -147,11 +150,11 @@ class BaseBuilding(Entity):
 
             # Tint red if not placeable
             if not self.placable:
-                img.tint(255, 100, 100)
+                img.tint(*self.redTint)
 
         elif self.selected:
             # Tint for selected
-            img.tint(60, 60, 60, blendMode=pygame.BLEND_ADD)
+            img.tint(*self.whiteTint, blendMode=pygame.BLEND_ADD)
             self.selected = False  # Reset selected
 
         # Draw the new tinted surface to the screen

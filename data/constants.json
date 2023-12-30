@@ -74,12 +74,18 @@
     "buildings": {
         "jsonPath": "data/buildings.json",
 
-        "buildReachTiles": 5
+        "buildReachTiles": 5,
+
+        "redTint": [ 255, 100, 100 ],
+        "whiteTint": [ 60, 60, 60 ]
     },
 
     "warriors": {
         "jsonPath": "data/warriors.json",
-        "knockbackAngleRange": 1
+        "knockbackAngleRange": 1,
+        
+        "damageTint": [ 255, 100, 100 ],
+        "damageTime": 0.2
     },
 
     "projectiles": {

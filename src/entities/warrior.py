@@ -29,6 +29,9 @@ class Warrior(Entity):
         cls.KNOCKBACK_ANGLE_RANGE: float = \
             constants["warriors"]["knockbackAngleRange"]
 
+        cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
+        cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],
                           enemySpawns: list[list[int]]) -> None:
@@ -83,6 +86,10 @@ class Warrior(Entity):
         # Enemy to target, move to, and attack
         self.target: Warrior = None
 
+        # Damage flash indicator
+        self.damageTimer: Timer = Timer(self.DAMAGE_TIME)
+        self.showDamageTint: bool = False
+
     def pickSpawnPos(self, isAlly: bool) -> Vect:
         """ Picks a random spawn position
             from the appropriate spawn positions list """
@@ -128,6 +135,13 @@ class Warrior(Entity):
 
         if self.attackType == "aoe":
             self.updateAoeAttack(window)
+
+        # Update damage tint timer
+        if self.showDamageTint:
+            self.damageTimer.update(window)
+            if self.damageTimer.completed():
+                self.showDamageTint = False
+                self.damageTimer.reset()
 
     def updateTarget(self, opponents: list[Warrior]) -> None:
         """ Finds the closest opponent to target
@@ -316,11 +330,20 @@ class Warrior(Entity):
         self.knockbackAngle = knockbackAngle
         self.knockbackVel = knockbackVel
 
+        self.showDamageTint = True
+
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the warrior and its aoe attack if necessary """
         self.renderAoeAttack(surface, offset)
 
-        super().render(surface, offset)
+        if self.showDamageTint:
+            # Render with damage tint
+            img = super().getAnim().getFrame().copy()
+            img.tint(self.DAMAGE_TINT)
+            surface.render(img, super().getPos() + offset)
+
+        else:
+            super().render(surface, offset)
 
     # Getters
     def hasTarget(self) -> bool:
