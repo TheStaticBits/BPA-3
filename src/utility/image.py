@@ -64,9 +64,9 @@ class Image:
         """ Fills the image with a given color """
         self.image.fill(color)
 
-    def tint(self, *color) -> None:
+    def tint(self, *color, blendMode=pygame.BLEND_MULT) -> None:
         """ Tints the image with a given color """
-        self.image.fill(color, special_flags=pygame.BLEND_MULT)
+        self.image.fill(color, special_flags=blendMode)
 
     def copy(self) -> Image:
         """ Returns a copy of the image """
@@ -89,6 +89,21 @@ class Image:
     def flip(self, x: bool, y: bool) -> None:
         """ Flips the image on the x and/or y axis """
         self.image = pygame.transform.flip(self.image, x, y)
+
+    def drawCircle(self, radius: int, color: tuple[int, int, int]) -> None:
+        """ Draws a circle centered on the image """
+        pygame.draw.circle(self.image, color,
+                           (self.size // 2).toTuple(), radius)
+
+    def pixelPerfectCollide(self, thisPos: Vect,
+                            other: Image, otherPos: Vect) -> bool:
+        """ Returns whether the two images collide """
+        offset: Vect = otherPos - thisPos
+
+        mask1 = pygame.mask.from_surface(self.image)
+        mask2 = pygame.mask.from_surface(other.image)
+
+        return mask1.overlap(mask2, offset.toTuple())
 
     # Getters
     def getSurf(self) -> pygame.Surface: return self.image

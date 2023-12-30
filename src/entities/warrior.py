@@ -11,6 +11,7 @@ from src.tileset import Tileset
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.utility.timer import Timer
+from src.utility.animation import Animation
 
 
 class Warrior(Entity):
@@ -54,11 +55,23 @@ class Warrior(Entity):
         self.attackType = self.WARRIOR_DICT[type]["attackType"]
         self.setStats(level)
 
+        # Load warrior-type specific data
         if self.attackType == "projectile":
             # Load the spawn offset for projectiles from the warrior's pos
             self.projectileSpawnPos = Vect(
                 self.WARRIOR_DICT[type]["projectileSpawnPos"]
             ) * Image.SCALE
+
+        elif self.attackType == "aoe":
+            # Load the aoe animation
+            data = self.WARRIOR_DICT[type]["aoeAttackAnim"]
+            self.aoeAnim = Animation(data["path"],
+                                     data["frames"],
+                                     data["delay"],
+                                     oneTime=True)
+
+            self.aoeAnim.setToEnd()  # So it doesn't play immediately
+            self.aoeAnimPos: Vect = Vect()  # Position of the aoe attack
 
         self.speed = 0
         self.angle = 0
@@ -94,11 +107,10 @@ class Warrior(Entity):
         self.decel: float = data["decel"] * Image.SCALE
 
         self.knockbackResistance = data["knockbackResistance"] * Image.SCALE
+        self.attackKnockback: float = data["attackKnockback"] * Image.SCALE
 
         if self.attackType == "projectile":
             self.projectileSpeed: float = data["projectileSpeed"] * Image.SCALE
-            self.projectileKnockback: float = \
-                data["projectileKnockback"] * Image.SCALE
 
     def update(self, window: Window, tileset: Tileset,
                opponents: list[Warrior]) -> None:
@@ -113,6 +125,9 @@ class Warrior(Entity):
 
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
+
+        if self.attackType == "aoe":
+            self.updateAoeAttack(window)
 
     def updateTarget(self, opponents: list[Warrior]) -> None:
         """ Finds the closest opponent to target
@@ -223,16 +238,16 @@ class Warrior(Entity):
         self.attackTimer.update(window)
 
         while self.attackTimer.completed():
-            self.attack(window, opponents, projectiles)
+            self.attack(opponents, projectiles)
 
-    def attack(self, window: Window, opponents: list[Warrior],
+    def attack(self, opponents: list[Warrior],
                projectiles: list[Projectile]) -> None:
         """ Attacks, based on self.attackType """
         if self.attackType == "projectile":
             self.spawnProjectile(projectiles)
 
         elif self.attackType == "aoe":
-            self.aoeAttack(window, opponents)
+            self.aoeAttack(opponents)
 
     def spawnProjectile(self, projectiles: list[Projectile]) -> None:
         """ Spawns a projectile from warrior data """
@@ -244,14 +259,50 @@ class Warrior(Entity):
         # Create projectile object from data
         proj: Projectile = Projectile(self.type, angle,
                                       self.projectileSpeed, self.damage,
-                                      self.projectileKnockback,
+                                      self.attackKnockback,
                                       spawnPos, self.isAlly)
 
         projectiles.append(proj)
 
     def aoeAttack(self, opponents: list[Warrior]) -> None:
         """ Deals damage to all opponents in range """
-        # Doing this soon :)
+        self.aoeAnim.restart()  # Sets the attack anim to play
+        # Center aoe attack animation on the player
+        self.aoeAnimPos = super().getCenterPos() - self.aoeAnim.getSize() / 2
+
+        # Create circle image to test for pixel-perfect collisions
+        # with all opponents in range
+        circle = Image.makeEmpty(Vect(self.range * 2), False, True)
+        circle.drawCircle(self.range, (255, 255, 255))
+
+        # Top left of circle image position
+        circlePos: Vect = super().getCenterPos() - self.range
+
+        # Deal damage with pixel perfect collision to all opponents in range
+        for opponent in opponents:
+            image = opponent.getAnim().getFrame()
+
+            # Test for pixel perfect collision
+            collided: bool = circle.pixelPerfectCollide(circlePos, image,
+                                                        opponent.getPos())
+
+            if collided:  # Deal damage if collided
+                # Getting angle from the center of this warrior to the opponent
+                angle = self.getCenterPos().angle(opponent.getCenterPos())
+
+                opponent.hit(self.damage, angle, self.attackKnockback)
+
+    def updateAoeAttack(self, window: Window) -> None:
+        """ Updates the aoe attack animation """
+        if self.attackType == "aoe":
+            self.aoeAnim.update(window)
+
+    def renderAoeAttack(self, surface: Window | Image,
+                        offset: Vect = Vect()) -> None:
+        """ Renders the aoe attack animation """
+        if self.attackType == "aoe":
+            if not self.aoeAnim.isFinished():
+                self.aoeAnim.render(surface, self.aoeAnimPos + offset)
 
     def hit(self, damage: float, knockbackAngle: float,
             knockbackVel: float) -> None:
@@ -264,6 +315,12 @@ class Warrior(Entity):
 
         self.knockbackAngle = knockbackAngle
         self.knockbackVel = knockbackVel
+
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
+        """ Renders the warrior and its aoe attack if necessary """
+        self.renderAoeAttack(surface, offset)
+
+        super().render(surface, offset)
 
     # Getters
     def hasTarget(self) -> bool:

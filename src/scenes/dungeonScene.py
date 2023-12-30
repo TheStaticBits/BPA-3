@@ -32,6 +32,9 @@ class DungeonScene(BaseScene):
         allySpawns = tileset.getData()["allySpawns"]
         Warrior.setSpawnPositions(allySpawns, enemySpawns)
 
+        self.enemies.append(Warrior("meleeWarrior", 1, False))
+        self.allies.append(Warrior("aoeWarrior", 1, True))
+
         self.waves = Waves()
 
     def update(self, window: Window) -> None:
@@ -40,7 +43,7 @@ class DungeonScene(BaseScene):
         super().update(window)
 
         self.updateWarriors(window)
-        self.spawnQueue()
+        # self.spawnQueue()
 
         self.updateProjectiles(window)
 

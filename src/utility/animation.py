@@ -13,7 +13,8 @@ class Animation:
         Only works with horizontal spritesheets """
     log = logging.getLogger(__name__)
 
-    def __init__(self, path: str, frameCount: int, delay: float) -> None:
+    def __init__(self, path: str, frameCount: int, delay: float,
+                 oneTime: bool = False) -> None:
         """ Sets initial values for the animation """
         self.spritesheet: Image = Image(path)
         self.timer = Timer(delay)
@@ -27,16 +28,25 @@ class Animation:
         self.frameCount = frameCount
         self.currentFrame: int = 0
 
+        self.oneTime: bool = oneTime
+
     def update(self, window: Window) -> None:
         """ Updates animation timer and frame if necessary """
+        if self.oneTime and self.currentFrame >= self.frameCount:
+            return  # Don't update if the animation is one time and completed
+
         self.timer.update(window)
 
         # while the timer is completed (so it works on low FPS):
         while self.timer.completed():
             self.currentFrame += 1
 
+            # Reached the end of the animation
             if self.currentFrame >= self.frameCount:
-                self.currentFrame = 0
+                if self.oneTime:  # One time, so don't reset current frame
+                    self.timer.reset()
+                else:
+                    self.currentFrame = 0  # Continue looping
 
     def render(self, surface: Window | Image, pos: Vect) -> None:
         """ Renders the portion of the animation spritesheet
@@ -61,3 +71,9 @@ class Animation:
 
         frame: pygame.Surface = self.spritesheet.getSurf().subsurface(rect)
         return Image(surf=frame, scale=False)
+
+    def isFinished(self) -> bool: return self.currentFrame >= self.frameCount
+
+    # Setters
+    def restart(self) -> None: self.currentFrame = 0
+    def setToEnd(self) -> None: self.currentFrame = self.frameCount

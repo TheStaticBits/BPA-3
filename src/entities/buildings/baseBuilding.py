@@ -1,4 +1,5 @@
 import logging
+import pygame
 import src.utility.utility as util
 from src.entities.entity import Entity
 from src.utility.vector import Vect
@@ -146,10 +147,11 @@ class BaseBuilding(Entity):
 
             # Tint red if not placeable
             if not self.placable:
-                img.tint(255, 80, 80)
+                img.tint(255, 100, 100)
 
         elif self.selected:
-            img.tint(150, 255, 150)  # Tint green for selected
+            # Tint for selected
+            img.tint(60, 60, 60, blendMode=pygame.BLEND_ADD)
             self.selected = False  # Reset selected
 
         # Draw the new tinted surface to the screen

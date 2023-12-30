@@ -24,8 +24,8 @@
                 
                 "attackInterval": 1,
                 "damage": 10,
-                "projectileSpeed": 200,
-                "projectileKnockback": 200
+                "attackKnockback": 200,
+                "projectileSpeed": 200
             },
             {
                 "health": 100,
@@ -35,8 +35,8 @@
                 
                 "attackInterval": 1,
                 "damage": 10,
-                "projectileSpeed": 200,
-                "projectileKnockback": 200
+                "attackKnockback": 200,
+                "projectileSpeed": 200
             },
             {
                 "health": 100,
@@ -46,8 +46,8 @@
                 
                 "attackInterval": 1,
                 "damage": 11,
-                "projectileSpeed": 200,
-                "projectileKnockback": 200
+                "attackKnockback": 200,
+                "projectileSpeed": 200
             },
             {
                 "health": 100,
@@ -57,8 +57,8 @@
                 
                 "attackInterval": 1,
                 "damage": 11,
-                "projectileSpeed": 200,
-                "projectileKnockback": 200
+                "attackKnockback": 200,
+                "projectileSpeed": 200
             },
             {
                 "health": 110,
@@ -68,8 +68,8 @@
                 
                 "attackInterval": 1,
                 "damage": 12,
-                "projectileSpeed": 200,
-                "projectileKnockback": 200
+                "attackKnockback": 200,
+                "projectileSpeed": 200
             },
             {
                 "health": 120,
@@ -79,8 +79,8 @@
                 
                 "attackInterval": 1,
                 "damage": 12,
-                "projectileSpeed": 240,
-                "projectileKnockback": 240
+                "attackKnockback": 240,
+                "projectileSpeed": 240
             },
             {
                 "health": 130,
@@ -90,8 +90,8 @@
                 
                 "attackInterval": 1,
                 "damage": 12,
-                "projectileSpeed": 240,
-                "projectileKnockback": 240
+                "attackKnockback": 240,
+                "projectileSpeed": 240
             },
             {
                 "health": 130,
@@ -101,8 +101,42 @@
                 
                 "attackInterval": 1,
                 "damage": 12,
-                "projectileSpeed": 260,
-                "projectileKnockback": 240
+                "attackKnockback": 240,
+                "projectileSpeed": 260
+            }
+        ]
+    },
+
+    "aoeWarrior": {
+        "attackType": "aoe",
+        "aoeAttackAnim": {
+            "path": "res/warriors/aoeWarriorRing.png",
+            "frames": 5,
+            "delay": 0.1
+        },
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 100,
+                "range": 50,
+                "maxSpeed": 80, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 0.5,
+                "damage": 10,
+                "attackKnockback": 200
             }
         ]
     }
