@@ -37,7 +37,7 @@
         "text": {
             "title": {
                 "text": "[Building Level]",
-                "offset": [ 40, 10 ],
+                "offset": [ 7, 7 ],
                 "fontSize": 8,
                 "color": [ 0, 0, 0 ]
             }
@@ -45,7 +45,7 @@
 
         "buttons": {
             "closeButton": {
-                "offset": [ 5, 7 ],
+                "offset": [ 243, 7 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",
@@ -62,7 +62,7 @@
             },
 
             "sellButton": {
-                "offset": [ 5, 28 ],
+                "offset": [ 243, 28 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",

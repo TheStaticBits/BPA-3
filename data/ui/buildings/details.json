@@ -55,28 +55,28 @@
                 "text": "[Building Name]",
                 "offset": [ 65, 5 ],
                 "fontSize": 8,
-                "color": [ 0, 0, 0 ]
+                "color": [ 255, 255, 255 ]
             },
 
             "description": {
                 "text": "[Description]",
                 "offset": [ 65, 18 ],
                 "fontSize": 5,
-                "color": [ 0, 0, 0 ]
+                "color": [ 255, 255, 255 ]
             },
 
             "goldCost": {
                 "text": "[Gold]",
                 "offset": [ 23, 7.5 ],
                 "fontSize": 5,
-                "color": [ 0, 0, 0 ]
+                "color": [ 255, 255, 255 ]
             },
 
             "steampowerCost": {
                 "text": "[Steam]",
                 "offset": [ 53, 7.5 ],
                 "fontSize": 5,
-                "color": [ 0, 0, 0 ]
+                "color": [ 255, 255, 255 ]
             }
         },
 
