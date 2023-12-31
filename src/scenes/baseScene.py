@@ -5,6 +5,7 @@ from src.entities.player import Player
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
+from src.particle import Particle
 
 
 class BaseScene:
@@ -25,20 +26,23 @@ class BaseScene:
 
         self.cameraOffset: Vect = Vect()
 
+        self.particles: list[Particle] = []
+
     def update(self, window: Window) -> None:
         """ Update scene objects """
         self.updateCameraPos(window)
 
         self.updateTileset(window)
         self.updatePlayer(window)
-
-    def updateTileset(self, window: Window) -> None:
-        """ Update tileset """
-        self.tileset.update(window)
+        self.updateParticles(window)
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
         self.player.update(window, self.tileset)
+
+    def updateTileset(self, window: Window) -> None:
+        """ Update tileset """
+        self.tileset.update(window)
 
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
@@ -55,10 +59,20 @@ class BaseScene:
         self.cameraOffset += ((newOffset - self.cameraOffset) *
                               self.CAMERA_SPEED * window.getDeltaTime())
 
+    def updateParticles(self, window: Window) -> None:
+        """ Update particles """
+        for particle in self.particles:
+            particle.update(window)
+
+        # Remove particles that are done
+        self.particles[:] = [particle for particle in self.particles
+                             if not particle.isDone()]
+
     def render(self, surface: Window | Image) -> None:
         """ Render scene objects """
         self.renderTileset(surface)
         self.renderPlayer(surface)
+        self.renderParticles(surface)
 
     def renderTileset(self, surface: Window | Image) -> None:
         """ Render the tileset """
@@ -68,7 +82,18 @@ class BaseScene:
         """ Render the player """
         self.player.render(surface, -self.cameraOffset)
 
+    def renderParticles(self, surface: Window | Image) -> None:
+        """ Render particles """
+        for particle in self.particles:
+            particle.render(surface, -self.cameraOffset)
+
     # Getters
     def getCamOffset(self) -> Vect: return self.cameraOffset
     def getPlayer(self) -> Player: return self.player
     def getTileset(self) -> Tileset: return self.tileset
+    def getParticles(self) -> list[Particle]: return self.particles
+
+    # Setters
+    def addParticles(self, particles: list[Particle]) -> None:
+        """ Adds particles to the scene """
+        self.particles.extend(particles)

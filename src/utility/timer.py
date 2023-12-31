@@ -27,6 +27,11 @@ class Timer:
 
         return False
 
+    def isDone(self) -> bool:
+        """ Returns True if the timer is done,
+            without resetting it """
+        return self.timer >= self.delay
+
     def reset(self) -> None:
         """ Resets the timer """
         self.timer = 0
@@ -35,3 +40,7 @@ class Timer:
     def getTimeLeft(self) -> float:
         """ Returns the time left on the timer """
         return self.delay - self.timer
+
+    def getPercentDone(self) -> float:
+        """ Returns the percent of the timer that has passed """
+        return self.timer / self.delay

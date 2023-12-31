@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import random
-from math import cos, sin
 from src.entities.entity import Entity
 from src.entities.projectile import Projectile
 from src.window import Window
@@ -12,6 +11,7 @@ from src.utility.vector import Vect
 from src.utility.image import Image
 from src.utility.timer import Timer
 from src.utility.animation import Animation
+from src.particle import Particle
 
 
 class Warrior(Entity):
@@ -29,8 +29,20 @@ class Warrior(Entity):
         cls.KNOCKBACK_ANGLE_RANGE: float = \
             constants["warriors"]["knockbackAngleRange"]
 
+        # Damage flash of red
         cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
         cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+
+        # Death particles
+        cls.PARTICLE_AMOUNT: int = \
+            constants["warriors"]["deathParticles"]["amount"]
+        cls.PARTICLE_SIZE: Vect = Vect(
+            constants["warriors"]["deathParticles"]["size"]
+        )
+        cls.PARTICLE_SPEED: float = \
+            constants["warriors"]["deathParticles"]["speed"]
+        cls.PARTICLE_DURATION: float = \
+            constants["warriors"]["deathParticles"]["duration"]
 
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],
@@ -195,10 +207,8 @@ class Warrior(Entity):
             return
 
         # Find velocity based on angle and speed
-        velocity: Vect = Vect(
-            self.speed * cos(self.angle),
-            self.speed * sin(self.angle)
-        ) * window.getDeltaTime()
+        velocity: Vect = Vect.angleMove(self.angle) * \
+            self.speed * window.getDeltaTime()
 
         # add movement amount
         super().addPos(velocity)
@@ -214,10 +224,8 @@ class Warrior(Entity):
                                             self.knockbackResistance)
 
         # Get velocity from angle and speed
-        velocity: Vect = Vect(
-            self.knockbackVel * cos(self.knockbackAngle),
-            self.knockbackVel * sin(self.knockbackAngle)
-        ) * window.getDeltaTime()
+        velocity: Vect = Vect.angleMove(self.knockbackAngle) * \
+            self.knockbackVel * window.getDeltaTime()
 
         # Add movement amount
         super().addPos(velocity)
@@ -332,9 +340,6 @@ class Warrior(Entity):
 
         self.showDamageTint = True
 
-        if not self.isAlly:
-            print(self.health)
-
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the warrior and its aoe attack if necessary """
         self.renderAoeAttack(surface, offset)
@@ -347,6 +352,27 @@ class Warrior(Entity):
 
         else:
             super().render(surface, offset)
+
+    def getDeathParticles(self) -> list[Particle]:
+        """ Returns a list of particles for the warrior's death """
+        particles: list[Particle] = []
+
+        frame = super().getAnim().getFrame()
+        centerPos = super().getCenterPos()
+
+        for _ in range(self.PARTICLE_AMOUNT):
+            # Create particle object and add it to the list
+            particles.append(self.createParticle(frame, centerPos))
+
+        return particles
+
+    def createParticle(self, frame: Image, pos: Vect) -> Particle:
+        """ Generates a particle object with random position and angle """
+        angle: float = random.randint(0, 359)
+
+        return Particle(frame, self.PARTICLE_SIZE,
+                        pos.copy(), angle,
+                        self.PARTICLE_SPEED, self.PARTICLE_DURATION)
 
     # Getters
     def hasTarget(self) -> bool:

@@ -55,14 +55,14 @@ class Vect:
         """ Returns the angle in radians between two points """
         return atan2(other.y - self.y, other.x - self.x)
 
-    @classmethod
-    def distFromAngle(self, angle: float, dist: float) -> Vect:
-        """ Returns a vector from an angle and distance """
-        return Vect(dist * cos(angle), dist * sin(angle))
-
-    @classmethod
-    def toRect(cls, pos: Vect, size: Vect) -> pygame.Rect:
+    @staticmethod
+    def toRect(pos: Vect, size: Vect) -> pygame.Rect:
         return pygame.Rect(pos.x, pos.y, size.x, size.y)
+
+    @staticmethod
+    def angleMove(angle: float) -> Vect:
+        """ Returns a vector from an angle """
+        return Vect(cos(angle), sin(angle))
 
     def getSigns(self) -> Vect:
         """ Returns a vector with the signs of each component """

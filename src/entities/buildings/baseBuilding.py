@@ -101,7 +101,7 @@ class BaseBuilding(Entity):
             angle: float = playerPos.angle(mousePos)
 
             # Get distance from angle and max distance
-            dist: Vect = Vect.distFromAngle(angle, self.BUILD_REACH)
+            dist: Vect = Vect.angleMove(angle) * self.BUILD_REACH
 
             # Set mousePos to the new position
             mousePos = playerPos + dist

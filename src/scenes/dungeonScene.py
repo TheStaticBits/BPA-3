@@ -59,9 +59,24 @@ class DungeonScene(BaseScene):
             enemy.update(window, tileset, self.allies)
             enemy.updateAttack(window, self.allies, self.projectiles)
 
-        # Remove dead warriors
-        self.allies = [ally for ally in self.allies if not ally.isDead()]
-        self.enemies = [enemy for enemy in self.enemies if not enemy.isDead()]
+        # Remove dead warriors through list comprehension in place
+        self.allies[:] = [ally for ally in self.allies
+                          if not self.warriorDead(ally)]
+
+        self.enemies[:] = [enemy for enemy in self.enemies
+                           if not self.warriorDead(enemy)]
+
+    def warriorDead(self, warrior: Warrior) -> bool:
+        """ Returns True if the warrior is dead.
+            Also adds death particles to the scene """
+        if warrior.isDead():
+            # Add death particles
+            deathParticles = warrior.getDeathParticles()
+            super().addParticles(deathParticles)
+
+            return True
+
+        return False
 
     def updateProjectiles(self, window: Window) -> None:
         """ Updates the projectiles, removing those out of bounds """
@@ -81,7 +96,7 @@ class DungeonScene(BaseScene):
             projectile.collisions(warriorsList)
 
         # Only keep projectiles that are in the bounds
-        self.projectiles = [  # list comprehension
+        self.projectiles[:] = [  # list comprehension in place
             projectile for projectile in self.projectiles
             if not projectile.shouldRemove()
         ]
@@ -103,6 +118,7 @@ class DungeonScene(BaseScene):
         self.renderWarriors(surface)
         super().renderPlayer(surface)
         self.renderProjectiles(surface)
+        super().renderParticles(surface)
 
     def renderWarriors(self, surface: Window | Image) -> None:
         """ Renders all warriors """

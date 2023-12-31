@@ -85,7 +85,14 @@
         "knockbackAngleRange": 1,
         
         "damageTint": [ 255, 100, 100 ],
-        "damageTime": 0.2
+        "damageTime": 0.2,
+
+        "deathParticles": {
+            "amount": 10,
+            "size": [ 9, 9 ],
+            "speed": 300,
+            "duration": 0.3
+        }
     },
 
     "projectiles": {

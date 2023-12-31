@@ -19,8 +19,8 @@ class Image:
     def loadStatic(cls, constants: dict) -> None:
         cls.SCALE = constants["game"]["imgScale"]
 
-    @classmethod
-    def makeEmpty(cls, size: Vect, scale=False, transparent=False) -> Image:
+    @staticmethod
+    def makeEmpty(size: Vect, scale=False, transparent=False) -> Image:
         """ Creates an empty transparent surface with a given size """
         flags = pygame.HWSURFACE | pygame.DOUBLEBUF
         if transparent:
@@ -105,8 +105,14 @@ class Image:
 
         return mask1.overlap(mask2, offset.toTuple())
 
+    def getSection(self, pos: Vect, size: Vect) -> Image:
+        """ Returns a subsurface of the image """
+        rect = pygame.Rect(pos.toTuple(), size.toTuple())  # Create rect
+        subsurface = self.image.subsurface(rect)  # Get pygame.Surface subsurf
+        return Image(surf=subsurface, scale=False)  # Return as Image
+
     # Getters
     def getSurf(self) -> pygame.Surface: return self.image
     def getSize(self) -> Vect: return self.size
-    def getWidth(self): return self.size.x
-    def getHeight(self): return self.size.y
+    def getWidth(self) -> int: return self.size.x
+    def getHeight(self) -> int: return self.size.y

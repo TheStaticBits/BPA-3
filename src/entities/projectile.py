@@ -1,5 +1,4 @@
 import logging
-from math import cos, sin
 from src.entities.entity import Entity
 from src.utility.vector import Vect
 from src.window import Window
@@ -43,10 +42,8 @@ class Projectile(Entity):
     def move(self, window: Window) -> None:
         """ Updates the projectile position """
         # Movement based on the angle and speed
-        moveAmount: Vect = Vect(
-            self.speed * cos(self.angle),
-            self.speed * sin(self.angle)
-        ) * window.getDeltaTime()
+        moveAmount: Vect = Vect.angleMove(self.angle) * \
+            self.speed * window.getDeltaTime()
         super().addPos(moveAmount)
 
     def testOutOfBounds(self, tilesetSize: Vect) -> bool:

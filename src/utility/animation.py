@@ -66,11 +66,11 @@ class Animation:
         if frame is None:
             frame = self.currentFrame
 
-        rect: pygame.Rect = pygame.Rect(frame * self.frameSize.x, 0,
-                                        self.frameSize.x, self.frameSize.y)
+        # Position of the frame on the spritesheet
+        pos: Vect = Vect(frame * self.frameSize.x, 0)
 
-        frame: pygame.Surface = self.spritesheet.getSurf().subsurface(rect)
-        return Image(surf=frame, scale=False)
+        # Get new image of only the frame
+        return self.spritesheet.getSection(pos, self.frameSize)
 
     def isFinished(self) -> bool: return self.currentFrame >= self.frameCount
 
