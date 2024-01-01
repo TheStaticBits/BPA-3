@@ -9,7 +9,7 @@ class UpgradeUI(BaseUI):
     log = logging.getLogger(__name__)
 
     def __init__(self) -> None:
-        super().__init__("upgradeUI")
+        super().__init__("buildings/upgrade")
 
         self.building: BaseBuilding = None
 
