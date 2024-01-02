@@ -39,7 +39,7 @@
                 "text": "[Building Level]",
                 "offset": [ 9, 9 ],
                 "fontSize": 8,
-                "color": [ 0, 0, 0 ]
+                "color": [ 255, 255, 255 ]
             }
         },
 

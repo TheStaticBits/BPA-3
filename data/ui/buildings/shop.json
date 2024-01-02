@@ -41,16 +41,16 @@
                 "offset": [ 250, -15 ],
 
                 "images": {
-                    "inactive": "res/buttons/exampleButton/inactive.png",
-                    "hover": "res/buttons/exampleButton/hover.png",
-                    "pressed": "res/buttons/exampleButton/pressed.png"
+                    "inactive": "res/buttons/shopButton/inactive.png",
+                    "hover": "res/buttons/shopButton/hover.png",
+                    "pressed": "res/buttons/shopButton/pressed.png"
                 },
 
                 "textData": {
                     "text": "Shop",
-                    "offset": [ 0.66, 0.33 ],
+                    "offset": [ 0.66, 1.66 ],
                     "fontSize": 5,
-                    "color": [ 0, 0, 0 ]
+                    "color": [ 255, 255, 255 ]
                 }
             },
 
