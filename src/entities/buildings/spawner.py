@@ -14,15 +14,32 @@ class Spawner(BaseBuilding):
     log = logging.getLogger(__name__)
 
     def __init__(self, type: str) -> None:
+        self.spawnInfo: dict = {}
+
+        self.timer: Timer = Timer(0)
+
         super().__init__(type)
 
-        data: dict = self.getData()
+    def onUpgrade(self, levelData: dict) -> None:
+        """ Loads the new unlocked warrior spawning info """
+        # Putting the warrior spawn info into the dict
+        warriorType = levelData["unlockedWarrior"]
+        self.spawnInfo[warriorType] = {
+            "spawnAmount": levelData["spawnAmount"],
+            "spawnInterval": levelData["spawnInterval"]
+        }
 
-        self.warriorType: str = data["warrior"]
-        self.spawnAmount: int = data["spawnAmount"]
-        self.spawnInterval: float = data["spawnInterval"]
+        # Sets the warrior to spawn to the newly unlocked warrior
+        self.chooseWarrior(warriorType)
 
-        self.timer: Timer = Timer(self.spawnInterval)
+    def chooseWarrior(self, spawnType: str) -> None:
+        """ Chooses the warrior to spawn """
+        self.spawnType: str = spawnType
+
+        self.spawnAmount: int = self.spawnInfo[spawnType]["spawnAmount"]
+        self.spawnInterval: float = self.spawnInfo[spawnType]["spawnInterval"]
+
+        self.timer.setDelay(self.spawnInterval)
 
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
@@ -40,5 +57,5 @@ class Spawner(BaseBuilding):
             for _ in range(self.spawnAmount):
                 # Queue the warrior type to be spawned
                 DungeonScene.queuedAllies.append(
-                    Warrior(self.warriorType, super().getLevel(), True)
+                    Warrior(self.spawnType, super().getLevel(), True)
                 )

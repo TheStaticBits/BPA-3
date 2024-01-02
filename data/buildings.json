@@ -15,10 +15,28 @@
             "gold": 100,
             "steampower": 0
         },
+        
+        "levels": [
+            {
+                "storageAmount": {
+                    "gold": 150
+                }
+            },
 
-        "storageAmount": {
-            "gold": 150
-        }
+            {
+                "upgrade": {
+                    "cost": {
+                        "gold": 10
+                    },
+    
+                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                },
+
+                "storageAmount": {
+                    "gold": 300
+                }
+            }
+        ]
     },
 
     "testSpawner": {
@@ -38,9 +56,27 @@
             "steampower": 15
         },
 
-        "warrior": "aoeWarrior",
-        "spawnInterval": 3,
-        "spawnAmount": 5
+        "levels": [
+            {
+                "unlockedWarrior": "meleeWarrior",
+                "spawnAmount": 2,
+                "spawnInterval": 5
+            },
+            {
+                "upgrade": {
+                    "cost": {
+                        "gold": 10,
+                        "steampower": 5
+                    },
+
+                    "description": "Upgrade to unlock the AOE warrior!"
+                },
+
+                "unlockedWarrior": "aoeWarrior",
+                "spawnAmount": 1,
+                "spawnInterval": 10
+            }
+        ]
     },
 
     "testGenerator": {
@@ -61,10 +97,14 @@
         },
 
         "oneTimeGenerate": false,
-
-        "generateAmount": {
-            "gold": 4
-        }
+        
+        "levels": [
+            {
+                "generateAmount": {
+                    "gold": 4
+                }
+            }
+        ]
     },
 
     "testSteamGenerator": {
@@ -86,8 +126,12 @@
 
         "oneTimeGenerate": true,
 
-        "generateAmount": {
-            "steampower": 5
-        }
+        "levels": [
+            {
+                "generateAmount": {
+                    "steampower": 5
+                }
+            }
+        ]
     }
 }

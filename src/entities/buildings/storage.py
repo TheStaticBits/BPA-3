@@ -10,12 +10,11 @@ class Storage(BaseBuilding):
 
     def onPlace(self) -> None:
         """ Add storage amount to the player's resource limit """
-        data: dict = self.getData()
-
-        # The amount that the storage can store
-        self.storage: AdvDict = AdvDict(data["storageAmount"])
-
         self.incrementStorage()
+
+    def onUpgrade(self, levelData: dict) -> None:
+        """ Loads the storage amount for the level """
+        self.storage: AdvDict = AdvDict(levelData["storageAmount"])
 
     def incrementStorage(self) -> None:
         """ Add storage amount to the player's resource limit """

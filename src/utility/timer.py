@@ -9,8 +9,12 @@ class Timer:
     log = logging.getLogger(__name__)
 
     def __init__(self, delay: float) -> None:
-        self.delay: float = delay
-        self.timer: float = 0
+        self.setDelay(delay)
+
+    def setDelay(self, delay: float) -> None:
+        """ Sets the delay of the timer """
+        self.timer = 0
+        self.delay = delay
 
     def update(self, window: Window) -> bool:
         """ Updates timer with the amount of time that

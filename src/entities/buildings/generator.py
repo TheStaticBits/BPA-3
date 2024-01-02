@@ -14,10 +14,13 @@ class Generator(BaseBuilding):
     def __init__(self, type: str) -> None:
         super().__init__(type)
 
-        data: dict = self.getData()
+        # Whether this is generated once on building creation and removed on
+        # building removal, or generated over time one time every second
+        self.oneTimeGenerate: bool = self.getData()["oneTimeGenerate"]
 
-        self.generate: AdvDict = AdvDict(data["generateAmount"])
-        self.oneTimeGenerate: bool = data["oneTimeGenerate"]
+    def onUpgrade(self, levelData: dict) -> None:
+        """ Loads the generator generation amount """
+        self.generate: AdvDict = AdvDict(levelData["generateAmount"])
 
     def onPlace(self) -> None:
         if self.oneTimeGenerate:

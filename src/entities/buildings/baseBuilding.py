@@ -56,6 +56,8 @@ class BaseBuilding(Entity):
         self.placable: bool = False
         self.level: int = level
 
+        self.loadLevel(level)  # Load level data
+
         # Whether the player has selected this building
         # and its upgrades UI is showing.
         # Resets to False every frame
@@ -70,6 +72,21 @@ class BaseBuilding(Entity):
     def onPlace(self) -> None:
         """ Overriden in subclasses.
             Called on building placement. """
+
+    def onUpgrade(self, levelData: dict) -> None:
+        """ Overriden in subclasses.
+            Called on building upgrade. """
+
+    def loadLevel(self, level: int = None) -> None:
+        """ Loads the the level or the next level if level is None """
+        if level is None:
+            level = self.level + 1
+
+        self.level = level
+
+        # Call load level on subclasses
+        levelData: dict = self.getData()["levels"][level - 1]
+        self.onUpgrade(levelData),
 
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
