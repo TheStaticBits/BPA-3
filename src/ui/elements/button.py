@@ -46,6 +46,9 @@ class Button(BaseUIElement):
         """ Updates the button's mode based on mouse position """
         super().update(window, offset)
 
+        # Reset activated (since it is only true for one frame)
+        self.activated = False
+
         if super().isHidden():
             return
 
@@ -57,9 +60,6 @@ class Button(BaseUIElement):
 
     def updateMouseEvents(self, window: Window) -> None:
         """ Updates the button's mode based on mouse position """
-        # Reset activated (since it is only true for one frame)
-        self.activated = False
-
         if not self.enabled:
             return
 

@@ -85,7 +85,7 @@ class BaseBuilding(Entity):
         self.level = level
 
         # Call load level on subclasses
-        self.onUpgrade(self.getLevelData()),
+        self.onUpgrade(self.getLevelData())
 
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
@@ -187,6 +187,10 @@ class BaseBuilding(Entity):
     def getNextLevelData(self) -> dict:
         """ Returns the level data for the next level """
         return self.getData()["levels"][self.level]
+
+    def reachedMaxLevel(self) -> bool:
+        """ Returns True if the building has reached the max level """
+        return self.level >= len(self.getData()["levels"])
 
     def isPlacing(self) -> bool: return self.placing
     def getLevel(self) -> int: return self.level

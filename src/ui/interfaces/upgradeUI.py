@@ -3,6 +3,8 @@ from src.ui.interfaces.baseUI import BaseUI
 from src.entities.buildings.baseBuilding import BaseBuilding
 from src.window import Window
 from src.utility.image import Image
+from src.entities.player import Player
+from src.utility.advDict import AdvDict
 
 
 class UpgradeUI(BaseUI):
@@ -43,6 +45,8 @@ class UpgradeUI(BaseUI):
 
     def setDisplayed(self) -> None:
         """ Updates the display statistics for the building """
+        super().getElement("maxLevelReached").setHidden(True)
+
         # Set level displayed
         data: dict = self.building.getData()
 
@@ -52,6 +56,11 @@ class UpgradeUI(BaseUI):
         )
         super().getElement("description").setText(data["description"])
 
+        # Check if the building doesn't have another level to upgrade to
+        if self.building.reachedMaxLevel():
+            self.setFinished()
+            return
+
         # Update upgrade data
         upgradeData: dict = self.building.getNextLevelData()["upgrade"]
 
@@ -60,8 +69,23 @@ class UpgradeUI(BaseUI):
         )
 
         # Set the cost amounts for the elements
+        self.upgradeCost: AdvDict = AdvDict(upgradeData["cost"])
         for resource, amount in upgradeData["cost"].items():
             super().getElement(resource + "Cost").setText(str(amount))
+
+    def setFinished(self) -> None:
+        """ Hides elements related to upgrading, and displays
+            the message that the highest level has been reached """
+
+        # Hide upgrade elements
+        super().getElement("upgradeDesc").setHidden(True)
+        super().getElement("upgrade").setHidden(True)
+        for resource in Player.resources.getPyDict().keys():
+            super().getElement(resource + "Cost").setHidden(True)
+            super().getElement(resource + "Img").setHidden(True)
+
+        # Show max level reached message
+        super().getElement("maxLevelReached").setHidden(False)
 
     def update(self, window: Window) -> None:
         """ Selects the building to make it render with a tint """
@@ -79,9 +103,28 @@ class UpgradeUI(BaseUI):
 
         super().update(window)
 
+        # Don't continue if closed
+        if super().getPosType() == "hidden":
+            return
+
         # Close button
         if super().getElement("closeButton").getActivated():
             self.hide(window)
+
+        # Upgrade button
+        self.updateButtons()
+
+    def updateButtons(self) -> None:
+        """ Updates the buttons to be enabled/disabled based on resources """
+        # Upgrade button
+        super().getElement("upgrade").setEnabled(
+            Player.resources >= self.upgradeCost
+        )
+
+        if super().getElement("upgrade").getActivated():
+            Player.resources -= self.upgradeCost
+            self.building.loadLevel()  # Upgrades it
+            self.setDisplayed()
 
     def canShowShop(self, window: Window) -> bool:
         """ Returns whether or not the shop UI can be shown based on the

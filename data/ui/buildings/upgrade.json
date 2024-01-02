@@ -87,6 +87,13 @@
                 "offset": [ 178, 9.5 ],
                 "fontSize": 10,
                 "color": [ 255, 255, 255 ]
+            },
+
+            "maxLevelReached": {
+                "text": "Max Level Reached!",
+                "offset": [ 145, 20 ],
+                "fontSize": 10,
+                "color": [ 255, 255, 255 ]
             }
         },
 
