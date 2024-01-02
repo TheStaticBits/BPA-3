@@ -29,7 +29,7 @@
         "cameraSpeed": 5,
 
         "uiFolder": "data/ui",
-        "font": "res/font/staticfont.ttf"
+        "font": "res/font/monogram.ttf"
     },
 
     "player": {

@@ -31,38 +31,78 @@
             "outline": {
                 "offset": [ 0, 0 ],
                 "path": "res/ui/shop/outline.png"
+            },
+
+            "goldImg": {
+                "offset": [ 135, 9 ],
+                "path": "res/ui/resources/gold.png"
+            },
+
+            "steampowerImg": {
+                "offset": [ 165, 9 ],
+                "path": "res/ui/resources/steampower.png"
             }
         },
         
         "text": {
-            "title": {
+            "name": {
+                "text": "[Building Name]",
+                "offset": [ 9, 5 ],
+                "fontSize": 15,
+                "color": [ 255, 255, 255 ]
+            },
+
+            "level": {
                 "text": "[Building Level]",
-                "offset": [ 9, 9 ],
+                "offset": [ 9, 16 ],
                 "fontSize": 8,
+                "color": [ 200, 200, 200 ]
+            },
+
+            "description": {
+                "text": "[Building Description]",
+                "offset": [ 9, 24 ],
+                "fontSize": 8,
+                "color": [ 255, 255, 255 ],
+                "wrapLength": 125
+            },
+
+            "upgradeDesc": {
+                "text": "[Upgrade Description]",
+                "offset": [ 135, 24 ],
+                "fontSize": 8,
+                "color": [ 255, 255, 255 ],
+                "wrapLength": 140
+            },
+
+            "goldCost": {
+                "text": "[Gold]",
+                "offset": [ 148, 9.5 ],
+                "fontSize": 10,
+                "color": [ 255, 255, 255 ]
+            },
+
+            "steampowerCost": {
+                "text": "[Steam]",
+                "offset": [ 178, 9.5 ],
+                "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             }
         },
 
         "buttons": {
             "closeButton": {
-                "offset": [ 241, 8 ],
+                "offset": [ 265, 8 ],
 
                 "images": {
-                    "inactive": "res/buttons/exampleButton/inactive.png",
-                    "hover": "res/buttons/exampleButton/hover.png",
-                    "pressed": "res/buttons/exampleButton/pressed.png"
-                },
-
-                "textData": {
-                    "text": "Close",
-                    "offset": [ 0.66, 0.33 ],
-                    "fontSize": 5,
-                    "color": [ 0, 0, 0 ]
+                    "inactive": "res/buttons/xButton/inactive.png",
+                    "hover": "res/buttons/xButton/hover.png",
+                    "pressed": "res/buttons/xButton/pressed.png"
                 }
             },
 
             "sellButton": {
-                "offset": [ 241, 27 ],
+                "offset": [ 230, 7 ],
 
                 "images": {
                     "inactive": "res/buttons/exampleButton/inactive.png",
@@ -73,7 +113,25 @@
                 "textData": {
                     "text": "Sell",
                     "offset": [ 0.66, 0.33 ],
-                    "fontSize": 5,
+                    "fontSize": 8,
+                    "color": [ 0, 0, 0 ]
+                }
+            },
+
+
+            "upgrade": {
+                "offset": [ 195, 7 ],
+
+                "images": {
+                    "inactive": "res/buttons/exampleButton/inactive.png",
+                    "hover": "res/buttons/exampleButton/hover.png",
+                    "pressed": "res/buttons/exampleButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Upgrade",
+                    "offset": [ 0, 0 ],
+                    "fontSize": 8,
                     "color": [ 0, 0, 0 ]
                 }
             }

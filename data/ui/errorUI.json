@@ -30,22 +30,22 @@
         },
         "text": {
             "title": {
-                "text": "[Recoverable/Non-recoverable] error:",
-                "offset": [ 15, 15 ],
-                "fontSize": 10,
+                "text": "[Recoverable/unrecoverable] error:",
+                "offset": [ 15, 10 ],
+                "fontSize": 20,
                 "color": [ 255, 255, 255 ]
             },
             "desc": {
                 "text": "[error description]",
-                "offset": [ 15, 30 ],
-                "fontSize": 5,
+                "offset": [ 15, 25 ],
+                "fontSize": 10,
                 "color": [ 200, 200, 200 ],
                 "wrapLength": 270
             },
             "errorMsg": {
                 "text": "[error message]",
-                "offset": [ 15, 45 ],
-                "fontSize": 5,
+                "offset": [ 15, 40 ],
+                "fontSize": 8,
                 "color": [ 255, 255, 255 ],
                 "wrapLength": 270
             }
@@ -70,9 +70,9 @@
                 },
 
                 "textData": {
-                    "text": "Send Crash Report Email",
-                    "offset": [ 0, 0 ],
-                    "fontSize": 5,
+                    "text": "Send Report Email",
+                    "offset": [ 0, -0.66 ],
+                    "fontSize": 10,
                     "color": [ 255, 255, 255 ]
                 }
             },
@@ -87,8 +87,8 @@
 
                 "textData": {
                     "text": "Open Logs File",
-                    "offset": [ 0, 0 ],
-                    "fontSize": 5,
+                    "offset": [ 0, -0.66 ],
+                    "fontSize": 10,
                     "color": [ 255, 255, 255 ]
                 }
             },
@@ -103,8 +103,8 @@
 
                 "textData": {
                     "text": "Open Errors File",
-                    "offset": [ 0, 0 ],
-                    "fontSize": 5,
+                    "offset": [ 0, -0.66 ],
+                    "fontSize": 10,
                     "color": [ 255, 255, 255 ]
                 }
             }

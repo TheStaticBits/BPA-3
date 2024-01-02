@@ -39,13 +39,29 @@ class UpgradeUI(BaseUI):
         else:  # No building showing, so move to visible
             self.building = building
             super().startTransition("visible", window)
-            self.setStats(window)
+            self.setDisplayed()
 
-    def setStats(self, window: Window) -> None:
+    def setDisplayed(self) -> None:
         """ Updates the display statistics for the building """
         # Set level displayed
-        buildingLevel: int = self.building.getLevel()
-        super().getElement("title").setText(f"Level {buildingLevel} building")
+        data: dict = self.building.getData()
+
+        super().getElement("name").setText(f"{data['name']}")
+        super().getElement("level").setText(
+            f"Level {self.building.getLevel()}"
+        )
+        super().getElement("description").setText(data["description"])
+
+        # Update upgrade data
+        upgradeData: dict = self.building.getNextLevelData()["upgrade"]
+
+        super().getElement("upgradeDesc").setText(
+            upgradeData["description"]
+        )
+
+        # Set the cost amounts for the elements
+        for resource, amount in upgradeData["cost"].items():
+            super().getElement(resource + "Cost").setText(str(amount))
 
     def update(self, window: Window) -> None:
         """ Selects the building to make it render with a tint """

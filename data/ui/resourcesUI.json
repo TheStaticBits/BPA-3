@@ -35,16 +35,16 @@
         
         "text": {
             "goldText": {
-                "text": "0",
-                "offset": [ 16, 4 ],
-                "fontSize": 8,
+                "text": "[Gold]",
+                "offset": [ 16, 3 ],
+                "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             },
 
             "steampowerText": {
-                "text": "0",
-                "offset": [ 16, 21 ],
-                "fontSize": 8,
+                "text": "[Steam]",
+                "offset": [ 16, 20 ],
+                "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             }
         },

@@ -48,8 +48,8 @@
 
                 "textData": {
                     "text": "Shop",
-                    "offset": [ 0.66, 1.66 ],
-                    "fontSize": 5,
+                    "offset": [ 0.66, 0.66 ],
+                    "fontSize": 10,
                     "color": [ 255, 255, 255 ]
                 }
             },

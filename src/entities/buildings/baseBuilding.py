@@ -85,8 +85,7 @@ class BaseBuilding(Entity):
         self.level = level
 
         # Call load level on subclasses
-        levelData: dict = self.getData()["levels"][level - 1]
-        self.onUpgrade(levelData),
+        self.onUpgrade(self.getLevelData()),
 
     def update(self, window: Window, camOffset: Vect,
                tileset: Tileset, player: Player) -> None:
@@ -180,6 +179,14 @@ class BaseBuilding(Entity):
     # Getters
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
+
+    def getLevelData(self) -> dict:
+        """ Returns the level data for the current level """
+        return self.getData()["levels"][self.level - 1]
+
+    def getNextLevelData(self) -> dict:
+        """ Returns the level data for the next level """
+        return self.getData()["levels"][self.level]
 
     def isPlacing(self) -> bool: return self.placing
     def getLevel(self) -> int: return self.level

@@ -53,29 +53,30 @@
         "text": {
             "buildingName": {
                 "text": "[Building Name]",
-                "offset": [ 65, 5 ],
-                "fontSize": 8,
+                "offset": [ 65, 1 ],
+                "fontSize": 16,
                 "color": [ 255, 255, 255 ]
             },
 
             "description": {
                 "text": "[Description]",
-                "offset": [ 65, 18 ],
-                "fontSize": 5,
-                "color": [ 255, 255, 255 ]
+                "offset": [ 65, 17 ],
+                "fontSize": 8,
+                "color": [ 255, 255, 255 ],
+                "wrapLength": 125
             },
 
             "goldCost": {
                 "text": "[Gold]",
-                "offset": [ 23, 7.5 ],
-                "fontSize": 5,
+                "offset": [ 23, 5.5 ],
+                "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             },
 
             "steampowerCost": {
                 "text": "[Steam]",
-                "offset": [ 53, 7.5 ],
-                "fontSize": 5,
+                "offset": [ 53, 5.5 ],
+                "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             }
         },
@@ -92,8 +93,8 @@
 
                 "textData": {
                     "text": "Buy",
-                    "offset": [ 0, 0 ],
-                    "fontSize": 5,
+                    "offset": [ 0, -1 ],
+                    "fontSize": 10,
                     "color": [ 0, 0, 0 ]
                 }
             }

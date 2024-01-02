@@ -2,7 +2,7 @@
     "treasureChest": {
         "type": "storage",
         "name": "Treasure Chest",
-        "description": "This treasure chest can hold much goodies.\n\nDon't let your enemies steal it! :)",
+        "description": "This treasure chest can hold much goodies. Don't let your enemies steal it! Increases your gold limit.",
 
         "anim": {
             "path": "res/buildings/treasureChest.png",
@@ -26,7 +26,8 @@
             {
                 "upgrade": {
                     "cost": {
-                        "gold": 10
+                        "gold": 10,
+                        "steampower": 0
                     },
     
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"

@@ -31,8 +31,8 @@
 
                 "textData": {
                     "text": "Dungeon",
-                    "offset": [ 0.66, 0.33 ],
-                    "fontSize": 5,
+                    "offset": [ 0.66, -0.66 ],
+                    "fontSize": 10,
                     "color": [ 0, 0, 0 ]
                 }
             },
@@ -48,8 +48,8 @@
 
                 "textData": {
                     "text": "Pause",
-                    "offset": [ 0.66, 0.33 ],
-                    "fontSize": 5,
+                    "offset": [ 0.66, -0.66 ],
+                    "fontSize": 10,
                     "color": [ 0, 0, 0 ]
                 }
             }
