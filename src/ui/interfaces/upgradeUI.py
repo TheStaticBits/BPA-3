@@ -46,6 +46,7 @@ class UpgradeUI(BaseUI):
 
     def setDisplayed(self) -> None:
         """ Updates the display statistics for the building """
+        self.setFinished(False)
         super().getElement("maxLevelReached").setHidden(True)
 
         # Set level displayed
@@ -60,7 +61,7 @@ class UpgradeUI(BaseUI):
 
         # Check if the building doesn't have another level to upgrade to
         if self.building.reachedMaxLevel():
-            self.setFinished()
+            self.setFinished(True)
             return
 
         # Update upgrade data
@@ -75,16 +76,16 @@ class UpgradeUI(BaseUI):
         for resource, amount in upgradeData["cost"].items():
             super().getElement(resource + "Cost").setText(str(amount))
 
-    def setFinished(self) -> None:
+    def setFinished(self, hide: bool = True) -> None:
         """ Hides elements related to upgrading, and displays
             the message that the highest level has been reached """
 
         # Hide upgrade elements
-        super().getElement("upgradeDesc").setHidden(True)
-        super().getElement("upgrade").setHidden(True)
+        super().getElement("upgradeDesc").setHidden(hide)
+        super().getElement("upgrade").setHidden(hide)
         for resource in Player.resources.getPyDict().keys():
-            super().getElement(resource + "Cost").setHidden(True)
-            super().getElement(resource + "Img").setHidden(True)
+            super().getElement(resource + "Cost").setHidden(hide)
+            super().getElement(resource + "Img").setHidden(hide)
 
         # Show max level reached message
         super().getElement("maxLevelReached").setHidden(False)

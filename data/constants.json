@@ -46,7 +46,7 @@
         "resources": {
             "starting": {
                 "gold": 1000,
-                "steampower": 20
+                "steampower": 100
             },
 
             "limits": {

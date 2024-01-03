@@ -12,13 +12,13 @@ class Generator(BaseBuilding):
     log = logging.getLogger(__name__)
 
     def __init__(self, type: str) -> None:
-        super().__init__(type)
-
         # Whether this is generated once on building creation and removed on
         # building removal, or generated over time one time every second
         self.oneTimeGenerate: bool = self.getData()["oneTimeGenerate"]
 
         self.generate: AdvDict = AdvDict({})
+
+        super().__init__(type)
 
     def onUpgrade(self, levelData: dict) -> None:
         """ Loads the generator generation amount """

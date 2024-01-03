@@ -1,0 +1,19 @@
+{
+    "positions": {
+        "hidden": {
+            "x": { "locked": "start", "margin": 0 },
+            "y": { "locked": "end",   "margin": 0 },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "start", "margin": 0 },
+            "y": { "locked": "end",   "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 6,
+    "transitionType": "ease"
+}
