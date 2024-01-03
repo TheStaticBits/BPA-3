@@ -38,8 +38,8 @@
         "decel": 550,
         
         "anim": {
-            "path": "res/exampleAnim.png",
-            "frames": 3,
+            "path": "res/player.png",
+            "frames": 2,
             "delay": 1
         },
 
