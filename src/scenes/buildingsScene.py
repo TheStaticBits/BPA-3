@@ -53,6 +53,12 @@ class BuildingsScene(BaseScene):
             building.update(window, super().getCamOffset(),
                             super().getTileset(), super().getPlayer())
 
+        # Remove buildings that were sold
+        self.buildings[:] = [
+            building for building in self.buildings
+            if not building.isSold()
+        ]
+
     def updatePlayerAndUpgrades(self, window: Window) -> None:
         """ Updates the player and the upgrade UI,
             including the building shop and upgrade UI interactions """
@@ -63,7 +69,7 @@ class BuildingsScene(BaseScene):
         # Set upgrade UI with the selected building
         self.upgradeUI.setBuilding(collided, window)
 
-        self.upgradeUI.update(window)
+        self.upgradeUI.update(window, super().getTileset())
 
         # Hide shop if the player is placing a building
         if not self.upgradeUI.canShowShop(window):

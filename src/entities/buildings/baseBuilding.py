@@ -55,6 +55,8 @@ class BaseBuilding(Entity):
         self.placing: bool = True
         self.placable: bool = False
         self.level: int = level
+        self.sold: bool = False
+        self.buildingTileSize: Vect = Vect(self.getData()["size"])
 
         self.loadLevel(level)  # Load level data
 
@@ -144,11 +146,9 @@ class BaseBuilding(Entity):
         if self.placable and window.getMouseJustPressed("left"):
             self.placing = False
 
-            buildingTileSize: Vect = Vect(self.getData()["size"])
-
             # Sets the range of tiles that the building takes up to occupied
             # so no other building can be placed there
-            tileset.setRangeOccupied(self.tilePos, buildingTileSize)
+            tileset.setRangeOccupied(self.tilePos, self.buildingTileSize)
 
             self.onPlace()
 
@@ -176,6 +176,14 @@ class BaseBuilding(Entity):
         # Draw the new tinted surface to the screen
         surface.render(img, super().getPos() + offset)
 
+    def setSold(self, tileset: Tileset) -> None:
+        """ Sets the building to sold and unoccupied """
+        self.sold = True
+
+        # Set tiles to be unoccupied:
+        tileset.setRangeOccupied(self.tilePos, self. buildingTileSize, False)
+        self.onRemove()
+
     # Getters
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
@@ -194,6 +202,7 @@ class BaseBuilding(Entity):
 
     def isPlacing(self) -> bool: return self.placing
     def getLevel(self) -> int: return self.level
+    def isSold(self) -> bool: return self.sold
 
     @classmethod
     def getDataFrom(cls, type: str) -> dict:

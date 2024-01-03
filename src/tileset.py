@@ -101,11 +101,12 @@ class Tileset:
 
         return False
 
-    def setRangeOccupied(self, startTile: Vect, tileRange: Vect) -> None:
+    def setRangeOccupied(self, startTile: Vect, tileRange: Vect,
+                         state: bool = True) -> None:
         """ Sets the occupied status of a range of tiles """
         for y in range(tileRange.y):
             for x in range(tileRange.x):
-                self.setOccupied(startTile + Vect(x, y))
+                self.setOccupied(startTile + Vect(x, y), state)
 
     # Getters
     def getPlayerStart(self) -> Vect:
@@ -120,6 +121,6 @@ class Tileset:
     def getData(self) -> dict: return self.data
 
     # Setters
-    def setOccupied(self, tilePos: Vect) -> None:
+    def setOccupied(self, tilePos: Vect, state: bool = True) -> None:
         """ Sets the occupied status of a tile """
-        self.occupiedTiles[tilePos.y][tilePos.x] = True
+        self.occupiedTiles[tilePos.y][tilePos.x] = False

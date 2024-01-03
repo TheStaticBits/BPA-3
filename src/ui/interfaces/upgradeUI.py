@@ -5,6 +5,7 @@ from src.window import Window
 from src.utility.image import Image
 from src.entities.player import Player
 from src.utility.advDict import AdvDict
+from src.tileset import Tileset
 
 
 class UpgradeUI(BaseUI):
@@ -55,6 +56,7 @@ class UpgradeUI(BaseUI):
             f"Level {self.building.getLevel()}"
         )
         super().getElement("description").setText(data["description"])
+        self.sellPrice = AdvDict(data["cost"])
 
         # Check if the building doesn't have another level to upgrade to
         if self.building.reachedMaxLevel():
@@ -87,7 +89,7 @@ class UpgradeUI(BaseUI):
         # Show max level reached message
         super().getElement("maxLevelReached").setHidden(False)
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, tileset: Tileset) -> None:
         """ Selects the building to make it render with a tint """
         if self.betweenBuildings and not super().isTransitioning():
             # Finished transition to hidden, so start transition to visible
@@ -112,9 +114,9 @@ class UpgradeUI(BaseUI):
             self.hide(window)
 
         # Upgrade button
-        self.updateButtons()
+        self.updateButtons(window, tileset)
 
-    def updateButtons(self) -> None:
+    def updateButtons(self, window: Window, tileset: Tileset) -> None:
         """ Updates the buttons to be enabled/disabled based on resources """
         # Upgrade button
         super().getElement("upgrade").setEnabled(
@@ -125,6 +127,11 @@ class UpgradeUI(BaseUI):
             Player.resources -= self.upgradeCost
             self.building.loadLevel()  # Upgrades it
             self.setDisplayed()
+
+        if super().getElement("sellButton").getActivated():
+            Player.resources += self.sellPrice
+            self.building.setSold(tileset)
+            self.hide(window)
 
     def canShowShop(self, window: Window) -> bool:
         """ Returns whether or not the shop UI can be shown based on the
