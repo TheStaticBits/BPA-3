@@ -18,9 +18,18 @@ class Generator(BaseBuilding):
         # building removal, or generated over time one time every second
         self.oneTimeGenerate: bool = self.getData()["oneTimeGenerate"]
 
+        self.generate: AdvDict = AdvDict({})
+
     def onUpgrade(self, levelData: dict) -> None:
         """ Loads the generator generation amount """
-        self.generate: AdvDict = AdvDict(levelData["generateAmount"])
+        newGenerate: AdvDict = AdvDict(levelData["generateAmount"])
+
+        if super().getLevel() > 1 and self.oneTimeGenerate:
+            # Remove old and add new
+            Player.resources -= self.generate
+            Player.resources += newGenerate
+
+        self.generate = newGenerate
 
     def onPlace(self) -> None:
         if self.oneTimeGenerate:

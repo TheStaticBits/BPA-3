@@ -113,11 +113,15 @@ class UpgradeUI(BaseUI):
         if super().getElement("closeButton").getActivated():
             self.hide(window)
 
-        # Upgrade button
-        self.updateButtons(window, tileset)
+        # Update buttons
+        self.updateUpgradeButton()
+        self.updateSellButton(window, tileset)
 
-    def updateButtons(self, window: Window, tileset: Tileset) -> None:
+    def updateUpgradeButton(self) -> None:
         """ Updates the buttons to be enabled/disabled based on resources """
+        if super().getElement("upgrade").isHidden():
+            return
+
         # Upgrade button
         super().getElement("upgrade").setEnabled(
             Player.resources >= self.upgradeCost
@@ -128,6 +132,9 @@ class UpgradeUI(BaseUI):
             self.building.loadLevel()  # Upgrades it
             self.setDisplayed()
 
+    def updateSellButton(self, window: Window, tileset: Tileset) -> None:
+        """ Updates the sell button to be enabled/disabled based on resources
+            and sells the building if pressed """
         if super().getElement("sellButton").getActivated():
             Player.resources += self.sellPrice
             self.building.setSold(tileset)
