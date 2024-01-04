@@ -70,6 +70,7 @@ class Player(Entity):
         super().update(window)
 
         self.movement(window)
+        self.updateMovementAnim()
 
         # Remove buildings that are being placed:
         buildings = [b for b in buildings if not b.isPlacing()]
@@ -89,11 +90,6 @@ class Player(Entity):
         # Gets movement direction based on the keys pressed (getKey is 1 or 0)
         acceleration = Vect(window.getKey("right") - window.getKey("left"),
                             window.getKey("down") - window.getKey("up"))
-
-        # Set animation based on if the player is moving or not
-        moving: bool = acceleration != Vect()
-        animation = "idle" if not moving else "walking"
-        self.setAnimation(animation)
 
         self.velocity += (acceleration *
                           self.ACCELERATION *
@@ -129,6 +125,13 @@ class Player(Entity):
         # with acceleration as the parameter of the decelerate function
         self.velocity = self.velocity.forEach(decelerate,
                                               vectParams=[acceleration])
+
+    def updateMovementAnim(self) -> None:
+        """ Changes animation based on player velocity """
+        # Set animation based on if the player is moving or not
+        moving: bool = self.velocity != Vect()
+        animation = "idle" if not moving else "walking"
+        self.setAnimation(animation)
 
     def setAnimation(self, anim: str) -> None:
         """ Sets the animation to the given animation name """
