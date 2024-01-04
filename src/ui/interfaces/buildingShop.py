@@ -101,7 +101,9 @@ class BuildingShop(BaseUI):
         defaultPos: Vect = super().getUIOffset(window.getSize(), "visible")
         transitionOffset: Vect = super().getOffset() - defaultPos
 
-        # Update every building UI
+        # Update every building UI with the transition offset
+        # This means that buttons and other such elements will have the proper
+        # offset
         for ui in self.detailUIs:
             ui.update(window, transitionOffset)
 

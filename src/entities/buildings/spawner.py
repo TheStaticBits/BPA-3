@@ -36,6 +36,11 @@ class Spawner(BaseBuilding):
         """ Chooses the warrior to spawn """
         self.spawnType: str = spawnType
 
+        # Amount to remove from the level index when spawning
+        # Dependent on how far along the warrior is in the upgrade list
+        warriorNames: list[str] = list(Warrior.WARRIOR_DICT.keys())
+        self.removeLevel: int = warriorNames.index(spawnType)
+
         self.spawnAmount: int = self.spawnInfo[spawnType]["spawnAmount"]
         self.spawnInterval: float = self.spawnInfo[spawnType]["spawnInterval"]
 
@@ -57,5 +62,7 @@ class Spawner(BaseBuilding):
             for _ in range(self.spawnAmount):
                 # Queue the warrior type to be spawned
                 DungeonScene.queuedAllies.append(
-                    Warrior(self.spawnType, super().getLevel(), True)
+                    Warrior(self.spawnType,
+                            super().getLevel() - self.removeLevel,
+                            True)
                 )
