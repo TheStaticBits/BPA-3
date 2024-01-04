@@ -109,7 +109,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 80, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
                 "generateAmount": { "gold": 6 }
@@ -117,7 +117,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 110, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
                 "generateAmount": { "gold": 8 }
@@ -125,7 +125,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 160, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
                 "generateAmount": { "gold": 10 }
@@ -133,7 +133,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 220, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
                 "generateAmount": { "gold": 13 }
@@ -167,7 +167,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 120, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
                 },
 
                 "generateAmount": { "steampower": 10 }
@@ -175,7 +175,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 140, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
                 },
 
                 "generateAmount": { "steampower": 15 }
@@ -184,7 +184,7 @@
                 "upgrade": {
                     "cost": { "gold": 270, "steampower": 0 },
     
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
                 },
 
                 "generateAmount": { "steampower": 25 }
@@ -192,7 +192,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 300, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
                 },
 
                 "generateAmount": { "steampower": 40 }
