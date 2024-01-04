@@ -77,7 +77,7 @@
                 },
 
                 "unlockedWarrior": "aoeWarrior",
-                "spawnAmount": 1,
+                "spawnAmount": 3,
                 "spawnInterval": 10
             }
         ]

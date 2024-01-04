@@ -135,12 +135,12 @@
             {
                 "health": 130,
                 "range": 35,
-                "maxSpeed": 70, "accel": 100, "decel": 400,
+                "maxSpeed": 90, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 3,
-                "damage": 10,
-                "attackKnockback": 150
+                "attackInterval": 2.1,
+                "damage": 8,
+                "attackKnockback": 160
             }
         ]
     }
