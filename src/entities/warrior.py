@@ -36,7 +36,7 @@ class Warrior(Entity):
         # Death particles
         particles = constants["warriors"]["deathParticles"]
         cls.PARTICLE_AMOUNT: int = particles["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(particles["size"] * Image.SCALE)
+        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
         cls.PARTICLE_SPEED: float = particles["speed"]
         cls.PARTICLE_DURATION: float = particles["duration"]
 
