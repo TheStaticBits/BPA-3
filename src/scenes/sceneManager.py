@@ -12,7 +12,7 @@ from src.utility.image import Image
 class SceneState(enum.Enum):
     """ The state of the scene """
 
-    BUILDING = "Buildings"
+    BUILDING = "Base"
     DUNGEON = "Dungeon"
 
 
