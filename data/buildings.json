@@ -18,54 +18,31 @@
         
         "levels": [
             {
-                "storageAmount": {
-                    "gold": 150
-                }
+                "storageAmount": { "gold": 150 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 90,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 90, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "storageAmount": {
-                    "gold": 300
-                }
+                "storageAmount": { "gold": 300 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 85,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 85, "steampower": 0},
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "storageAmount": {
-                    "gold": 450
-                }
+                "storageAmount": { "gold": 450 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 80,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 80, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "storageAmount": {
-                    "gold": 600
-                }
+                "storageAmount": { "gold": 600 }
             }
         ]
     },
@@ -95,11 +72,7 @@
             },
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 110,
-                        "steampower": 5
-                    },
-
+                    "cost": { "gold": 110, "steampower": 5 },
                     "description": "Upgrade to unlock the AOE warrior!"
                 },
 
@@ -131,69 +104,39 @@
         
         "levels": [
             {
-                "generateAmount": {
-                    "gold": 4
-                }
+                "generateAmount": { "gold": 4 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 80,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 80, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "gold": 6
-                }
+                "generateAmount": { "gold": 6 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 110,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 110, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "gold": 8
-                }
+                "generateAmount": { "gold": 8 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 160,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 160, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "gold": 10
-                }
+                "generateAmount": { "gold": 10 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 220,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 220, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "gold": 13
-                }
+                "generateAmount": { "gold": 13 }
             }
         ]
     },
@@ -219,69 +162,40 @@
 
         "levels": [
             {
-                "generateAmount": {
-                    "steampower": 5
-                }
+                "generateAmount": { "steampower": 5 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 120,
-                        "steampower": 0
-                    },
+                    "cost": { "gold": 120, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                },
+
+                "generateAmount": { "steampower": 10 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 140, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                },
+
+                "generateAmount": { "steampower": 15 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 270, "steampower": 0 },
     
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "steampower": 10
-                }
+                "generateAmount": { "steampower": 25 }
             },
-
             {
                 "upgrade": {
-                    "cost": {
-                        "gold": 140,
-                        "steampower": 0
-                    },
-    
+                    "cost": { "gold": 300, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you can store in it!"
                 },
 
-                "generateAmount": {
-                    "steampower": 15
-                }
-            },
-
-            {
-                "upgrade": {
-                    "cost": {
-                        "gold": 270,
-                        "steampower": 0
-                    },
-    
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
-                },
-
-                "generateAmount": {
-                    "steampower": 25
-                }
-            },
-
-            {
-                "upgrade": {
-                    "cost": {
-                        "gold": 300,
-                        "steampower": 0
-                    },
-    
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
-                },
-
-                "generateAmount": {
-                    "steampower": 40
-                }
+                "generateAmount": { "steampower": 40 }
             }
         ]
     }
