@@ -144,6 +144,7 @@ class UpgradeUI(BaseUI):
         if super().getElement("upgrade").getActivated():
             Player.resources -= self.upgradeCost
             self.building.loadLevel()  # Upgrades it
+            self.building.setSpawnParticles()  # Spawn particles
             self.setDisplayed()
 
             if self.spawnerUI.getPosType() == "visible":
@@ -154,7 +155,8 @@ class UpgradeUI(BaseUI):
             and sells the building if pressed """
         if super().getElement("sellButton").getActivated():
             Player.resources += self.sellPrice
-            self.building.setSold(tileset)
+            self.building.setSold(tileset)  # Sells the building
+            self.building.setSpawnParticles()  # Spawn particles
             self.hide(window)
 
     def updateSpawnerUI(self, window: Window) -> None:

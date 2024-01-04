@@ -7,6 +7,7 @@ from src.tileset import Tileset
 from src.window import Window
 from src.entities.player import Player
 from src.utility.image import Image
+from src.particle import Particle
 
 
 class BaseBuilding(Entity):
@@ -29,6 +30,13 @@ class BaseBuilding(Entity):
 
         cls.redTint: tuple[int] = constants["buildings"]["redTint"]
         cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+
+        # Particles
+        particles: dict = constants["buildings"]["effectParticles"]
+        cls.PARTICLE_AMOUNT: int = particles["amount"]
+        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
+        cls.PARTICLE_SPEED: float = particles["speed"]
+        cls.PARTICLE_DURATION: float = particles["duration"]
 
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
@@ -57,6 +65,9 @@ class BaseBuilding(Entity):
         self.level: int = level
         self.sold: bool = False
         self.buildingTileSize: Vect = Vect(self.getData()["size"])
+
+        # Set to True to spawn effect particles
+        self.spawnParticles: bool = False
 
         self.loadLevel(level)  # Load level data
 
@@ -150,6 +161,7 @@ class BaseBuilding(Entity):
             # so no other building can be placed there
             tileset.setRangeOccupied(self.tilePos, self.buildingTileSize)
 
+            self.setSpawnParticles()
             self.onPlace()
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
@@ -184,6 +196,14 @@ class BaseBuilding(Entity):
         tileset.setRangeOccupied(self.tilePos, self. buildingTileSize, False)
         self.onRemove()
 
+    def getParticles(self) -> list[Particle]:
+        """ Gets a list of particles used for various situations """
+        return Particle.generate(self.PARTICLE_AMOUNT,
+                                 super().getAnim().getFrame(),
+                                 super().getPos(),
+                                 self.PARTICLE_SIZE, self.PARTICLE_SPEED,
+                                 self.PARTICLE_DURATION)
+
     # Getters
     def getData(self) -> dict:
         return self.BUILDINGS_DATA[self.type]
@@ -200,6 +220,14 @@ class BaseBuilding(Entity):
         """ Returns True if the building has reached the max level """
         return self.level >= len(self.getData()["levels"])
 
+    def isSpawningParticles(self) -> bool:
+        """ Returns True if the building is spawning particles
+            Also sets the spawnParticles to False """
+        if self.spawnParticles:
+            self.spawnParticles = False
+            return True
+        return False
+
     def isPlacing(self) -> bool: return self.placing
     def getLevel(self) -> int: return self.level
     def isSold(self) -> bool: return self.sold
@@ -210,3 +238,4 @@ class BaseBuilding(Entity):
 
     # Setters
     def select(self) -> None: self.selected = True
+    def setSpawnParticles(self) -> None: self.spawnParticles = True

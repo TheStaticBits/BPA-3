@@ -34,15 +34,11 @@ class Warrior(Entity):
         cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
 
         # Death particles
-        cls.PARTICLE_AMOUNT: int = \
-            constants["warriors"]["deathParticles"]["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(
-            constants["warriors"]["deathParticles"]["size"]
-        )
-        cls.PARTICLE_SPEED: float = \
-            constants["warriors"]["deathParticles"]["speed"]
-        cls.PARTICLE_DURATION: float = \
-            constants["warriors"]["deathParticles"]["duration"]
+        particles = constants["warriors"]["deathParticles"]
+        cls.PARTICLE_AMOUNT: int = particles["amount"]
+        cls.PARTICLE_SIZE: Vect = Vect(particles["size"] * Image.SCALE)
+        cls.PARTICLE_SPEED: float = particles["speed"]
+        cls.PARTICLE_DURATION: float = particles["duration"]
 
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],
@@ -355,24 +351,11 @@ class Warrior(Entity):
 
     def getDeathParticles(self) -> list[Particle]:
         """ Returns a list of particles for the warrior's death """
-        particles: list[Particle] = []
-
-        frame = super().getAnim().getFrame()
-        centerPos = super().getCenterPos()
-
-        for _ in range(self.PARTICLE_AMOUNT):
-            # Create particle object and add it to the list
-            particles.append(self.createParticle(frame, centerPos))
-
-        return particles
-
-    def createParticle(self, frame: Image, pos: Vect) -> Particle:
-        """ Generates a particle object with random position and angle """
-        angle: float = random.randint(0, 359)
-
-        return Particle(frame, self.PARTICLE_SIZE,
-                        pos.copy(), angle,
-                        self.PARTICLE_SPEED, self.PARTICLE_DURATION)
+        return Particle.generate(self.PARTICLE_AMOUNT,
+                                 super().getAnim().getFrame(),
+                                 super().getPos(),
+                                 self.PARTICLE_SIZE, self.PARTICLE_SPEED,
+                                 self.PARTICLE_DURATION)
 
     # Getters
     def hasTarget(self) -> bool:

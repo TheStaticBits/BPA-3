@@ -36,6 +36,7 @@ class BuildingsScene(BaseScene):
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
         super().updateTileset(window)
+        super().updateParticles(window)
 
         self.buildingShop.update(window)
         self.updateBuildings(window)
@@ -52,6 +53,10 @@ class BuildingsScene(BaseScene):
         for building in self.buildings:
             building.update(window, super().getCamOffset(),
                             super().getTileset(), super().getPlayer())
+
+            # Particles
+            if building.isSpawningParticles():
+                super().addParticles(building.getParticles())
 
         # Remove buildings that were sold
         self.buildings[:] = [
@@ -111,8 +116,9 @@ class BuildingsScene(BaseScene):
         return False
 
     def render(self, surface: Window | Image) -> None:
-        """ Renders buildings """
+        """ Renders the building scene in order """
         super().renderTileset(surface)
+        super().renderParticles(surface)
 
         # Render buildings
         for building in self.buildings:
@@ -120,6 +126,6 @@ class BuildingsScene(BaseScene):
 
         super().renderPlayer(surface)
 
+        # Render UIs
         self.buildingShop.render(surface)
-
         self.upgradeUI.render(surface)
