@@ -48,13 +48,13 @@
             "name": {
                 "text": "[Building Name]",
                 "offset": [ 9, 5 ],
-                "fontSize": 15,
+                "fontSize": 16,
                 "color": [ 255, 255, 255 ]
             },
 
             "level": {
                 "text": "[Building Level]",
-                "offset": [ 9, 16 ],
+                "offset": [ 9, 17 ],
                 "fontSize": 8,
                 "color": [ 200, 200, 200 ]
             },

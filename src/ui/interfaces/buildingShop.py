@@ -96,14 +96,13 @@ class BuildingShop(BaseUI):
 
     def updateDetailUIs(self, window: Window) -> None:
         """ Updates the detail UIs """
-        # Calculate current transition offset by finding the distance from
-        # the default position of "visible"
-        defaultPos: Vect = super().getUIOffset(window.getSize(), "visible")
-        transitionOffset: Vect = super().getOffset() - defaultPos
+        # Find current distance from the visible position,
+        # to use it as an offset on the detail UIs
+        transitionOffset: Vect = super().findDistFromPos("visible", window)
 
         # Update every building UI with the transition offset
         # This means that buttons and other such elements will have the proper
-        # offset
+        # offset based on the current height of the outer shop UI
         for ui in self.detailUIs:
             ui.update(window, transitionOffset)
 

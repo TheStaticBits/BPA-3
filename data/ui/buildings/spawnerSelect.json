@@ -1,19 +1,77 @@
 {
     "positions": {
         "hidden": {
-            "x": { "locked": "start", "margin": 0 },
-            "y": { "locked": "end",   "margin": 0 },
+            "x": { "locked": "start", "margin":  10 },
+            "y": { "locked": "end",   "margin": -30 },
             "hidden": true
         },
 
         "visible": {
-            "x": { "locked": "start", "margin": 0 },
-            "y": { "locked": "end",   "margin": 0 },
+            "x": { "locked": "start", "margin": 10 },
+            "y": { "locked": "end",   "margin": 0  },
             "hidden": false
         }
     },
 
     "defaultPos": "hidden",
-    "transitionSpeed": 6,
-    "transitionType": "ease"
+    "transitionSpeed": 9,
+    "transitionType": "ease",
+
+    "size": [ 100, 30 ],
+    
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/shop/spawnerSelectBg.png"
+            },
+
+            "warriorImg": {
+                "offset": [ 32, 17 ],
+                "path": "res/warriors/meleeWarriorAlly.png",
+                "centered": true
+            }
+        },
+
+        "text": {
+            "warriorName": {
+                "text": "[Warrior Name]",
+                "offset": [ 46, 5 ],
+                "fontSize": 10,
+                "color": [ 255, 255, 255 ]
+            },
+
+            "description": {
+                "text": "[Warrior Desc]",
+                "offset": [ 46, 14 ],
+                "fontSize": 8,
+                "color": [ 200, 200, 200 ],
+                "wrapLength": 80
+            }
+        },
+
+        "buttons": {
+            "left": {
+                "offset": [ 6, 7 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                }
+            },
+
+            "right": {
+                "offset": [ 132, 7 ],
+                
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ]
+            }
+        }
+    }
 }

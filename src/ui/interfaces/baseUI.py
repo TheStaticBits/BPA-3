@@ -51,7 +51,7 @@ class BaseUI:
         if self.data["size"] == "auto":
             self.size: Vect = self.findSize()
         else:
-            self.size: Vect = Vect(self.data["size"])
+            self.size: Vect = Vect(self.data["size"]) * Image.SCALE
 
         # Get layer number if provided in the data
         self.layers: int = self.data["layers"] if "layers" in self.data else 1
@@ -279,6 +279,12 @@ class BaseUI:
 
             element.addRenderOffset(offset)
             element.render(surface)
+
+    def findDistFromPos(self, posType: str, window: Window) -> Vect:
+        """ Returns the distance between the given position type
+            and the current position """
+        position: Vect = self.getUIOffset(window.getSize(), posType)
+        return self.offset - position
 
     # Getters
     def getElement(self, key: str) -> BaseUIElement:

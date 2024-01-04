@@ -1,5 +1,7 @@
 {
     "meleeWarrior": {
+        "name": "Melee Warrior",
+        "description": "Deals close-range damage to enemies using bullets",
         "attackType": "projectile",
         "projectileSpawnPos": [ 7, 8 ],
 
@@ -108,6 +110,8 @@
     },
 
     "aoeWarrior": {
+        "name": "Aoe Warrior",
+        "description": "Deals damage to all enemies in a radius",
         "attackType": "aoe",
         "aoeAttackAnim": {
             "path": "res/warriors/aoeWarriorRing.png",

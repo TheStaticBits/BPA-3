@@ -69,7 +69,7 @@
     },
 
     "tileset": {
-        "tilesFile": "data/tileset.json",
+        "tilesFile": "data/maps/tileset.json",
 
         "tileSize": [ 20, 20 ],
         "mapsFolder": "data/maps",

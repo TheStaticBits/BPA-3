@@ -17,6 +17,7 @@ class Spawner(BaseBuilding):
         self.spawnInfo: dict = {}
 
         self.timer: Timer = Timer(0)
+        self.unlockedWarriors: list[str] = []
 
         super().__init__(type)
 
@@ -28,6 +29,7 @@ class Spawner(BaseBuilding):
             "spawnAmount": levelData["spawnAmount"],
             "spawnInterval": levelData["spawnInterval"]
         }
+        self.unlockedWarriors.append(warriorType)
 
         # Sets the warrior to spawn to the newly unlocked warrior
         self.chooseWarrior(warriorType)
@@ -36,10 +38,8 @@ class Spawner(BaseBuilding):
         """ Chooses the warrior to spawn """
         self.spawnType: str = spawnType
 
-        # Amount to remove from the level index when spawning
-        # Dependent on how far along the warrior is in the upgrade list
-        warriorNames: list[str] = list(Warrior.WARRIOR_DICT.keys())
-        self.removeLevel: int = warriorNames.index(spawnType)
+        # Index of warrior in the list of warrior names
+        self.warriorIndex: int = self.unlockedWarriors.index(spawnType)
 
         self.spawnAmount: int = self.spawnInfo[spawnType]["spawnAmount"]
         self.spawnInterval: float = self.spawnInfo[spawnType]["spawnInterval"]
@@ -63,6 +63,18 @@ class Spawner(BaseBuilding):
                 # Queue the warrior type to be spawned
                 DungeonScene.queuedAllies.append(
                     Warrior(self.spawnType,
-                            super().getLevel() - self.removeLevel,
+                            super().getLevel() - self.warriorIndex,
                             True)
                 )
+
+    # Getters
+    def getSpawnType(self) -> str:
+        """ Returns the type of warrior to spawn """
+        return self.spawnType
+
+    def getMaxWarrior(self) -> int:
+        """ Returns the index of the highest warrior that can be spawned """
+        return super().getLevel() - 1
+
+    def getWarriorIndex(self) -> int: return self.warriorIndex
+    def getUnlocked(self) -> list[str]: return self.unlockedWarriors

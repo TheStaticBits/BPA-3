@@ -111,7 +111,7 @@ class Button(BaseUIElement):
 
         if not self.enabled:
             grayedImg = btnImg.copy()  # Copy image
-            grayedImg.tint(180, 180, 180)  # Make gray
+            grayedImg.tint(140, 140, 140)  # Make gray
             btnImg = grayedImg  # Set to grayed image
 
         super().render(surface, image=btnImg)

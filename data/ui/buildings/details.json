@@ -25,15 +25,10 @@
     "transitionSpeed": 15,
     "transitionType": "ease",
 
-    "size": "auto",
+    "size": [ 240, 40 ],
 
     "elements": {
         "images": {
-            "bg": {
-                "offset": [ 0, 0 ],
-                "path": "res/ui/shop/detailsBg.png"
-            },
-
             "buildingImg": {
                 "offset": [ 5, 5 ],
                 "path": ""

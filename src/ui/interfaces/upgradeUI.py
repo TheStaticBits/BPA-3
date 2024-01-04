@@ -6,6 +6,9 @@ from src.utility.image import Image
 from src.entities.player import Player
 from src.utility.advDict import AdvDict
 from src.tileset import Tileset
+from src.ui.interfaces.spawnerUI import SpawnerUI
+from src.entities.buildings.spawner import Spawner
+from src.utility.vector import Vect
 
 
 class UpgradeUI(BaseUI):
@@ -27,6 +30,9 @@ class UpgradeUI(BaseUI):
         self.expandedMinWidth = super().getData()["expandedMinWidth"] * \
             Image.SCALE
 
+        # Spawner UI for spawner buildings
+        self.spawnerUI: SpawnerUI = SpawnerUI()
+
     def setBuilding(self, building: BaseBuilding, window: Window) -> None:
         """ Sets the building to upgrade """
         if building is None or building == self.building or \
@@ -38,11 +44,16 @@ class UpgradeUI(BaseUI):
             self.betweenBuildings = True
             self.goToBuilding = building
             super().startTransition("hidden", window)
+            self.spawnerUI.hide(window)
 
         else:  # No building showing, so move to visible
             self.building = building
             super().startTransition("visible", window)
             self.setDisplayed()
+
+            # Show spawner UI if it's a spawner building
+            if isinstance(self.building, Spawner):
+                self.spawnerUI.show(self.building, window)
 
     def setDisplayed(self) -> None:
         """ Updates the display statistics for the building """
@@ -107,8 +118,10 @@ class UpgradeUI(BaseUI):
         super().update(window)
 
         # Don't continue if closed
-        if super().getPosType() == "hidden":
+        if super().isHidden():
             return
+
+        self.updateSpawnerUI(window)
 
         # Close button
         if super().getElement("closeButton").getActivated():
@@ -133,6 +146,9 @@ class UpgradeUI(BaseUI):
             self.building.loadLevel()  # Upgrades it
             self.setDisplayed()
 
+            if self.spawnerUI.getPosType() == "visible":
+                self.spawnerUI.chooseWarrior()  # Update the spawner UI
+
     def updateSellButton(self, window: Window, tileset: Tileset) -> None:
         """ Updates the sell button to be enabled/disabled based on resources
             and sells the building if pressed """
@@ -140,6 +156,23 @@ class UpgradeUI(BaseUI):
             Player.resources += self.sellPrice
             self.building.setSold(tileset)
             self.hide(window)
+
+    def updateSpawnerUI(self, window: Window) -> None:
+        """ Updates the spawner UI """
+        # Get current transition offset from the hidden position
+        transitionOffset: Vect = super().findDistFromPos("hidden", window)
+
+        # Using the offset to make the spawner UI appear attached to the
+        # top of the upgrade UI
+        self.spawnerUI.update(window, transitionOffset)
+
+    def render(self, surface: Window | Image) -> None:
+        """ Renders the upgrade UI """
+        # Only render if the upgrade UI is visible
+        if not super().isHidden():
+            self.spawnerUI.render(surface)
+
+        super().render(surface)
 
     def canShowShop(self, window: Window) -> bool:
         """ Returns whether or not the shop UI can be shown based on the
@@ -156,3 +189,4 @@ class UpgradeUI(BaseUI):
         """ Closes the upgrade menu """
         super().startTransition("hidden", window)
         self.building = None
+        self.spawnerUI.hide(window)
