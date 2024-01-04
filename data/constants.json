@@ -37,10 +37,17 @@
         "accel": 400,
         "decel": 550,
         
-        "anim": {
-            "path": "res/player.png",
-            "frames": 2,
-            "delay": 1
+        "anims": {
+            "idle": {
+                "path": "res/player/idle.png",
+                "frames": 1,
+                "delay": 1
+            },
+            "walking": {
+                "path": "res/player/walking.png",
+                "frames": 2,
+                "delay": 0.2
+            }
         },
 
         "resources": {

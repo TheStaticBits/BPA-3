@@ -6,6 +6,7 @@ from src.utility.advDict import AdvDict
 from src.utility.image import Image
 from src.tileset import Tileset
 from src.ui.interfaces.errorUI import ErrorUI
+from src.utility.animation import Animation
 
 
 class Player(Entity):
@@ -16,7 +17,7 @@ class Player(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Load static variables from constants dict """
-        cls.ANIM: dict = constants["player"]["anim"]
+        cls.ANIMS: dict = constants["player"]["anims"]
 
         try:
             cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * \
@@ -48,7 +49,15 @@ class Player(Entity):
 
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
-        super().__init__(self.ANIM, pos=startingPos)
+        super().__init__(pos=startingPos)
+
+        self.animations: dict[Animation] = {
+            "idle": super().loadAnim(self.ANIMS["idle"]),
+            "walking": super().loadAnim(self.ANIMS["walking"]),
+        }
+
+        self.currentAnim = None
+        self.setAnimation("idle")
 
         self.log.info("Initializing player")
 
@@ -80,6 +89,11 @@ class Player(Entity):
         # Gets movement direction based on the keys pressed (getKey is 1 or 0)
         acceleration = Vect(window.getKey("right") - window.getKey("left"),
                             window.getKey("down") - window.getKey("up"))
+
+        # Set animation based on if the player is moving or not
+        moving: bool = acceleration != Vect()
+        animation = "idle" if not moving else "walking"
+        self.setAnimation(animation)
 
         self.velocity += (acceleration *
                           self.ACCELERATION *
@@ -115,6 +129,15 @@ class Player(Entity):
         # with acceleration as the parameter of the decelerate function
         self.velocity = self.velocity.forEach(decelerate,
                                               vectParams=[acceleration])
+
+    def setAnimation(self, anim: str) -> None:
+        """ Sets the animation to the given animation name """
+        if anim == self.currentAnim:
+            return
+
+        self.currentAnim = anim
+        self.animations[anim].restart()
+        super().setAnim(self.animations[anim])
 
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:

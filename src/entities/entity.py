@@ -13,13 +13,16 @@ class Entity:
         Handles the animation and position """
     log = logging.getLogger(__name__)
 
-    def __init__(self, animData: dict, pos: Vect = Vect()) -> None:
+    def __init__(self, animData: dict = None, pos: Vect = Vect()) -> None:
         """ Setup base values.
             animData must contain "path", "frames", and "delay" keys.
             pos is an optional argument which is set to (0, 0) by default """
         self.pos: Vect = pos
 
-        self.animation = self.loadAnim(animData)
+        if animData is not None:
+            self.animation = self.loadAnim(animData)
+        else:
+            self.animation = None
 
     @classmethod
     def loadAnim(cls, animData: dict) -> Animation:
@@ -117,6 +120,7 @@ class Entity:
 
     # Setters
     def setPos(self, pos: Vect) -> None: self.pos = pos
+    def setAnim(self, anim: Animation) -> None: self.animation = anim
 
     def addPos(self, addPos: Vect) -> None:
         self.pos += addPos
