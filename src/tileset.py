@@ -123,4 +123,4 @@ class Tileset:
     # Setters
     def setOccupied(self, tilePos: Vect, state: bool = True) -> None:
         """ Sets the occupied status of a tile """
-        self.occupiedTiles[tilePos.y][tilePos.x] = False
+        self.occupiedTiles[tilePos.y][tilePos.x] = state
