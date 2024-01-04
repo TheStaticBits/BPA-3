@@ -4,23 +4,23 @@
         { "type": "meleeWarrior", "level": 1, "amount": 10, "startDelay": 0, "spawnInterval": 1, "spawnAmount": 2 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 14, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 1, "amount": 14, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 2 }
+        { "type": "meleeWarrior", "level": 1, "amount": 14, "startDelay": 30, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 1, "amount": 14, "startDelay": 30, "spawnInterval": 1, "spawnAmount": 2 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 25, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 25, "spawnInterval": 1, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 22, "spawnInterval": 1, "spawnAmount": 3 }
     ]
 ]
