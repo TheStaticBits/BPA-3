@@ -10,5 +10,17 @@
     [
         { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
         { "type": "meleeWarrior", "level": 1, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 24, "startDelay": 20, "spawnInterval": 1, "spawnAmount": 3 }
     ]
 ]
