@@ -193,7 +193,7 @@ class BaseBuilding(Entity):
         self.sold = True
 
         # Set tiles to be unoccupied:
-        tileset.setRangeOccupied(self.tilePos, self. buildingTileSize, False)
+        tileset.setRangeOccupied(self.tilePos, self.buildingTileSize, False)
         self.onRemove()
 
     def getParticles(self) -> list[Particle]:
