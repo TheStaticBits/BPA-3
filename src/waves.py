@@ -105,3 +105,5 @@ class Waves:
     def clearSpawnQueue(self) -> None:
         """ Clears the spawn queue """
         self.spawnQueue.clear()
+
+    def getWaveNum(self) -> int: return self.waveNum

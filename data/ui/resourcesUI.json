@@ -22,6 +22,11 @@
                 "path": "res/ui/resources/bg.png"
             },
 
+            "bg3": {
+                "offset": [ 0, 34 ],
+                "path": "res/ui/resources/bg.png"
+            },
+
             "goldImg": {
                 "offset": [ 2, 2 ],
                 "path": "res/ui/resources/gold.png"
@@ -44,6 +49,13 @@
             "steampowerText": {
                 "text": "[Steam]",
                 "offset": [ 16, 20 ],
+                "fontSize": 10,
+                "color": [ 255, 255, 255 ]
+            },
+
+            "waveText": {
+                "text": "Wave [number]",
+                "offset": [ 7, 37 ],
                 "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             }

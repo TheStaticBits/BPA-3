@@ -15,10 +15,12 @@ class ResourcesUI(BaseUI):
     def __init__(self) -> None:
         super().__init__("resourcesUI")
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, waveNum: int) -> None:
+        """ Updates the UI, resources shown, and the wave number """
         super().update(window)
 
         self.updateResources()
+        self.updateWaveNum(waveNum)
 
     def updateResources(self) -> None:
         """ Update all the resources
@@ -38,3 +40,7 @@ class ResourcesUI(BaseUI):
 
             # Set text element's value
             element.setText(text)
+
+    def updateWaveNum(self, waveNum: int) -> None:
+        """ Sets the wave number displayed """
+        super().getElement("waveText").setText(f"Wave {waveNum + 1}")

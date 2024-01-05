@@ -132,3 +132,8 @@ class DungeonScene(BaseScene):
         """ Renders projectiles """
         for projectile in self.projectiles:
             projectile.render(surface, -super().getCamOffset())
+
+    # Getters
+    def getWaveNum(self) -> int:
+        """ Returns the current wave number """
+        return self.waves.getWaveNum()

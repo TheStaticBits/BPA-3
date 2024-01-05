@@ -52,7 +52,10 @@ class SceneManager:
         self.scenes[self.otherState].update(window)
         window.setHideInputs(False)
 
-        self.resourcesUI.update(window)  # Update resource numbers shown
+        # Update wave number and resource numbers shown
+        waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
+        self.resourcesUI.update(window, waveNum)
+
         self.testSwitchScene()
 
     def testSwitchScene(self) -> None:
