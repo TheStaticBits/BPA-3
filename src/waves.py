@@ -27,6 +27,8 @@ class Waves:
 
         self.loadWave(0)  # Load the first wave
 
+        self.lost: bool = False
+
     def loadWave(self, waveNum: int) -> None:
         """ Loads the delay objects for the wave """
         self.waveNum = waveNum
@@ -49,9 +51,13 @@ class Waves:
                 "spawnTimer": Timer(data["spawnInterval"]),
             })
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window,
+               allies: list[Warrior], enemies: list[Warrior]) -> None:
         """ Updates the wave timer """
         if self.betweenWaves:  # Delay timer between waves
+            # During the period between waves allies cannot spawn
+            allies.clear()
+
             self.waveTimer.update(window)
             if self.waveTimer.completed():
                 self.waveTimer.reset()  # Reset timer
@@ -62,11 +68,13 @@ class Waves:
 
         else:
             self.updateDelays(window)
+            self.testEndPeriod(allies, enemies)
 
     def updateDelays(self, window: Window) -> None:
         """ Updates the delays for the warriors in the wave,
             spawning any if they are ready """
-
+        # Iterating through the data for each enemy type being spawned
+        # in the wave
         for data in self.spawnData:
             if data["startTimer"] is not False:
                 data["startTimer"].update(window)  # Update timer
@@ -75,35 +83,51 @@ class Waves:
                 else:
                     continue  # Skip the rest of the loop
 
-            if data["amount"] <= 0:
-                continue
-
             # Start timer is False, so spawn warriors
             data["spawnTimer"].update(window)
             while data["spawnTimer"].completed():
                 for _ in range(data["spawnAmount"]):
+                    # Amount left to spawn of the warrior type is zero.
+                    if data["amount"] <= 0:
+                        break
+
                     # Spawn enemy
                     self.spawnWarrior(data["type"], data["level"])
                     data["amount"] -= 1
 
+    def testEndPeriod(self, allies: list[Warrior],
+                      enemies: list[Warrior]) -> None:
+        """ Tests the period between waves """
         # Test if all enemies have been spawned
         for data in self.spawnData:
             if data["amount"] > 0:
                 return
 
-        # all enemies in the wave have spawned, start delay timer
-        self.betweenWaves = True
+        # During the period between the last enemy being spawned
+        # and the last enemy dying, test the following conditions:
+
+        # No enemies left, so start delay between waves
+        if len(enemies) == 0:
+            self.betweenWaves = True
+            self.log.info(
+                "All enemies have died. Starting delay between waves."
+            )
+
+        # No allies left on any given frame, so the player lost
+        if len(allies) == 0:
+            self.log.info("All allies have died. You lose!")
+            self.lost = True
+            return
 
     def spawnWarrior(self, warriorType: str, level: int) -> None:
         """ Spawns a warrior by adding it to the queue """
         self.spawnQueue.append(Warrior(warriorType, level, False))
 
-    def getSpawnQueue(self) -> list[Warrior]:
-        """ Returns the spawn queue """
-        return self.spawnQueue
-
     def clearSpawnQueue(self) -> None:
         """ Clears the spawn queue """
         self.spawnQueue.clear()
 
+    # Geters
     def getWaveNum(self) -> int: return self.waveNum
+    def getSpawnQueue(self) -> list[Warrior]: return self.spawnQueue
+    def hasLost(self) -> bool: return self.lost

@@ -44,7 +44,7 @@ class DungeonScene(BaseScene):
 
         self.updateProjectiles(window)
 
-        self.waves.update(window)
+        self.waves.update(window, self.allies, self.enemies)
 
     def updateWarriors(self, window: Window) -> None:
         """ Updates warriors (both allies and enemies) """
