@@ -6,6 +6,7 @@ from src.entities.projectile import Projectile
 from src.utility.image import Image
 from src.tileset import Tileset
 from src.waves import Waves
+from src.utility.database import Database
 
 
 class DungeonScene(BaseScene):
@@ -16,7 +17,7 @@ class DungeonScene(BaseScene):
     # Append to this list to queue allies to spawn
     queuedAllies: list[Warrior] = []
 
-    def __init__(self, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str, database: Database) -> None:
         super().__init__(mapFolderName)
 
         self.enemies: list[Warrior] = []
@@ -32,7 +33,7 @@ class DungeonScene(BaseScene):
         allySpawns = tileset.getData()["allySpawns"]
         Warrior.setSpawnPositions(allySpawns, enemySpawns)
 
-        self.waves = Waves()
+        self.waves = Waves(database)
 
     def update(self, window: Window) -> None:
         """ Updates warriors, spawns enemies,

@@ -7,6 +7,7 @@ from src.ui.interfaces.resourcesUI import ResourcesUI
 from src.ui.interfaces.optionsUI import OptionsUI
 from src.window import Window
 from src.utility.image import Image
+from src.utility.database import Database
 
 
 class SceneState(enum.Enum):
@@ -22,7 +23,7 @@ class SceneManager:
         It also manages any shared UI elements. """
     log = logging.getLogger(__name__)
 
-    def __init__(self) -> None:
+    def __init__(self, database: Database) -> None:
         """ Create the scene objects """
 
         # Current scene being shown & updated
@@ -32,7 +33,7 @@ class SceneManager:
         # Dictionary of all the scenes
         self.scenes: dict[SceneState, BaseScene] = {
             SceneState.BUILDING: BuildingsScene("testmap"),
-            SceneState.DUNGEON: DungeonScene("dungeon")
+            SceneState.DUNGEON: DungeonScene("dungeon", database)
         }
 
         # Shared UI elements

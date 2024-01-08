@@ -1,6 +1,7 @@
 {
     "saves": {
         "folder": "saves",
+        "saveFile": "saves/save.db",
         "log": {
             "level": "debug",
             "file": "saves/log.txt",

@@ -14,13 +14,14 @@ from src.scenes.sceneManager import SceneManager
 from src.ui.elements.text import Text
 from src.ui.interfaces.baseUI import BaseUI
 from src.ui.interfaces.errorUI import ErrorUI
+from src.utility.database import Database
 
 
 class Game:
     log = logging.getLogger(__name__)
 
     def __init__(self, CONSTANTS_FILE: str) -> None:
-        """ Initialize game objects and data"""
+        """ Initialize game objects and data """
 
         # Load constants and setup logger
         self.constants: dict = util.loadJSON(CONSTANTS_FILE)
@@ -28,13 +29,16 @@ class Game:
 
         self.log.info("Initializing game")
 
+        # Create database
+        self.database: Database = Database(self.constants["saves"]["saveFile"])
+
         # Load static data from the constants JSON file
         self.loadStatic()
 
         # Create objects
         self.window: Window = Window()
         self.errorUI: ErrorUI = ErrorUI()
-        self.sceneManager: SceneManager = SceneManager()
+        self.sceneManager: SceneManager = SceneManager(self.database)
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
@@ -90,3 +94,8 @@ class Game:
     def render(self) -> None:
         """ Each render iteration of the game loop """
         self.sceneManager.render(self.window)
+
+    def save(self) -> None:
+        """ Saves the game data """
+
+        self.database.saveAndClose()
