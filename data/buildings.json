@@ -49,8 +49,8 @@
 
     "testSpawner": {
         "type": "spawner",
-        "name": "Test Spawner",
-        "description": "This is a test\nspawner building",
+        "name": "Unit Spawner",
+        "description": "This factory will spawn units periodically to fight enemies in the dungeon. You can also change which type of unit will spawn at later levels.",
 
         "anim": {
             "path": "res/buildings/spawner.png",
@@ -85,15 +85,15 @@
 
     "testGenerator": {
         "type": "generator",
-        "name": "Test Generator",
-        "description": "This is a test generator building",
+        "name": "Gold Generator",
+        "description": "A conveyor line that turns pure gold chunks into spendable gold. Dropped into the inventory abyss for convienence.",
 
         "anim": {
             "path": "res/buildings/goldGen.png",
             "frames": 2, "delay": 1
         },
 
-        "size": [ 3, 2 ],
+        "size": [ 3, 3 ],
 
         "cost": {
             "gold": 140,
@@ -143,15 +143,15 @@
 
     "testSteamGenerator": {
         "type": "generator",
-        "name": "Test Steam Generator",
-        "description": "This is a test steam gen building",
+        "name": "Steam Generator",
+        "description": "Generates steam to add to your maximum capacity. Use the steam to power your units for fighting.",
 
         "anim": {
             "path": "res/buildings/steamGen.png",
             "frames": 2, "delay": 0.8
         },
 
-        "size": [ 3, 2 ],
+        "size": [ 2, 3 ],
 
         "cost": {
             "gold": 100,
