@@ -147,8 +147,8 @@
         "description": "This is a test steam gen building",
 
         "anim": {
-            "path": "res/testBuilding.png",
-            "frames": 1, "delay": 1
+            "path": "res/buildings/steamGen.png",
+            "frames": 2, "delay": 0.8
         },
 
         "size": [ 3, 2 ],
