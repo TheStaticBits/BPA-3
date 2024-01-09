@@ -277,8 +277,7 @@ class BaseUI:
             if element.getLayer() != layer:
                 continue
 
-            element.addRenderOffset(offset)
-            element.render(surface)
+            element.render(surface, offset=offset)
 
     def findDistFromPos(self, posType: str, window: Window) -> Vect:
         """ Returns the distance between the given position type

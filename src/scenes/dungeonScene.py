@@ -135,6 +135,5 @@ class DungeonScene(BaseScene):
             projectile.render(surface, -super().getCamOffset())
 
     # Getters
-    def getWaveNum(self) -> int:
-        """ Returns the current wave number """
-        return self.waves.getWaveNum()
+    def hasLost(self) -> bool: return self.waves.hasLost()
+    def getWaveNum(self) -> int: return self.waves.getWaveNum()

@@ -99,7 +99,7 @@ class Button(BaseUIElement):
         if self.text is not None:
             self.text.addRenderOffset(offset)
 
-    def render(self, surface: Window | Image) -> None:
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the button """
         if super().isHidden():
             return
@@ -114,11 +114,11 @@ class Button(BaseUIElement):
             grayedImg.tint(140, 140, 140)  # Make gray
             btnImg = grayedImg  # Set to grayed image
 
-        super().render(surface, image=btnImg)
+        super().render(surface, image=btnImg, offset=offset)
 
         # Render text if it exists
         if self.text is not None:
-            self.text.render(surface)
+            self.text.render(surface, offset=offset)
 
     # Getters
     def getActivated(self) -> bool: return self.activated

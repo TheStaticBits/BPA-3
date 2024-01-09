@@ -7,7 +7,7 @@ from base64 import b64decode
 from src.ui.interfaces.baseUI import BaseUI
 from src.window import Window
 from src.utility.image import Image
-from src.utility.vector import Vect
+from src.utility.overlay import Overlay
 
 
 class ErrorUI(BaseUI):
@@ -53,15 +53,29 @@ class ErrorUI(BaseUI):
     def __init__(self) -> None:
         super().__init__("errorUI")
 
-        # Load from the errorUI.json file
-        self.bgAlpha = super().getData()["bgAlpha"]
+        # Load from the errorUI.json file the max opacity of the overlay
+        maxOpacity = super().getData()["bgAlpha"]
+        self.overlay: Overlay = Overlay(maxOpacity)
 
     def update(self, window: Window) -> None:
         """ Handles button presses if an error is showing """
         self.checkTransition(window)
         super().update(window)
 
+        if super().isHidden():
+            return
+
         self.updateButtons()
+
+        # Only update the overlay if the error is recoverable
+        # because the game does not render behind it if it's not
+        if self.recoverable:
+            # Update overlay, reversing the opacity if the error screen
+            # is transitioning to hidden
+            reversed: bool = super().getPosType() == "hidden"
+            opacity = self.overlay.percentOpacity(super().getPercentDone(),
+                                                  reversed)
+            self.overlay.update(opacity, window)
 
     def updateButtons(self) -> None:
         """ Handles button presses on the error screen """
@@ -103,25 +117,13 @@ class ErrorUI(BaseUI):
 
     def render(self, surface: Window | Image) -> None:
         """ Renders a dark overlay behind the error message """
-        if super().isHidden():
-            return
+        if not super().isHidden():
+            # Render the overlay if the error is recoverable
+            if self.recoverable:
+                self.overlay.render(surface)
 
-        # Only render overlay if the error is recoverable, as
-        # unrecoverable errors do not render the game in the back
-        if self.recoverable:
-            percent = super().getPercentDone()
-            if super().getPosType() == "hidden":
-                percent = 1 - percent
-
-            # create and render shaded overlay
-            surf: Image = Image.makeEmpty(surface.getSize(),
-                                          transparent=True)
-            surf.fill((0, 0, 0, round(self.bgAlpha * percent)))
-
-            surface.render(surf, Vect(0, 0))
-
-        # Render the error UI
-        super().render(surface)
+            # Render the rest of the error UI
+            super().render(surface)
 
     def emailCrashReport(self):
         """ Sends an email to the developer with the crash report """

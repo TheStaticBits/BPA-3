@@ -8,6 +8,7 @@ from src.ui.interfaces.optionsUI import OptionsUI
 from src.window import Window
 from src.utility.image import Image
 from src.utility.database import Database
+from src.ui.interfaces.loseUI import LoseUI
 
 
 class SceneState(enum.Enum):
@@ -30,22 +31,51 @@ class SceneManager:
         self.state = SceneState.BUILDING
         self.otherState = SceneState.DUNGEON
 
-        # Dictionary of all the scenes
-        self.scenes: dict[SceneState, BaseScene] = {
-            SceneState.BUILDING: BuildingsScene("testmap"),
-            SceneState.DUNGEON: DungeonScene("dungeon", database)
-        }
+        self.db = database
+        self.resetScenes()  # Create scenes
 
         # Shared UI elements
         # Handling resource numbers and icons in the top left
         self.resourcesUI = ResourcesUI()
         self.optionsUI = OptionsUI()
 
+        self.loseUI: LoseUI = LoseUI()
+
+    def resetScenes(self) -> None:
+        """ Resets the scenes """
+        # Dictionary of all the scenes
+        self.scenes: dict[SceneState, BaseScene] = {
+            SceneState.BUILDING: BuildingsScene("testmap"),
+            SceneState.DUNGEON: DungeonScene("dungeon", self.db)
+        }
+
+        self.lost: bool = False
+
     def update(self, window: Window) -> None:
         """ Update the current scene """
         self.optionsUI.update(window)  # Update options buttons
+        self.loseUI.update(window)
 
-        # Update the current scene
+        if not self.lost:
+            self.updateScene(window)
+
+            # Test if the player has lost, then get wave num and set
+            # the lose UI to show
+            if self.scenes[SceneState.DUNGEON].hasLost():
+                self.lost = True
+                waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
+                self.loseUI.show(window, waveNum)
+
+        elif self.loseUI.isClosed():
+            # Reset everything
+            self.loseUI.reset(window)
+            self.lost = False
+            self.resetScenes()
+            # Update scenes to make sure they're set up
+            self.updateScene(window)
+
+    def updateScene(self, window: Window) -> None:
+        """ Updates the current scene """
         self.scenes[self.state].update(window)
 
         # Update the hidden scene without any inputs
@@ -74,3 +104,5 @@ class SceneManager:
 
         self.resourcesUI.render(surface)
         self.optionsUI.render(surface)
+
+        self.loseUI.render(surface)
