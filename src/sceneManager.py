@@ -9,6 +9,7 @@ from src.window import Window
 from src.utility.image import Image
 from src.utility.database import Database
 from src.ui.interfaces.loseUI import LoseUI
+from src.ui.interfaces.mainMenu import MainMenu
 
 
 class SceneState(enum.Enum):
@@ -24,7 +25,7 @@ class SceneManager:
         It also manages any shared UI elements. """
     log = logging.getLogger(__name__)
 
-    def __init__(self, database: Database) -> None:
+    def __init__(self, window: Window, database: Database) -> None:
         """ Create the scene objects """
 
         # Current scene being shown & updated
@@ -41,22 +42,42 @@ class SceneManager:
 
         self.loseUI: LoseUI = LoseUI()
 
+        self.mainMenu = MainMenu(window)
+
     def resetScenes(self) -> None:
         """ Resets the scenes """
         # Dictionary of all the scenes
         self.scenes: dict[SceneState, BaseScene] = {
-            SceneState.BUILDING: BuildingsScene("testmap"),
+            SceneState.BUILDING: BuildingsScene("buildings"),
             SceneState.DUNGEON: DungeonScene("dungeon", self.db)
         }
 
-        self.lost: bool = False
-
     def update(self, window: Window) -> None:
         """ Update the current scene """
-        self.optionsUI.update(window)  # Update options buttons
         self.loseUI.update(window)
+        self.mainMenu.update(window)
 
-        if not self.lost:
+        # Main menu open
+        if self.mainMenu.isOpen():
+            # Update the UI, allowing it to adjust to changes
+            # in the window size
+            self.updateOnlyUI(window)
+
+        # Lose UI open
+        elif self.loseUI.isOpen():
+            self.updateOnlyUI(window)
+
+            # Test if the user pressed the lose UI close button
+            if self.loseUI.pressedClosed():
+                # Reset the entire game
+                self.loseUI.reset(window)
+                self.resetScenes()
+                # Update scenes to make sure they're set up
+                self.updateScene(window)
+
+        # No ui open, player is playing
+        else:
+            # Updating the entire game
             self.updateScene(window)
 
             # Test if the player has lost, then get wave num and set
@@ -66,16 +87,9 @@ class SceneManager:
                 waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
                 self.loseUI.show(window, waveNum)
 
-        elif self.loseUI.isClosed():
-            # Reset everything
-            self.loseUI.reset(window)
-            self.lost = False
-            self.resetScenes()
-            # Update scenes to make sure they're set up
-            self.updateScene(window)
-
     def updateScene(self, window: Window) -> None:
-        """ Updates the current scene """
+        """ Updates everything necessary for the player to play """
+        self.optionsUI.update(window)
         self.scenes[self.state].update(window)
 
         # Update the hidden scene without any inputs
@@ -83,11 +97,25 @@ class SceneManager:
         self.scenes[self.otherState].update(window)
         window.setHideInputs(False)
 
-        # Update wave number and resource numbers shown
+        self.updateResources(window)
+        self.testSwitchScene()
+
+    def updateOnlyUI(self, window: Window) -> None:
+        """ Updates only the UI of the current scene,
+            this allows the UI to adjust to changes in the window size
+            when there is a foreground UI like the main menu """
+        # Preventing mouse interactions with the UI
+        window.setHideInputs(True)
+        self.scenes[self.state].update(window)
+        self.optionsUI.update(window)
+        window.setHideInputs(False)
+
+        self.updateResources(window)
+
+    def updateResources(self, window: Window) -> None:
+        """ Update wave number and resource numbers shown """
         waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
         self.resourcesUI.update(window, waveNum)
-
-        self.testSwitchScene()
 
     def testSwitchScene(self) -> None:
         """ Tests if the scene should be switched """
@@ -106,3 +134,4 @@ class SceneManager:
         self.optionsUI.render(surface)
 
         self.loseUI.render(surface)
+        self.mainMenu.render(surface)

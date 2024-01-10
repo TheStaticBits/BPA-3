@@ -84,10 +84,6 @@ class Tileset:
                 tileImg = Image(self.TILESET_DATA[tileChar])
                 self.tiles.render(tileImg, pos)
 
-    def update(self, window: Window) -> None:
-        """ Will be used to update anything in the tileset
-            with animations in the future """
-
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders tileset image """
         surface.render(self.tiles, offset)

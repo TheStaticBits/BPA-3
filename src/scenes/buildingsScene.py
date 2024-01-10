@@ -35,7 +35,6 @@ class BuildingsScene(BaseScene):
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
-        super().updateTileset(window)
         super().updateParticles(window)
 
         self.buildingShop.update(window)
@@ -47,6 +46,11 @@ class BuildingsScene(BaseScene):
             self.testBuyBuilding()
         else:
             self.placingBuilding = self.isPlacingBuilding()
+
+    def updateUI(self, window: Window) -> None:
+        """ Updates the UI elements """
+        self.buildingShop.update(window)
+        self.upgradeUI.update(window, super().getTileset())
 
     def updateBuildings(self, window: Window) -> None:
         """ Updates all buildings """

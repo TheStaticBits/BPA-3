@@ -10,7 +10,7 @@ from src.entities.player import Player
 from src.entities.warrior import Warrior
 from src.entities.projectile import Projectile
 from src.scenes.baseScene import BaseScene
-from src.scenes.sceneManager import SceneManager
+from src.sceneManager import SceneManager
 from src.ui.elements.text import Text
 from src.ui.interfaces.baseUI import BaseUI
 from src.ui.interfaces.errorUI import ErrorUI
@@ -38,7 +38,8 @@ class Game:
         # Create objects
         self.window: Window = Window()
         self.errorUI: ErrorUI = ErrorUI()
-        self.sceneManager: SceneManager = SceneManager(self.database)
+        self.sceneManager: SceneManager = SceneManager(self.window,
+                                                       self.database)
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """

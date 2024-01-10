@@ -6,6 +6,7 @@ import src.utility.utility as util
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
+from src.utility.overlay import Overlay
 
 from src.ui.elements.baseUIElement import BaseUIElement
 from src.ui.elements.text import Text
@@ -52,6 +53,13 @@ class BaseUI:
             self.size: Vect = self.findSize()
         else:
             self.size: Vect = Vect(self.data["size"]) * Image.SCALE
+
+        if "bgAlpha" in self.data:
+            # Adds an overlay in the background when the position is the type
+            self.overlay = Overlay(self.data["bgAlpha"])
+            self.bgAlphaPosType: str = self.data["bgAlphaShowsPos"]
+        else:
+            self.overlay = None
 
         # Get layer number if provided in the data
         self.layers: int = self.data["layers"] if "layers" in self.data else 1
@@ -174,6 +182,8 @@ class BaseUI:
         for element in self.elements.values():
             element.update(window, self.offset)
 
+        self.updateOverlay(window)
+
     def getUIOffset(self, surfaceSize: Vect, posType: str) -> Vect:
         """ Gets the offset of the UI interface based on the position type """
 
@@ -239,6 +249,23 @@ class BaseUI:
         # tests if the UI has moved past its destination offset
         return not moveTo.signsMatch(moveTo - self.transitionOffset)
 
+    def updateOverlay(self, window: Window) -> None:
+        """ Updates the overlay if applicable """
+        if self.overlay is None:
+            return
+
+        # Transitioning, so get opacity based on the percent done
+        if self.transitioning:
+            reversed: bool = self.posType == self.bgAlphaPosType
+            opacity: int = self.overlay.percentOpacity(self.percentDone,
+                                                       reversed)
+        elif self.posType == self.bgAlphaPosType:
+            opacity: int = -1  # Max opacity
+        else:
+            opacity: int = 0
+
+        self.overlay.update(opacity, window)
+
     def startTransition(self, posType: str, surface: Window | Image) -> None:
 
         """ Starts UI transition to the given position type """
@@ -265,6 +292,9 @@ class BaseUI:
         """ Renders all UI elements in this interface """
         if self.hidden:
             return
+
+        if self.overlay is not None:
+            self.overlay.render(surface)
 
         # Render all elements in the order of layers
         for layer in range(self.layers):

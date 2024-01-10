@@ -32,17 +32,15 @@ class BaseScene:
         """ Update scene objects """
         self.updateCameraPos(window)
 
-        self.updateTileset(window)
         self.updatePlayer(window)
         self.updateParticles(window)
+
+    def updateUI(self, window: Window) -> None:
+        """ Override in subclasses to update UIs """
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
         self.player.update(window, self.tileset)
-
-    def updateTileset(self, window: Window) -> None:
-        """ Update tileset """
-        self.tileset.update(window)
 
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """

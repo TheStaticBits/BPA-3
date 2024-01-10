@@ -20,6 +20,9 @@ class Overlay:
         """ Updates the overlay, changing it if necessary """
         size: Vect = surface.getSize()
 
+        if opacity < 0:
+            opacity = self.maxOpacity
+
         # Update overlay image if anything changed
         if self.opacity != opacity or self.size != size:
             self.opacity = opacity
