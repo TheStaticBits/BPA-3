@@ -72,7 +72,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 110, "steampower": 5 },
+                    "cost": { "gold": 115, "steampower": 5 },
                     "description": "Upgrade to unlock the AOE warrior!"
                 },
 
@@ -96,7 +96,7 @@
         "size": [ 3, 3 ],
 
         "cost": {
-            "gold": 140,
+            "gold": 130,
             "steampower": 0
         },
 
@@ -104,15 +104,15 @@
         
         "levels": [
             {
-                "generateAmount": { "gold": 4 }
+                "generateAmount": { "gold": 3 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 80, "steampower": 0 },
+                    "cost": { "gold": 75, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 6 }
+                "generateAmount": { "gold": 5 }
             },
             {
                 "upgrade": {
@@ -120,7 +120,7 @@
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 8 }
+                "generateAmount": { "gold": 7 }
             },
             {
                 "upgrade": {
@@ -128,7 +128,7 @@
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 10 }
+                "generateAmount": { "gold": 9 }
             },
             {
                 "upgrade": {
@@ -136,7 +136,7 @@
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 13 }
+                "generateAmount": { "gold": 11 }
             }
         ]
     },
@@ -154,7 +154,7 @@
         "size": [ 2, 3 ],
 
         "cost": {
-            "gold": 100,
+            "gold": 90,
             "steampower": 0
         },
 
