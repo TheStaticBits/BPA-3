@@ -57,7 +57,7 @@
                 "text": "[Description]",
                 "offset": [ 65, 17 ],
                 "fontSize": 8,
-                "color": [ 255, 255, 255 ],
+                "color": [ 200, 200, 200 ],
                 "wrapLength": 125
             },
 
@@ -78,19 +78,19 @@
 
         "buttons": {
             "buy": {
-                "offset": [ 10, 20 ],
+                "offset": [ 10, 18 ],
 
                 "images": {
-                    "inactive": "res/buttons/exampleButton/inactive.png",
-                    "hover": "res/buttons/exampleButton/hover.png",
-                    "pressed": "res/buttons/exampleButton/pressed.png"
+                    "inactive": "res/buttons/buyButton/inactive.png",
+                    "hover": "res/buttons/buyButton/hover.png",
+                    "pressed": "res/buttons/buyButton/pressed.png"
                 },
 
                 "textData": {
                     "text": "Buy",
                     "offset": [ 0, -1 ],
                     "fontSize": 10,
-                    "color": [ 0, 0, 0 ]
+                    "color": [ 255, 255, 255 ]
                 }
             }
         }

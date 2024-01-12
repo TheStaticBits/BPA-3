@@ -13,7 +13,7 @@
 
         "cost": {
             "gold": 100,
-            "steampower": 0
+            "steampower": 10
         },
         
         "levels": [

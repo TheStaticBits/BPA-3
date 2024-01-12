@@ -73,6 +73,10 @@ class ShopDetails(BaseUI):
         """ Returns True if the buy button was pressed """
         return super().getElement("buy").getActivated()
 
+    def setBuyEnabled(self, enabled: bool) -> None:
+        """ Sets the state of the buy button """
+        super().getElement("buy").setEnabled(enabled)
+
     def spendResources(self) -> None:
         """ Spends the resources for the building """
         Player.resources -= self.cost

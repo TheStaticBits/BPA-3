@@ -8,6 +8,7 @@ from src.window import Window
 from src.utility.image import Image
 from src.ui.interfaces.buildingShop import BuildingShop
 from src.ui.interfaces.upgradeUI import UpgradeUI
+from src.utility.vector import Vect
 
 
 class BuildingsScene(BaseScene):
@@ -32,12 +33,20 @@ class BuildingsScene(BaseScene):
 
         self.placingBuilding: bool = False
 
+        # Create build range circle image
+        radius: int = BaseBuilding.BUILD_REACH
+        size: Vect = Vect(radius * 2)  # Size of the circle image
+        self.buildRangeCircle: Image = Image.makeEmpty(size, scale=False,
+                                                       transparent=True)
+        # draw circle onto it
+        self.buildRangeCircle.drawCircle(radius, (200, 200, 200, 40))
+
     def update(self, window: Window) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
         super().updateParticles(window)
 
-        self.buildingShop.update(window)
+        self.buildingShop.update(window, self.placingBuilding)
         self.updateBuildings(window)
         self.updatePlayerAndUpgrades(window)
 
@@ -49,7 +58,7 @@ class BuildingsScene(BaseScene):
 
     def updateUI(self, window: Window) -> None:
         """ Updates the UI elements """
-        self.buildingShop.update(window)
+        self.buildingShop.update(window, self.placingBuilding)
         self.upgradeUI.update(window, super().getTileset())
 
     def updateBuildings(self, window: Window) -> None:
@@ -96,9 +105,8 @@ class BuildingsScene(BaseScene):
         if type:
             # Place the building
             self.log.info(f"Started placing building {type}")
-            self.buildingShop.setPlacing(True)
-            self.placeBuilding(type)
             self.placingBuilding = True
+            self.placeBuilding(type)
 
     def placeBuilding(self, buildingType: str) -> None:
         """ Appends building to the list """
@@ -116,13 +124,24 @@ class BuildingsScene(BaseScene):
             if building.isPlacing():
                 return True
 
-        self.buildingShop.setPlacing(False)
         return False
+
+    def drawPlaceRange(self, surface: Window | Image) -> None:
+        """ Draws the circle around the player when
+            placing a building that shows the build reach range """
+        if self.placingBuilding:
+            # Find the top left of the circle, where it will be rendered
+            playerPos: Vect = super().getPlayer().getCenterPos()
+            topLeft: Vect = playerPos - BaseBuilding.BUILD_REACH
+
+            surface.render(self.buildRangeCircle, topLeft)
 
     def render(self, surface: Window | Image) -> None:
         """ Renders the building scene in order """
         super().renderTileset(surface)
         super().renderParticles(surface)
+
+        self.drawPlaceRange(surface)
 
         # Render buildings
         for building in self.buildings:

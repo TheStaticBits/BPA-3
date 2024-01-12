@@ -40,7 +40,7 @@ class BuildingShop(BaseUI):
         buildingUI = ShopDetails(index, posType)
         self.detailUIs.append(buildingUI)
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, isPlacing: bool) -> None:
         """ Updates the UI buttons """
         super().update(window)
 
@@ -48,8 +48,15 @@ class BuildingShop(BaseUI):
         self.checkLeftRight(window)
         self.updateDetailUIs(window)
 
-        # Updates buy button status
-        self.detailUIs[self.buildingShown].updateResources()
+        # Only check the buy button status when the player isn't
+        # placing a building
+        if not isPlacing:
+            # Updates buy button status
+            self.detailUIs[self.buildingShown].updateResources()
+        else:
+            # Sets the buy button state to disabled while the player
+            # is placing a building
+            self.detailUIs[self.buildingShown].setBuyEnabled(False)
 
     def updateButtons(self, window: Window) -> None:
         """ Updates the buttons """
@@ -105,11 +112,6 @@ class BuildingShop(BaseUI):
         # offset based on the current height of the outer shop UI
         for ui in self.detailUIs:
             ui.update(window, transitionOffset)
-
-    def setPlacing(self, placing: bool) -> None:
-        """ Call when starting to place a building """
-        buyButton = self.detailUIs[self.buildingShown].getElement("buy")
-        buyButton.setEnabled(not placing)
 
     def render(self, surface: Window | Image) -> None:
         """ Renders the UI to the given surface along with the

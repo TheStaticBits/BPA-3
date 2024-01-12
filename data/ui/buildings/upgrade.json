@@ -34,12 +34,12 @@
             },
 
             "goldImg": {
-                "offset": [ 135, 9 ],
+                "offset": [ 135, 11 ],
                 "path": "res/ui/resources/gold.png"
             },
 
             "steampowerImg": {
-                "offset": [ 165, 9 ],
+                "offset": [ 165, 11 ],
                 "path": "res/ui/resources/steampower.png"
             }
         },
@@ -47,21 +47,21 @@
         "text": {
             "name": {
                 "text": "[Building Name]",
-                "offset": [ 9, 5 ],
+                "offset": [ 9, 6 ],
                 "fontSize": 16,
                 "color": [ 255, 255, 255 ]
             },
 
             "level": {
                 "text": "[Building Level]",
-                "offset": [ 9, 17 ],
+                "offset": [ 103, 11 ],
                 "fontSize": 8,
                 "color": [ 200, 200, 200 ]
             },
 
             "description": {
                 "text": "[Building Description]",
-                "offset": [ 9, 24 ],
+                "offset": [ 9, 22 ],
                 "fontSize": 8,
                 "color": [ 255, 255, 255 ],
                 "wrapLength": 125
@@ -69,7 +69,7 @@
 
             "upgradeDesc": {
                 "text": "[Upgrade Description]",
-                "offset": [ 135, 24 ],
+                "offset": [ 135, 27 ],
                 "fontSize": 8,
                 "color": [ 255, 255, 255 ],
                 "wrapLength": 140
@@ -77,14 +77,14 @@
 
             "goldCost": {
                 "text": "[Gold]",
-                "offset": [ 148, 9.5 ],
+                "offset": [ 148, 11.5 ],
                 "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             },
 
             "steampowerCost": {
                 "text": "[Steam]",
-                "offset": [ 178, 9.5 ],
+                "offset": [ 178, 11.5 ],
                 "fontSize": 10,
                 "color": [ 255, 255, 255 ]
             },
@@ -99,7 +99,7 @@
 
         "buttons": {
             "closeButton": {
-                "offset": [ 265, 8 ],
+                "offset": [ 270, -10 ],
 
                 "images": {
                     "inactive": "res/buttons/xButton/inactive.png",
@@ -109,37 +109,37 @@
             },
 
             "sellButton": {
-                "offset": [ 230, 7 ],
+                "offset": [ 235, 7 ],
 
                 "images": {
-                    "inactive": "res/buttons/exampleButton/inactive.png",
-                    "hover": "res/buttons/exampleButton/hover.png",
-                    "pressed": "res/buttons/exampleButton/pressed.png"
+                    "inactive": "res/buttons/main/inactive.png",
+                    "hover": "res/buttons/main/hover.png",
+                    "pressed": "res/buttons/main/pressed.png"
                 },
 
                 "textData": {
                     "text": "Sell",
-                    "offset": [ 0.66, 0.33 ],
-                    "fontSize": 8,
-                    "color": [ 0, 0, 0 ]
+                    "offset": [ 0.66, -0.66 ],
+                    "fontSize": 10,
+                    "color": [ 255, 255, 255 ]
                 }
             },
 
 
             "upgrade": {
-                "offset": [ 195, 7 ],
+                "offset": [ 194, 7 ],
 
                 "images": {
-                    "inactive": "res/buttons/exampleButton/inactive.png",
-                    "hover": "res/buttons/exampleButton/hover.png",
-                    "pressed": "res/buttons/exampleButton/pressed.png"
+                    "inactive": "res/buttons/main/inactive.png",
+                    "hover": "res/buttons/main/hover.png",
+                    "pressed": "res/buttons/main/pressed.png"
                 },
 
                 "textData": {
                     "text": "Upgrade",
-                    "offset": [ 0, 0 ],
-                    "fontSize": 8,
-                    "color": [ 0, 0, 0 ]
+                    "fontSize": 10,
+                    "offset": [ 0.66, -0.66 ],
+                    "color": [ 255, 255, 255 ]
                 }
             }
         }

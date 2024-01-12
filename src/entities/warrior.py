@@ -291,7 +291,7 @@ class Warrior(Entity):
         # Create circle image to test for pixel-perfect collisions
         # with all opponents in range
         circle = Image.makeEmpty(Vect(self.range * 2), False, True)
-        circle.drawCircle(self.range, (255, 255, 255))
+        circle.drawCircle(self.range, (0, 0, 0))
 
         # Top left of circle image position
         circlePos: Vect = super().getCenterPos() - self.range
