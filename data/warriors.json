@@ -291,5 +291,38 @@
                 "projectileSpeed": 380
             }
         ]
+    },
+
+    "sniperWarrior": {
+        "name": "Sniper Warrior",
+        "description": "Has a longer range than the Melee Warrior",
+        "attackType": "projectile",
+        "projectileSpawnPos": [ 7, 8 ],
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 70,
+                "range": 220,
+                "maxSpeed": 55, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 2,
+                "damage": 17,
+                "attackKnockback": 50,
+                "projectileSpeed": 460
+            }
+        ]
     }
 }
