@@ -141,6 +141,66 @@
                 "attackInterval": 1.2,
                 "damage": 6,
                 "attackKnockback": 160
+            },
+            {
+                "health": 145,
+                "range": 45,
+                "maxSpeed": 90, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.2,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 145,
+                "range": 45,
+                "maxSpeed": 90, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.1,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 160,
+                "range": 45,
+                "maxSpeed": 95, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.1,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 170,
+                "range": 50,
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 7,
+                "attackKnockback": 160
+            },
+            {
+                "health": 175,
+                "range": 50,
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 8,
+                "attackKnockback": 160
+            },
+            {
+                "health": 180,
+                "range": 55,
+                "maxSpeed": 110, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 0.9,
+                "damage": 10,
+                "attackKnockback": 160
             }
         ]
     },
