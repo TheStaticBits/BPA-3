@@ -141,6 +141,99 @@
                 "attackInterval": 1.2,
                 "damage": 6,
                 "attackKnockback": 160
+            },
+            {
+                "health": 145,
+                "range": 45,
+                "maxSpeed": 90, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.2,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 145,
+                "range": 45,
+                "maxSpeed": 90, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.1,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 160,
+                "range": 45,
+                "maxSpeed": 95, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.1,
+                "damage": 6,
+                "attackKnockback": 160
+            },
+            {
+                "health": 170,
+                "range": 50,
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 7,
+                "attackKnockback": 160
+            },
+            {
+                "health": 175,
+                "range": 50,
+                "maxSpeed": 100, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1,
+                "damage": 8,
+                "attackKnockback": 160
+            },
+            {
+                "health": 180,
+                "range": 55,
+                "maxSpeed": 110, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 0.9,
+                "damage": 10,
+                "attackKnockback": 160
+            }
+        ]
+    },
+
+    "rangeWarrior": {
+        "name": "Range Warrior",
+        "description": "Has a longer range than the Melee Warrior",
+        "attackType": "projectile",
+        "projectileSpawnPos": [ 7, 8 ],
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 70,
+                "range": 95,
+                "maxSpeed": 70, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.6,
+                "damage": 9,
+                "attackKnockback": 100,
+                "projectileSpeed": 320
             }
         ]
     }
