@@ -115,6 +115,26 @@
         "meleeWarrior": {
             "path": "res/particles/meleeWarriorBullet.png",
             "frames": 2, "delay": 0.3
+        },
+        "rangeWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "sniperWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "meleeWarriorStrong": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "rangeWarriorStrong": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "sniperWarriorStrong": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
         }
     },
 
