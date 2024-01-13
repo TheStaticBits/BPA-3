@@ -134,6 +134,8 @@ class BuildingsScene(BaseScene):
             playerPos: Vect = super().getPlayer().getCenterPos()
             topLeft: Vect = playerPos - BaseBuilding.BUILD_REACH
 
+            topLeft -= super().getCamOffset()
+
             surface.render(self.buildRangeCircle, topLeft)
 
     def render(self, surface: Window | Image) -> None:
