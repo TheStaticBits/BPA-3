@@ -225,15 +225,15 @@
 
         "levels": [
             {
-                "health": 70,
-                "range": 95,
-                "maxSpeed": 70, "accel": 100, "decel": 400,
+                "health": 65,
+                "range": 110,
+                "maxSpeed": 65, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.6,
-                "damage": 9,
+                "attackInterval": 1.5,
+                "damage": 8,
                 "attackKnockback": 100,
-                "projectileSpeed": 320
+                "projectileSpeed": 340
             }
         ]
     }
