@@ -44,6 +44,22 @@
                 },
 
                 "storageAmount": { "gold": 600 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 220, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 600 to 900"
+                },
+
+                "storageAmount": { "gold": 900 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 260, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 900 to 1200"
+                },
+
+                "storageAmount": { "gold": 1200 }
             }
         ]
     },
@@ -210,6 +226,30 @@
                 },
 
                 "generateAmount": { "steampower": 40 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 600, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 60 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 570, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 80 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 550, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 100 }
             }
         ]
     }
