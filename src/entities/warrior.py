@@ -12,6 +12,7 @@ from src.utility.image import Image
 from src.utility.timer import Timer
 from src.utility.animation import Animation
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Warrior(Entity):
@@ -22,23 +23,45 @@ class Warrior(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the warrior data JSON file """
-        cls.WARRIOR_DICT: str = util.loadJSON(
-            constants["warriors"]["jsonPath"]
-        )
+        try:
+            cls.WARRIOR_DICT: str = util.loadJSON(
+                constants["warriors"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> jsonPath in constants",
+                           cls.log)
 
-        cls.KNOCKBACK_ANGLE_RANGE: float = \
-            constants["warriors"]["knockbackAngleRange"]
+        try:
+            cls.KNOCKBACK_ANGLE_RANGE: float = \
+                constants["warriors"]["knockbackAngleRange"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> knockbackAngleRange "
+                           "in constants, defaulting to 1", cls.log,
+                           recoverable=True)
+            cls.KNOCKBACK_ANGLE_RANGE: float = 1
 
-        # Damage flash of red
-        cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
-        cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+        try:
+            # Damage flash of red
+            cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
+            cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> [damageTint or "
+                           "damageTime] in constants", cls.log,
+                           recoverable=True)
+            cls.DAMAGE_TINT: tuple[int] = (255, 100, 100)
+            cls.DAMAGE_TIME: float = 0.2
 
-        # Death particles
-        particles = constants["warriors"]["deathParticles"]
-        cls.PARTICLE_AMOUNT: int = particles["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
-        cls.PARTICLE_SPEED: float = particles["speed"]
-        cls.PARTICLE_DURATION: float = particles["duration"]
+        try:
+            # Death particles
+            particles = constants["warriors"]["deathParticles"]
+            cls.PARTICLE_AMOUNT: int = particles["amount"]
+            cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
+            cls.PARTICLE_SPEED: float = particles["speed"]
+            cls.PARTICLE_DURATION: float = particles["duration"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> deathParticles -> "
+                           "[amount, size, speed, or duration] in constants",
+                           cls.log)
 
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],

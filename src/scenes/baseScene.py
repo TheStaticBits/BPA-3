@@ -6,6 +6,7 @@ from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class BaseScene:
@@ -15,7 +16,12 @@ class BaseScene:
 
     @classmethod
     def loadStatic(cls, constants: str):
-        cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
+        try:
+            cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
+        except KeyError:
+            ErrorUI.create("Unable to find game -> cameraSpeed in constants",
+                           cls.log, recoverable=True)
+            cls.CAMERA_SPEED: float = 5
 
     def __init__(self, mapFolderName: str) -> None:
         """ Sets up tileset, players, and camera offset """

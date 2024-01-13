@@ -38,27 +38,31 @@ class Game:
         # Create objects
         self.window: Window = Window()
         self.errorUI: ErrorUI = ErrorUI()
-        self.sceneManager: SceneManager = SceneManager(self.window,
-                                                       self.database)
+
+        try:
+            self.sceneManager: SceneManager = SceneManager(self.window,
+                                                           self.database)
+        except Exception:
+            ErrorUI.create("Uncaught error creating the scene", self.log)
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
         self.log.info("Loading static data from constants.json")
 
         try:
-            Image.loadStatic(self.constants)
-            BaseUI.loadStatic(self.constants)
-            Text.loadStatic(self.constants)
-            ErrorUI.loadStatic(self.constants)
+            Image.loadStatic(self.constants)         # Done
+            BaseUI.loadStatic(self.constants)        # Done
+            Text.loadStatic(self.constants)          # Done
+            ErrorUI.loadStatic(self.constants)       # Done
 
-            Window.loadStatic(self.constants)
-            Tileset.loadStatic(self.constants)
-            BaseBuilding.loadStatic(self.constants)
-            Warrior.loadStatic(self.constants)
-            Projectile.loadStatic(self.constants)
-            BaseScene.loadStatic(self.constants)
-            Player.loadStatic(self.constants)
-            Waves.loadStatic(self.constants)
+            Window.loadStatic(self.constants)        # Done
+            Tileset.loadStatic(self.constants)       # Done
+            BaseBuilding.loadStatic(self.constants)  # Done
+            Warrior.loadStatic(self.constants)       # Done
+            Projectile.loadStatic(self.constants)    # Done
+            BaseScene.loadStatic(self.constants)     # Done
+            Player.loadStatic(self.constants)        # Done
+            Waves.loadStatic(self.constants)         #
 
         except KeyError:
             ErrorUI.create("Uncaught error loading data from JSON files",

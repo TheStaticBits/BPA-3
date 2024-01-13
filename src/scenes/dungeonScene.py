@@ -7,6 +7,7 @@ from src.utility.image import Image
 from src.tileset import Tileset
 from src.waves import Waves
 from src.utility.database import Database
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class DungeonScene(BaseScene):
@@ -29,9 +30,14 @@ class DungeonScene(BaseScene):
         # List of tile coords where enemies can spawn,
         # and where allies can spawn from data/maps/dungeon/data.json
         tileset = super().getTileset()
-        enemySpawns = tileset.getData()["enemySpawns"]
-        allySpawns = tileset.getData()["allySpawns"]
-        Warrior.setSpawnPositions(allySpawns, enemySpawns)
+
+        try:
+            enemySpawns = tileset.getData()["enemySpawns"]
+            allySpawns = tileset.getData()["allySpawns"]
+            Warrior.setSpawnPositions(allySpawns, enemySpawns)
+        except KeyError:
+            ErrorUI.create("Unable to find [enemySpawns or allySpawns] "
+                           "in data.json", self.log)
 
         self.waves = Waves(database)
 

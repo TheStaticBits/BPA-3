@@ -8,6 +8,7 @@ from src.window import Window
 from src.entities.player import Player
 from src.utility.image import Image
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class BaseBuilding(Entity):
@@ -20,23 +21,45 @@ class BaseBuilding(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the buildings data JSON file """
-        # Building JSON data file (data/buildings.json)
-        cls.BUILDINGS_DATA: dict = util.loadJSON(
-            constants["buildings"]["jsonPath"]
-        )
+        try:
+            # Building JSON data file (data/buildings.json)
+            cls.BUILDINGS_DATA: dict = util.loadJSON(
+                constants["buildings"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> jsonPath in constants",
+                           cls.log)
 
-        cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
-            * Tileset.TILE_SIZE.x
+        try:
+            # Range in pixels that the player can place buildings
+            cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
+                * Tileset.TILE_SIZE.x
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> buildReachTiles "
+                           "in constants. Defaulting to 5 tiles", cls.log,
+                           recoverable=True)
+            cls.BUILD_REACH: int = 5 * Tileset.TILE_SIZE.x
 
-        cls.redTint: tuple[int] = constants["buildings"]["redTint"]
-        cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+        try:
+            cls.redTint: tuple[int] = constants["buildings"]["redTint"]
+            cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> [redTint or whiteTint]"
+                           " in constants", cls.log, recoverable=True)
+            cls.redTint: tuple[int] = (255, 0, 0)
+            cls.whiteTint: tuple[int] = (255, 255, 255)
 
         # Particles
-        particles: dict = constants["buildings"]["effectParticles"]
-        cls.PARTICLE_AMOUNT: int = particles["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
-        cls.PARTICLE_SPEED: float = particles["speed"]
-        cls.PARTICLE_DURATION: float = particles["duration"]
+        try:
+            particles: dict = constants["buildings"]["effectParticles"]
+            cls.PARTICLE_AMOUNT: int = particles["amount"]
+            cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
+            cls.PARTICLE_SPEED: float = particles["speed"]
+            cls.PARTICLE_DURATION: float = particles["duration"]
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> effectParticles -> "
+                           "[amount, size, speed, or duration] in constants",
+                           cls.log)
 
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
@@ -64,7 +87,13 @@ class BaseBuilding(Entity):
         self.placable: bool = False
         self.level: int = level
         self.sold: bool = False
-        self.buildingTileSize: Vect = Vect(self.getData()["size"])
+
+        try:
+            self.buildingTileSize: Vect = Vect(self.getData()["size"])
+        except KeyError:
+            ErrorUI.create("Unable to find building -> size in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
 
         # Set to True to spawn effect particles
         self.spawnParticles: bool = False
@@ -76,7 +105,18 @@ class BaseBuilding(Entity):
         # Resets to False every frame
         self.selected: bool = False
 
-        super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
+        try:
+            super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
+        except KeyError:
+            ErrorUI.create("Unable to find building -> anim in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
+
+        # Making sure "levels" is in the building data
+        if "levels" not in self.getData():
+            ErrorUI.create("Can't find building -> levels in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
 
     def onRemove(self) -> None:
         """ Overriden in subclasses.

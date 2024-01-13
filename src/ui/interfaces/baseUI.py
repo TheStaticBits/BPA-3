@@ -36,7 +36,13 @@ class BaseUI:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Load static vars from constants """
-        cls.UI_FOLDER: str = constants["game"]["uiFolder"]
+        try:
+            cls.UI_FOLDER: str = constants["game"]["uiFolder"]
+        except KeyError:
+            # avoid circular import
+            from src.ui.interfaces.errorUI import ErrorUI
+            ErrorUI.create("Unable to find game -> uiFolder in constants",
+                           cls.log)
 
     def __init__(self, jsonFile: str) -> None:
         # Load the UI's JSON data
@@ -84,18 +90,26 @@ class BaseUI:
             from the JSON data, and returns it """
         elements: dict = {}
 
-        # Load image elements from the UI JSON data
-        # by using the base UI element object
-        for key, imageData in jsonData["elements"]["images"].items():
-            elements[key] = BaseUIElement(imageData, imgPath=imageData["path"])
+        # avoid circular import
+        from src.ui.interfaces.errorUI import ErrorUI
+        try:
+            # Load image elements from the UI JSON data
+            # by using the base UI element object
+            for key, imageData in jsonData["elements"]["images"].items():
+                elements[key] = BaseUIElement(imageData,
+                                              imgPath=imageData["path"])
 
-        # Load text elements from the UI JSON data
-        for key, textData in jsonData["elements"]["text"].items():
-            elements[key] = Text(textData)
+            # Load text elements from the UI JSON data
+            for key, textData in jsonData["elements"]["text"].items():
+                elements[key] = Text(textData)
 
-        # Load button elements
-        for key, buttonData in jsonData["elements"]["buttons"].items():
-            elements[key] = Button(buttonData)
+            # Load button elements
+            for key, buttonData in jsonData["elements"]["buttons"].items():
+                elements[key] = Button(buttonData)
+        except KeyError:
+            ErrorUI.create("Unable to find elements -> [images, text, or "
+                           "buttons] in UI JSON", self.log,
+                           recoverable=True)
 
         return elements
 

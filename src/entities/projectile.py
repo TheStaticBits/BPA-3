@@ -3,6 +3,7 @@ from src.entities.entity import Entity
 from src.utility.vector import Vect
 from src.window import Window
 from src.tileset import Tileset
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Projectile(Entity):
@@ -11,7 +12,11 @@ class Projectile(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the projectile animation data from consts """
-        cls.ANIMS: dict = constants["projectiles"]
+        try:
+            cls.ANIMS: dict = constants["projectiles"]
+        except KeyError:
+            ErrorUI.create("Unable to find projectiles in constants",
+                           cls.log)
 
     def __init__(self, type: str, angle: float, speed: float,
                  damage: float, knockback: float,

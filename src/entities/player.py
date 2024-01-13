@@ -17,25 +17,45 @@ class Player(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Load static variables from constants dict """
-        cls.ANIMS: dict = constants["player"]["anims"]
+        try:
+            cls.ANIMS: dict = constants["player"]["anims"]
+        except KeyError:
+            ErrorUI.create("Unable to find player -> anims in constants",
+                           cls.log)
 
+        # Max velocity/speed
         try:
             cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * \
                 Image.SCALE
         except KeyError:
-            ErrorUI.create("Unable to find player: maxSpeed in constants.json",
+            ErrorUI.create("Unable to find player -> maxSpeed in constants",
                            cls.log, recoverable=True)
             cls.MAX_SPEED: float = 100 * Image.SCALE
 
-        cls.ACCELERATION: float = constants["player"]["accel"] * Image.SCALE
-        cls.DECELERATION: float = constants["player"]["decel"] * Image.SCALE
+        # Acceleration, decceleration
+        try:
+            cls.ACCELERATION: float = constants["player"]["accel"] * \
+                Image.SCALE
+            cls.DECELERATION: float = constants["player"]["decel"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find player -> [accel or decel] "
+                           "in constants.json. Using default values.",
+                           cls.log, recoverable=True)
+            cls.ACCELERATION: float = 400 * Image.SCALE
+            cls.DECELERATION: float = 550 * Image.SCALE
 
-        # Player resources
-        cls.resources = AdvDict(constants["player"]["resources"]["starting"])
-        # resource limits (max amounts), -1 means no limit
-        cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
-        # display names for resources
-        cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
+        try:
+            # Player resources
+            cls.resources = AdvDict(constants["player"]["resources"]["start"])
+            # resource limits (max amounts), -1 means no limit
+            cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
+            # display names for resources
+            cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
+        except KeyError:
+            ErrorUI.create("Unable to find player -> resources -> "
+                           "[start, limits, or labels] data in constants",
+                           cls.log)
 
     @classmethod
     def capResources(cls) -> None:

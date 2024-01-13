@@ -17,7 +17,16 @@ class Image:
 
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
-        cls.SCALE = constants["game"]["imgScale"]
+        try:
+            cls.SCALE = constants["game"]["imgScale"]
+        except KeyError:
+            # avoid circular import
+            from src.ui.interfaces.errorUI import ErrorUI
+            ErrorUI.create(
+                "Missing game -> imgScale in constants. Defaulting to 3",
+                cls.log, recoverable=True
+            )
+            cls.SCALE = 3
 
     @staticmethod
     def makeEmpty(size: Vect, scale=False, transparent=False) -> Image:

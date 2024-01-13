@@ -16,6 +16,7 @@
     
     "window": {
         "title": "BPA 3 or something",
+        "icon": "",
 
         "minSize": [ 900, 600 ],
         "resizable": true,
@@ -52,7 +53,7 @@
         },
 
         "resources": {
-            "starting": {
+            "start": {
                 "gold": 1000,
                 "steampower": 100
             },

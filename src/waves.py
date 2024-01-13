@@ -4,6 +4,7 @@ from src.utility.timer import Timer
 from src.window import Window
 from src.entities.warrior import Warrior
 from src.utility.database import Database
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Waves:
@@ -13,9 +14,20 @@ class Waves:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the waves JSON file data """
-        cls.WAVES_DATA: list = util.loadJSON(constants["waves"]["jsonPath"])
+        try:
+            cls.WAVES_DATA: list = util.loadJSON(
+                constants["waves"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find waves -> jsonPath in constants",
+                           cls.log)
 
-        cls.WAVES_DELAY: float = constants["waves"]["delayBetweenWaves"]
+        try:
+            cls.WAVES_DELAY: float = constants["waves"]["delayBetweenWaves"]
+        except KeyError:
+            ErrorUI.create("Unable to find waves -> delayBetweenWaves "
+                           "in constants", cls.log, recoverable=True)
+            cls.WAVES_DELAY: float = 5
 
     def __init__(self, database: Database) -> None:
         """ Sets up wave timers and data """
@@ -64,14 +76,19 @@ class Waves:
             # Create timers (startTimer, spawnTimer)
             # and load data amounts (amount, spawnAmount)
 
-            self.spawnData.append({
-                "type": data["type"],
-                "level": data["level"],  # Level of warrior to spawn
-                "amount": data["amount"],  # Total amount to spawn
-                "spawnAmount": data["spawnAmount"],  # Amount created per spawn
-                "startTimer": Timer(data["startDelay"]),
-                "spawnTimer": Timer(data["spawnInterval"]),
-            })
+            try:
+                self.spawnData.append({
+                    "type": data["type"],
+                    "level": data["level"],  # Level of warrior to spawn
+                    "amount": data["amount"],  # Total amount to spawn
+                    "spawnAmount": data["spawnAmount"],  # Amount per interval
+                    "startTimer": Timer(data["startDelay"]),
+                    "spawnTimer": Timer(data["spawnInterval"]),
+                })
+            except KeyError:
+                ErrorUI.create("Unable to find [type, level, amount, "
+                               "spawnAmount, startDelay, or spawnInterval] "
+                               f"in waves.json for wave #{waveNum}", self.log)
 
     def update(self, window: Window,
                allies: list[Warrior], enemies: list[Warrior]) -> None:

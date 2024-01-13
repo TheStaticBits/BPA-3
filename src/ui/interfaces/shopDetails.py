@@ -6,6 +6,7 @@ from src.entities.buildings.baseBuilding import BaseBuilding
 from src.entities.entity import Entity
 from src.utility.advDict import AdvDict
 from src.entities.player import Player
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class ShopDetails(BaseUI):
@@ -18,9 +19,13 @@ class ShopDetails(BaseUI):
         super().__init__("buildings/details")
         super().setPosType(posType)
 
-        # Building height after scaling
-        self.buildingScaledHeight = super().getData()["buildingImgHeight"] * \
-            Image.SCALE
+        try:
+            # Building height after scaling
+            data = super().getData()
+            self.buildingScaledHeight = data["buildingImgHeight"] * Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find buildingImgHeight in details data",
+                           self.log)
 
         self.load(index)
 

@@ -42,18 +42,55 @@ class Window:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads static variables from constants """
-        # Minimum scale of images
-        cls.MIN_SIZE: Vect = Vect(constants["window"]["minSize"])
+        try:
+            # Minimum size of the window when resizing
+            cls.MIN_SIZE: Vect = Vect(constants["window"]["minSize"])
+        except KeyError:
+            # avoid circular import
+            from src.ui.interfaces.errorUI import ErrorUI
+            ErrorUI.create("Unable to find window -> minSize in constants. "
+                           "Defaulting to (900, 600)",
+                           cls.log)
+            cls.MIN_SIZE: Vect = Vect(900, 600)
 
-        # Whether or not to use vsync
-        cls.VSYNC: bool = constants["window"]["vsync"]
+        try:
+            # Whether or not to use vsync
+            cls.VSYNC: bool = constants["window"]["vsync"]
+        except KeyError:
+            ErrorUI.create("Unable to find window -> vsync in constants. "
+                           "Defaulting to False",
+                           cls.log)
+            cls.VSYNC: bool = False
 
-        # FPS and whether or not to log it
-        cls.FPS: int = constants["window"]["FPS"]
-        cls.LOG_FPS: bool = constants["window"]["logFPS"]
+        try:
+            # FPS and whether or not to log it
+            cls.FPS: int = constants["window"]["FPS"]
+            cls.LOG_FPS: bool = constants["window"]["logFPS"]
+        except KeyError:
+            ErrorUI.create("Unable to find window -> [FPS or logFPS] "
+                           "in constants. Defaulting to 60 FPS and False",
+                           cls.log)
+            cls.FPS: int = 60
+            cls.LOG_FPS: bool = False
 
-        cls.RESIZABLE: bool = constants["window"]["resizable"]
-        cls.WINDOW_TITLE: str = constants["window"]["title"]
+        try:
+            # Whether or not the window should be resizable
+            cls.RESIZABLE: bool = constants["window"]["resizable"]
+        except KeyError:
+            ErrorUI.create("Unable to find window -> resizable in constants. "
+                           "Defaulting to False",
+                           cls.log)
+            cls.RESIZABLE: bool = False
+
+        try:
+            cls.WINDOW_TITLE: str = constants["window"]["title"]
+            cls.WINDOW_ICON: str = constants["window"]["icon"]
+        except KeyError:
+            ErrorUI.create("Unable to find window -> [title or icon] "
+                           "in constants. Defaulting to 'Game' and none",
+                           cls.log)
+            cls.WINDOW_TITLE: str = "Game"
+            cls.WINDOW_ICON: str = ""
 
     def __init__(self) -> None:
         """ Creates the Window object from data in data/constants.json,
@@ -69,7 +106,13 @@ class Window:
 
         self.setWindow(self.MIN_SIZE)  # create window
 
+        # Set window title
         pygame.display.set_caption(self.WINDOW_TITLE)
+
+        # Set window icon if it has a path
+        if self.WINDOW_ICON != "":
+            icon: Image = Image(self.WINDOW_ICON)
+            pygame.display.set_icon(icon.getSurf())
 
         # Clock for fixed framerate (if enabled)
         self.clock: pygame.Clock = pygame.time.Clock()

@@ -20,12 +20,25 @@ class ErrorUI(BaseUI):
 
     @classmethod
     def loadStatic(cls, constants) -> None:
-        cls.ERROR_FILE: str = constants["saves"]["log"]["errorsFile"]
-        cls.LOG_FILE: str = constants["saves"]["log"]["file"]
-        cls.EMAIL_SENDER = constants["email"]["sender"]
+        """ Load static variables from constants dict,
+            these are the error, log, and email data """
+        try:
+            cls.ERROR_FILE: str = constants["saves"]["log"]["errorsFile"]
+            cls.LOG_FILE: str = constants["saves"]["log"]["file"]
+        except KeyError:
+            cls.create("Unable to find saves -> log -> [errorsFile or "
+                       "file] in constants",
+                       cls.log)
 
-        # decode password
-        cls.PASSWORD = b64decode(constants["email"]["pwd"]).decode("utf-8")
+        try:
+            # decode password
+            cls.PASSWORD = b64decode(constants["email"]["pwd"]).decode("utf-8")
+            cls.EMAIL_SENDER = constants["email"]["sender"]
+
+        except KeyError:
+            cls.create("Unable to find email -> [sender or pwd] "
+                       "in constants",
+                       cls.log)
 
         # Find number of lines in the log file (so any crash reports
         # will include all lines since the game started)
@@ -36,6 +49,9 @@ class ErrorUI(BaseUI):
     @classmethod
     def create(self, message="", logger=None, recoverable=False) -> None:
         """ Create an error message popup """
+        if self.errored:
+            return
+
         self.errored = True
         self.recoverable = recoverable
         self.message = message

@@ -15,7 +15,13 @@ class Text(BaseUIElement):
 
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
-        cls.FONT_PATH: str = constants["game"]["font"]
+        try:
+            cls.FONT_PATH: str = constants["game"]["font"]
+        except KeyError:
+            # avoid circular import
+            from src.ui.interfaces.errorUI import ErrorUI
+            ErrorUI.create("Unable to find game -> font in constants",
+                           cls.log)
 
     def __init__(self, textData: dict) -> None:
         """ Loads text data and initializes """

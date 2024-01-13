@@ -88,7 +88,7 @@
 
                 "textData": {
                     "text": "Buy",
-                    "offset": [ 0, -1 ],
+                    "offset": [ 0.66, -0.66 ],
                     "fontSize": 10,
                     "color": [ 255, 255, 255 ]
                 }
