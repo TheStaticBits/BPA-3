@@ -3,6 +3,7 @@
         "type": "storage",
         "name": "Treasure Chest",
         "description": "This treasure chest can hold much goodies. Don't let your enemies steal it! Increases your gold limit.",
+        "sound": "res/sound/steamgen.wav",
 
         "anim": {
             "path": "res/buildings/treasureChest.png",
@@ -51,6 +52,7 @@
         "type": "spawner",
         "name": "Unit Spawner",
         "description": "This factory will spawn units periodically to fight enemies in the dungeon. You can also change which type of unit will spawn at later levels.",
+        "sound": "res/sound/steamgen.wav",
 
         "anim": {
             "path": "res/buildings/spawner.png",
@@ -97,6 +99,7 @@
         "type": "generator",
         "name": "Gold Generator",
         "description": "A conveyor line that turns pure gold chunks into spendable gold. Dropped into the inventory abyss for convienence.",
+        "sound": "res/sound/steamgen.wav",
 
         "anim": {
             "path": "res/buildings/goldGen.png",
@@ -155,6 +158,7 @@
         "type": "generator",
         "name": "Steam Generator",
         "description": "Generates steam to add to your maximum capacity. Use the steam to power your units for fighting.",
+        "sound": "res/sound/steamgen.wav",
 
         "anim": {
             "path": "res/buildings/steamGen.png",

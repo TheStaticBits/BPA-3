@@ -61,6 +61,11 @@ class BuildingsScene(BaseScene):
         self.buildingShop.update(window, self.placingBuilding)
         self.upgradeUI.update(window, super().getTileset())
 
+    def playSounds(self, play: bool) -> None:
+        """ Stops or starts all sounds """
+        for building in self.buildings:
+            building.playSound(play)
+
     def updateBuildings(self, window: Window) -> None:
         """ Updates all buildings """
         for building in self.buildings:
