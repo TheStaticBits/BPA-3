@@ -107,7 +107,7 @@
 
         "cost": {
             "gold": 130,
-            "steampower": 5
+            "steampower": 0
         },
 
         "oneTimeGenerate": false,
