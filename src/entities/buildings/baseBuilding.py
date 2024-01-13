@@ -118,6 +118,14 @@ class BaseBuilding(Entity):
                            f" for building {self.type}",
                            self.log)
 
+        # Get sound data
+        if "sound" in self.getData():
+            self.sound: pygame.mixer.Sound = pygame.mixer.Sound(
+                self.getData()["sound"]
+            )
+        else:
+            self.sound: pygame.mixer.Sound = None
+
     def onRemove(self) -> None:
         """ Overriden in subclasses.
             Called on building removal. """
@@ -149,6 +157,7 @@ class BaseBuilding(Entity):
             self.testPlace(window, tileset, player)
         else:  # update animation:
             super().update(window)
+            self.updateSound(player)
 
     def followCursor(self, window: Window, camOffset: Vect,
                      tileset: Tileset, player: Player) -> None:
@@ -195,14 +204,31 @@ class BaseBuilding(Entity):
             and not super().collide(player)
 
         if self.placable and window.getMouseJustPressed("left"):
+            # Placed down the building!
             self.placing = False
 
             # Sets the range of tiles that the building takes up to occupied
             # so no other building can be placed there
             tileset.setRangeOccupied(self.tilePos, self.buildingTileSize)
 
+            self.playSound(True)
             self.setSpawnParticles()
             self.onPlace()
+
+    def updateSound(self, player: Player) -> None:
+        """ Plays the sound if the player is close enough """
+        if self.sound is None:
+            return
+
+        volume: float = player.getSoundVolume(super().getCenterPos())
+        self.sound.set_volume(volume)
+
+    def playSound(self, play: bool) -> None:
+        """ Plays or stops the sound """
+        if play:
+            self.sound.play(-1)
+        else:
+            self.sound.stop()
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """
@@ -235,6 +261,8 @@ class BaseBuilding(Entity):
         # Set tiles to be unoccupied:
         tileset.setRangeOccupied(self.tilePos, self.buildingTileSize, False)
         self.onRemove()
+
+        self.playSound(False)
 
     def getParticles(self) -> list[Particle]:
         """ Gets a list of particles used for various situations """

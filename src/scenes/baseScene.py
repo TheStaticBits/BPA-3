@@ -44,6 +44,9 @@ class BaseScene:
     def updateUI(self, window: Window) -> None:
         """ Override in subclasses to update UIs """
 
+    def playSounds(self, play: bool) -> None:
+        """ Override in subclasses to start or stop sounds """
+
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
         self.player.update(window, self.tileset)

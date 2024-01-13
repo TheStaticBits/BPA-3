@@ -65,6 +65,16 @@ class Player(Entity):
                            "[start, limits, or labels] data in constants",
                            cls.log)
 
+        try:
+            # Distance that the player needs to be to hear a sound
+            cls.HEARING_RANGE: float = constants["player"]["hearingRange"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find player -> hearingRange"
+                           " in constants. Defaulting to 150",
+                           cls.log, recoverable=True)
+            cls.HEARING_RANGE: float = 150 * Image.SCALE
+
     @classmethod
     def capResources(cls) -> None:
         """ If any resources are above their limit, set them to the limit """
@@ -175,6 +185,15 @@ class Player(Entity):
         self.currentAnim = anim
         self.animations[anim].restart()
         super().setAnim(self.animations[anim])
+
+    def getSoundVolume(self, pos: Vect) -> None:
+        """ Returns the volume of a sound given its position """
+        dist: float = pos.dist(super().getCenterPos())
+
+        if dist > self.HEARING_RANGE:
+            return 0
+
+        return 1 - (dist / self.HEARING_RANGE)
 
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:

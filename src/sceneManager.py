@@ -134,6 +134,10 @@ class SceneManager:
             # Switch the scene
             self.state, self.otherState = self.otherState, self.state
 
+            # Set sounds to play in the new scene
+            self.scenes[self.state].playSounds(True)
+            self.scenes[self.otherState].playSounds(False)
+
     def render(self, surface: Window | Image) -> None:
         """ Render the current scene """
         self.scenes[self.state].render(surface)
