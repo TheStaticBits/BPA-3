@@ -12,7 +12,7 @@
         "size": [ 3, 2 ],
 
         "cost": {
-            "gold": 100,
+            "gold": 120,
             "steampower": 0
         },
         
@@ -22,24 +22,24 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 90, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 110, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 150 to 300"
                 },
 
                 "storageAmount": { "gold": 300 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 85, "steampower": 0},
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 105, "steampower": 0},
+                    "description": "Upgrade this building to increase its gold storange from 300 to 450"
                 },
 
                 "storageAmount": { "gold": 450 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 80, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 100, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 450 to 600"
                 },
 
                 "storageAmount": { "gold": 600 }
@@ -107,7 +107,7 @@
 
         "cost": {
             "gold": 130,
-            "steampower": 5
+            "steampower": 0
         },
 
         "oneTimeGenerate": false,
