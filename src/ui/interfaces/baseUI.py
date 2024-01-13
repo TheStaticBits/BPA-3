@@ -270,7 +270,7 @@ class BaseUI:
 
         # Transitioning, so get opacity based on the percent done
         if self.transitioning:
-            reversed: bool = self.posType == self.bgAlphaPosType
+            reversed: bool = self.transitionTo != self.bgAlphaPosType
             opacity: int = self.overlay.percentOpacity(self.percentDone,
                                                        reversed)
         elif self.posType == self.bgAlphaPosType:

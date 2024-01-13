@@ -46,12 +46,20 @@ class Player(Entity):
             cls.DECELERATION: float = 550 * Image.SCALE
 
         try:
-            # Player resources
-            cls.resources = AdvDict(constants["player"]["resources"]["start"])
+            # Player starting resources
+            cls.STARTNG_RES = AdvDict(
+                constants["player"]["resources"]["start"]
+            )
             # resource limits (max amounts), -1 means no limit
-            cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
+            cls.RES_LIMITS = AdvDict(
+                constants["player"]["resources"]["limits"]
+            )
             # display names for resources
-            cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
+            cls.RES_LABELS = AdvDict(
+                constants["player"]["resources"]["labels"]
+            )
+
+            cls.resetResources()
         except KeyError:
             ErrorUI.create("Unable to find player -> resources -> "
                            "[start, limits, or labels] data in constants",
@@ -66,6 +74,12 @@ class Player(Entity):
 
             if cls.resources[resource] > cls.resLimits[resource]:
                 cls.resources[resource] = cls.resLimits[resource]
+
+    @classmethod
+    def resetResources(cls) -> None:
+        """ Reset resources to starting resources """
+        cls.resources = cls.STARTNG_RES.copy()
+        cls.resLimits = cls.RES_LIMITS.copy()
 
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """

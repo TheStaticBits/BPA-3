@@ -10,6 +10,7 @@ from src.utility.image import Image
 from src.utility.database import Database
 from src.ui.interfaces.loseUI import LoseUI
 from src.ui.interfaces.mainMenu import MainMenu
+from src.entities.player import Player
 
 
 class SceneState(enum.Enum):
@@ -51,6 +52,8 @@ class SceneManager:
             SceneState.BUILDING: BuildingsScene("buildings"),
             SceneState.DUNGEON: DungeonScene("dungeon", self.db)
         }
+
+        Player.resetResources()
 
     def update(self, window: Window) -> None:
         """ Update the current scene """
