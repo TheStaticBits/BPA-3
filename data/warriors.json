@@ -143,5 +143,36 @@
                 "attackKnockback": 160
             }
         ]
+    },
+
+    "rangeWarrior": {
+        "name": "Range Warrior",
+        "description": "Has a longer range than the Melee Warrior",
+        "attackType": "projectile",
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 70,
+                "range": 95,
+                "maxSpeed": 70, "accel": 100, "decel": 400,
+                "knockbackResistance": 400,
+                
+                "attackInterval": 1.6,
+                "damage": 9,
+                "attackKnockback": 100
+            }
+        ]
     }
 }
