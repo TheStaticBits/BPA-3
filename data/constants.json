@@ -100,6 +100,9 @@
     "warriors": {
         "jsonPath": "data/warriors.json",
         "knockbackAngleRange": 1,
+
+        "spawnSound": "res/sound/warriorHit.wav",
+        "hitSound": "res/sound/warriorHit.wav",
         
         "damageTint": [ 255, 100, 100 ],
         "damageTime": 0.2,

@@ -8,6 +8,7 @@ from src.tileset import Tileset
 from src.waves import Waves
 from src.utility.database import Database
 from src.ui.interfaces.errorUI import ErrorUI
+from src.entities.player import Player
 
 
 class DungeonScene(BaseScene):
@@ -41,29 +42,30 @@ class DungeonScene(BaseScene):
 
         self.waves = Waves(database)
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, sceneIsFocused: bool) -> None:
         """ Updates warriors, spawns enemies,
             and updates projectiles"""
-        super().update(window)
+        super().update(window, sceneIsFocused)
 
-        self.updateWarriors(window)
+        self.updateWarriors(window, sceneIsFocused)
         self.spawnQueue()
 
         self.updateProjectiles(window)
 
         self.waves.update(window, self.allies, self.enemies)
 
-    def updateWarriors(self, window: Window) -> None:
+    def updateWarriors(self, window: Window, sceneIsFocused: bool) -> None:
         """ Updates warriors (both allies and enemies) """
         tileset: Tileset = super().getTileset()
+        player: Player = super().getPlayer()
 
         # Updating warriors with the opponent list of warriors
         for ally in self.allies:
-            ally.update(window, tileset, self.enemies)
+            ally.update(window, tileset, self.enemies, player, sceneIsFocused)
             ally.updateAttack(window, self.enemies, self.projectiles)
 
         for enemy in self.enemies:
-            enemy.update(window, tileset, self.allies)
+            enemy.update(window, tileset, self.allies, player, sceneIsFocused)
             enemy.updateAttack(window, self.allies, self.projectiles)
 
         # Remove dead warriors through list comprehension in place

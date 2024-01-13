@@ -95,6 +95,8 @@ class Waves:
         """ Updates the wave timer """
         if self.betweenWaves:  # Delay timer between waves
             # During the period between waves allies cannot spawn
+            for warrior in allies:
+                warrior.stopSounds()
             allies.clear()
 
             self.waveTimer.update(window)

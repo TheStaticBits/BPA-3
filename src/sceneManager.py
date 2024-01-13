@@ -98,11 +98,11 @@ class SceneManager:
     def updateScene(self, window: Window) -> None:
         """ Updates everything necessary for the player to play """
         self.optionsUI.update(window)
-        self.scenes[self.state].update(window)
+        self.scenes[self.state].update(window, True)
 
         # Update the hidden scene without any inputs
         window.setHideInputs(True)
-        self.scenes[self.otherState].update(window)
+        self.scenes[self.otherState].update(window, False)
         window.setHideInputs(False)
 
         self.updateResources(window)
@@ -114,7 +114,7 @@ class SceneManager:
             when there is a foreground UI like the main menu """
         # Preventing mouse interactions with the UI
         window.setHideInputs(True)
-        self.scenes[self.state].update(window)
+        self.scenes[self.state].update(window, False)
         self.optionsUI.update(window)
         window.setHideInputs(False)
 
@@ -133,10 +133,6 @@ class SceneManager:
 
             # Switch the scene
             self.state, self.otherState = self.otherState, self.state
-
-            # Set sounds to play in the new scene
-            self.scenes[self.state].playSounds(True)
-            self.scenes[self.otherState].playSounds(False)
 
     def render(self, surface: Window | Image) -> None:
         """ Render the current scene """

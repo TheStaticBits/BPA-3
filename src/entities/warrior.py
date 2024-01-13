@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import pygame
 import random
 from src.entities.entity import Entity
 from src.entities.projectile import Projectile
@@ -13,6 +14,7 @@ from src.utility.timer import Timer
 from src.utility.animation import Animation
 from src.particle import Particle
 from src.ui.interfaces.errorUI import ErrorUI
+from src.entities.player import Player
 
 
 class Warrior(Entity):
@@ -62,6 +64,16 @@ class Warrior(Entity):
             ErrorUI.create("Unable to find warriors -> deathParticles -> "
                            "[amount, size, speed, or duration] in constants",
                            cls.log)
+
+        try:
+            cls.SPAWN_SOUND: str = constants["warriors"]["spawnSound"]
+            cls.HIT_SOUND: str = constants["warriors"]["hitSound"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> "
+                           "[spawnSound or hitSound] in constants",
+                           cls.log)
+            cls.SPAWN_SOUND = None
+            cls.HIT_SOUND = None
 
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],
@@ -121,6 +133,13 @@ class Warrior(Entity):
         self.damageTimer: Timer = Timer(self.DAMAGE_TIME)
         self.showDamageTint: bool = False
 
+        # Sounds
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound = pygame.mixer.Sound(self.SPAWN_SOUND)
+            self.spawnSound.play(0)
+        if self.HIT_SOUND is not None:
+            self.hitSound = pygame.mixer.Sound(self.HIT_SOUND)
+
     def pickSpawnPos(self, isAlly: bool) -> Vect:
         """ Picks a random spawn position
             from the appropriate spawn positions list """
@@ -151,7 +170,8 @@ class Warrior(Entity):
             self.projectileSpeed: float = data["projectileSpeed"] * Image.SCALE
 
     def update(self, window: Window, tileset: Tileset,
-               opponents: list[Warrior]) -> None:
+               opponents: list[Warrior], player: Player,
+               playSounds: bool) -> None:
         """ Updates warrior: moving, attacking, etc."""
         super().update(window)
 
@@ -160,6 +180,9 @@ class Warrior(Entity):
         self.updateSpeed(window)
         self.moveToTarget(window)
         self.updateKnockback(window)
+
+        # Update sound volumes
+        self.updateSounds(player, playSounds)
 
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
@@ -269,6 +292,27 @@ class Warrior(Entity):
 
         return velocity
 
+    def updateSounds(self, player: Player, playSounds: bool) -> None:
+        """ Sets the sound volume based on the player's distance """
+        if playSounds:
+            # Sound relative to the position of the player
+            volume: float = player.getSoundVolume(super().getPos())
+        else:
+            volume = 0
+
+        # Set volumes
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound.set_volume(volume)
+        if self.HIT_SOUND is not None:
+            self.hitSound.set_volume(volume)
+
+    def stopSounds(self) -> None:
+        """ Stops all sounds """
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound.stop()
+        if self.HIT_SOUND is not None:
+            self.hitSound.stop()
+
     def updateAttack(self, window: Window, opponents: list[Warrior],
                      projectiles: list[Projectile]) -> None:
         """ Updates the warrior's attack, and attacking when timer is up """
@@ -358,6 +402,8 @@ class Warrior(Entity):
         self.knockbackVel = knockbackVel
 
         self.showDamageTint = True
+
+        self.hitSound.play(0)
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the warrior and its aoe attack if necessary """

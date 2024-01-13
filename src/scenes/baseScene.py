@@ -34,7 +34,7 @@ class BaseScene:
 
         self.particles: list[Particle] = []
 
-    def update(self, window: Window) -> None:
+    def update(self, window: Window, sceneIsFocused: bool) -> None:
         """ Update scene objects """
         self.updateCameraPos(window)
 
@@ -43,9 +43,6 @@ class BaseScene:
 
     def updateUI(self, window: Window) -> None:
         """ Override in subclasses to update UIs """
-
-    def playSounds(self, play: bool) -> None:
-        """ Override in subclasses to start or stop sounds """
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
