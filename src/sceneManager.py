@@ -87,6 +87,11 @@ class SceneManager:
                 waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
                 self.loseUI.show(window, waveNum)
 
+            # Test if the player pressed pause
+            elif self.optionsUI.pausePressed():
+                # Open the main menu
+                self.mainMenu.open(window)
+
     def updateScene(self, window: Window) -> None:
         """ Updates everything necessary for the player to play """
         self.optionsUI.update(window)

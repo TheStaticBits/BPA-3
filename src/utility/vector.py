@@ -44,8 +44,16 @@ class Vect:
 
     def clamp(self, minVect: Vect, maxVect: Vect) -> None:
         """ Locks the vector between two vectors """
-        self.x = min(max(self.x, minVect.x), maxVect.x)
-        self.y = min(max(self.y, minVect.y), maxVect.y)
+        self.clampX(minVect.x, maxVect.x)
+        self.clampY(minVect.y, maxVect.y)
+
+    def clampX(self, minX: float, maxX: float) -> None:
+        """ Locks the x component between two numbers """
+        self.x = min(max(self.x, minX), maxX)
+
+    def clampY(self, minY: float, maxY: float) -> None:
+        """ Locks the y component between two numbers """
+        self.y = min(max(self.y, minY), maxY)
 
     def dist(self, other: Vect) -> float:
         """ Returns distance using pythagorean theorem """

@@ -35,7 +35,22 @@
         },
 
         "buttons": {
-            
+            "play": {
+                "offset": [ 10, 10 ],
+
+                "images": {
+                    "inactive": "res/buttons/main/inactive.png",
+                    "hover": "res/buttons/main/hover.png",
+                    "pressed": "res/buttons/main/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Play",
+                    "fontSize": 10,
+                    "offset": [ 0.66, -0.66 ],
+                    "color": [ 255, 255, 255 ]
+                }
+            }
         }
     }
 }

@@ -50,14 +50,24 @@ class BaseScene:
 
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
+        winSize = window.getSize()
+        tileSize = self.tileset.getSize()
+
         # Camera position centered on the position
         newOffset = self.player.getCenterPos() - window.getSize() / 2
 
-        # Clamp between 0, 0 and max camera offset
-        newOffset.clamp(
-            Vect(),  # 0, 0
-            self.tileset.getSize() - window.getSize()
-        )
+        if tileSize.x < winSize.x:
+            # Center the map offset on the screen if
+            # it's smaller than the screen
+            newOffset.x = tileSize.x / 2 - winSize.x / 2
+        else:
+            # Clamp the offset to the map size
+            newOffset.clampX(0, tileSize.x - winSize.x)
+
+        if tileSize.y < winSize.y:
+            newOffset.y = tileSize.y / 2 - winSize.y / 2
+        else:
+            newOffset.clampY(0, tileSize.y - winSize.y)
 
         # Move the camera offset slowly to the new position
         self.cameraOffset += ((newOffset - self.cameraOffset) *
