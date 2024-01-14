@@ -61,10 +61,16 @@ class BuildingsScene(BaseScene):
             # Show shop
             self.buildingShop.show(window)
 
-    def updateUI(self, window: Window) -> None:
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Updates the UI elements """
+        super().updateUI(window, sfxVol, musicVol)
         self.buildingShop.update(window, self.placingBuilding)
         self.upgradeUI.update(window, super().getTileset())
+
+        # Update building sfx sound
+        for building in self.buildings:
+            building.updateSound(super().getPlayer(),
+                                 sfxVol)
 
     def updateBuildings(self, window: Window, sfxVol: float) -> None:
         """ Updates all buildings """

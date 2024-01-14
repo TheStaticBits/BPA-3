@@ -55,6 +55,16 @@ class DungeonScene(BaseScene):
 
         self.waves.update(window, self.allies, self.enemies)
 
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
+        """ Updates UIs """
+        super().updateUI(window, sfxVol, musicVol)
+
+        # Update warrior sound volume
+        for ally in self.allies:
+            ally.updateSounds(super().getPlayer(), sfxVol)
+        for enemy in self.enemies:
+            enemy.updateSounds(super().getPlayer(), sfxVol)
+
     def updateWarriors(self, window: Window, sfxVol: float) -> None:
         """ Updates warriors (both allies and enemies) """
         tileset: Tileset = super().getTileset()

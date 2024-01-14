@@ -56,13 +56,15 @@ class BaseScene:
 
         self.updateMusicVolume(musicVol)
 
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
+        """ Override in subclasses to update UIs """
+        self.updateCameraPos(window)
+        self.updateMusicVolume(musicVol)
+
     def updateMusicVolume(self, musicVol: float) -> None:
         """ Update music volume """
         if self.music is not None:
             self.music.set_volume(musicVol)
-
-    def updateUI(self, window: Window) -> None:
-        """ Override in subclasses to update UIs """
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
