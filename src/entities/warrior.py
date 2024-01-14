@@ -349,29 +349,20 @@ class Warrior(Entity):
 
     def aoeAttack(self, opponents: list[Warrior]) -> None:
         """ Deals damage to all opponents in range """
+        centerPos = self.getCenterPos()
+
         self.aoeAnim.restart()  # Sets the attack anim to play
         # Center aoe attack animation on the player
-        self.aoeAnimPos = super().getCenterPos() - self.aoeAnim.getSize() / 2
+        self.aoeAnimPos = centerPos - self.aoeAnim.getSize() / 2
 
-        # Create circle image to test for pixel-perfect collisions
-        # with all opponents in range
-        circle = Image.makeEmpty(Vect(self.range * 2), False, True)
-        circle.drawCircle(self.range, (0, 0, 0))
-
-        # Top left of circle image position
-        circlePos: Vect = super().getCenterPos() - self.range
-
-        # Deal damage with pixel perfect collision to all opponents in range
         for opponent in opponents:
-            image = opponent.getAnim().getFrame()
+            opponentPos: Vect = opponent.getCenterPos()
+            # Distance bewteen the center of this warrior and the opponent
+            dist: float = centerPos.dist()
 
-            # Test for pixel perfect collision
-            collided: bool = circle.pixelPerfectCollide(circlePos, image,
-                                                        opponent.getPos())
-
-            if collided:  # Deal damage if collided
+            if dist <= self.range:
                 # Getting angle from the center of this warrior to the opponent
-                angle = self.getCenterPos().angle(opponent.getCenterPos())
+                angle = centerPos.angle(opponentPos)
 
                 opponent.hit(self.damage, angle, self.attackKnockback)
 
