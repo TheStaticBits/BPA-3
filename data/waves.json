@@ -172,5 +172,13 @@
         { "type": "meleeWarriorStrong", "level": 2, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
         { "type": "aoeWarriorStrong", "level": 2, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
         { "type": "meleeWarrior", "level": 8, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 1, "amount": 9, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 1, "amount": 13, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 1 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
     ]
 ]
