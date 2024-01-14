@@ -114,7 +114,7 @@
                     "description": "Upgrade to unlock the Sniper warrior!"
                 },
 
-                "unlockedWarrior": "rangeWarrior",
+                "unlockedWarrior": "sniperWarrior",
                 "spawnAmount": 4,
                 "spawnInterval": 14
             }
