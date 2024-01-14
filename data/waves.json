@@ -83,5 +83,36 @@
         { "type": "aoeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
         { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
         { "type": "rangeWarrior", "level": 4, "amount": 15, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 5, "amount": 24, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "rangeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 5, "amount": 24, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "rangeWarrior", "level": 4, "amount": 20, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 5, "amount": 24, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "rangeWarrior", "level": 4, "amount": 20, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "sniperWarrior", "level": 4, "amount": 12, "startDelay": 15, "spawnInterval": 1, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 5, "amount": 16, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "rangeWarrior", "level": 4, "amount": 20, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "sniperWarrior", "level": 4, "amount": 24, "startDelay": 15, "spawnInterval": 1, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 5, "amount": 16, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "rangeWarrior", "level": 4, "amount": 20, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 4 },
+        { "type": "sniperWarrior", "level": 5, "amount": 24, "startDelay": 15, "spawnInterval": 0.9, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "rangeWarrior", "level": 5, "amount": 25, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 5 },
+        { "type": "sniperWarrior", "level": 5, "amount": 25, "startDelay": 15, "spawnInterval": 1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "rangeWarrior", "level": 5, "amount": 25, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 5 },
+        { "type": "sniperWarrior", "level": 5, "amount": 25, "startDelay": 13, "spawnInterval": 1, "spawnAmount": 5 }
     ]
 ]
