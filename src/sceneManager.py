@@ -41,9 +41,8 @@ class SceneManager:
         self.resourcesUI = ResourcesUI()
         self.optionsUI = OptionsUI()
 
-        self.loseUI: LoseUI = LoseUI()
-
         self.mainMenu = MainMenu(window, database)
+        self.loseUI: LoseUI = LoseUI()
 
     def resetScenes(self) -> None:
         """ Resets the scenes """

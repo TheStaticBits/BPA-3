@@ -1,0 +1,49 @@
+{
+    "positions": {
+        "hidden": {
+            "x": { "locked": "end",    "margin": -250 },
+            "y": { "locked": "center", "margin": 0    },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "center", "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 6,
+    "transitionType": "ease",
+
+    "bgAlpha": 150,
+    "bgAlphaShowsPos": "visible",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/mainMenu/bg.png"
+            }
+        },
+
+        "text": {
+
+        },
+
+        "buttons": {
+            "closeButton": {
+                "offset": [ 233, 10 ],
+
+                "images": {
+                    "inactive": "res/buttons/xButton/inactive.png",
+                    "hover": "res/buttons/xButton/hover.png",
+                    "pressed": "res/buttons/xButton/pressed.png"
+                }
+            }
+        }
+    }
+}

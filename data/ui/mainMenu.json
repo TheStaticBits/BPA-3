@@ -1,4 +1,4 @@
-{   
+{
     "positions": {
         "hidden": {
             "x": { "locked": "center", "margin":  0   },
@@ -140,7 +140,7 @@
                 "centered": true
             },
 
-            "tutorialButton": {
+            "tutorial": {
                 "offset": [ 125, 127 ],
     
                 "images": {

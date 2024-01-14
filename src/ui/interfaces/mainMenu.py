@@ -3,6 +3,9 @@ from src.ui.interfaces.baseUI import BaseUI
 from src.window import Window
 from src.utility.database import Database
 import src.utility.utility as util
+from src.ui.interfaces.tutorial import Tutorial
+from src.utility.image import Image
+from src.utility.vector import Vect
 
 
 class MainMenu(BaseUI):
@@ -16,6 +19,8 @@ class MainMenu(BaseUI):
         self.setupDatabase()
 
         self.open(window)
+
+        self.tutorial: Tutorial = Tutorial()
 
     def setupDatabase(self) -> None:
         """ Sets up the settings database table """
@@ -38,13 +43,22 @@ class MainMenu(BaseUI):
         """ Updates the menu and the scene behind it """
         super().update(window)
 
-        self.checkPlayButton(window)
-        self.updateSettingsButtons(window)
+        if self.tutorial.isHidden():
+            # Updating the main menu buttons
+            self.checkPlayButton(window)
+            self.checkTutorialButton(window)
+            self.updateSettingsButtons(window)
+
+        self.tutorial.update(window)
 
     def checkPlayButton(self, window: Window) -> None:
         """ Checks if the play button is pressed """
         if super().getElement("play").getActivated():
             self.startTransition("hidden", window)
+
+    def checkTutorialButton(self, window: Window) -> None:
+        if super().getElement("tutorial").getActivated():
+            self.tutorial.show(window)
 
     def updateSettingsButtons(self, window: Window) -> None:
         """ Updates the settings buttons """
@@ -68,6 +82,12 @@ class MainMenu(BaseUI):
         super().getElement("sfxText").setText(
             f"{round(self.sfxVol * 100)}%"
         )
+
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
+        """ Renders the menu """
+        super().render(surface, offset)
+
+        self.tutorial.render(surface, offset)
 
     def saveVolume(self) -> None:
         """ Saves the volume """
