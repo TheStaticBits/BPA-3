@@ -60,6 +60,7 @@ class Waves:
         if waveNum <= self.highscore:
             return
 
+        self.highscore = waveNum
         self.db.update("highscores", "type", "wave",
                        "value", waveNum)
 
@@ -153,13 +154,13 @@ class Waves:
             self.log.info(
                 "All enemies have died. Starting delay between waves."
             )
-            self.saveHighscore(self.waveNum)
+            self.saveHighscore(self.waveNum + 1)
 
         # No allies left on any given frame, so the player lost
         if len(allies) == 0:
             self.log.info("All allies have died. You lose!")
             self.lost = True
-            self.saveHighscore(self.waveNum)
+            self.saveHighscore(self.waveNum + 1)
 
     def spawnWarrior(self, warriorType: str, level: int) -> None:
         """ Spawns a warrior by adding it to the queue """

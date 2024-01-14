@@ -102,7 +102,7 @@ class MainMenu(BaseUI):
     def setWaveHighscore(self, highscore: int) -> None:
         """ Sets the wave highscore """
         super().getElement("waveHighscore").setText(
-            f"Highscore: Wave {highscore}"
+            f"Highscore: Wave {highscore + 1}"
         )
 
     def isOpen(self) -> bool: return super().getPosType() == "visible"
