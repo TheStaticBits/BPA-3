@@ -27,7 +27,7 @@
     },
 
     "game": {
-        "imgScale": 4,
+        "imgScale": 3,
         "cameraSpeed": 5,
 
         "uiFolder": "data/ui",
