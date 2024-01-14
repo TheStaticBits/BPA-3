@@ -131,7 +131,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 265, "steampower": 25 },
-                    "description": "Upgrade to unlock the Stronger Melee warrior!"
+                    "description": "Upgrade to unlock the Stronger AOE warrior!"
                 },
 
                 "unlockedWarrior": "aoeWarriorStrong",
@@ -141,7 +141,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 300, "steampower": 30 },
-                    "description": "Upgrade to unlock the Stronger Melee warrior!"
+                    "description": "Upgrade to unlock the Stronger Range warrior!"
                 },
 
                 "unlockedWarrior": "rangeWarriorStrong",
@@ -151,7 +151,7 @@
             {
                 "upgrade": {
                     "cost": { "gold": 345, "steampower": 35 },
-                    "description": "Upgrade to unlock the Stronger Melee warrior!"
+                    "description": "Upgrade to unlock the Stronger Sniper warrior!"
                 },
 
                 "unlockedWarrior": "sniperWarriorStrong",
