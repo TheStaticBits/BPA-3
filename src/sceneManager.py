@@ -106,7 +106,7 @@ class SceneManager:
         window.setHideInputs(False)
 
         self.updateResources(window)
-        self.testSwitchScene()
+        self.testSwitchScene(window)
 
     def updateOnlyUI(self, window: Window) -> None:
         """ Updates only the UI of the current scene,
@@ -125,9 +125,10 @@ class SceneManager:
         waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
         self.resourcesUI.update(window, waveNum)
 
-    def testSwitchScene(self) -> None:
+    def testSwitchScene(self, window: Window) -> None:
         """ Tests if the scene should be switched """
-        if self.optionsUI.switchScene():  # Pressed button
+        # Pressed switch scene button or the shift key
+        if self.optionsUI.switchScene() or window.getJustPressed("shift"):
             # Update switch scene button's text and switch it
             self.optionsUI.updateSceneText(self.state.value)
 

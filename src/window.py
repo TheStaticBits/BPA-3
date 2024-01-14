@@ -26,10 +26,7 @@ class Window:
         pygame.K_w: "up",    pygame.K_UP: "up",
         pygame.K_s: "down",  pygame.K_DOWN: "down",
 
-        # TEMPORARY
-        pygame.K_1: "1",
-        pygame.K_2: "2",
-        pygame.K_3: "3"
+        pygame.K_LSHIFT: "shift"
     }
 
     MOUSE: dict[int, str] = {
