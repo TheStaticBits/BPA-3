@@ -41,9 +41,9 @@ class Generator(BaseBuilding):
             Player.resources += self.generate
 
     def update(self, window: Window, camOffset: Vect,
-               tileset: Tileset, player: Player) -> None:
+               tileset: Tileset, player: Player, sfxVol: float) -> None:
         """ Updates generator and generates resources """
-        super().update(window, camOffset, tileset, player)
+        super().update(window, camOffset, tileset, player, sfxVol)
 
         # Do not generate resources if placing or onetimegeneration
         if self.oneTimeGenerate or super().isPlacing():
