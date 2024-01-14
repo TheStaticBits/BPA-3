@@ -40,7 +40,7 @@
             "waveHighscore": {
                 "text": "Highscore: Wave 0",
                 "fontSize": 10,
-                "offset": [ 125, 83.33 ],
+                "offset": [ 125, 84 ],
                 "color": [ 200, 200, 200 ],
                 "centered": true
             },
