@@ -212,13 +212,21 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
+<<<<<<< HEAD
             "path": "res/warriors/rangedWarriorEnemy.png",
+=======
+            "path": "res/warriors/rangeWarriorEnemy.png",
+>>>>>>> 76f1f6f330735aba80b692cc43dd55d6f2a94667
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
+<<<<<<< HEAD
             "path": "res/warriors/rangedWarriorAlly.png",
+=======
+            "path": "res/warriors/rangeWarriorAlly.png",
+>>>>>>> 76f1f6f330735aba80b692cc43dd55d6f2a94667
             "frames": 1,
             "delay": 1
         },
@@ -371,7 +379,7 @@
     },
 
     "meleeWarriorStrong": {
-        "name": "Melee Warrior",
+        "name": "Strong Melee Warrior",
         "description": "Deals close-range damage to enemies using bullets",
         "attackType": "projectile",
         "projectileSpawnPos": [ 7, 8 ],
@@ -432,6 +440,139 @@
                 "damage": 18,
                 "attackKnockback": 280,
                 "projectileSpeed": 280
+            }
+        ]
+    },
+
+    "aoeWarriorStrong": {
+        "name": "Strong Aoe Warrior",
+        "description": "Deals damage to all enemies in a radius",
+        "attackType": "aoe",
+        "aoeAttackAnim": {
+            "path": "res/warriors/aoeWarriorRing.png",
+            "frames": 5,
+            "delay": 0.1
+        },
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 280,
+                "range": 50,
+                "maxSpeed": 30, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 1.4,
+                "damage": 11,
+                "attackKnockback": 180
+            },
+            {
+                "health": 300,
+                "range": 55,
+                "maxSpeed": 30, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 1.3,
+                "damage": 12,
+                "attackKnockback": 190
+            },
+            {
+                "health": 320,
+                "range": 60,
+                "maxSpeed": 30, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 1.2,
+                "damage": 15,
+                "attackKnockback": 190
+            }
+        ]
+    },
+
+    "rangeWarriorStrong": {
+        "name": "Strong Range Warrior",
+        "description": "Has a longer range than the Melee Warrior",
+        "attackType": "projectile",
+        "projectileSpawnPos": [ 7, 8 ],
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 125,
+                "range": 140,
+                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 0.4,
+                "damage": 10,
+                "attackKnockback": 120,
+                "projectileSpeed": 360
+            },
+            {
+                "health": 145,
+                "range": 145,
+                "maxSpeed": 65, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 0.4,
+                "damage": 12,
+                "attackKnockback": 120,
+                "projectileSpeed": 360
+            }
+        ]
+    },
+
+    "sniperWarriorStrong": {
+        "name": "Strong Sniper Warrior",
+        "description": "Has a longer range than the Melee Warrior",
+        "attackType": "projectile",
+        "projectileSpawnPos": [ 7, 8 ],
+
+        "enemyAnim": {
+            "path": "res/warriors/meleeWarriorEnemy.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "allyAnim": {
+            "path": "res/warriors/meleeWarriorAlly.png",
+            "frames": 1,
+            "delay": 1
+        },
+
+        "levels": [
+            {
+                "health": 150,
+                "range": 320,
+                "maxSpeed": 45, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 1.3,
+                "damage": 22,
+                "attackKnockback": 60,
+                "projectileSpeed": 480
             }
         ]
     }
