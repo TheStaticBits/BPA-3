@@ -16,7 +16,7 @@ from src.entities.player import Player
 class SceneState(enum.Enum):
     """ The state of the scene """
 
-    BUILDING = "Base"
+    BUILDING = "Factory"
     DUNGEON = "Dungeon"
 
 
