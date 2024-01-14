@@ -256,7 +256,8 @@ class BaseBuilding(Entity):
         tileset.setRangeOccupied(self.tilePos, self.buildingTileSize, False)
         self.onRemove()
 
-        self.playSound(False)
+        if self.sound is not None:
+            self.sound.stop()
 
     def getParticles(self) -> list[Particle]:
         """ Gets a list of particles used for various situations """
