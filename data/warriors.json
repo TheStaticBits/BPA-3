@@ -209,7 +209,7 @@
         "name": "Range Warrior",
         "description": "Has a longer range than the Melee Warrior",
         "attackType": "projectile",
-        "projectileSpawnPos": [ 7, 8 ],
+        "projectileSpawnPos": [ 7, 7 ],
 
         "enemyAnim": {
             "path": "res/warriors/rangeWarriorEnemy.png",
@@ -297,7 +297,7 @@
         "name": "Sniper Warrior",
         "description": "Has a longer range than the ranged Warrior",
         "attackType": "projectile",
-        "projectileSpawnPos": [ 7, 8 ],
+        "projectileSpawnPos": [ 7, 7 ],
 
         "enemyAnim": {
             "path": "res/warriors/sniperWarriorEnemy.png",
