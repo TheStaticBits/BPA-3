@@ -122,7 +122,7 @@ class SceneManager:
         # Preventing mouse interactions with the UI
         window.setHideInputs(True)
         # Updates the current scene, without any inputs
-        self.scenes[self.state].update(window, 0, self.mainMenu.getMusicVol())
+        self.scenes[self.state].updateUI(window, 0, self.mainMenu.getMusicVol())
         self.optionsUI.update(window)
         window.setHideInputs(False)
 
