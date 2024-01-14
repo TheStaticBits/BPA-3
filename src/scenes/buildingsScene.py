@@ -41,13 +41,13 @@ class BuildingsScene(BaseScene):
         # draw circle onto it
         self.buildRangeCircle.drawCircle(radius, (200, 200, 200, 40))
 
-    def update(self, window: Window, sceneIsFocused: bool) -> None:
+    def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
         super().updateParticles(window)
 
         self.buildingShop.update(window, self.placingBuilding)
-        self.updateBuildings(window, sceneIsFocused)
+        self.updateBuildings(window, sfxVol)
         self.updatePlayerAndUpgrades(window)
 
         # Makes sure the player can only buy one building at a time
@@ -61,12 +61,12 @@ class BuildingsScene(BaseScene):
         self.buildingShop.update(window, self.placingBuilding)
         self.upgradeUI.update(window, super().getTileset())
 
-    def updateBuildings(self, window: Window, sceneIsFocused: bool) -> None:
+    def updateBuildings(self, window: Window, sfxVol: float) -> None:
         """ Updates all buildings """
         for building in self.buildings:
             building.update(window, super().getCamOffset(),
                             super().getTileset(), super().getPlayer(),
-                            sceneIsFocused)
+                            sfxVol)
 
             # Particles
             if building.isSpawningParticles():

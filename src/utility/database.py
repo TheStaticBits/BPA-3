@@ -55,7 +55,7 @@ class Database:
             the keyColumn column is equal to the given key """
         self.log.info(
             f"In {table}, finding the value of "
-            "{valueColumn} where {keyColumn} = {key}"
+            f"{valueColumn} where {keyColumn} = {key}"
         )
         value = self.cur.execute(f"SELECT {valueColumn} FROM {table} \
                                  WHERE {keyColumn} = ?", (key,)).fetchone()
@@ -70,7 +70,7 @@ class Database:
         """ Sets valueColumn to value where keyColumn is equal to key """
         self.log.info(
             f"In {table}, changing {valueColumn} to {value} "
-            "where {keyColumn} = {key}"
+            f"where {keyColumn} = {key}"
         )
         self.cur.execute(f"UPDATE {table} SET {valueColumn} = ? \
                            WHERE {keyColumn} = ?", (value, key))
@@ -85,8 +85,8 @@ class Database:
 
     def setIfNone(self, table: str, keyColumn: str, key: str,
                   valueColumn: str, defaultValue: str):
-        """ Inserts the data if it doesn't exist, otherwise does nothing,
-            and returns the resulting value """
+        """ Inserts the data if it doesn't exist,
+            otherwise returns the current value """
         getValue = self.fetch(table, keyColumn, key, valueColumn)
         if getValue is None:  # Insert if it does not exist
             self.insert(table, key, defaultValue)

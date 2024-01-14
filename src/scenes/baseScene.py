@@ -34,7 +34,7 @@ class BaseScene:
 
         self.particles: list[Particle] = []
 
-    def update(self, window: Window, sceneIsFocused: bool) -> None:
+    def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Update scene objects """
         self.updateCameraPos(window)
 

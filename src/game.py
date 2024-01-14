@@ -84,6 +84,8 @@ class Game:
             self.errorUI.render(self.window)
             self.window.update()
 
+        self.save()
+
     def iteration(self) -> None:
         """ Each iteration of the game loop """
 
@@ -102,5 +104,5 @@ class Game:
 
     def save(self) -> None:
         """ Saves the game data """
-
+        self.sceneManager.save()
         self.database.saveAndClose()

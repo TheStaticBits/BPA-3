@@ -171,7 +171,7 @@ class Warrior(Entity):
 
     def update(self, window: Window, tileset: Tileset,
                opponents: list[Warrior], player: Player,
-               playSounds: bool) -> None:
+               sfxVol: float) -> None:
         """ Updates warrior: moving, attacking, etc."""
         super().update(window)
 
@@ -182,7 +182,7 @@ class Warrior(Entity):
         self.updateKnockback(window)
 
         # Update sound volumes
-        self.updateSounds(player, playSounds)
+        self.updateSounds(player, sfxVol)
 
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
@@ -292,13 +292,11 @@ class Warrior(Entity):
 
         return velocity
 
-    def updateSounds(self, player: Player, playSounds: bool) -> None:
+    def updateSounds(self, player: Player, sfxVol: float) -> None:
         """ Sets the sound volume based on the player's distance """
-        if playSounds:
-            # Sound relative to the position of the player
-            volume: float = player.getSoundVolume(super().getPos())
-        else:
-            volume = 0
+        # Sound relative to the position of the player
+        volume: float = player.getSoundVolume(super().getPos())
+        volume *= sfxVol
 
         # Set volumes
         if self.SPAWN_SOUND is not None:

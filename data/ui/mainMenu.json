@@ -27,21 +27,107 @@
             "bg": {
                 "offset": [ 0, 0 ],
                 "path": "res/ui/mainMenu/bg.png"
+            },
+
+            "logo": {
+                "offset": [ 125, 49 ],
+                "path": "res/ui/mainMenu/logo.png",
+                "centered": true
             }
         },
 
         "text": {
+            "musicTitle": {
+                "text": "Music",
+                "fontSize": 10,
+                "offset": [ 50, 103 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
 
+            "sfxTitle": {
+                "text": "SFX",
+                "fontSize": 10,
+                "offset": [ 200, 103 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "musicText": {
+                "text": "100%",
+                "fontSize": 10,
+                "offset": [ 50, 119 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "sfxText": {
+                "text": "50%",
+                "fontSize": 10,
+                "offset": [ 200, 119 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            }
         },
 
         "buttons": {
-            "play": {
-                "offset": [ 125, 120 ],
+            "musicLeft": {
+                "offset": [ 32, 120 ],
 
                 "images": {
-                    "inactive": "res/buttons/main/inactive.png",
-                    "hover": "res/buttons/main/hover.png",
-                    "pressed": "res/buttons/main/pressed.png"
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "musicRight": {
+                "offset": [ 68, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
+            },
+
+            "sfxLeft": {
+                "offset": [ 182, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "sfxRight": {
+                "offset": [ 218, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
+            },
+
+            "play": {
+                "offset": [ 125, 105 ],
+
+                "images": {
+                    "inactive": "res/buttons/wideButton/inactive.png",
+                    "hover": "res/buttons/wideButton/hover.png",
+                    "pressed": "res/buttons/wideButton/pressed.png"
                 },
 
                 "textData": {
@@ -51,6 +137,25 @@
                     "color": [ 255, 255, 255 ]
                 },
 
+                "centered": true
+            },
+
+            "tutorialButton": {
+                "offset": [ 125, 127 ],
+    
+                "images": {
+                    "inactive": "res/buttons/wideButton/inactive.png",
+                    "hover": "res/buttons/wideButton/hover.png",
+                    "pressed": "res/buttons/wideButton/pressed.png"
+                },
+    
+                "textData": {
+                    "text": "Tutorial",
+                    "fontSize": 10,
+                    "offset": [ 0.66, -0.66 ],
+                    "color": [ 255, 255, 255 ]
+                },
+    
                 "centered": true
             }
         }

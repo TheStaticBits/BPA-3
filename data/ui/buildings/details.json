@@ -81,9 +81,9 @@
                 "offset": [ 10, 18 ],
 
                 "images": {
-                    "inactive": "res/buttons/buyButton/inactive.png",
-                    "hover": "res/buttons/buyButton/hover.png",
-                    "pressed": "res/buttons/buyButton/pressed.png"
+                    "inactive": "res/buttons/wideButton/inactive.png",
+                    "hover": "res/buttons/wideButton/hover.png",
+                    "pressed": "res/buttons/wideButton/pressed.png"
                 },
 
                 "textData": {

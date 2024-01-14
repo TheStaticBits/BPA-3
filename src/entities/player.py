@@ -71,9 +71,9 @@ class Player(Entity):
                 Image.SCALE
         except KeyError:
             ErrorUI.create("Unable to find player -> hearingRange"
-                           " in constants. Defaulting to 150",
+                           " in constants. Defaulting to 100",
                            cls.log, recoverable=True)
-            cls.HEARING_RANGE: float = 150 * Image.SCALE
+            cls.HEARING_RANGE: float = 100 * Image.SCALE
 
     @classmethod
     def capResources(cls) -> None:

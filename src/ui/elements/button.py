@@ -121,10 +121,17 @@ class Button(BaseUIElement):
             self.text.render(surface, offset=offset)
 
     # Getters
-    def getActivated(self) -> bool: return self.activated
+    def getActivated(self) -> bool:
+        """ Only true for one frame after the button is pressed """
+        return self.activated
+
+    def getHeld(self) -> bool:
+        """ True if the button is held down """
+        return self.mode == "pressed"
+
     def getText(self) -> Text: return self.text
 
-    def getModeImg(self) -> str:
+    def getModeImg(self) -> Image:
         """ Gets the mode image or defaults to the inactive img """
         if self.mode in self.buttons:
             return self.buttons[self.mode]

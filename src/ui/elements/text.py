@@ -69,5 +69,8 @@ class Text(BaseUIElement):
 
     # Setters
     def setText(self, newText: str) -> None:
+        """ Sets the text and generates a new text image """
+        if self.text == newText:
+            return
         self.text = newText
         self.createTextImg()

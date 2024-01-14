@@ -149,8 +149,7 @@ class BaseBuilding(Entity):
         self.onUpgrade(self.getLevelData())
 
     def update(self, window: Window, camOffset: Vect,
-               tileset: Tileset, player: Player,
-               playSound: bool) -> None:
+               tileset: Tileset, player: Player, sfxVol: float) -> None:
         """ Updates the building by following the cursor and testing placement
             and updating animation if not placing"""
         if self.placing:
@@ -158,7 +157,7 @@ class BaseBuilding(Entity):
             self.testPlace(window, tileset, player)
         else:  # update animation:
             super().update(window)
-            self.updateSound(player, playSound)
+            self.updateSound(player, sfxVol)
 
     def followCursor(self, window: Window, camOffset: Vect,
                      tileset: Tileset, player: Player) -> None:
@@ -216,16 +215,14 @@ class BaseBuilding(Entity):
             self.setSpawnParticles()
             self.onPlace()
 
-    def updateSound(self, player: Player, playSound: bool) -> None:
+    def updateSound(self, player: Player, sfxVol: float) -> None:
         """ Plays the sound if the player is close enough """
         if self.sound is None:
             return
 
-        if playSound:
-            volume: float = player.getSoundVolume(super().getCenterPos())
-            self.sound.set_volume(volume)
-        else:
-            self.sound.set_volume(0)
+        volume: float = player.getSoundVolume(super().getCenterPos())
+        volume *= sfxVol
+        self.sound.set_volume(volume)
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """

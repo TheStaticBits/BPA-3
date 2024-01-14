@@ -43,7 +43,7 @@ class SceneManager:
 
         self.loseUI: LoseUI = LoseUI()
 
-        self.mainMenu = MainMenu(window)
+        self.mainMenu = MainMenu(window, database)
 
     def resetScenes(self) -> None:
         """ Resets the scenes """
@@ -98,11 +98,12 @@ class SceneManager:
     def updateScene(self, window: Window) -> None:
         """ Updates everything necessary for the player to play """
         self.optionsUI.update(window)
-        self.scenes[self.state].update(window, True)
+        self.scenes[self.state].update(window, self.mainMenu.getSFXVol(),
+                                       self.mainMenu.getMusicVol())
 
-        # Update the hidden scene without any inputs
+        # Update the hidden scene without any inputs or sounds
         window.setHideInputs(True)
-        self.scenes[self.otherState].update(window, False)
+        self.scenes[self.otherState].update(window, 0, 0)
         window.setHideInputs(False)
 
         self.updateResources(window)
@@ -114,7 +115,7 @@ class SceneManager:
             when there is a foreground UI like the main menu """
         # Preventing mouse interactions with the UI
         window.setHideInputs(True)
-        self.scenes[self.state].update(window, False)
+        self.scenes[self.state].update(window, 0, 0)
         self.optionsUI.update(window)
         window.setHideInputs(False)
 
@@ -143,3 +144,7 @@ class SceneManager:
 
         self.loseUI.render(surface)
         self.mainMenu.render(surface)
+
+    def save(self) -> None:
+        """ Saves the game """
+        self.mainMenu.saveVolume()

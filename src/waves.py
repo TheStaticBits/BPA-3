@@ -50,7 +50,7 @@ class Waves:
         self.db.makeTable("highscores", "type TEXT, value INTEGER")
 
         # Load highscore wave number
-        # with a default value of 0 if it doesn't exist
+        # with a default value of -1 if it doesn't exist
         self.highscore: int = self.db.setIfNone("highscores",
                                                 "type", "wave",
                                                 "value", -1)
