@@ -212,21 +212,13 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-<<<<<<< HEAD
             "path": "res/warriors/rangedWarriorEnemy.png",
-=======
-            "path": "res/warriors/rangeWarriorEnemy.png",
->>>>>>> 76f1f6f330735aba80b692cc43dd55d6f2a94667
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-<<<<<<< HEAD
             "path": "res/warriors/rangedWarriorAlly.png",
-=======
-            "path": "res/warriors/rangeWarriorAlly.png",
->>>>>>> 76f1f6f330735aba80b692cc43dd55d6f2a94667
             "frames": 1,
             "delay": 1
         },
