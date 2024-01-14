@@ -173,3 +173,4 @@ class Waves:
     def getWaveNum(self) -> int: return self.waveNum
     def getSpawnQueue(self) -> list[Warrior]: return self.spawnQueue
     def hasLost(self) -> bool: return self.lost
+    def getHighscore(self) -> int: return self.highscore

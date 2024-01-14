@@ -67,6 +67,11 @@ class SceneManager:
             # in the window size
             self.updateOnlyUI(window)
 
+            # Update wave highscore
+            self.mainMenu.setWaveHighscore(
+                self.scenes[SceneState.DUNGEON].getWaveHighscore()
+            )
+
         # Lose UI open
         elif self.loseUI.isOpen():
             self.updateOnlyUI(window)

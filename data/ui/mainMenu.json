@@ -30,13 +30,21 @@
             },
 
             "logo": {
-                "offset": [ 125, 49 ],
+                "offset": [ 125, 43 ],
                 "path": "res/ui/mainMenu/logo.png",
                 "centered": true
             }
         },
 
         "text": {
+            "waveHighscore": {
+                "text": "Highscore: Wave 0",
+                "fontSize": 10,
+                "offset": [ 125, 83.33 ],
+                "color": [ 200, 200, 200 ],
+                "centered": true
+            },
+
             "musicTitle": {
                 "text": "Music",
                 "fontSize": 10,

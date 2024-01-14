@@ -99,6 +99,12 @@ class MainMenu(BaseUI):
                        "type", "music",
                        "value", self.musicVol * 100)
 
+    def setWaveHighscore(self, highscore: int) -> None:
+        """ Sets the wave highscore """
+        super().getElement("waveHighscore").setText(
+            f"Highscore: Wave {highscore}"
+        )
+
     def isOpen(self) -> bool: return super().getPosType() == "visible"
     def getSFXVol(self) -> float: return self.sfxVol
     def getMusicVol(self) -> float: return self.musicVol

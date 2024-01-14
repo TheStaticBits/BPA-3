@@ -146,3 +146,4 @@ class DungeonScene(BaseScene):
     # Getters
     def hasLost(self) -> bool: return self.waves.hasLost()
     def getWaveNum(self) -> int: return self.waves.getWaveNum()
+    def getWaveHighscore(self) -> int: return self.waves.getHighscore()
