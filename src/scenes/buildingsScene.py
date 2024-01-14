@@ -23,9 +23,9 @@ class BuildingsScene(BaseScene):
         "spawner": Spawner
     }
 
-    def __init__(self, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str, musicVol: float) -> None:
         """ Initializes buildings list """
-        super().__init__(mapFolderName)
+        super().__init__(mapFolderName, musicVol)
 
         self.buildings: list[BaseBuilding] = []
         self.buildingShop: BuildingShop = BuildingShop()
@@ -45,6 +45,7 @@ class BuildingsScene(BaseScene):
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
         super().updateParticles(window)
+        super().updateMusicVolume(musicVol)
 
         self.buildingShop.update(window, self.placingBuilding)
         self.updateBuildings(window, sfxVol)

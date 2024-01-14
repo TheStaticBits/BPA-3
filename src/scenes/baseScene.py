@@ -1,3 +1,4 @@
+import pygame
 import logging
 
 from src.tileset import Tileset
@@ -23,7 +24,7 @@ class BaseScene:
                            cls.log, recoverable=True)
             cls.CAMERA_SPEED: float = 5
 
-    def __init__(self, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str, musicVol: float) -> None:
         """ Sets up tileset, players, and camera offset """
         self.log.info("Initializing scene for map " + mapFolderName)
 
@@ -34,12 +35,31 @@ class BaseScene:
 
         self.particles: list[Particle] = []
 
+        # music
+        try:
+            self.music = pygame.mixer.Sound(
+                self.tileset.getData()["music"]
+            )
+            self.music.set_volume(musicVol)
+            self.music.play(-1)
+        except KeyError:
+            ErrorUI.create(f"Unable to find music in map: {mapFolderName}",
+                           self.log, recoverable=True)
+            self.music = None
+
     def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Update scene objects """
         self.updateCameraPos(window)
 
         self.updatePlayer(window)
         self.updateParticles(window)
+
+        self.updateMusicVolume(musicVol)
+
+    def updateMusicVolume(self, musicVol: float) -> None:
+        """ Update music volume """
+        if self.music is not None:
+            self.music.set_volume(musicVol)
 
     def updateUI(self, window: Window) -> None:
         """ Override in subclasses to update UIs """

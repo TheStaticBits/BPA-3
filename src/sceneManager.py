@@ -33,9 +33,6 @@ class SceneManager:
         self.state = SceneState.BUILDING
         self.otherState = SceneState.DUNGEON
 
-        self.db = database
-        self.resetScenes()  # Create scenes
-
         # Shared UI elements
         # Handling resource numbers and icons in the top left
         self.resourcesUI = ResourcesUI()
@@ -44,12 +41,17 @@ class SceneManager:
         self.mainMenu = MainMenu(window, database)
         self.loseUI: LoseUI = LoseUI()
 
+        self.db = database
+        self.resetScenes()  # Create scenes
+
     def resetScenes(self) -> None:
         """ Resets the scenes """
+        musicVol: float = self.mainMenu.getMusicVol()
+
         # Dictionary of all the scenes
         self.scenes: dict[SceneState, BaseScene] = {
-            SceneState.BUILDING: BuildingsScene("buildings"),
-            SceneState.DUNGEON: DungeonScene("dungeon", self.db)
+            SceneState.BUILDING: BuildingsScene("buildings", musicVol),
+            SceneState.DUNGEON: DungeonScene("dungeon", musicVol, self.db)
         }
 
         Player.resetResources()
@@ -114,7 +116,8 @@ class SceneManager:
             when there is a foreground UI like the main menu """
         # Preventing mouse interactions with the UI
         window.setHideInputs(True)
-        self.scenes[self.state].update(window, 0, 0)
+        # Updates the current scene, without any inputs
+        self.scenes[self.state].update(window, 0, self.mainMenu.getMusicVol())
         self.optionsUI.update(window)
         window.setHideInputs(False)
 

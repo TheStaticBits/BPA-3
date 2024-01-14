@@ -19,8 +19,9 @@ class DungeonScene(BaseScene):
     # Append to this list to queue allies to spawn
     queuedAllies: list[Warrior] = []
 
-    def __init__(self, mapFolderName: str, database: Database) -> None:
-        super().__init__(mapFolderName)
+    def __init__(self, mapFolderName: str, musicVol: float,
+                 database: Database) -> None:
+        super().__init__(mapFolderName, musicVol)
 
         self.enemies: list[Warrior] = []
         self.allies: list[Warrior] = []

@@ -1,4 +1,4 @@
 {
     "playerSpawn": [4, 4],
-    "other": {}
+    "music": "res/sound/music/potential.wav"
 }
