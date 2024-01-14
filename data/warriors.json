@@ -399,6 +399,39 @@
                 "damage": 14,
                 "attackKnockback": 260,
                 "projectileSpeed": 280
+            },
+            {
+                "health": 185,
+                "range": 30,
+                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 0.8,
+                "damage": 15,
+                "attackKnockback": 260,
+                "projectileSpeed": 280
+            },
+            {
+                "health": 185,
+                "range": 30,
+                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 0.6,
+                "damage": 16,
+                "attackKnockback": 280,
+                "projectileSpeed": 280
+            },
+            {
+                "health": 205,
+                "range": 35,
+                "maxSpeed": 65, "accel": 80, "decel": 320,
+                "knockbackResistance": 700,
+                
+                "attackInterval": 0.6,
+                "damage": 18,
+                "attackKnockback": 280,
+                "projectileSpeed": 280
             }
         ]
     }
