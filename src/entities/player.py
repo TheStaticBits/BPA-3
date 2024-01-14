@@ -17,25 +17,63 @@ class Player(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Load static variables from constants dict """
-        cls.ANIMS: dict = constants["player"]["anims"]
+        try:
+            cls.ANIMS: dict = constants["player"]["anims"]
+        except KeyError:
+            ErrorUI.create("Unable to find player -> anims in constants",
+                           cls.log)
 
+        # Max velocity/speed
         try:
             cls.MAX_SPEED: float = constants["player"]["maxSpeed"] * \
                 Image.SCALE
         except KeyError:
-            ErrorUI.create("Unable to find player: maxSpeed in constants.json",
+            ErrorUI.create("Unable to find player -> maxSpeed in constants",
                            cls.log, recoverable=True)
             cls.MAX_SPEED: float = 100 * Image.SCALE
 
-        cls.ACCELERATION: float = constants["player"]["accel"] * Image.SCALE
-        cls.DECELERATION: float = constants["player"]["decel"] * Image.SCALE
+        # Acceleration, decceleration
+        try:
+            cls.ACCELERATION: float = constants["player"]["accel"] * \
+                Image.SCALE
+            cls.DECELERATION: float = constants["player"]["decel"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find player -> [accel or decel] "
+                           "in constants.json. Using default values.",
+                           cls.log, recoverable=True)
+            cls.ACCELERATION: float = 400 * Image.SCALE
+            cls.DECELERATION: float = 550 * Image.SCALE
 
-        # Player resources
-        cls.resources = AdvDict(constants["player"]["resources"]["starting"])
-        # resource limits (max amounts), -1 means no limit
-        cls.resLimits = AdvDict(constants["player"]["resources"]["limits"])
-        # display names for resources
-        cls.resLabels = AdvDict(constants["player"]["resources"]["labels"])
+        try:
+            # Player starting resources
+            cls.STARTNG_RES = AdvDict(
+                constants["player"]["resources"]["start"]
+            )
+            # resource limits (max amounts), -1 means no limit
+            cls.RES_LIMITS = AdvDict(
+                constants["player"]["resources"]["limits"]
+            )
+            # display names for resources
+            cls.RES_LABELS = AdvDict(
+                constants["player"]["resources"]["labels"]
+            )
+
+            cls.resetResources()
+        except KeyError:
+            ErrorUI.create("Unable to find player -> resources -> "
+                           "[start, limits, or labels] data in constants",
+                           cls.log)
+
+        try:
+            # Distance that the player needs to be to hear a sound
+            cls.HEARING_RANGE: float = constants["player"]["hearingRange"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find player -> hearingRange"
+                           " in constants. Defaulting to 100",
+                           cls.log, recoverable=True)
+            cls.HEARING_RANGE: float = 100 * Image.SCALE
 
     @classmethod
     def capResources(cls) -> None:
@@ -46,6 +84,12 @@ class Player(Entity):
 
             if cls.resources[resource] > cls.resLimits[resource]:
                 cls.resources[resource] = cls.resLimits[resource]
+
+    @classmethod
+    def resetResources(cls) -> None:
+        """ Reset resources to starting resources """
+        cls.resources = cls.STARTNG_RES.copy()
+        cls.resLimits = cls.RES_LIMITS.copy()
 
     def __init__(self, startingPos: Vect) -> None:
         """ Initialize player objects and data """
@@ -141,6 +185,15 @@ class Player(Entity):
         self.currentAnim = anim
         self.animations[anim].restart()
         super().setAnim(self.animations[anim])
+
+    def getSoundVolume(self, pos: Vect) -> None:
+        """ Returns the volume of a sound given its position """
+        dist: float = pos.dist(super().getCenterPos())
+
+        if dist > self.HEARING_RANGE:
+            return 0
+
+        return 1 - (dist / self.HEARING_RANGE)
 
     # Getters
     def getTilePos(self, tileSize: Vect) -> Vect:

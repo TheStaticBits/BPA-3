@@ -99,7 +99,7 @@ class Button(BaseUIElement):
         if self.text is not None:
             self.text.addRenderOffset(offset)
 
-    def render(self, surface: Window | Image) -> None:
+    def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the button """
         if super().isHidden():
             return
@@ -114,17 +114,24 @@ class Button(BaseUIElement):
             grayedImg.tint(140, 140, 140)  # Make gray
             btnImg = grayedImg  # Set to grayed image
 
-        super().render(surface, image=btnImg)
+        super().render(surface, image=btnImg, offset=offset)
 
         # Render text if it exists
         if self.text is not None:
-            self.text.render(surface)
+            self.text.render(surface, offset=offset)
 
     # Getters
-    def getActivated(self) -> bool: return self.activated
+    def getActivated(self) -> bool:
+        """ Only true for one frame after the button is pressed """
+        return self.activated
+
+    def getHeld(self) -> bool:
+        """ True if the button is held down """
+        return self.mode == "pressed"
+
     def getText(self) -> Text: return self.text
 
-    def getModeImg(self) -> str:
+    def getModeImg(self) -> Image:
         """ Gets the mode image or defaults to the inactive img """
         if self.mode in self.buttons:
             return self.buttons[self.mode]

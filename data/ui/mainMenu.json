@@ -1,3 +1,171 @@
 {
+    "positions": {
+        "hidden": {
+            "x": { "locked": "center", "margin":  0   },
+            "y": { "locked": "start",  "margin": -150 },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "center", "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 6,
+    "transitionType": "ease",
+
+    "bgAlpha": 150,
+    "bgAlphaShowsPos": "visible",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/mainMenu/bg.png"
+            },
+
+            "logo": {
+                "offset": [ 125, 43 ],
+                "path": "res/ui/mainMenu/logo.png",
+                "centered": true
+            }
+        },
+
+        "text": {
+            "waveHighscore": {
+                "text": "Highscore: Wave 0",
+                "fontSize": 10,
+                "offset": [ 125, 83.33 ],
+                "color": [ 200, 200, 200 ],
+                "centered": true
+            },
+
+            "musicTitle": {
+                "text": "Music",
+                "fontSize": 10,
+                "offset": [ 50, 103 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "sfxTitle": {
+                "text": "SFX",
+                "fontSize": 10,
+                "offset": [ 200, 103 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "musicText": {
+                "text": "100%",
+                "fontSize": 10,
+                "offset": [ 50, 119 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "sfxText": {
+                "text": "50%",
+                "fontSize": 10,
+                "offset": [ 200, 119 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            }
+        },
+
+        "buttons": {
+            "musicLeft": {
+                "offset": [ 32, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "musicRight": {
+                "offset": [ 68, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
+            },
+
+            "sfxLeft": {
+                "offset": [ 182, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "sfxRight": {
+                "offset": [ 218, 120 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
+            },
+
+            "play": {
+                "offset": [ 125, 105 ],
+
+                "images": {
+                    "inactive": "res/buttons/wideButton/inactive.png",
+                    "hover": "res/buttons/wideButton/hover.png",
+                    "pressed": "res/buttons/wideButton/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Play",
+                    "fontSize": 10,
+                    "offset": [ 0.66, -0.66 ],
+                    "color": [ 255, 255, 255 ]
+                },
+
+                "centered": true
+            },
+
+            "tutorial": {
+                "offset": [ 125, 127 ],
     
+                "images": {
+                    "inactive": "res/buttons/wideButton/inactive.png",
+                    "hover": "res/buttons/wideButton/hover.png",
+                    "pressed": "res/buttons/wideButton/pressed.png"
+                },
+    
+                "textData": {
+                    "text": "Tutorial",
+                    "fontSize": 10,
+                    "offset": [ 0.66, -0.66 ],
+                    "color": [ 255, 255, 255 ]
+                },
+    
+                "centered": true
+            }
+        }
+    }
 }

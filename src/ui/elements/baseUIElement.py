@@ -40,7 +40,7 @@ class BaseUIElement:
         self.renderPos += offset
 
     def render(self, surface: Window | Image,
-               image: Image = None) -> None:
+               image: Image = None, offset: Vect = Vect()) -> None:
         """ Renders the image to the given window or surf
             with optional offset and image """
         if self.hidden:
@@ -48,7 +48,7 @@ class BaseUIElement:
 
         image = image if image is not None else self.image
 
-        surface.render(image, self.renderPos)
+        surface.render(image, self.renderPos + offset)
 
     def getOffset(self) -> Vect:
         """ Gets offset, accounting for

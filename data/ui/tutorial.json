@@ -1,0 +1,80 @@
+{
+    "positions": {
+        "hidden": {
+            "x": { "locked": "end",    "margin": -250 },
+            "y": { "locked": "center", "margin": 0    },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "center", "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 9,
+    "transitionType": "ease",
+
+    "bgAlpha": 150,
+    "bgAlphaShowsPos": "visible",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/mainMenu/bg.png"
+            }
+        },
+
+        "text": {
+            "title": {
+                "text": "Tutorial",
+                "fontSize": 16,
+                "offset": [ 125, 15 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            }
+        },
+
+        "buttons": {
+            "closeButton": {
+                "offset": [ 233, 10 ],
+
+                "images": {
+                    "inactive": "res/buttons/xButton/inactive.png",
+                    "hover": "res/buttons/xButton/hover.png",
+                    "pressed": "res/buttons/xButton/pressed.png"
+                }
+            },
+
+            "left": {
+                "offset": [ 20, 75 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "right": {
+                "offset": [ 230, 75 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
+            }
+        }
+    }
+}

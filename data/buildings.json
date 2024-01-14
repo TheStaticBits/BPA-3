@@ -2,7 +2,8 @@
     "treasureChest": {
         "type": "storage",
         "name": "Treasure Chest",
-        "description": "This treasure chest can hold much goodies. Don't let your enemies steal it! Increases your gold limit.",
+        "description": "Each treasure chest can hold gold! Increases your gold storage limit. Upgrade to increase the limit.",
+        "sound": "res/sound/steamGen.wav",
 
         "anim": {
             "path": "res/buildings/treasureChest.png",
@@ -12,7 +13,7 @@
         "size": [ 3, 2 ],
 
         "cost": {
-            "gold": 100,
+            "gold": 120,
             "steampower": 0
         },
         
@@ -22,27 +23,43 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 90, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 110, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 150 to 300"
                 },
 
                 "storageAmount": { "gold": 300 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 85, "steampower": 0},
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 105, "steampower": 0},
+                    "description": "Upgrade this building to increase its gold storange from 300 to 450"
                 },
 
                 "storageAmount": { "gold": 450 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 80, "steampower": 0 },
-                    "description": "Upgrade this building to increase the amount of gold you can store in it!"
+                    "cost": { "gold": 100, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 450 to 600"
                 },
 
                 "storageAmount": { "gold": 600 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 220, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 600 to 900"
+                },
+
+                "storageAmount": { "gold": 900 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 260, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 900 to 1200"
+                },
+
+                "storageAmount": { "gold": 1200 }
             }
         ]
     },
@@ -50,7 +67,8 @@
     "testSpawner": {
         "type": "spawner",
         "name": "Unit Spawner",
-        "description": "This factory will spawn units periodically to fight enemies in the dungeon. You can also change which type of unit will spawn at later levels.",
+        "description": "Spawn units periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
+        "sound": "res/sound/steamGen.wav",
 
         "anim": {
             "path": "res/buildings/spawner.png",
@@ -72,13 +90,43 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 110, "steampower": 5 },
+                    "cost": { "gold": 115, "steampower": 5 },
                     "description": "Upgrade to unlock the AOE warrior!"
                 },
 
                 "unlockedWarrior": "aoeWarrior",
                 "spawnAmount": 3,
                 "spawnInterval": 10
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 155, "steampower": 10 },
+                    "description": "Upgrade to unlock the Range warrior!"
+                },
+
+                "unlockedWarrior": "rangeWarrior",
+                "spawnAmount": 3,
+                "spawnInterval": 8
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 185, "steampower": 15 },
+                    "description": "Upgrade to unlock the Sniper warrior!"
+                },
+
+                "unlockedWarrior": "sniperWarrior",
+                "spawnAmount": 4,
+                "spawnInterval": 14
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 215, "steampower": 20 },
+                    "description": "Upgrade to unlock the Stronger Melee warrior!"
+                },
+
+                "unlockedWarrior": "meleeWarriorStrong",
+                "spawnAmount": 1,
+                "spawnInterval": 9
             }
         ]
     },
@@ -87,6 +135,7 @@
         "type": "generator",
         "name": "Gold Generator",
         "description": "A conveyor line that turns pure gold chunks into spendable gold. Dropped into the inventory abyss for convienence.",
+        "sound": "res/sound/steamGen.wav",
 
         "anim": {
             "path": "res/buildings/goldGen.png",
@@ -96,7 +145,7 @@
         "size": [ 3, 3 ],
 
         "cost": {
-            "gold": 140,
+            "gold": 130,
             "steampower": 0
         },
 
@@ -104,39 +153,39 @@
         
         "levels": [
             {
-                "generateAmount": { "gold": 4 }
+                "generateAmount": { "gold": 3 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 80, "steampower": 0 },
+                    "cost": { "gold": 115, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 6 }
+                "generateAmount": { "gold": 5 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 110, "steampower": 0 },
+                    "cost": { "gold": 150, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 8 }
+                "generateAmount": { "gold": 7 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 160, "steampower": 0 },
+                    "cost": { "gold": 190, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 10 }
+                "generateAmount": { "gold": 9 }
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 220, "steampower": 0 },
+                    "cost": { "gold": 270, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
-                "generateAmount": { "gold": 13 }
+                "generateAmount": { "gold": 11 }
             }
         ]
     },
@@ -145,6 +194,7 @@
         "type": "generator",
         "name": "Steam Generator",
         "description": "Generates steam to add to your maximum capacity. Use the steam to power your units for fighting.",
+        "sound": "res/sound/steamGen.wav",
 
         "anim": {
             "path": "res/buildings/steamGen.png",
@@ -154,7 +204,7 @@
         "size": [ 2, 3 ],
 
         "cost": {
-            "gold": 100,
+            "gold": 90,
             "steampower": 0
         },
 
@@ -196,6 +246,38 @@
                 },
 
                 "generateAmount": { "steampower": 40 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 600, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 60 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 570, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 80 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 550, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 100 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 950, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 140 }
             }
         ]
     }

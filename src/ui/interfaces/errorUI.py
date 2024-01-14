@@ -6,8 +6,6 @@ from email.mime.text import MIMEText
 from base64 import b64decode
 from src.ui.interfaces.baseUI import BaseUI
 from src.window import Window
-from src.utility.image import Image
-from src.utility.vector import Vect
 
 
 class ErrorUI(BaseUI):
@@ -22,12 +20,25 @@ class ErrorUI(BaseUI):
 
     @classmethod
     def loadStatic(cls, constants) -> None:
-        cls.ERROR_FILE: str = constants["saves"]["log"]["errorsFile"]
-        cls.LOG_FILE: str = constants["saves"]["log"]["file"]
-        cls.EMAIL_SENDER = constants["email"]["sender"]
+        """ Load static variables from constants dict,
+            these are the error, log, and email data """
+        try:
+            cls.ERROR_FILE: str = constants["saves"]["log"]["errorsFile"]
+            cls.LOG_FILE: str = constants["saves"]["log"]["file"]
+        except KeyError:
+            cls.create("Unable to find saves -> log -> [errorsFile or "
+                       "file] in constants",
+                       cls.log)
 
-        # decode password
-        cls.PASSWORD = b64decode(constants["email"]["pwd"]).decode("utf-8")
+        try:
+            # decode password
+            cls.PASSWORD = b64decode(constants["email"]["pwd"]).decode("utf-8")
+            cls.EMAIL_SENDER = constants["email"]["sender"]
+
+        except KeyError:
+            cls.create("Unable to find email -> [sender or pwd] "
+                       "in constants",
+                       cls.log)
 
         # Find number of lines in the log file (so any crash reports
         # will include all lines since the game started)
@@ -38,6 +49,9 @@ class ErrorUI(BaseUI):
     @classmethod
     def create(self, message="", logger=None, recoverable=False) -> None:
         """ Create an error message popup """
+        if self.errored:
+            return
+
         self.errored = True
         self.recoverable = recoverable
         self.message = message
@@ -53,13 +67,13 @@ class ErrorUI(BaseUI):
     def __init__(self) -> None:
         super().__init__("errorUI")
 
-        # Load from the errorUI.json file
-        self.bgAlpha = super().getData()["bgAlpha"]
-
     def update(self, window: Window) -> None:
         """ Handles button presses if an error is showing """
         self.checkTransition(window)
         super().update(window)
+
+        if super().isHidden():
+            return
 
         self.updateButtons()
 
@@ -100,28 +114,6 @@ class ErrorUI(BaseUI):
         # Exited error screen:
         elif not self.errored and super().getPosType() == "visible":
             super().startTransition("hidden", window)
-
-    def render(self, surface: Window | Image) -> None:
-        """ Renders a dark overlay behind the error message """
-        if super().isHidden():
-            return
-
-        # Only render overlay if the error is recoverable, as
-        # unrecoverable errors do not render the game in the back
-        if self.recoverable:
-            percent = super().getPercentDone()
-            if super().getPosType() == "hidden":
-                percent = 1 - percent
-
-            # create and render shaded overlay
-            surf: Image = Image.makeEmpty(surface.getSize(),
-                                          transparent=True)
-            surf.fill((0, 0, 0, round(self.bgAlpha * percent)))
-
-            surface.render(surf, Vect(0, 0))
-
-        # Render the error UI
-        super().render(surface)
 
     def emailCrashReport(self):
         """ Sends an email to the developer with the crash report """

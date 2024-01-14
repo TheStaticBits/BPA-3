@@ -5,6 +5,7 @@ import src.utility.utility as util
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Tileset:
@@ -16,24 +17,35 @@ class Tileset:
     def loadStatic(cls, constants: dict) -> None:
         """ Loads metadata about the tilesets from the constants file
             into several static variables """
-        # Static data about tilesets loaded from constants.json
-        cls.TILE_SIZE: Vect = (
-            Vect(constants["tileset"]["tileSize"]) * Image.SCALE
-        )
+        try:
+            # Static data about tilesets loaded from constants.json
+            cls.TILE_SIZE: Vect = (
+                Vect(constants["tileset"]["tileSize"]) * Image.SCALE
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find tileset -> tileSize in constants",
+                           cls.log)
 
         # FILE INFO:
+        try:
+            # Map folder containing folders for each map
+            cls.MAPS_FOLDER: str = constants["tileset"]["mapsFolder"]
+            # File inside each map folder for map data (JSON)
+            cls.JSON_FILE: str = constants["tileset"]["jsonFile"]
+            # File for map data (txt)
+            cls.MAP_FILE: str = constants["tileset"]["mapFile"]
+        except KeyError:
+            ErrorUI.create("Unable to find tileset -> [mapsFolder, jsonFile, "
+                           "or mapFile] in constants", cls.log)
 
-        # Map folder containing folders for each map
-        cls.MAPS_FOLDER: str = constants["tileset"]["mapsFolder"]
-        # File inside each map folder for map data (JSON)
-        cls.JSON_FILE: str = constants["tileset"]["jsonFile"]
-        # File for map data (txt)
-        cls.MAP_FILE: str = constants["tileset"]["mapFile"]
-
-        # Tileset data loaded from JSON file
-        cls.TILESET_DATA: dict = util.loadJSON(
-            constants["tileset"]["tilesFile"]
-        )
+        try:
+            # Tileset data loaded from JSON file
+            cls.TILESET_DATA: dict = util.loadJSON(
+                constants["tileset"]["tilesFile"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find tileset -> tilesFile in constants",
+                           cls.log)
 
     def __init__(self, mapFolderName: str) -> None:
         """ Load tileset information and tiles """
@@ -55,7 +67,13 @@ class Tileset:
         """ Loads the JSON containing map metadata and vars from it """
 
         self.data: dict = util.loadJSON(dataPath)
-        self.playerStart = Vect(self.data["playerSpawn"]) * self.TILE_SIZE
+
+        try:
+            self.playerStart = Vect(self.data["playerSpawn"]) * self.TILE_SIZE
+        except KeyError:
+            ErrorUI.create(f"Unable to find playerSpawn in {dataPath},"
+                           " defaulting to (0, 0)", self.log)
+            self.playerStart = Vect(0, 0)
 
     def generateMapImg(self, mapPath: str) -> None:
         """ Generates the tiles based on the chars in the map data """
@@ -83,10 +101,6 @@ class Tileset:
                 # Load image and draw to tiles image at the current pos
                 tileImg = Image(self.TILESET_DATA[tileChar])
                 self.tiles.render(tileImg, pos)
-
-    def update(self, window: Window) -> None:
-        """ Will be used to update anything in the tileset
-            with animations in the future """
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders tileset image """

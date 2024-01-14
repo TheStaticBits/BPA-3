@@ -6,6 +6,9 @@ from src.entities.projectile import Projectile
 from src.utility.image import Image
 from src.tileset import Tileset
 from src.waves import Waves
+from src.utility.database import Database
+from src.ui.interfaces.errorUI import ErrorUI
+from src.entities.player import Player
 
 
 class DungeonScene(BaseScene):
@@ -16,8 +19,9 @@ class DungeonScene(BaseScene):
     # Append to this list to queue allies to spawn
     queuedAllies: list[Warrior] = []
 
-    def __init__(self, mapFolderName: str) -> None:
-        super().__init__(mapFolderName)
+    def __init__(self, mapFolderName: str, musicVol: float,
+                 database: Database) -> None:
+        super().__init__(mapFolderName, musicVol)
 
         self.enemies: list[Warrior] = []
         self.allies: list[Warrior] = []
@@ -28,35 +32,51 @@ class DungeonScene(BaseScene):
         # List of tile coords where enemies can spawn,
         # and where allies can spawn from data/maps/dungeon/data.json
         tileset = super().getTileset()
-        enemySpawns = tileset.getData()["enemySpawns"]
-        allySpawns = tileset.getData()["allySpawns"]
-        Warrior.setSpawnPositions(allySpawns, enemySpawns)
 
-        self.waves = Waves()
+        try:
+            enemySpawns = tileset.getData()["enemySpawns"]
+            allySpawns = tileset.getData()["allySpawns"]
+            Warrior.setSpawnPositions(allySpawns, enemySpawns)
+        except KeyError:
+            ErrorUI.create("Unable to find [enemySpawns or allySpawns] "
+                           "in data.json", self.log)
 
-    def update(self, window: Window) -> None:
+        self.waves = Waves(database)
+
+    def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Updates warriors, spawns enemies,
             and updates projectiles"""
-        super().update(window)
+        super().update(window, sfxVol, musicVol)
 
-        self.updateWarriors(window)
+        self.updateWarriors(window, sfxVol)
         self.spawnQueue()
 
         self.updateProjectiles(window)
 
         self.waves.update(window, self.allies, self.enemies)
 
-    def updateWarriors(self, window: Window) -> None:
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
+        """ Updates UIs """
+        super().updateUI(window, sfxVol, musicVol)
+
+        # Update warrior sound volume
+        for ally in self.allies:
+            ally.updateSounds(super().getPlayer(), sfxVol)
+        for enemy in self.enemies:
+            enemy.updateSounds(super().getPlayer(), sfxVol)
+
+    def updateWarriors(self, window: Window, sfxVol: float) -> None:
         """ Updates warriors (both allies and enemies) """
         tileset: Tileset = super().getTileset()
+        player: Player = super().getPlayer()
 
         # Updating warriors with the opponent list of warriors
         for ally in self.allies:
-            ally.update(window, tileset, self.enemies)
+            ally.update(window, tileset, self.enemies, player, sfxVol)
             ally.updateAttack(window, self.enemies, self.projectiles)
 
         for enemy in self.enemies:
-            enemy.update(window, tileset, self.allies)
+            enemy.update(window, tileset, self.allies, player, sfxVol)
             enemy.updateAttack(window, self.allies, self.projectiles)
 
         # Remove dead warriors through list comprehension in place
@@ -134,6 +154,6 @@ class DungeonScene(BaseScene):
             projectile.render(surface, -super().getCamOffset())
 
     # Getters
-    def getWaveNum(self) -> int:
-        """ Returns the current wave number """
-        return self.waves.getWaveNum()
+    def hasLost(self) -> bool: return self.waves.hasLost()
+    def getWaveNum(self) -> int: return self.waves.getWaveNum()
+    def getWaveHighscore(self) -> int: return self.waves.getHighscore()

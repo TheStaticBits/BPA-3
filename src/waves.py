@@ -3,6 +3,8 @@ import src.utility.utility as util
 from src.utility.timer import Timer
 from src.window import Window
 from src.entities.warrior import Warrior
+from src.utility.database import Database
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Waves:
@@ -12,12 +14,26 @@ class Waves:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the waves JSON file data """
-        cls.WAVES_DATA: list = util.loadJSON(constants["waves"]["jsonPath"])
+        try:
+            cls.WAVES_DATA: list = util.loadJSON(
+                constants["waves"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find waves -> jsonPath in constants",
+                           cls.log)
 
-        cls.WAVES_DELAY: float = constants["waves"]["delayBetweenWaves"]
+        try:
+            cls.WAVES_DELAY: float = constants["waves"]["delayBetweenWaves"]
+        except KeyError:
+            ErrorUI.create("Unable to find waves -> delayBetweenWaves "
+                           "in constants", cls.log, recoverable=True)
+            cls.WAVES_DELAY: float = 5
 
-    def __init__(self) -> None:
+    def __init__(self, database: Database) -> None:
         """ Sets up wave timers and data """
+        self.db = database
+        self.setupDatabase()
+
         self.waveTimer: Timer = Timer(self.WAVES_DELAY)
 
         self.betweenWaves: bool = False
@@ -28,6 +44,25 @@ class Waves:
         self.loadWave(0)  # Load the first wave
 
         self.lost: bool = False
+
+    def setupDatabase(self) -> None:
+        """ Load table and loads data """
+        self.db.makeTable("highscores", "type TEXT, value INTEGER")
+
+        # Load highscore wave number
+        # with a default value of -1 if it doesn't exist
+        self.highscore: int = self.db.setIfNone("highscores",
+                                                "type", "wave",
+                                                "value", -1)
+
+    def saveHighscore(self, waveNum: int) -> None:
+        """ Saves the highscore """
+        if waveNum <= self.highscore:
+            return
+
+        self.highscore = waveNum
+        self.db.update("highscores", "type", "wave",
+                       "value", waveNum)
 
     def loadWave(self, waveNum: int) -> None:
         """ Loads the delay objects for the wave """
@@ -42,20 +77,27 @@ class Waves:
             # Create timers (startTimer, spawnTimer)
             # and load data amounts (amount, spawnAmount)
 
-            self.spawnData.append({
-                "type": data["type"],
-                "level": data["level"],  # Level of warrior to spawn
-                "amount": data["amount"],  # Total amount to spawn
-                "spawnAmount": data["spawnAmount"],  # Amount created per spawn
-                "startTimer": Timer(data["startDelay"]),
-                "spawnTimer": Timer(data["spawnInterval"]),
-            })
+            try:
+                self.spawnData.append({
+                    "type": data["type"],
+                    "level": data["level"],  # Level of warrior to spawn
+                    "amount": data["amount"],  # Total amount to spawn
+                    "spawnAmount": data["spawnAmount"],  # Amount per interval
+                    "startTimer": Timer(data["startDelay"]),
+                    "spawnTimer": Timer(data["spawnInterval"]),
+                })
+            except KeyError:
+                ErrorUI.create("Unable to find [type, level, amount, "
+                               "spawnAmount, startDelay, or spawnInterval] "
+                               f"in waves.json for wave #{waveNum}", self.log)
 
     def update(self, window: Window,
                allies: list[Warrior], enemies: list[Warrior]) -> None:
         """ Updates the wave timer """
         if self.betweenWaves:  # Delay timer between waves
             # During the period between waves allies cannot spawn
+            for warrior in allies:
+                warrior.stopSounds()
             allies.clear()
 
             self.waveTimer.update(window)
@@ -112,12 +154,13 @@ class Waves:
             self.log.info(
                 "All enemies have died. Starting delay between waves."
             )
+            self.saveHighscore(self.waveNum + 1)
 
         # No allies left on any given frame, so the player lost
         if len(allies) == 0:
             self.log.info("All allies have died. You lose!")
             self.lost = True
-            return
+            self.saveHighscore(self.waveNum + 1)
 
     def spawnWarrior(self, warriorType: str, level: int) -> None:
         """ Spawns a warrior by adding it to the queue """
@@ -131,3 +174,4 @@ class Waves:
     def getWaveNum(self) -> int: return self.waveNum
     def getSpawnQueue(self) -> list[Warrior]: return self.spawnQueue
     def hasLost(self) -> bool: return self.lost
+    def getHighscore(self) -> int: return self.highscore

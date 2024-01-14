@@ -1,6 +1,7 @@
 {
     "saves": {
         "folder": "saves",
+        "saveFile": "saves/save.db",
         "log": {
             "level": "debug",
             "file": "saves/log.txt",
@@ -15,6 +16,7 @@
     
     "window": {
         "title": "BPA 3 or something",
+        "icon": "",
 
         "minSize": [ 900, 600 ],
         "resizable": true,
@@ -36,6 +38,7 @@
         "maxSpeed": 100,
         "accel": 400,
         "decel": 550,
+        "hearingRange": 100,
         
         "anims": {
             "idle": {
@@ -51,13 +54,13 @@
         },
 
         "resources": {
-            "starting": {
-                "gold": 1000,
-                "steampower": 100
+            "start": {
+                "gold": 350,
+                "steampower": 30
             },
 
             "limits": {
-                "gold": 1000,
+                "gold": 350,
                 "steampower": -1
             },
 
@@ -97,6 +100,9 @@
     "warriors": {
         "jsonPath": "data/warriors.json",
         "knockbackAngleRange": 1,
+
+        "spawnSound": "res/sound/warriorSpawn.wav",
+        "hitSound": "res/sound/warriorHit.wav",
         
         "damageTint": [ 255, 100, 100 ],
         "damageTime": 0.2,
@@ -111,6 +117,26 @@
 
     "projectiles": {
         "meleeWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "rangeWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "sniperWarrior": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "meleeWarriorStrong": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "rangeWarriorStrong": {
+            "path": "res/particles/meleeWarriorBullet.png",
+            "frames": 2, "delay": 0.3
+        },
+        "sniperWarriorStrong": {
             "path": "res/particles/meleeWarriorBullet.png",
             "frames": 2, "delay": 0.3
         }

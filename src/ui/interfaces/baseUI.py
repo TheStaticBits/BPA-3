@@ -6,6 +6,7 @@ import src.utility.utility as util
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
+from src.utility.overlay import Overlay
 
 from src.ui.elements.baseUIElement import BaseUIElement
 from src.ui.elements.text import Text
@@ -35,7 +36,13 @@ class BaseUI:
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Load static vars from constants """
-        cls.UI_FOLDER: str = constants["game"]["uiFolder"]
+        try:
+            cls.UI_FOLDER: str = constants["game"]["uiFolder"]
+        except KeyError:
+            # avoid circular import
+            from src.ui.interfaces.errorUI import ErrorUI
+            ErrorUI.create("Unable to find game -> uiFolder in constants",
+                           cls.log)
 
     def __init__(self, jsonFile: str) -> None:
         # Load the UI's JSON data
@@ -52,6 +59,13 @@ class BaseUI:
             self.size: Vect = self.findSize()
         else:
             self.size: Vect = Vect(self.data["size"]) * Image.SCALE
+
+        if "bgAlpha" in self.data:
+            # Adds an overlay in the background when the position is the type
+            self.overlay = Overlay(self.data["bgAlpha"])
+            self.bgAlphaPosType: str = self.data["bgAlphaShowsPos"]
+        else:
+            self.overlay = None
 
         # Get layer number if provided in the data
         self.layers: int = self.data["layers"] if "layers" in self.data else 1
@@ -76,18 +90,26 @@ class BaseUI:
             from the JSON data, and returns it """
         elements: dict = {}
 
-        # Load image elements from the UI JSON data
-        # by using the base UI element object
-        for key, imageData in jsonData["elements"]["images"].items():
-            elements[key] = BaseUIElement(imageData, imgPath=imageData["path"])
+        # avoid circular import
+        from src.ui.interfaces.errorUI import ErrorUI
+        try:
+            # Load image elements from the UI JSON data
+            # by using the base UI element object
+            for key, imageData in jsonData["elements"]["images"].items():
+                elements[key] = BaseUIElement(imageData,
+                                              imgPath=imageData["path"])
 
-        # Load text elements from the UI JSON data
-        for key, textData in jsonData["elements"]["text"].items():
-            elements[key] = Text(textData)
+            # Load text elements from the UI JSON data
+            for key, textData in jsonData["elements"]["text"].items():
+                elements[key] = Text(textData)
 
-        # Load button elements
-        for key, buttonData in jsonData["elements"]["buttons"].items():
-            elements[key] = Button(buttonData)
+            # Load button elements
+            for key, buttonData in jsonData["elements"]["buttons"].items():
+                elements[key] = Button(buttonData)
+        except KeyError:
+            ErrorUI.create("Unable to find elements -> [images, text, or "
+                           "buttons] in UI JSON", self.log,
+                           recoverable=True)
 
         return elements
 
@@ -174,6 +196,8 @@ class BaseUI:
         for element in self.elements.values():
             element.update(window, self.offset)
 
+        self.updateOverlay(window)
+
     def getUIOffset(self, surfaceSize: Vect, posType: str) -> Vect:
         """ Gets the offset of the UI interface based on the position type """
 
@@ -239,6 +263,23 @@ class BaseUI:
         # tests if the UI has moved past its destination offset
         return not moveTo.signsMatch(moveTo - self.transitionOffset)
 
+    def updateOverlay(self, window: Window) -> None:
+        """ Updates the overlay if applicable """
+        if self.overlay is None:
+            return
+
+        # Transitioning, so get opacity based on the percent done
+        if self.transitioning:
+            reversed: bool = self.transitionTo != self.bgAlphaPosType
+            opacity: int = self.overlay.percentOpacity(self.percentDone,
+                                                       reversed)
+        elif self.posType == self.bgAlphaPosType:
+            opacity: int = -1  # Max opacity
+        else:
+            opacity: int = 0
+
+        self.overlay.update(opacity, window)
+
     def startTransition(self, posType: str, surface: Window | Image) -> None:
 
         """ Starts UI transition to the given position type """
@@ -266,6 +307,9 @@ class BaseUI:
         if self.hidden:
             return
 
+        if self.overlay is not None:
+            self.overlay.render(surface)
+
         # Render all elements in the order of layers
         for layer in range(self.layers):
             self.renderLayer(surface, layer, offset)
@@ -277,8 +321,7 @@ class BaseUI:
             if element.getLayer() != layer:
                 continue
 
-            element.addRenderOffset(offset)
-            element.render(surface)
+            element.render(surface, offset=offset)
 
     def findDistFromPos(self, posType: str, window: Window) -> Vect:
         """ Returns the distance between the given position type

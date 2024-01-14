@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import pygame
 import random
 from src.entities.entity import Entity
 from src.entities.projectile import Projectile
@@ -12,6 +13,8 @@ from src.utility.image import Image
 from src.utility.timer import Timer
 from src.utility.animation import Animation
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
+from src.entities.player import Player
 
 
 class Warrior(Entity):
@@ -22,23 +25,55 @@ class Warrior(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the warrior data JSON file """
-        cls.WARRIOR_DICT: str = util.loadJSON(
-            constants["warriors"]["jsonPath"]
-        )
+        try:
+            cls.WARRIOR_DICT: str = util.loadJSON(
+                constants["warriors"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> jsonPath in constants",
+                           cls.log)
 
-        cls.KNOCKBACK_ANGLE_RANGE: float = \
-            constants["warriors"]["knockbackAngleRange"]
+        try:
+            cls.KNOCKBACK_ANGLE_RANGE: float = \
+                constants["warriors"]["knockbackAngleRange"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> knockbackAngleRange "
+                           "in constants, defaulting to 1", cls.log,
+                           recoverable=True)
+            cls.KNOCKBACK_ANGLE_RANGE: float = 1
 
-        # Damage flash of red
-        cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
-        cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+        try:
+            # Damage flash of red
+            cls.DAMAGE_TINT: tuple[int] = constants["warriors"]["damageTint"]
+            cls.DAMAGE_TIME: float = constants["warriors"]["damageTime"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> [damageTint or "
+                           "damageTime] in constants", cls.log,
+                           recoverable=True)
+            cls.DAMAGE_TINT: tuple[int] = (255, 100, 100)
+            cls.DAMAGE_TIME: float = 0.2
 
-        # Death particles
-        particles = constants["warriors"]["deathParticles"]
-        cls.PARTICLE_AMOUNT: int = particles["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
-        cls.PARTICLE_SPEED: float = particles["speed"]
-        cls.PARTICLE_DURATION: float = particles["duration"]
+        try:
+            # Death particles
+            particles = constants["warriors"]["deathParticles"]
+            cls.PARTICLE_AMOUNT: int = particles["amount"]
+            cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
+            cls.PARTICLE_SPEED: float = particles["speed"]
+            cls.PARTICLE_DURATION: float = particles["duration"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> deathParticles -> "
+                           "[amount, size, speed, or duration] in constants",
+                           cls.log)
+
+        try:
+            cls.SPAWN_SOUND: str = constants["warriors"]["spawnSound"]
+            cls.HIT_SOUND: str = constants["warriors"]["hitSound"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> "
+                           "[spawnSound or hitSound] in constants",
+                           cls.log)
+            cls.SPAWN_SOUND = None
+            cls.HIT_SOUND = None
 
     @classmethod
     def setSpawnPositions(cls, allySpawns: list[list[int]],
@@ -98,6 +133,13 @@ class Warrior(Entity):
         self.damageTimer: Timer = Timer(self.DAMAGE_TIME)
         self.showDamageTint: bool = False
 
+        # Sounds
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound = pygame.mixer.Sound(self.SPAWN_SOUND)
+            self.spawnSound.play(0)
+        if self.HIT_SOUND is not None:
+            self.hitSound = pygame.mixer.Sound(self.HIT_SOUND)
+
     def pickSpawnPos(self, isAlly: bool) -> Vect:
         """ Picks a random spawn position
             from the appropriate spawn positions list """
@@ -128,7 +170,8 @@ class Warrior(Entity):
             self.projectileSpeed: float = data["projectileSpeed"] * Image.SCALE
 
     def update(self, window: Window, tileset: Tileset,
-               opponents: list[Warrior]) -> None:
+               opponents: list[Warrior], player: Player,
+               sfxVol: float) -> None:
         """ Updates warrior: moving, attacking, etc."""
         super().update(window)
 
@@ -137,6 +180,9 @@ class Warrior(Entity):
         self.updateSpeed(window)
         self.moveToTarget(window)
         self.updateKnockback(window)
+
+        # Update sound volumes
+        self.updateSounds(player, sfxVol)
 
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
@@ -246,6 +292,25 @@ class Warrior(Entity):
 
         return velocity
 
+    def updateSounds(self, player: Player, sfxVol: float) -> None:
+        """ Sets the sound volume based on the player's distance """
+        # Sound relative to the position of the player
+        volume: float = player.getSoundVolume(super().getPos())
+        volume *= sfxVol
+
+        # Set volumes
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound.set_volume(volume)
+        if self.HIT_SOUND is not None:
+            self.hitSound.set_volume(volume)
+
+    def stopSounds(self) -> None:
+        """ Stops all sounds """
+        if self.SPAWN_SOUND is not None:
+            self.spawnSound.stop()
+        if self.HIT_SOUND is not None:
+            self.hitSound.stop()
+
     def updateAttack(self, window: Window, opponents: list[Warrior],
                      projectiles: list[Projectile]) -> None:
         """ Updates the warrior's attack, and attacking when timer is up """
@@ -284,29 +349,20 @@ class Warrior(Entity):
 
     def aoeAttack(self, opponents: list[Warrior]) -> None:
         """ Deals damage to all opponents in range """
+        centerPos = self.getCenterPos()
+
         self.aoeAnim.restart()  # Sets the attack anim to play
         # Center aoe attack animation on the player
-        self.aoeAnimPos = super().getCenterPos() - self.aoeAnim.getSize() / 2
+        self.aoeAnimPos = centerPos - self.aoeAnim.getSize() / 2
 
-        # Create circle image to test for pixel-perfect collisions
-        # with all opponents in range
-        circle = Image.makeEmpty(Vect(self.range * 2), False, True)
-        circle.drawCircle(self.range, (255, 255, 255))
-
-        # Top left of circle image position
-        circlePos: Vect = super().getCenterPos() - self.range
-
-        # Deal damage with pixel perfect collision to all opponents in range
         for opponent in opponents:
-            image = opponent.getAnim().getFrame()
+            opponentPos: Vect = opponent.getCenterPos()
+            # Distance bewteen the center of this warrior and the opponent
+            dist: float = centerPos.dist(opponentPos)
 
-            # Test for pixel perfect collision
-            collided: bool = circle.pixelPerfectCollide(circlePos, image,
-                                                        opponent.getPos())
-
-            if collided:  # Deal damage if collided
+            if dist <= self.range:
                 # Getting angle from the center of this warrior to the opponent
-                angle = self.getCenterPos().angle(opponent.getCenterPos())
+                angle = centerPos.angle(opponentPos)
 
                 opponent.hit(self.damage, angle, self.attackKnockback)
 
@@ -335,6 +391,8 @@ class Warrior(Entity):
         self.knockbackVel = knockbackVel
 
         self.showDamageTint = True
+
+        self.hitSound.play(0)
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Renders the warrior and its aoe attack if necessary """

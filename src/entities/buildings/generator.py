@@ -5,6 +5,7 @@ from src.tileset import Tileset
 from src.entities.player import Player
 from src.utility.vector import Vect
 from src.utility.advDict import AdvDict
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class Generator(BaseBuilding):
@@ -16,9 +17,13 @@ class Generator(BaseBuilding):
 
         super().__init__(type)
 
-        # Whether this is generated once on building creation and removed on
-        # building removal, or generated over time one time every second
-        self.oneTimeGenerate: bool = self.getData()["oneTimeGenerate"]
+        try:
+            # Whether this is generated once on building creation and removed
+            # on building removal, or generated over time one time every second
+            self.oneTimeGenerate: bool = self.getData()["oneTimeGenerate"]
+        except KeyError:
+            ErrorUI.create("Unable to find oneTimeGenerate in generator data",
+                           self.log)
 
     def onUpgrade(self, levelData: dict) -> None:
         """ Loads the generator generation amount """
@@ -36,9 +41,9 @@ class Generator(BaseBuilding):
             Player.resources += self.generate
 
     def update(self, window: Window, camOffset: Vect,
-               tileset: Tileset, player: Player) -> None:
+               tileset: Tileset, player: Player, sfxVol: float) -> None:
         """ Updates generator and generates resources """
-        super().update(window, camOffset, tileset, player)
+        super().update(window, camOffset, tileset, player, sfxVol)
 
         # Do not generate resources if placing or onetimegeneration
         if self.oneTimeGenerate or super().isPlacing():

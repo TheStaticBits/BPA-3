@@ -1,3 +1,4 @@
+import pygame
 import logging
 
 from src.tileset import Tileset
@@ -6,6 +7,7 @@ from src.utility.vector import Vect
 from src.utility.image import Image
 from src.window import Window
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class BaseScene:
@@ -15,9 +17,14 @@ class BaseScene:
 
     @classmethod
     def loadStatic(cls, constants: str):
-        cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
+        try:
+            cls.CAMERA_SPEED: float = constants["game"]["cameraSpeed"]
+        except KeyError:
+            ErrorUI.create("Unable to find game -> cameraSpeed in constants",
+                           cls.log, recoverable=True)
+            cls.CAMERA_SPEED: float = 5
 
-    def __init__(self, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str, musicVol: float) -> None:
         """ Sets up tileset, players, and camera offset """
         self.log.info("Initializing scene for map " + mapFolderName)
 
@@ -28,32 +35,61 @@ class BaseScene:
 
         self.particles: list[Particle] = []
 
-    def update(self, window: Window) -> None:
+        # music
+        try:
+            self.music = pygame.mixer.Sound(
+                self.tileset.getData()["music"]
+            )
+            self.music.set_volume(musicVol)
+            self.music.play(-1)
+        except KeyError:
+            ErrorUI.create(f"Unable to find music in map: {mapFolderName}",
+                           self.log, recoverable=True)
+            self.music = None
+
+    def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Update scene objects """
         self.updateCameraPos(window)
 
-        self.updateTileset(window)
         self.updatePlayer(window)
         self.updateParticles(window)
+
+        self.updateMusicVolume(musicVol)
+
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
+        """ Override in subclasses to update UIs """
+        self.updateCameraPos(window)
+        self.updateMusicVolume(musicVol)
+
+    def updateMusicVolume(self, musicVol: float) -> None:
+        """ Update music volume """
+        if self.music is not None:
+            self.music.set_volume(musicVol)
 
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
         self.player.update(window, self.tileset)
 
-    def updateTileset(self, window: Window) -> None:
-        """ Update tileset """
-        self.tileset.update(window)
-
     def updateCameraPos(self, window: Window) -> None:
         """ Update camera position """
+        winSize = window.getSize()
+        tileSize = self.tileset.getSize()
+
         # Camera position centered on the position
         newOffset = self.player.getCenterPos() - window.getSize() / 2
 
-        # Clamp between 0, 0 and max camera offset
-        newOffset.clamp(
-            Vect(),  # 0, 0
-            self.tileset.getSize() - window.getSize()
-        )
+        if tileSize.x < winSize.x:
+            # Center the map offset on the screen if
+            # it's smaller than the screen
+            newOffset.x = tileSize.x / 2 - winSize.x / 2
+        else:
+            # Clamp the offset to the map size
+            newOffset.clampX(0, tileSize.x - winSize.x)
+
+        if tileSize.y < winSize.y:
+            newOffset.y = tileSize.y / 2 - winSize.y / 2
+        else:
+            newOffset.clampY(0, tileSize.y - winSize.y)
 
         # Move the camera offset slowly to the new position
         self.cameraOffset += ((newOffset - self.cameraOffset) *

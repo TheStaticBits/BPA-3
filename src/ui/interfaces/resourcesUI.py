@@ -36,7 +36,7 @@ class ResourcesUI(BaseUI):
             if Player.resLimits[resource] >= 0:
                 text += "/" + str(Player.resLimits[resource])
 
-            text += " " + Player.resLabels[resource]
+            text += " " + Player.RES_LABELS[resource]
 
             # Set text element's value
             element.setText(text)

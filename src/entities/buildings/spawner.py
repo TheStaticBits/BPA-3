@@ -47,9 +47,9 @@ class Spawner(BaseBuilding):
         self.timer.setDelay(self.spawnInterval)
 
     def update(self, window: Window, camOffset: Vect,
-               tileset: Tileset, player: Player) -> None:
+               tileset: Tileset, player: Player, sfxVol: float) -> None:
         """ Updates spawner and spawns warriors """
-        super().update(window, camOffset, tileset, player)
+        super().update(window, camOffset, tileset, player, sfxVol)
 
         if super().isPlacing():
             return

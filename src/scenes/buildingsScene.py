@@ -8,6 +8,7 @@ from src.window import Window
 from src.utility.image import Image
 from src.ui.interfaces.buildingShop import BuildingShop
 from src.ui.interfaces.upgradeUI import UpgradeUI
+from src.utility.vector import Vect
 
 
 class BuildingsScene(BaseScene):
@@ -22,9 +23,9 @@ class BuildingsScene(BaseScene):
         "spawner": Spawner
     }
 
-    def __init__(self, mapFolderName: str) -> None:
+    def __init__(self, mapFolderName: str, musicVol: float) -> None:
         """ Initializes buildings list """
-        super().__init__(mapFolderName)
+        super().__init__(mapFolderName, musicVol)
 
         self.buildings: list[BaseBuilding] = []
         self.buildingShop: BuildingShop = BuildingShop()
@@ -32,27 +33,51 @@ class BuildingsScene(BaseScene):
 
         self.placingBuilding: bool = False
 
-    def update(self, window: Window) -> None:
+        # Create build range circle image
+        radius: int = BaseBuilding.BUILD_REACH
+        size: Vect = Vect(radius * 2)  # Size of the circle image
+        self.buildRangeCircle: Image = Image.makeEmpty(size, scale=False,
+                                                       transparent=True)
+        # draw circle onto it
+        self.buildRangeCircle.drawCircle(radius, (200, 200, 200, 40))
+
+    def update(self, window: Window, sfxVol: float, musicVol: float) -> None:
         """ Updates buildings and test for placing buildings """
         super().updateCameraPos(window)
-        super().updateTileset(window)
         super().updateParticles(window)
+        super().updateMusicVolume(musicVol)
 
-        self.buildingShop.update(window)
-        self.updateBuildings(window)
+        self.buildingShop.update(window, self.placingBuilding)
+        self.updateBuildings(window, sfxVol)
         self.updatePlayerAndUpgrades(window)
 
         # Makes sure the player can only buy one building at a time
         if not self.placingBuilding:
-            self.testBuyBuilding()
-        else:
-            self.placingBuilding = self.isPlacingBuilding()
+            self.testBuyBuilding(window)
+        elif not self.isPlacingBuilding():
+            self.log.info("Stopped placing building")
+            self.placingBuilding = False
 
-    def updateBuildings(self, window: Window) -> None:
+            # Show shop
+            self.buildingShop.show(window)
+
+    def updateUI(self, window: Window, sfxVol: float, musicVol: float) -> None:
+        """ Updates the UI elements """
+        super().updateUI(window, sfxVol, musicVol)
+        self.buildingShop.update(window, self.placingBuilding)
+        self.upgradeUI.update(window, super().getTileset())
+
+        # Update building sfx sound
+        for building in self.buildings:
+            building.updateSound(super().getPlayer(),
+                                 sfxVol)
+
+    def updateBuildings(self, window: Window, sfxVol: float) -> None:
         """ Updates all buildings """
         for building in self.buildings:
             building.update(window, super().getCamOffset(),
-                            super().getTileset(), super().getPlayer())
+                            super().getTileset(), super().getPlayer(),
+                            sfxVol)
 
             # Particles
             if building.isSpawningParticles():
@@ -85,16 +110,15 @@ class BuildingsScene(BaseScene):
             else:
                 self.buildingShop.hide(window)
 
-    def testBuyBuilding(self) -> None:
+    def testBuyBuilding(self, window: Window) -> None:
         """ Tests if the player has begun placing a building """
         # Test if the player pressed the button to buy a building
-        type: str = self.buildingShop.pressedBuy()
+        type: str = self.buildingShop.pressedBuy(window)
         if type:
             # Place the building
             self.log.info(f"Started placing building {type}")
-            self.buildingShop.setPlacing(True)
-            self.placeBuilding(type)
             self.placingBuilding = True
+            self.placeBuilding(type)
 
     def placeBuilding(self, buildingType: str) -> None:
         """ Appends building to the list """
@@ -112,13 +136,26 @@ class BuildingsScene(BaseScene):
             if building.isPlacing():
                 return True
 
-        self.buildingShop.setPlacing(False)
         return False
+
+    def drawPlaceRange(self, surface: Window | Image) -> None:
+        """ Draws the circle around the player when
+            placing a building that shows the build reach range """
+        if self.placingBuilding:
+            # Find the top left of the circle, where it will be rendered
+            playerPos: Vect = super().getPlayer().getCenterPos()
+            topLeft: Vect = playerPos - BaseBuilding.BUILD_REACH
+
+            topLeft -= super().getCamOffset()
+
+            surface.render(self.buildRangeCircle, topLeft)
 
     def render(self, surface: Window | Image) -> None:
         """ Renders the building scene in order """
         super().renderTileset(surface)
         super().renderParticles(surface)
+
+        self.drawPlaceRange(surface)
 
         # Render buildings
         for building in self.buildings:

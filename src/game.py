@@ -10,17 +10,18 @@ from src.entities.player import Player
 from src.entities.warrior import Warrior
 from src.entities.projectile import Projectile
 from src.scenes.baseScene import BaseScene
-from src.scenes.sceneManager import SceneManager
+from src.sceneManager import SceneManager
 from src.ui.elements.text import Text
 from src.ui.interfaces.baseUI import BaseUI
 from src.ui.interfaces.errorUI import ErrorUI
+from src.utility.database import Database
 
 
 class Game:
     log = logging.getLogger(__name__)
 
     def __init__(self, CONSTANTS_FILE: str) -> None:
-        """ Initialize game objects and data"""
+        """ Initialize game objects and data """
 
         # Load constants and setup logger
         self.constants: dict = util.loadJSON(CONSTANTS_FILE)
@@ -28,32 +29,40 @@ class Game:
 
         self.log.info("Initializing game")
 
+        # Create database
+        self.database: Database = Database(self.constants["saves"]["saveFile"])
+
         # Load static data from the constants JSON file
         self.loadStatic()
 
         # Create objects
         self.window: Window = Window()
         self.errorUI: ErrorUI = ErrorUI()
-        self.sceneManager: SceneManager = SceneManager()
+
+        try:
+            self.sceneManager: SceneManager = SceneManager(self.window,
+                                                           self.database)
+        except Exception:
+            ErrorUI.create("Uncaught error creating the scene", self.log)
 
     def loadStatic(self) -> None:
         """ Loading static data from the constants JSON file """
         self.log.info("Loading static data from constants.json")
 
         try:
-            Image.loadStatic(self.constants)
-            BaseUI.loadStatic(self.constants)
-            Text.loadStatic(self.constants)
-            ErrorUI.loadStatic(self.constants)
+            Image.loadStatic(self.constants)         # Done
+            BaseUI.loadStatic(self.constants)        # Done
+            Text.loadStatic(self.constants)          # Done
+            ErrorUI.loadStatic(self.constants)       # Done
 
-            Window.loadStatic(self.constants)
-            Tileset.loadStatic(self.constants)
-            BaseBuilding.loadStatic(self.constants)
-            Warrior.loadStatic(self.constants)
-            Projectile.loadStatic(self.constants)
-            BaseScene.loadStatic(self.constants)
-            Player.loadStatic(self.constants)
-            Waves.loadStatic(self.constants)
+            Window.loadStatic(self.constants)        # Done
+            Tileset.loadStatic(self.constants)       # Done
+            BaseBuilding.loadStatic(self.constants)  # Done
+            Warrior.loadStatic(self.constants)       # Done
+            Projectile.loadStatic(self.constants)    # Done
+            BaseScene.loadStatic(self.constants)     # Done
+            Player.loadStatic(self.constants)        # Done
+            Waves.loadStatic(self.constants)         #
 
         except KeyError:
             ErrorUI.create("Uncaught error loading data from JSON files",
@@ -75,6 +84,8 @@ class Game:
             self.errorUI.render(self.window)
             self.window.update()
 
+        self.save()
+
     def iteration(self) -> None:
         """ Each iteration of the game loop """
 
@@ -90,3 +101,8 @@ class Game:
     def render(self) -> None:
         """ Each render iteration of the game loop """
         self.sceneManager.render(self.window)
+
+    def save(self) -> None:
+        """ Saves the game data """
+        self.sceneManager.save()
+        self.database.saveAndClose()

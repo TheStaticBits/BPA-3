@@ -8,6 +8,7 @@ from src.window import Window
 from src.entities.player import Player
 from src.utility.image import Image
 from src.particle import Particle
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class BaseBuilding(Entity):
@@ -20,23 +21,45 @@ class BaseBuilding(Entity):
     @classmethod
     def loadStatic(cls, constants: dict) -> None:
         """ Loads the buildings data JSON file """
-        # Building JSON data file (data/buildings.json)
-        cls.BUILDINGS_DATA: dict = util.loadJSON(
-            constants["buildings"]["jsonPath"]
-        )
+        try:
+            # Building JSON data file (data/buildings.json)
+            cls.BUILDINGS_DATA: dict = util.loadJSON(
+                constants["buildings"]["jsonPath"]
+            )
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> jsonPath in constants",
+                           cls.log)
 
-        cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
-            * Tileset.TILE_SIZE.x
+        try:
+            # Range in pixels that the player can place buildings
+            cls.BUILD_REACH: int = constants["buildings"]["buildReachTiles"] \
+                * Tileset.TILE_SIZE.x
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> buildReachTiles "
+                           "in constants. Defaulting to 5 tiles", cls.log,
+                           recoverable=True)
+            cls.BUILD_REACH: int = 5 * Tileset.TILE_SIZE.x
 
-        cls.redTint: tuple[int] = constants["buildings"]["redTint"]
-        cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+        try:
+            cls.redTint: tuple[int] = constants["buildings"]["redTint"]
+            cls.whiteTint: tuple[int] = constants["buildings"]["whiteTint"]
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> [redTint or whiteTint]"
+                           " in constants", cls.log, recoverable=True)
+            cls.redTint: tuple[int] = (255, 0, 0)
+            cls.whiteTint: tuple[int] = (255, 255, 255)
 
         # Particles
-        particles: dict = constants["buildings"]["effectParticles"]
-        cls.PARTICLE_AMOUNT: int = particles["amount"]
-        cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
-        cls.PARTICLE_SPEED: float = particles["speed"]
-        cls.PARTICLE_DURATION: float = particles["duration"]
+        try:
+            particles: dict = constants["buildings"]["effectParticles"]
+            cls.PARTICLE_AMOUNT: int = particles["amount"]
+            cls.PARTICLE_SIZE: Vect = Vect(particles["size"]) * Image.SCALE
+            cls.PARTICLE_SPEED: float = particles["speed"]
+            cls.PARTICLE_DURATION: float = particles["duration"]
+        except KeyError:
+            ErrorUI.create("Unable to find buildings -> effectParticles -> "
+                           "[amount, size, speed, or duration] in constants",
+                           cls.log)
 
     @classmethod
     def testPlacement(cls, type: str, tilePos: Vect, tileset: Tileset) -> bool:
@@ -64,7 +87,13 @@ class BaseBuilding(Entity):
         self.placable: bool = False
         self.level: int = level
         self.sold: bool = False
-        self.buildingTileSize: Vect = Vect(self.getData()["size"])
+
+        try:
+            self.buildingTileSize: Vect = Vect(self.getData()["size"])
+        except KeyError:
+            ErrorUI.create("Unable to find building -> size in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
 
         # Set to True to spawn effect particles
         self.spawnParticles: bool = False
@@ -76,7 +105,26 @@ class BaseBuilding(Entity):
         # Resets to False every frame
         self.selected: bool = False
 
-        super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
+        try:
+            super().__init__(self.getData()["anim"], Tileset.TILE_SIZE)
+        except KeyError:
+            ErrorUI.create("Unable to find building -> anim in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
+
+        # Making sure "levels" is in the building data
+        if "levels" not in self.getData():
+            ErrorUI.create("Can't find building -> levels in buildings.json"
+                           f" for building {self.type}",
+                           self.log)
+
+        # Get sound data
+        if "sound" in self.getData():
+            self.sound: pygame.mixer.Sound = pygame.mixer.Sound(
+                self.getData()["sound"]
+            )
+        else:
+            self.sound: pygame.mixer.Sound = None
 
     def onRemove(self) -> None:
         """ Overriden in subclasses.
@@ -101,7 +149,7 @@ class BaseBuilding(Entity):
         self.onUpgrade(self.getLevelData())
 
     def update(self, window: Window, camOffset: Vect,
-               tileset: Tileset, player: Player) -> None:
+               tileset: Tileset, player: Player, sfxVol: float) -> None:
         """ Updates the building by following the cursor and testing placement
             and updating animation if not placing"""
         if self.placing:
@@ -109,6 +157,7 @@ class BaseBuilding(Entity):
             self.testPlace(window, tileset, player)
         else:  # update animation:
             super().update(window)
+            self.updateSound(player, sfxVol)
 
     def followCursor(self, window: Window, camOffset: Vect,
                      tileset: Tileset, player: Player) -> None:
@@ -155,14 +204,25 @@ class BaseBuilding(Entity):
             and not super().collide(player)
 
         if self.placable and window.getMouseJustPressed("left"):
+            # Placed down the building!
             self.placing = False
 
             # Sets the range of tiles that the building takes up to occupied
             # so no other building can be placed there
             tileset.setRangeOccupied(self.tilePos, self.buildingTileSize)
 
+            self.sound.play(-1)
             self.setSpawnParticles()
             self.onPlace()
+
+    def updateSound(self, player: Player, sfxVol: float) -> None:
+        """ Plays the sound if the player is close enough """
+        if self.sound is None:
+            return
+
+        volume: float = player.getSoundVolume(super().getCenterPos())
+        volume *= sfxVol
+        self.sound.set_volume(volume)
 
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """
@@ -195,6 +255,9 @@ class BaseBuilding(Entity):
         # Set tiles to be unoccupied:
         tileset.setRangeOccupied(self.tilePos, self.buildingTileSize, False)
         self.onRemove()
+
+        if self.sound is not None:
+            self.sound.stop()
 
     def getParticles(self) -> list[Particle]:
         """ Gets a list of particles used for various situations """

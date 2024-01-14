@@ -16,6 +16,11 @@ def loadJSON(path: str) -> dict:
         return json.load(file)
 
 
+def clamp(value: float, minimum: float, maximum: float) -> float:
+    """ Clamps a value between a minimum and maximum """
+    return max(minimum, min(value, maximum))
+
+
 def createFolder(folder) -> None:
     """ Creates the a folder directory if it hasn't already been created """
     if not os.path.exists(folder):

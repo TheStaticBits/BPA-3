@@ -1,0 +1,71 @@
+{
+    "positions": {
+        "hidden": {
+            "x": { "locked": "center", "margin": 0    },
+            "y": { "locked": "end",    "margin": -100 },
+            "hidden": true
+        },
+
+        "visible": {
+            "x": { "locked": "center", "margin": 0 },
+            "y": { "locked": "center", "margin": 0 },
+            "hidden": false
+        }
+    },
+
+    "defaultPos": "hidden",
+    "transitionSpeed": 6,
+    "transitionType": "ease",
+
+    "bgAlpha": 100,
+    "bgAlphaShowsPos": "visible",
+
+    "size": "auto",
+
+    "elements": {
+        "images": {
+            "bg": {
+                "offset": [ 0, 0 ],
+                "path": "res/ui/lose/bg.png"
+            }
+        },
+
+        "text": {
+            "title": {
+                "text": "You lost!",
+                "offset": [ 52, 20 ],
+                "fontSize": 20,
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "score": {
+                "text": "Wave: [score]",
+                "offset": [ 50, 35 ],
+                "fontSize": 12,
+                "color": [ 200, 200, 200 ],
+                "centered": true
+            }
+        },
+
+        "buttons": {
+            "close": {
+                "offset": [ 50, 57 ],
+                "centered": true,
+
+                "images": {
+                    "inactive": "res/buttons/main/inactive.png",
+                    "hover": "res/buttons/main/hover.png",
+                    "pressed": "res/buttons/main/pressed.png"
+                },
+
+                "textData": {
+                    "text": "Restart",
+                    "offset": [ 0.66, -0.66 ],
+                    "fontSize": 10,
+                    "color": [ 255, 255, 255 ]
+                }
+            }
+        }
+    }
+}

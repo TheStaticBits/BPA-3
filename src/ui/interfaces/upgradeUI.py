@@ -9,6 +9,7 @@ from src.tileset import Tileset
 from src.ui.interfaces.spawnerUI import SpawnerUI
 from src.entities.buildings.spawner import Spawner
 from src.utility.vector import Vect
+from src.ui.interfaces.errorUI import ErrorUI
 
 
 class UpgradeUI(BaseUI):
@@ -24,11 +25,15 @@ class UpgradeUI(BaseUI):
         self.betweenBuildings: bool = False
         self.goToBuilding: BaseBuilding = None
 
-        # The min width of the window to allow both the upgrade UI and
-        # the shop UI to show at the same time. Otherwise, only one can be
-        # shown at the same time.
-        self.expandedMinWidth = super().getData()["expandedMinWidth"] * \
-            Image.SCALE
+        try:
+            # The min width of the window to allow both the upgrade UI and
+            # the shop UI to show at the same time. Otherwise, only one can be
+            # shown at the same time.
+            self.expandedMinWidth = super().getData()["expandedMinWidth"] * \
+                Image.SCALE
+        except KeyError:
+            ErrorUI.create("Unable to find expandedMinWidth in upgradeUI data",
+                           self.log)
 
         # Spawner UI for spawner buildings
         self.spawnerUI: SpawnerUI = SpawnerUI()

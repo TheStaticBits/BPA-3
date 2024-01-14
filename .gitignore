@@ -1,4 +1,13 @@
+# Game save data
+saves
+
+# Pyinstaller
+build
+*.spec
+
+bin
+
+# Misc
 __pycache__
 .vscode
 venv
-saves
