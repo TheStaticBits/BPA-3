@@ -51,7 +51,7 @@ class SceneManager:
         # Dictionary of all the scenes
         self.scenes: dict[SceneState, BaseScene] = {
             SceneState.BUILDING: BuildingsScene("buildings", musicVol),
-            SceneState.DUNGEON: DungeonScene("dungeon", musicVol, self.db)
+            SceneState.DUNGEON: DungeonScene("dungeon", 0, self.db)
         }
 
         Player.resetResources()
