@@ -390,7 +390,7 @@
 
         "levels": [
             {
-                "health": 150,
+                "health": 165,
                 "range": 30,
                 "maxSpeed": 65, "accel": 100, "decel": 400,
                 "knockbackResistance": 700,

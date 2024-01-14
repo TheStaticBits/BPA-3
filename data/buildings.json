@@ -117,6 +117,16 @@
                 "unlockedWarrior": "sniperWarrior",
                 "spawnAmount": 4,
                 "spawnInterval": 14
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 215, "steampower": 20 },
+                    "description": "Upgrade to unlock the Stronger Melee warrior!"
+                },
+
+                "unlockedWarrior": "meleeWarriorStrong",
+                "spawnAmount": 1,
+                "spawnInterval": 9
             }
         ]
     },
