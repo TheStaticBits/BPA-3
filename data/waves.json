@@ -114,5 +114,9 @@
     [
         { "type": "rangeWarrior", "level": 5, "amount": 25, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 5 },
         { "type": "sniperWarrior", "level": 5, "amount": 25, "startDelay": 13, "spawnInterval": 1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "rangeWarrior", "level": 5, "amount": 25, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 5 },
+        { "type": "sniperWarrior", "level": 6, "amount": 25, "startDelay": 13, "spawnInterval": 1, "spawnAmount": 5 }
     ]
 ]
