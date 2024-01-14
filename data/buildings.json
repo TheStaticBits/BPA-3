@@ -173,7 +173,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 19, "steampower": 0 },
+                    "cost": { "gold": 190, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
