@@ -358,7 +358,7 @@ class Warrior(Entity):
         for opponent in opponents:
             opponentPos: Vect = opponent.getCenterPos()
             # Distance bewteen the center of this warrior and the opponent
-            dist: float = centerPos.dist()
+            dist: float = centerPos.dist(opponentPos)
 
             if dist <= self.range:
                 # Getting angle from the center of this warrior to the opponent
