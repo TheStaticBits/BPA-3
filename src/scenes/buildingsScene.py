@@ -52,9 +52,14 @@ class BuildingsScene(BaseScene):
 
         # Makes sure the player can only buy one building at a time
         if not self.placingBuilding:
-            self.testBuyBuilding()
+            self.testBuyBuilding(window)
         else:
-            self.placingBuilding = self.isPlacingBuilding()
+            newState: bool = self.isPlacingBuilding()
+            if newState != self.placingBuilding:
+                self.log.info("Stopped placing building")
+                self.placingBuilding = newState
+                # Show shop
+                self.buildingShop.show(window)
 
     def updateUI(self, window: Window) -> None:
         """ Updates the UI elements """
@@ -99,10 +104,10 @@ class BuildingsScene(BaseScene):
             else:
                 self.buildingShop.hide(window)
 
-    def testBuyBuilding(self) -> None:
+    def testBuyBuilding(self, window: Window) -> None:
         """ Tests if the player has begun placing a building """
         # Test if the player pressed the button to buy a building
-        type: str = self.buildingShop.pressedBuy()
+        type: str = self.buildingShop.pressedBuy(window)
         if type:
             # Place the building
             self.log.info(f"Started placing building {type}")

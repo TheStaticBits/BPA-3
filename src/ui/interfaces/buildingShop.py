@@ -62,9 +62,9 @@ class BuildingShop(BaseUI):
         """ Updates the buttons """
         if super().getElement("openShop").getActivated():
             if super().getPosType() == "hidden":
-                super().startTransition("visible", window)
+                self.show(window)
             else:
-                super().startTransition("hidden", window)
+                self.hide(window)
 
     def checkButtonsDisabled(self) -> None:
         """ Updates the disabled/enabled status of the left/right buttons
@@ -138,11 +138,13 @@ class BuildingShop(BaseUI):
         # Render clipped surface at the offset to the screen
         surface.render(self.clipSurface, offset)
 
-    def pressedBuy(self) -> str:
+    def pressedBuy(self, window: Window) -> str:
         """ Returns the type of building, or None if no building was bought """
         if self.detailUIs[self.buildingShown].pressedBuy():
             # Spend player resources
             self.detailUIs[self.buildingShown].spendResources()
+            # Hide shop
+            self.hide(window)
             # Return type
             return self.detailUIs[self.buildingShown].getType()
 
@@ -151,6 +153,10 @@ class BuildingShop(BaseUI):
     def hide(self, window: Window) -> None:
         """ Hides the UI """
         super().startTransition("hidden", window)
+
+    def show(self, window: Window) -> None:
+        """ Shows the UI """
+        super().startTransition("visible", window)
 
     def startedVisible(self) -> bool:
         """ Returns True if the UI has started transitioning to visible """

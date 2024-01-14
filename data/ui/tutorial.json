@@ -14,7 +14,7 @@
     },
 
     "defaultPos": "hidden",
-    "transitionSpeed": 6,
+    "transitionSpeed": 9,
     "transitionType": "ease",
 
     "bgAlpha": 150,
@@ -31,7 +31,13 @@
         },
 
         "text": {
-
+            "title": {
+                "text": "Tutorial",
+                "fontSize": 16,
+                "offset": [ 125, 15 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            }
         },
 
         "buttons": {
@@ -43,6 +49,31 @@
                     "hover": "res/buttons/xButton/hover.png",
                     "pressed": "res/buttons/xButton/pressed.png"
                 }
+            },
+
+            "left": {
+                "offset": [ 20, 75 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "centered": true
+            },
+
+            "right": {
+                "offset": [ 230, 75 ],
+
+                "images": {
+                    "inactive": "res/buttons/arrow/inactive.png",
+                    "hover": "res/buttons/arrow/hover.png",
+                    "pressed": "res/buttons/arrow/pressed.png"
+                },
+
+                "flip": [ true, false ],
+                "centered": true
             }
         }
     }
