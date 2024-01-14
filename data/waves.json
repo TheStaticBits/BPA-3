@@ -180,5 +180,31 @@
     [
         { "type": "rangeWarriorStrong", "level": 1, "amount": 13, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 1 },
         { "type": "aoeWarriorStrong", "level": 2, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 13, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 1 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 15, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 20, "startDelay": 11, "spawnInterval": 1.2, "spawnAmount": 4 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 20, "startDelay": 11, "spawnInterval": 1.2, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 1, "amount": 18, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 5, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 1, "amount": 20, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 21, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
     ]
 ]
