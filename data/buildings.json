@@ -107,6 +107,16 @@
                 "unlockedWarrior": "rangeWarrior",
                 "spawnAmount": 3,
                 "spawnInterval": 8
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 185, "steampower": 15 },
+                    "description": "Upgrade to unlock the Sniper warrior!"
+                },
+
+                "unlockedWarrior": "rangeWarrior",
+                "spawnAmount": 4,
+                "spawnInterval": 14
             }
         ]
     },
@@ -250,6 +260,14 @@
                 },
 
                 "generateAmount": { "steampower": 100 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 950, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 140 }
             }
         ]
     }
