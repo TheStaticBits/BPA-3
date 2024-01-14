@@ -2,7 +2,7 @@
     "treasureChest": {
         "type": "storage",
         "name": "Treasure Chest",
-        "description": "This treasure chest can hold much goodies. Don't let your enemies steal it! Increases your gold limit.",
+        "description": "Each treasure chest can hold gold! Increases your gold storage limit. Upgrade to increase the limit.",
         "sound": "res/sound/steamGen.wav",
 
         "anim": {
@@ -67,7 +67,7 @@
     "testSpawner": {
         "type": "spawner",
         "name": "Unit Spawner",
-        "description": "This factory will spawn units periodically to fight enemies in the dungeon. You can also change which type of unit will spawn at later levels.",
+        "description": "Spawn units periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
         "sound": "res/sound/steamGen.wav",
 
         "anim": {
