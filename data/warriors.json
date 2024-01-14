@@ -315,10 +315,10 @@
             {
                 "health": 70,
                 "range": 220,
-                "maxSpeed": 55, "accel": 100, "decel": 400,
+                "maxSpeed": 45, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.4,
+                "attackInterval": 1.5,
                 "damage": 17,
                 "attackKnockback": 50,
                 "projectileSpeed": 460
@@ -326,10 +326,10 @@
             {
                 "health": 75,
                 "range": 225,
-                "maxSpeed": 60, "accel": 100, "decel": 400,
+                "maxSpeed": 50, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.3,
+                "attackInterval": 1.4,
                 "damage": 18,
                 "attackKnockback": 50,
                 "projectileSpeed": 470
@@ -337,10 +337,10 @@
             {
                 "health": 85,
                 "range": 235,
-                "maxSpeed": 60, "accel": 100, "decel": 400,
+                "maxSpeed": 50, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.3,
+                "attackInterval": 1.4,
                 "damage": 19,
                 "attackKnockback": 50,
                 "projectileSpeed": 470
@@ -348,10 +348,10 @@
             {
                 "health": 85,
                 "range": 240,
-                "maxSpeed": 60, "accel": 100, "decel": 400,
+                "maxSpeed": 50, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.2,
+                "attackInterval": 1.3,
                 "damage": 20,
                 "attackKnockback": 50,
                 "projectileSpeed": 470
@@ -359,10 +359,10 @@
             {
                 "health": 95,
                 "range": 240,
-                "maxSpeed": 60, "accel": 100, "decel": 400,
+                "maxSpeed": 50, "accel": 100, "decel": 400,
                 "knockbackResistance": 400,
                 
-                "attackInterval": 1.1,
+                "attackInterval": 1.2,
                 "damage": 22,
                 "attackKnockback": 50,
                 "projectileSpeed": 470
