@@ -295,18 +295,18 @@
 
     "sniperWarrior": {
         "name": "Sniper Warrior",
-        "description": "Has a longer range than the Melee Warrior",
+        "description": "Has a longer range than the ranged Warrior",
         "attackType": "projectile",
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarriorEnemy.png",
+            "path": "res/warriors/sniperWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarriorAlly.png",
+            "path": "res/warriors/sniperWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
