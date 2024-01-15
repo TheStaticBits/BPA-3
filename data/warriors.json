@@ -392,7 +392,7 @@
             {
                 "health": 165,
                 "range": 30,
-                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "maxSpeed": 80, "accel": 80, "decel": 320,
                 "knockbackResistance": 700,
                 
                 "attackInterval": 0.8,
@@ -403,7 +403,7 @@
             {
                 "health": 185,
                 "range": 30,
-                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "maxSpeed": 80, "accel": 80, "decel": 320,
                 "knockbackResistance": 700,
                 
                 "attackInterval": 0.8,
@@ -414,7 +414,7 @@
             {
                 "health": 185,
                 "range": 30,
-                "maxSpeed": 60, "accel": 80, "decel": 320,
+                "maxSpeed": 80, "accel": 80, "decel": 320,
                 "knockbackResistance": 700,
                 
                 "attackInterval": 0.6,
@@ -425,7 +425,7 @@
             {
                 "health": 205,
                 "range": 35,
-                "maxSpeed": 65, "accel": 80, "decel": 320,
+                "maxSpeed": 85, "accel": 80, "decel": 320,
                 "knockbackResistance": 700,
                 
                 "attackInterval": 0.6,
