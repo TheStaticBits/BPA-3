@@ -295,7 +295,7 @@
 
     "sniperWarrior": {
         "name": "Sniper Warrior",
-        "description": "Has a longer range than the ranged Warrior",
+        "description": "Has a longer range than the Ranged Warrior",
         "attackType": "projectile",
         "projectileSpawnPos": [ 7, 7 ],
 

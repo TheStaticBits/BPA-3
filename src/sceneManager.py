@@ -83,6 +83,7 @@ class SceneManager:
                 self.resetScenes()
                 # Update scenes to make sure they're set up
                 self.updateScene(window)
+                self.mainMenu.open(window)
 
         # No ui open, player is playing
         else:
