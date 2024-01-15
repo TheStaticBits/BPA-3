@@ -90,7 +90,7 @@
             },
 
             "2 text": {
-                "text": "In the shop, press 'buy' to buy a building. Click on the map to place the building there. To open the upgrades menu, touch the side of the building with the player. Here, you can read a description of the upgrades, see the cost, and upgrade the building. You can also sell for the original price of the building. Unit Spawners are unique, as you can choose which warrior it spawns in this menu (unlock warriors by upgrading it!)",
+                "text": "In the shop, press 'buy' to buy a building. Click on the map to place the building there. To open the upgrades menu, touch the side of the building with the player. Here, you can read a description of the upgrades, see the cost, and upgrade the building. You can also sell for the original price of the building. Warrior Spawners are unique, as you can choose which warrior it spawns in this menu (unlock warriors by upgrading it!)",
                 "fontSize": 10,
                 "offset": [ 125, 95 ],
                 "color": [ 255, 255, 255 ],
@@ -107,7 +107,7 @@
             },
 
             "3 text": {
-                "text": "Press the 'Dungeon' button in the top right or press shift to switch scenes. In the dungeon, the allied warriors (blue) that are spawned from your Unit Spawner building are spawned in the center and enemies (red) spawn in the corners. After all enemies in a wave have spawned, if you have no ally warriors in the dungeon.",
+                "text": "Press the 'Dungeon' button in the top right or press shift to switch scenes. In the dungeon, the allied warriors (blue) that are spawned from your Warrior Spawner building are spawned in the center and enemies (red) spawn in the corners. After all enemies in a wave have spawned, if you have no ally warriors in the dungeon.",
                 "fontSize": 10,
                 "offset": [ 125, 90 ],
                 "color": [ 255, 255, 255 ],
