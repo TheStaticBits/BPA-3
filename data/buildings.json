@@ -64,10 +64,10 @@
         ]
     },
 
-    "testSpawner": {
+    "unitSpawner": {
         "type": "spawner",
-        "name": "Unit Spawner",
-        "description": "Spawn units periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
+        "name": "Warrior Spawner",
+        "description": "Spawn warriors periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
         "sound": "res/sound/spawner.wav",
 
         "anim": {
@@ -161,7 +161,7 @@
         ]
     },
 
-    "testGenerator": {
+    "goldGenerator": {
         "type": "generator",
         "name": "Gold Generator",
         "description": "A conveyor line that turns pure gold chunks into spendable gold. Dropped into the inventory abyss for convienence.",
@@ -220,7 +220,7 @@
         ]
     },
 
-    "testSteamGenerator": {
+    "steamGenerator": {
         "type": "generator",
         "name": "Steam Generator",
         "description": "Generates steam to add to your maximum capacity. Use the steam to power your units for fighting.",
