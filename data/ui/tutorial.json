@@ -29,6 +29,20 @@
             "bg": {
                 "offset": [ 0, 0 ],
                 "path": "res/ui/mainMenu/bg.png"
+            },
+
+            "0 image": {
+                "offset": [ 125, 60 ],
+                "path": "res/ui/tutorial/slide0.png",
+                "centered": true,
+                "scaled": false
+            },
+
+            "1 image": {
+                "offset": [ 125, 62 ],
+                "path": "res/ui/tutorial/slide1.png",
+                "centered": true,
+                "scaled": false
             }
         },
 
@@ -41,20 +55,30 @@
                 "centered": true
             },
 
-            "0 text": {
-                "text": "Slide 0",
+            "slideNum": {
+                "text": "Slide 1",
                 "fontSize": 10,
-                "offset": [ 125, 75 ],
-                "color": [ 255, 255, 255 ],
+                "offset": [ 125, 25 ],
+                "color": [ 200, 200, 200 ],
                 "centered": true
+            },
+            
+            "0 text": {
+                "text": "This is you, the player! Move using WASD or the arrow keys. You can only place buildings in a certain range around the player. When you've placed buildings down, move and touch them to open the building's upgrades & details menu!",
+                "fontSize": 10,
+                "offset": [ 125, 110 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true,
+                "wrapLength": 180
             },
 
             "1 text": {
-                "text": "Slide 1",
+                "text": "These are your resources. Gold can be continuously generated with the Gold Generator, and Steam capacity can be increased with the Steam Generator (only increases once upon placement). Buy a Treasure Chest to increase your gold limit.",
                 "fontSize": 10,
-                "offset": [ 125, 75 ],
+                "offset": [ 125, 117 ],
                 "color": [ 255, 255, 255 ],
-                "centered": true
+                "centered": true,
+                "wrapLength": 180
             },
 
             "2 text": {

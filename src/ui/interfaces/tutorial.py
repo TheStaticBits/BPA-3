@@ -52,6 +52,8 @@ class Tutorial(BaseUI):
 
         self.slide = newSlide
 
+        super().getElement("slideNum").setText(f"Slide {self.slide + 1}")
+
     def update(self, window: Window) -> None:
         """ Updates the UI and the buttons """
         super().update(window)
