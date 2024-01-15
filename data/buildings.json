@@ -308,6 +308,30 @@
                 },
 
                 "generateAmount": { "steampower": 140 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 2100, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 200 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 3500, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 250 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 7500, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 320 }
             }
         ]
     }
