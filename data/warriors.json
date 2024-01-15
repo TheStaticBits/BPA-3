@@ -447,13 +447,13 @@
         },
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarriorEnemy.png",
+            "path": "res/warriors/UPaoeWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarriorAlly.png",
+            "path": "res/warriors/UPaoeWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
