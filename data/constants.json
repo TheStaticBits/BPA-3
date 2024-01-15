@@ -16,7 +16,7 @@
     
     "window": {
         "title": "BPA 3 or something",
-        "icon": "",
+        "icon": "res/icon.png",
 
         "minSize": [ 900, 600 ],
         "resizable": true,

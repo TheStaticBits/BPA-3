@@ -96,8 +96,8 @@ class SceneManager:
                 waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
                 self.loseUI.show(window, waveNum)
 
-            # Test if the player pressed pause
-            elif self.optionsUI.pausePressed():
+            # Test if the player pressed pause or esc
+            elif self.optionsUI.pausePressed() or window.getJustPressed("esc"):
                 # Open the main menu
                 self.mainMenu.open(window)
 

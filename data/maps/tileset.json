@@ -1,4 +1,4 @@
 {
-    "0": "res/floorTile.png",
-    "1": "res/dungeonTile.png"
+    "0": "res/tiles/floorTile.png",
+    "1": "res/tiles/dungeonTile.png"
 }
