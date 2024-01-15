@@ -175,7 +175,7 @@
         "size": [ 3, 3 ],
 
         "cost": {
-            "gold": 130,
+            "gold": 160,
             "steampower": 0
         },
 
@@ -187,7 +187,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 115, "steampower": 0 },
+                    "cost": { "gold": 145, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -195,7 +195,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 150, "steampower": 0 },
+                    "cost": { "gold": 190, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -203,7 +203,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 190, "steampower": 0 },
+                    "cost": { "gold": 240, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -211,7 +211,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 270, "steampower": 0 },
+                    "cost": { "gold": 500, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
