@@ -1,7 +1,7 @@
 [
     [
-        { "type": "aoeWarrior", "level": 1, "amount": 4, "startDelay": 0, "spawnInterval": 4, "spawnAmount": 1 },
-        { "type": "aoeWarrior", "level": 1, "amount": 4, "startDelay": 0, "spawnInterval": 4, "spawnAmount": 1 }
+        { "type": "meleeWarrior", "level": 1, "amount": 4, "startDelay": 60, "spawnInterval": 4, "spawnAmount": 1 },
+        { "type": "meleeWarrior", "level": 1, "amount": 4, "startDelay": 60, "spawnInterval": 4, "spawnAmount": 1 }
     ],
     [
         { "type": "meleeWarrior", "level": 1, "amount": 6, "startDelay": 11, "spawnInterval": 3.8, "spawnAmount": 1 },
