@@ -1,73 +1,81 @@
 [
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 5, "startDelay": 39, "spawnInterval": 2.4, "spawnAmount": 1 },
-        { "type": "meleeWarrior", "level": 1, "amount": 5, "startDelay": 39, "spawnInterval": 2.4, "spawnAmount": 1 }
+        { "type": "meleeWarrior", "level": 1, "amount": 4, "startDelay": 39, "spawnInterval": 4, "spawnAmount": 1 },
+        { "type": "meleeWarrior", "level": 1, "amount": 4, "startDelay": 39, "spawnInterval": 4, "spawnAmount": 1 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 7, "startDelay": 11, "spawnInterval": 3, "spawnAmount": 1 },
-        { "type": "meleeWarrior", "level": 1, "amount": 7, "startDelay": 11, "spawnInterval": 3, "spawnAmount": 1 }
+        { "type": "meleeWarrior", "level": 1, "amount": 6, "startDelay": 11, "spawnInterval": 3.8, "spawnAmount": 1 },
+        { "type": "meleeWarrior", "level": 1, "amount": 6, "startDelay": 11, "spawnInterval": 3.8, "spawnAmount": 1 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 11, "startDelay": 12, "spawnInterval": 4, "spawnAmount": 1 },
-        { "type": "meleeWarrior", "level": 1, "amount": 11, "startDelay": 12, "spawnInterval": 4, "spawnAmount": 1 }
+        { "type": "meleeWarrior", "level": 1, "amount": 9, "startDelay": 12, "spawnInterval": 3.5, "spawnAmount": 1 },
+        { "type": "meleeWarrior", "level": 1, "amount": 9, "startDelay": 12, "spawnInterval": 3.5, "spawnAmount": 1 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 13, "startDelay": 12, "spawnInterval": 2.4, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 1, "amount": 13, "startDelay": 12, "spawnInterval": 2.4, "spawnAmount": 2 }
+        { "type": "meleeWarrior", "level": 1, "amount": 11, "startDelay": 12, "spawnInterval": 2.9, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 1, "amount": 11, "startDelay": 12, "spawnInterval": 2.9, "spawnAmount": 2 }
     ],
     [
-        { "type": "meleeWarrior", "level": 1, "amount": 16, "startDelay": 12, "spawnInterval": 1.7, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 1, "amount": 16, "startDelay": 12, "spawnInterval": 1.7, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 1, "amount": 13, "startDelay": 12, "spawnInterval": 2.7, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 1, "amount": 13, "startDelay": 12, "spawnInterval": 2.7, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 2, "amount": 17, "startDelay": 10, "spawnInterval": 1.6, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 2, "amount": 17, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 2, "amount": 17, "startDelay": 10, "spawnInterval": 2.4, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 2, "amount": 17, "startDelay": 12, "spawnInterval": 2.4, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 14, "spawnInterval": 1.5, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 14, "spawnInterval": 1.5, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 14, "spawnInterval": 1.9, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 2, "amount": 18, "startDelay": 14, "spawnInterval": 1.9, "spawnAmount": 3 }
     ],
     [
-        { "type": "meleeWarrior", "level": 2, "amount": 22, "startDelay": 10, "spawnInterval": 1.5, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 2, "amount": 22, "startDelay": 10, "spawnInterval": 1.5, "spawnAmount": 3 }
+        { "type": "meleeWarrior", "level": 2, "amount": 22, "startDelay": 10, "spawnInterval": 1.8, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 2, "amount": 22, "startDelay": 10, "spawnInterval": 1.8, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 1, "amount": 11, "startDelay": 16, "spawnInterval": 1.5, "spawnAmount": 3 },
-        { "type": "aoeWarrior", "level": 1, "amount": 11, "startDelay": 16, "spawnInterval": 1.5, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 1, "amount": 5, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 },
+        { "type": "aoeWarrior", "level": 1, "amount": 5, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 3 },
-        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 1, "amount": 7, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 },
+        { "type": "aoeWarrior", "level": 1, "amount": 7, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 15, "spawnInterval": 1.4, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 3, "amount": 12, "startDelay": 15, "spawnInterval": 1.4, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 1, "amount": 11, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 },
+        { "type": "aoeWarrior", "level": 1, "amount": 11, "startDelay": 16, "spawnInterval": 1.8, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 2, "amount": 14, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 3, "amount": 14, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 17, "spawnInterval": 1.7, "spawnAmount": 3 },
+        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 17, "spawnInterval": 1.7, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 14, "startDelay": 16, "spawnInterval": 1.4, "spawnAmount": 3 },
-        { "type": "meleeWarrior", "level": 3, "amount": 14, "startDelay": 16, "spawnInterval": 1.4, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 2, "amount": 12, "startDelay": 15, "spawnInterval": 1.7, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 12, "startDelay": 15, "spawnInterval": 1.7, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 14, "spawnInterval": 1.4, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 14, "spawnInterval": 1.4, "spawnAmount": 2 }
+        { "type": "aoeWarrior", "level": 2, "amount": 14, "startDelay": 17, "spawnInterval": 1.7, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 14, "startDelay": 17, "spawnInterval": 1.7, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 2 }
+        { "type": "aoeWarrior", "level": 3, "amount": 14, "startDelay": 16, "spawnInterval": 1.6, "spawnAmount": 3 },
+        { "type": "meleeWarrior", "level": 3, "amount": 14, "startDelay": 16, "spawnInterval": 1.6, "spawnAmount": 3 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 2 },
-        { "type": "rangeWarrior", "level": 1, "amount": 6, "startDelay": 8, "spawnInterval": 2.8, "spawnAmount": 1 }
+        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 12, "spawnInterval": 1.5, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 3, "amount": 18, "startDelay": 12, "spawnInterval": 1.5, "spawnAmount": 2 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
-        { "type": "rangeWarrior", "level": 1, "amount": 6, "startDelay": 9, "spawnInterval": 2.6, "spawnAmount": 1 }
+        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 9, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 14, "spawnInterval": 1.4, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 3, "amount": 22, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 4, "amount": 22, "startDelay": 17, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "rangeWarrior", "level": 1, "amount": 8, "startDelay": 8, "spawnInterval": 2.8, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "aoeWarrior", "level": 3, "amount": 22, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 4, "amount": 22, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "rangeWarrior", "level": 1, "amount": 10, "startDelay": 9, "spawnInterval": 2.6, "spawnAmount": 1 }
     ],
     [
         { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
@@ -75,18 +83,18 @@
         { "type": "rangeWarrior", "level": 2, "amount": 10, "startDelay": 9, "spawnInterval": 2.6, "spawnAmount": 1 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "aoeWarrior", "level": 3, "amount": 24, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 4, "amount": 24, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
         { "type": "rangeWarrior", "level": 1, "amount": 15, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 }
     ],
     [
-        { "type": "aoeWarrior", "level": 3, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
-        { "type": "meleeWarrior", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "aoeWarrior", "level": 3, "amount": 30, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "meleeWarrior", "level": 4, "amount": 30, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
         { "type": "rangeWarrior", "level": 2, "amount": 15, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 }
     ],
     [
-        { "type": "aoeWarrior", "level": 4, "amount": 24, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 3 },
-        { "type": "rangeWarrior", "level": 2, "amount": 18, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 3 }
+        { "type": "aoeWarrior", "level": 4, "amount": 24, "startDelay": 7, "spawnInterval": 1, "spawnAmount": 3 },
+        { "type": "rangeWarrior", "level": 2, "amount": 18, "startDelay": 7, "spawnInterval": 1, "spawnAmount": 3 }
     ],
     [
         { "type": "aoeWarrior", "level": 4, "amount": 24, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 4 },
@@ -110,10 +118,6 @@
     [
         { "type": "rangeWarrior", "level": 3, "amount": 25, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 5 },
         { "type": "sniperWarrior", "level": 2, "amount": 25, "startDelay": 15, "spawnInterval": 1, "spawnAmount": 5 }
-    ],
-    [
-        { "type": "rangeWarrior", "level": 3, "amount": 25, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 5 },
-        { "type": "sniperWarrior", "level": 2, "amount": 25, "startDelay": 13, "spawnInterval": 1, "spawnAmount": 5 }
     ],
     [
         { "type": "rangeWarrior", "level": 3, "amount": 25, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 5 },
@@ -206,5 +210,347 @@
         { "type": "rangeWarriorStrong", "level": 1, "amount": 20, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 2 },
         { "type": "aoeWarriorStrong", "level": 2, "amount": 21, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
         { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 20, "startDelay": 11, "spawnInterval": 1.5, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 21, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 20, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 21, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 22, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 21, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 1, "amount": 10, "startDelay": 8, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "rangeWarriorStrong", "level": 1, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 1, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 2, "amount": 10, "startDelay": 8, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 2, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 3, "amount": 12, "startDelay": 8, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 16, "startDelay": 8, "spawnInterval": 1, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 3 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 8, "startDelay": 12, "spawnInterval": 1.6, "spawnAmount": 1 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 14, "startDelay": 9, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 14, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 14, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 14, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 16, "startDelay": 9, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 16, "startDelay": 10, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 16, "startDelay": 11, "spawnInterval": 1.4, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 16, "startDelay": 12, "spawnInterval": 1.4, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 18, "startDelay": 12, "spawnInterval": 1.3, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 8, "amount": 20, "startDelay": 8, "spawnInterval": 1, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 18, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18, "startDelay": 10, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18, "startDelay": 11, "spawnInterval": 1.3, "spawnAmount": 2 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 18, "startDelay": 12, "spawnInterval": 1.3, "spawnAmount": 2 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 24, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 3 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 24, "startDelay": 10, "spawnInterval": 1.3, "spawnAmount": 3 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 24, "startDelay": 11, "spawnInterval": 1.3, "spawnAmount": 3 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 24, "startDelay": 12, "spawnInterval": 1.3, "spawnAmount": 3 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 28, "startDelay": 9, "spawnInterval": 1.3, "spawnAmount": 4 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 28, "startDelay": 10, "spawnInterval": 1.3, "spawnAmount": 4 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 28, "startDelay": 11, "spawnInterval": 1.3, "spawnAmount": 4 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 28, "startDelay": 12, "spawnInterval": 1.3, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 28, "startDelay": 9, "spawnInterval": 1.1, "spawnAmount": 4 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 28, "startDelay": 10, "spawnInterval": 1.1, "spawnAmount": 4 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 28, "startDelay": 11, "spawnInterval": 1.1, "spawnAmount": 4 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 28, "startDelay": 12, "spawnInterval": 1.1, "spawnAmount": 4 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 35, "startDelay": 9, "spawnInterval": 1.1, "spawnAmount": 5 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 35, "startDelay": 10, "spawnInterval": 1.1, "spawnAmount": 5 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 35, "startDelay": 11, "spawnInterval": 1.1, "spawnAmount": 5 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 35, "startDelay": 12, "spawnInterval": 1.1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 35, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 35, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 35, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 35, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "rangeWarrior", "level": 6, "amount": 35, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "sniperWarrior", "level": 5, "amount": 35, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 35, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 35, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 35, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 35, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 35, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "aoeWarrior", "level": 7, "amount": 35, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "rangeWarrior", "level": 6, "amount": 35, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "sniperWarrior", "level": 5, "amount": 35, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 35, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 35, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 35, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 5 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 35, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 5 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 42, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "aoeWarrior", "level": 7, "amount": 42, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "rangeWarrior", "level": 6, "amount": 42, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "sniperWarrior", "level": 5, "amount": 42, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 7 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 42, "startDelay": 9, "spawnInterval": 1, "spawnAmount": 6 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 42, "startDelay": 10, "spawnInterval": 1, "spawnAmount": 6 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 42, "startDelay": 11, "spawnInterval": 1, "spawnAmount": 6 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 42, "startDelay": 12, "spawnInterval": 1, "spawnAmount": 6 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 42, "startDelay": 9, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "aoeWarrior", "level": 7, "amount": 42, "startDelay": 10, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "rangeWarrior", "level": 6, "amount": 42, "startDelay": 11, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "sniperWarrior", "level": 5, "amount": 42, "startDelay": 12, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 42, "startDelay": 9, "spawnInterval": 0.8, "spawnAmount": 6 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 42, "startDelay": 10, "spawnInterval": 0.8, "spawnAmount": 6 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 42, "startDelay": 11, "spawnInterval": 0.8, "spawnAmount": 6 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 42, "startDelay": 12, "spawnInterval": 0.8, "spawnAmount": 6 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 56, "startDelay": 9, "spawnInterval": 0.8, "spawnAmount": 8 },
+        { "type": "aoeWarrior", "level": 7, "amount": 56, "startDelay": 10, "spawnInterval": 0.8, "spawnAmount": 8 },
+        { "type": "rangeWarrior", "level": 6, "amount": 56, "startDelay": 11, "spawnInterval": 0.8, "spawnAmount": 8 },
+        { "type": "sniperWarrior", "level": 5, "amount": 56, "startDelay": 12, "spawnInterval": 0.8, "spawnAmount": 8 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 56, "startDelay": 9, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 56, "startDelay": 10, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 56, "startDelay": 11, "spawnInterval": 0.8, "spawnAmount": 7 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 56, "startDelay": 12, "spawnInterval": 0.8, "spawnAmount": 7 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 56, "startDelay": 9, "spawnInterval": 0.6, "spawnAmount": 8 },
+        { "type": "aoeWarrior", "level": 7, "amount": 56, "startDelay": 10, "spawnInterval": 0.6, "spawnAmount": 8 },
+        { "type": "rangeWarrior", "level": 6, "amount": 56, "startDelay": 11, "spawnInterval": 0.6, "spawnAmount": 8 },
+        { "type": "sniperWarrior", "level": 5, "amount": 56, "startDelay": 12, "spawnInterval": 0.6, "spawnAmount": 8 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 56, "startDelay": 9, "spawnInterval": 0.6, "spawnAmount": 7 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 56, "startDelay": 10, "spawnInterval": 0.6, "spawnAmount": 7 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 56, "startDelay": 11, "spawnInterval": 0.6, "spawnAmount": 7 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 56, "startDelay": 12, "spawnInterval": 0.6, "spawnAmount": 7 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 90, "startDelay": 9, "spawnInterval": 0.6, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 90, "startDelay": 10, "spawnInterval": 0.6, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 90, "startDelay": 11, "spawnInterval": 0.6, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 90, "startDelay": 12, "spawnInterval": 0.6, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 90, "startDelay": 9, "spawnInterval": 0.6, "spawnAmount": 9 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 90, "startDelay": 10, "spawnInterval": 0.6, "spawnAmount": 9 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 90, "startDelay": 11, "spawnInterval": 0.6, "spawnAmount": 9 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 90, "startDelay": 12, "spawnInterval": 0.6, "spawnAmount": 9 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 90, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 90, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 90, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 90, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 90, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 90, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 90, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 90, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 110, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 110, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 110, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 110, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 110, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 110, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 110, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 110, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 170, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 170, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 170, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 170, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 170, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 170, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 170, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 170, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 270, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 270, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 270, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 270, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 270, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 270, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 270, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 270, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 500, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 500, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 500, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 500, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 500, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 500, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 500, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 500, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 800, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 800, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 800, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 800, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 800, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 800, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 800, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 800, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 1100, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 1100, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 1100, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 1100, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 1100, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 1100, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 1100, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 1100, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 1800, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 1800, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 1800, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 1800, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 1800, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 1800, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 1800, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 1800, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 3600, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 3600, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 3600, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 3600, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 3600, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 3600, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 3600, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 3600, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 3600, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 3600, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 3600, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 3600, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 3600, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 3600, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 3600, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 3600, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 5400, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 5400, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 5400, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 5400, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 5400, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 5400, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 5400, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 5400, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 7200, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 7200, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 7200, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 7200, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 7200, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 7200, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 7200, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 7200, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 12000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 12000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 12000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 12000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 12000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 12000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 12000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 12000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 18000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 18000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 18000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 18000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 18000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 18000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 18000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 18000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 36000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 36000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 36000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 36000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 36000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 36000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 36000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 36000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 72000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 72000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 72000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 72000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 72000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 72000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 72000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 72000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 360000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 360000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 360000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 360000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 360000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 360000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 360000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 360000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
+    ],
+    [
+        { "type": "meleeWarrior", "level": 7, "amount": 720000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarrior", "level": 7, "amount": 720000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarrior", "level": 6, "amount": 720000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarrior", "level": 5, "amount": 720000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "meleeWarriorStrong", "level": 4, "amount": 720000, "startDelay": 8, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "aoeWarriorStrong", "level": 3, "amount": 720000, "startDelay": 9, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "rangeWarriorStrong", "level": 2, "amount": 720000, "startDelay": 10, "spawnInterval": 0.5, "spawnAmount": 10 },
+        { "type": "sniperWarriorStrong", "level": 1, "amount": 720000, "startDelay": 11, "spawnInterval": 0.5, "spawnAmount": 10 }
     ]
 ]

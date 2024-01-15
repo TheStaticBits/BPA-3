@@ -68,7 +68,7 @@
         "type": "spawner",
         "name": "Unit Spawner",
         "description": "Spawn units periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
-        "sound": "res/sound/steamGen.wav",
+        "sound": "res/sound/spawner.wav",
 
         "anim": {
             "path": "res/buildings/spawner.png",
@@ -165,17 +165,17 @@
         "type": "generator",
         "name": "Gold Generator",
         "description": "A conveyor line that turns pure gold chunks into spendable gold. Dropped into the inventory abyss for convienence.",
-        "sound": "res/sound/steamGen.wav",
+        "sound": "res/sound/goldGen.wav",
 
         "anim": {
             "path": "res/buildings/goldGen.png",
-            "frames": 2, "delay": 1
+            "frames": 2, "delay": 1.05
         },
 
         "size": [ 3, 3 ],
 
         "cost": {
-            "gold": 130,
+            "gold": 160,
             "steampower": 0
         },
 
@@ -187,7 +187,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 115, "steampower": 0 },
+                    "cost": { "gold": 145, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -195,7 +195,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 150, "steampower": 0 },
+                    "cost": { "gold": 190, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -203,7 +203,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 190, "steampower": 0 },
+                    "cost": { "gold": 240, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -211,7 +211,7 @@
             },
             {
                 "upgrade": {
-                    "cost": { "gold": 270, "steampower": 0 },
+                    "cost": { "gold": 500, "steampower": 0 },
                     "description": "Upgrade this building to increase the amount of gold you generate!"
                 },
 
@@ -308,6 +308,30 @@
                 },
 
                 "generateAmount": { "steampower": 140 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 2100, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 200 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 3500, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 250 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 7500, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of steampower you generate!"
+                },
+
+                "generateAmount": { "steampower": 320 }
             }
         ]
     }

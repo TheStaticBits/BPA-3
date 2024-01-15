@@ -26,7 +26,8 @@ class Window:
         pygame.K_w: "up",    pygame.K_UP: "up",
         pygame.K_s: "down",  pygame.K_DOWN: "down",
 
-        pygame.K_LSHIFT: "shift", pygame.K_RSHIFT: "shift"
+        pygame.K_LSHIFT: "shift", pygame.K_RSHIFT: "shift",
+        pygame.K_ESCAPE: "esc"
     }
 
     MOUSE: dict[int, str] = {
@@ -108,7 +109,7 @@ class Window:
 
         # Set window icon if it has a path
         if self.WINDOW_ICON != "":
-            icon: Image = Image(self.WINDOW_ICON)
+            icon: Image = Image(self.WINDOW_ICON, scale=False)
             pygame.display.set_icon(icon.getSurf())
 
         # Clock for fixed framerate (if enabled)

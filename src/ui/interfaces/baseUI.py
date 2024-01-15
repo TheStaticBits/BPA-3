@@ -336,7 +336,7 @@ class BaseUI:
     def isTransitioning(self) -> bool: return self.transitioning
     def isHidden(self) -> bool: return self.hidden
 
-    def getAllElements(self) -> list[BaseUIElement]: return self.elements
+    def getAllElements(self) -> dict[str, BaseUIElement]: return self.elements
     def getPosType(self) -> str: return self.transitionTo
     def getSize(self) -> Vect: return self.size
     def getData(self) -> dict: return self.data

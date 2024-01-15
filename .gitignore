@@ -4,6 +4,7 @@ saves
 # Pyinstaller
 build
 *.spec
+*.exe
 
 bin
 

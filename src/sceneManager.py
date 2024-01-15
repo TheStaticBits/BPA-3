@@ -42,10 +42,15 @@ class SceneManager:
         self.loseUI: LoseUI = LoseUI()
 
         self.db = database
+        self.scenes: dict[SceneState, BaseScene] = {}
         self.resetScenes()  # Create scenes
 
     def resetScenes(self) -> None:
         """ Resets the scenes """
+        # Clear sounds and music
+        for scene in self.scenes.values():
+            scene.stopSounds()
+
         musicVol: float = self.mainMenu.getMusicVol()
 
         # Dictionary of all the scenes
@@ -83,6 +88,7 @@ class SceneManager:
                 self.resetScenes()
                 # Update scenes to make sure they're set up
                 self.updateScene(window)
+                self.mainMenu.open(window)
 
         # No ui open, player is playing
         else:
@@ -96,8 +102,8 @@ class SceneManager:
                 waveNum: int = self.scenes[SceneState.DUNGEON].getWaveNum()
                 self.loseUI.show(window, waveNum)
 
-            # Test if the player pressed pause
-            elif self.optionsUI.pausePressed():
+            # Test if the player pressed pause or esc
+            elif self.optionsUI.pausePressed() or window.getJustPressed("esc"):
                 # Open the main menu
                 self.mainMenu.open(window)
 

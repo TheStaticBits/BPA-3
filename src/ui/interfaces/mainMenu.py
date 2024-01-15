@@ -93,11 +93,11 @@ class MainMenu(BaseUI):
         """ Saves the volume """
         self.db.update("settings",
                        "type", "sfx",
-                       "value", self.sfxVol * 100)
+                       "value", round(self.sfxVol * 100))
 
         self.db.update("settings",
                        "type", "music",
-                       "value", self.musicVol * 100)
+                       "value", round(self.musicVol * 100))
 
     def setWaveHighscore(self, highscore: int) -> None:
         """ Sets the wave highscore """

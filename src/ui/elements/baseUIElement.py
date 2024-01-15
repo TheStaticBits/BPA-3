@@ -20,6 +20,7 @@ class BaseUIElement:
         self.rotateDegrees: float = data["rotate"] if "rotate" in data else 0
         self.flip: Vect = Vect(data["flip"]) if "flip" in data else Vect(False)
         self.layer: int = data["layer"] if "layer" in data else 0
+        self.isScaled: bool = data["scaled"] if "scaled" in data else True
 
         self.image: Image = None
         self.size: Vect = None
@@ -27,7 +28,7 @@ class BaseUIElement:
         self.hidden: bool = False
 
         if imgPath is not None and imgPath != "":
-            image: Image = self.transform(Image(imgPath))
+            image: Image = self.transform(Image(imgPath, scale=self.isScaled))
             self.setImg(image)
 
     def update(self, window: Window, offset: Vect) -> None:
