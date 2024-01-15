@@ -16,7 +16,7 @@
     
     "window": {
         "title": "Factory of Steam",
-        "icon": "res/icon-scaled.png",
+        "icon": "res/icon.png",
 
         "minSize": [ 900, 600 ],
         "resizable": true,
@@ -49,7 +49,7 @@
             "walking": {
                 "path": "res/player/walking.png",
                 "frames": 2,
-                "delay": 0.2
+                "delay": 0.15
             }
         },
 
