@@ -72,6 +72,12 @@ class BuildingsScene(BaseScene):
             building.updateSound(super().getPlayer(),
                                  sfxVol)
 
+    def stopSounds(self) -> None:
+        """ Stops all sounds """
+        super().stopSounds()
+        for building in self.buildings:
+            building.stopSound()
+
     def updateBuildings(self, window: Window, sfxVol: float) -> None:
         """ Updates all buildings """
         for building in self.buildings:

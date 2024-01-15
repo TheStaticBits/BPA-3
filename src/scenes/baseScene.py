@@ -66,6 +66,11 @@ class BaseScene:
         if self.music is not None:
             self.music.set_volume(musicVol)
 
+    def stopSounds(self) -> None:
+        """ Stop all sounds """
+        if self.music is not None:
+            self.music.stop()
+
     def updatePlayer(self, window: Window) -> None:
         """ Update player """
         self.player.update(window, self.tileset)

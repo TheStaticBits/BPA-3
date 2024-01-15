@@ -42,10 +42,15 @@ class SceneManager:
         self.loseUI: LoseUI = LoseUI()
 
         self.db = database
+        self.scenes: dict[SceneState, BaseScene] = {}
         self.resetScenes()  # Create scenes
 
     def resetScenes(self) -> None:
         """ Resets the scenes """
+        # Clear sounds and music
+        for scene in self.scenes.values():
+            scene.stopSounds()
+
         musicVol: float = self.mainMenu.getMusicVol()
 
         # Dictionary of all the scenes

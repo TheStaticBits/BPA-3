@@ -224,6 +224,11 @@ class BaseBuilding(Entity):
         volume *= sfxVol
         self.sound.set_volume(volume)
 
+    def stopSound(self) -> None:
+        """ Stops the sound """
+        if self.sound is not None:
+            self.sound.stop()
+
     def render(self, surface: Window | Image, offset: Vect = Vect()) -> None:
         """ Render with tints if placing """
         if not self.placing and not self.selected:
