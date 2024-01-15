@@ -151,6 +151,14 @@
                 },
 
                 "generateAmount": { "gold": 11 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 800, "steampower": 0 },
+                    "description": "Upgrade this building to increase the amount of gold you generate!"
+                },
+
+                "generateAmount": { "gold": 13 }
             }
         ]
     },
@@ -332,6 +340,14 @@
                 },
 
                 "storageAmount": { "gold": 1200 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 1500, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 1200 to 3000"
+                },
+
+                "storageAmount": { "gold": 3000 }
             }
         ]
     }
