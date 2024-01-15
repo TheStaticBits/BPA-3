@@ -169,7 +169,7 @@
 
         "anim": {
             "path": "res/buildings/goldGen.png",
-            "frames": 2, "delay": 1
+            "frames": 2, "delay": 1.05
         },
 
         "size": [ 3, 3 ],
