@@ -65,6 +65,16 @@ class DungeonScene(BaseScene):
         for enemy in self.enemies:
             enemy.updateSounds(super().getPlayer(), sfxVol)
 
+    def stopSounds(self) -> None:
+        """ Stops all sounds """
+        super().stopSounds()
+
+        # Stops the sounds of the warriors
+        for ally in self.allies:
+            ally.stopSounds()
+        for enemy in self.enemies:
+            enemy.stopSounds()
+
     def updateWarriors(self, window: Window, sfxVol: float) -> None:
         """ Updates warriors (both allies and enemies) """
         tileset: Tileset = super().getTileset()
