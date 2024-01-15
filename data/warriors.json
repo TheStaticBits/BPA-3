@@ -374,7 +374,7 @@
         "name": "Strong Melee Warrior",
         "description": "Deals close-range damage to enemies using bullets",
         "attackType": "projectile",
-        "projectileSpawnPos": [ 7, 8 ],
+        "projectileSpawnPos": [ 9, 11 ],
 
         "enemyAnim": {
             "path": "res/warriors/UPmeleeWarriorEnemy.png",
@@ -496,7 +496,7 @@
         "name": "Strong Range Warrior",
         "description": "Has a longer range than the Melee Warrior",
         "attackType": "projectile",
-        "projectileSpawnPos": [ 7, 8 ],
+        "projectileSpawnPos": [ 9, 10 ],
 
         "enemyAnim": {
             "path": "res/warriors/UPrangeWarriorEnemy.png",
@@ -540,7 +540,7 @@
         "name": "Strong Sniper Warrior",
         "description": "Has a longer range than the Melee Warrior",
         "attackType": "projectile",
-        "projectileSpawnPos": [ 7, 8 ],
+        "projectileSpawnPos": [ 9, 8 ],
 
         "enemyAnim": {
             "path": "res/warriors/UPsniperWarriorEnemy.png",
