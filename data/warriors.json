@@ -543,13 +543,13 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/sniperWarriorEnemy.png",
+            "path": "res/warriors/UPsniperWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/sniperWarriorAlly.png",
+            "path": "res/warriors/UPsniperWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
