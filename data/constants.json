@@ -15,8 +15,8 @@
     },
     
     "window": {
-        "title": "BPA 3 or something",
-        "icon": "res/icon.png",
+        "title": "Factory of Steam",
+        "icon": "res/icon-scaled.png",
 
         "minSize": [ 900, 600 ],
         "resizable": true,
