@@ -1,4 +1,6 @@
 {
+    "slides": 3,
+
     "positions": {
         "hidden": {
             "x": { "locked": "end",    "margin": -250 },
@@ -35,6 +37,30 @@
                 "text": "Tutorial",
                 "fontSize": 16,
                 "offset": [ 125, 15 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "0 text": {
+                "text": "Slide 0",
+                "fontSize": 10,
+                "offset": [ 125, 75 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "1 text": {
+                "text": "Slide 1",
+                "fontSize": 10,
+                "offset": [ 125, 75 ],
+                "color": [ 255, 255, 255 ],
+                "centered": true
+            },
+
+            "2 text": {
+                "text": "Slide 2",
+                "fontSize": 10,
+                "offset": [ 125, 75 ],
                 "color": [ 255, 255, 255 ],
                 "centered": true
             }
