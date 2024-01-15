@@ -447,13 +447,13 @@
         },
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarriorEnemy.png",
+            "path": "res/warriors/aoeWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarriorAlly.png",
+            "path": "res/warriors/aoeWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
@@ -499,13 +499,13 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarriorEnemy.png",
+            "path": "res/warriors/rangeWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarriorAlly.png",
+            "path": "res/warriors/rangeWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
@@ -543,13 +543,13 @@
         "projectileSpawnPos": [ 7, 8 ],
 
         "enemyAnim": {
-            "path": "res/warriors/meleeWarriorEnemy.png",
+            "path": "res/warriors/sniperWarriorEnemy.png",
             "frames": 1,
             "delay": 1
         },
 
         "allyAnim": {
-            "path": "res/warriors/meleeWarriorAlly.png",
+            "path": "res/warriors/sniperWarriorAlly.png",
             "frames": 1,
             "delay": 1
         },
