@@ -101,6 +101,9 @@
         "jsonPath": "data/warriors.json",
         "knockbackAngleRange": 1,
 
+        "aoeCircleColor": [ 255, 0, 0, 20 ],
+        "aoeCircleTime": 0.5,
+
         "spawnSound": "res/sound/warriorSpawn.wav",
         "hitSound": "res/sound/warriorHit.wav",
         

@@ -11,7 +11,6 @@ from src.tileset import Tileset
 from src.utility.vector import Vect
 from src.utility.image import Image
 from src.utility.timer import Timer
-from src.utility.animation import Animation
 from src.particle import Particle
 from src.ui.interfaces.errorUI import ErrorUI
 from src.entities.player import Player
@@ -41,6 +40,18 @@ class Warrior(Entity):
                            "in constants, defaulting to 1", cls.log,
                            recoverable=True)
             cls.KNOCKBACK_ANGLE_RANGE: float = 1
+
+        try:
+            cls.AOE_CIRCLE_COLOR: tuple[int] = \
+                constants["warriors"]["aoeCircleColor"]
+            cls.AOE_CIRCLE_TIME: float = \
+                constants["warriors"]["aoeCircleTime"]
+        except KeyError:
+            ErrorUI.create("Unable to find warriors -> [aoeCircleColor, "
+                           "aoeCircleTime] in constants", cls.log,
+                           recoverable=True)
+            cls.AOE_CIRCLE_COLOR: tuple[int] = (255, 0, 0, 40)
+            cls.AOE_CIRCLE_TIME: float = 0.2
 
         try:
             # Damage flash of red
@@ -109,14 +120,16 @@ class Warrior(Entity):
             ) * Image.SCALE
 
         elif self.attackType == "aoe":
-            # Load the aoe animation
-            data = self.WARRIOR_DICT[type]["aoeAttackAnim"]
-            self.aoeAnim = Animation(data["path"],
-                                     data["frames"],
-                                     data["delay"],
-                                     oneTime=True)
+            # Create the aoe attack circle based on the range of the warrior
+            self.aoeAttackCircle: Image = Image.makeEmpty(Vect(self.range * 2),
+                                                          scale=False,
+                                                          transparent=True)
+            self.aoeAttackCircle.drawCircle(self.range,
+                                            self.AOE_CIRCLE_COLOR)
 
-            self.aoeAnim.setToEnd()  # So it doesn't play immediately
+            self.aoeTimer: Timer = Timer(self.AOE_CIRCLE_TIME)
+            self.showAoeCircle: bool = False
+
             self.aoeAnimPos: Vect = Vect()  # Position of the aoe attack
 
         self.speed = 0
@@ -187,15 +200,25 @@ class Warrior(Entity):
         # Lock to tileset
         super().lockToRect(Vect(0, 0), tileset.getSize())
 
-        if self.attackType == "aoe":
-            self.updateAoeAttack(window)
-
         # Update damage tint timer
         if self.showDamageTint:
             self.damageTimer.update(window)
             if self.damageTimer.completed():
                 self.showDamageTint = False
                 self.damageTimer.reset()
+
+        # Update aoe circle timer
+        if self.attackType == "aoe" and self.showAoeCircle:
+            self.aoeTimer.update(window)
+
+            # Circle alpha set to the time left on the timer
+            self.aoeAttackCircle.setAlpha(
+                255 * (1 - self.aoeTimer.getPercentDone())
+            )
+
+            if self.aoeTimer.completed():
+                self.showAoeCircle = False
+                self.aoeTimer.reset()
 
     def updateTarget(self, opponents: list[Warrior]) -> None:
         """ Finds the closest opponent to target
@@ -351,13 +374,14 @@ class Warrior(Entity):
         """ Deals damage to all opponents in range """
         centerPos = self.getCenterPos()
 
-        self.aoeAnim.restart()  # Sets the attack anim to play
+        self.showAoeCircle = True
+
         # Center aoe attack animation on the player
-        self.aoeAnimPos = centerPos - self.aoeAnim.getSize() / 2
+        self.aoeAnimPos = centerPos - self.range
 
         for opponent in opponents:
             opponentPos: Vect = opponent.getCenterPos()
-            # Distance bewteen the center of this warrior and the opponent
+            # Distance between the center of this warrior and the opponent
             dist: float = centerPos.dist(opponentPos)
 
             if dist <= self.range:
@@ -366,17 +390,11 @@ class Warrior(Entity):
 
                 opponent.hit(self.damage, angle, self.attackKnockback)
 
-    def updateAoeAttack(self, window: Window) -> None:
-        """ Updates the aoe attack animation """
-        if self.attackType == "aoe":
-            self.aoeAnim.update(window)
-
     def renderAoeAttack(self, surface: Window | Image,
                         offset: Vect = Vect()) -> None:
         """ Renders the aoe attack animation """
-        if self.attackType == "aoe":
-            if not self.aoeAnim.isFinished():
-                self.aoeAnim.render(surface, self.aoeAnimPos + offset)
+        if self.attackType == "aoe" and self.showAoeCircle:
+            surface.render(self.aoeAttackCircle, self.aoeAnimPos + offset)
 
     def hit(self, damage: float, knockbackAngle: float,
             knockbackVel: float) -> None:

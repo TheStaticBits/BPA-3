@@ -113,11 +113,6 @@
         "name": "Aoe Warrior",
         "description": "Deals damage to all enemies in a radius",
         "attackType": "aoe",
-        "aoeAttackAnim": {
-            "path": "res/warriors/aoeWarriorRing.png",
-            "frames": 5,
-            "delay": 0.1
-        },
 
         "enemyAnim": {
             "path": "res/warriors/aoeWarriorEnemy.png",
@@ -440,11 +435,6 @@
         "name": "Strong Aoe Warrior",
         "description": "Deals damage to all enemies in a radius",
         "attackType": "aoe",
-        "aoeAttackAnim": {
-            "path": "res/warriors/aoeWarriorRing.png",
-            "frames": 5,
-            "delay": 0.1
-        },
 
         "enemyAnim": {
             "path": "res/warriors/UPaoeWarriorEnemy.png",
