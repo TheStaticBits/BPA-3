@@ -1,70 +1,5 @@
 {
-    "treasureChest": {
-        "type": "storage",
-        "name": "Treasure Chest",
-        "description": "Each treasure chest can hold gold! Increases your gold storage limit. Upgrade to increase the limit.",
-        "sound": "res/sound/steamGen.wav",
-
-        "anim": {
-            "path": "res/buildings/treasureChest.png",
-            "frames": 1, "delay": 1
-        },
-
-        "size": [ 3, 2 ],
-
-        "cost": {
-            "gold": 120,
-            "steampower": 0
-        },
-        
-        "levels": [
-            {
-                "storageAmount": { "gold": 150 }
-            },
-            {
-                "upgrade": {
-                    "cost": { "gold": 110, "steampower": 0 },
-                    "description": "Upgrade this building to increase its gold storange from 150 to 300"
-                },
-
-                "storageAmount": { "gold": 300 }
-            },
-            {
-                "upgrade": {
-                    "cost": { "gold": 105, "steampower": 0},
-                    "description": "Upgrade this building to increase its gold storange from 300 to 450"
-                },
-
-                "storageAmount": { "gold": 450 }
-            },
-            {
-                "upgrade": {
-                    "cost": { "gold": 100, "steampower": 0 },
-                    "description": "Upgrade this building to increase its gold storange from 450 to 600"
-                },
-
-                "storageAmount": { "gold": 600 }
-            },
-            {
-                "upgrade": {
-                    "cost": { "gold": 220, "steampower": 0 },
-                    "description": "Upgrade this building to increase its gold storange from 600 to 900"
-                },
-
-                "storageAmount": { "gold": 900 }
-            },
-            {
-                "upgrade": {
-                    "cost": { "gold": 260, "steampower": 0 },
-                    "description": "Upgrade this building to increase its gold storange from 900 to 1200"
-                },
-
-                "storageAmount": { "gold": 1200 }
-            }
-        ]
-    },
-
-    "unitSpawner": {
+    "warriorSpawner": {
         "type": "spawner",
         "name": "Warrior Spawner",
         "description": "Spawn warriors periodically to fight enemies in the dungeon. Upgrade to unlock different warrior types!",
@@ -223,7 +158,7 @@
     "steamGenerator": {
         "type": "generator",
         "name": "Steam Generator",
-        "description": "Generates steam to add to your maximum capacity. Use the steam to power your units for fighting.",
+        "description": "Generates steam to add to your maximum capacity. Use the steam to power your warriors for fighting.",
         "sound": "res/sound/steamGen.wav",
 
         "anim": {
@@ -332,6 +267,71 @@
                 },
 
                 "generateAmount": { "steampower": 320 }
+            }
+        ]
+    },
+
+    "treasureChest": {
+        "type": "storage",
+        "name": "Treasure Chest",
+        "description": "Each treasure chest can hold gold! Increases your gold storage limit. Upgrade to increase the limit.",
+        "sound": "res/sound/steamGen.wav",
+
+        "anim": {
+            "path": "res/buildings/treasureChest.png",
+            "frames": 1, "delay": 1
+        },
+
+        "size": [ 3, 2 ],
+
+        "cost": {
+            "gold": 120,
+            "steampower": 0
+        },
+        
+        "levels": [
+            {
+                "storageAmount": { "gold": 150 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 110, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 150 to 300"
+                },
+
+                "storageAmount": { "gold": 300 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 105, "steampower": 0},
+                    "description": "Upgrade this building to increase its gold storange from 300 to 450"
+                },
+
+                "storageAmount": { "gold": 450 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 100, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 450 to 600"
+                },
+
+                "storageAmount": { "gold": 600 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 220, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 600 to 900"
+                },
+
+                "storageAmount": { "gold": 900 }
+            },
+            {
+                "upgrade": {
+                    "cost": { "gold": 260, "steampower": 0 },
+                    "description": "Upgrade this building to increase its gold storange from 900 to 1200"
+                },
+
+                "storageAmount": { "gold": 1200 }
             }
         ]
     }
